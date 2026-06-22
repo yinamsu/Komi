@@ -310,7 +310,7 @@
                     <div class="partner-list">
                         
                         <!-- Partner 1 -->
-                        <div class="partner-card">
+                        <div class="partner-card" data-clinic-id="1">
                             <div class="partner-top">
                                 <div class="partner-info">
                                     <h4>Cheongdam Barrier Lab</h4>
@@ -337,7 +337,7 @@
                         </div>
 
                         <!-- Partner 2 -->
-                        <div class="partner-card">
+                        <div class="partner-card" data-clinic-id="2">
                             <div class="partner-top">
                                 <div class="partner-info">
                                     <h4>Myeongdong Forest Dermatology</h4>
@@ -364,7 +364,7 @@
                         </div>
 
                         <!-- Partner 3 -->
-                        <div class="partner-card">
+                        <div class="partner-card" data-clinic-id="3">
                             <div class="partner-top">
                                 <div class="partner-info">
                                     <h4>Hannam Aesthetic & Laser House</h4>
@@ -391,7 +391,7 @@
                         </div>
 
                         <!-- Partner 4 -->
-                        <div class="partner-card">
+                        <div class="partner-card" data-clinic-id="4">
                             <div class="partner-top">
                                 <div class="partner-info">
                                     <h4>Sinsa Glow Dermatology</h4>
@@ -418,7 +418,7 @@
                         </div>
 
                         <!-- Partner 5 -->
-                        <div class="partner-card">
+                        <div class="partner-card" data-clinic-id="5">
                             <div class="partner-top">
                                 <div class="partner-info">
                                     <h4>Hongdae Calm Skin Clinic</h4>
@@ -731,6 +731,74 @@
                 <button class="reader-nav-btn" id="reader-next-btn">Next &rarr;</button>
             </div>
 
+        </div>
+    </div>
+
+    <!-- Modal Interactive Dialog: Clinic Details -->
+    <div class="modal-overlay" id="clinicModal">
+        <div class="modal-content-wrapper clinic-modal-wrapper">
+            
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h3 id="clinic-detail-name">Cheongdam Barrier Lab</h3>
+                    <p id="clinic-detail-location">📍 Cheongdam-dong, Gangnam</p>
+                </div>
+                <button class="btn-close" id="btnCloseClinic">&times;</button>
+            </div>
+ 
+            <div class="modal-body clinic-modal-body">
+                <div class="clinic-info-section">
+                    <div class="info-block">
+                        <span class="info-label">Clinic Rating</span>
+                        <h4 id="clinic-detail-rating" style="color: var(--color-accent);">⭐ 4.9</h4>
+                    </div>
+                    <div class="info-block">
+                        <span class="info-label">About the Clinic</span>
+                        <p id="clinic-detail-desc">...</p>
+                    </div>
+                    <div class="info-block">
+                        <span class="info-label">Specialties</span>
+                        <div class="clinic-specialties-container" id="clinic-detail-specialties">
+                            <!-- JS will inject tags -->
+                        </div>
+                    </div>
+                    <div class="info-block doctor-block">
+                        <span class="info-label">Operating Physician</span>
+                        <div class="doctor-profile" style="margin-top: 8px;">
+                            <div class="doctor-avatar" id="clinic-detail-doc-avatar">JY</div>
+                            <div class="doctor-meta">
+                                <h5 id="clinic-detail-doc-name">Dr. Ji-Yeon Lee</h5>
+                                <p id="clinic-detail-doc-title">Board-Certified Dermatologist | Nd:YAG Specialist</p>
+                            </div>
+                        </div>
+                        <p id="clinic-detail-doc-bio" style="font-size: 13px; margin-top: 10px; font-style: italic; line-height: 1.5; color: var(--text-secondary);">...</p>
+                    </div>
+                    <div class="info-block">
+                        <span class="info-label">Operating Hours</span>
+                        <p id="clinic-detail-hours" style="font-size: 13px; color: var(--text-secondary);">...</p>
+                    </div>
+                </div>
+
+                <!-- Google Maps / Map Section -->
+                <div class="clinic-map-section">
+                    <span class="info-label" style="display: block; margin-bottom: 8px;">Clinic Location Map</span>
+                    <div class="map-iframe-container">
+                        <iframe 
+                            id="clinic-detail-map-iframe"
+                            src="" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; border-radius: 12px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <button class="btn-primary" style="width: 100%; margin-top: 16px;" onclick="alert('Safe Consultation Booking initialized. An email has been sent to confirm booking slots!')">
+                        📅 Secure 1:1 Booking Slot
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
