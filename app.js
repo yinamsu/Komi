@@ -357,6 +357,8 @@ function initReader() {
         nextBtn.addEventListener('click', () => {
             if (currentChapter < totalChapters) {
                 setChapter(currentChapter + 1);
+            } else {
+                closeReaderModal();
             }
         });
     }
@@ -408,7 +410,11 @@ function setChapter(chNum) {
 
     if (prevBtn && nextBtn) {
         prevBtn.disabled = (chNum === 1);
-        nextBtn.disabled = (chNum === totalChapters);
+        if (chNum === totalChapters) {
+            nextBtn.innerHTML = 'Finish & Close ✓';
+        } else {
+            nextBtn.innerHTML = 'Next &rarr;';
+        }
     }
 }
 
