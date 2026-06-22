@@ -334,6 +334,7 @@ a {
 .quiz-option {
     background-color: var(--bg-primary);
     border: 1px solid var(--border-color);
+    color: var(--text-primary);
     border-radius: 12px;
     padding: 16px 20px;
     text-align: left;
