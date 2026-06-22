@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOMICARE | Premium Boutique Skin Match & Safety Verification</title>
+    <meta name="description" content="Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. Custom Fitzpatrick Skin Type safety protocols.">
+    <!-- Premium Google Fonts and CSS Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="app-header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                KOMI<span>CARE</span>
+            </a>
+            <div class="badge-verified">
+                🛡️ <span>100% Verified Boutique Only</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero text-center">
+            <div class="hero-glow"></div>
+            <div class="container">
+                <div class="social-proof-badge">
+                    ⚡ <span>Join 540+ medical travelers</span> securing early access this month.
+                </div>
+                
+                <h1 class="hero-headline">
+                    Tired of Fake Reviews and K-Beauty <br>
+                    <span class="gradient-text">"Factory" Clinics?</span>
+                </h1>
+                
+                <p class="hero-subheadline">
+                    Access Seoul’s top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. No sponsored ads. No hidden fees. Just honest medical expertise tailored to your specific skin type.
+                </p>
+
+                <!-- Step-by-Step Fitzpatrick Diagnostic Quiz Card -->
+                <div class="diagnostic-container">
+                    
+                    <!-- Quiz Wizard Area -->
+                    <div id="quiz-setup">
+                        <div class="diagnostic-header">
+                            <span class="diagnostic-step-title">Step 1: Check Your Skin Behavior</span>
+                            <h3 class="diagnostic-title">Fitzpatrick Skin Type Quiz</h3>
+                        </div>
+
+                        <!-- Step 1: Skin Tone -->
+                        <div class="quiz-step active" id="quiz-step-1">
+                            <h4 class="quiz-question">Q1. What is the color of your untreated skin?</h4>
+                            <div class="quiz-options">
+                                <button class="quiz-option" data-step="1" data-score="0" data-type="tone">
+                                    <span>Pale White / Translucent</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="1" data-score="1" data-type="tone">
+                                    <span>Fair / Pale</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="1" data-score="2" data-type="tone">
+                                    <span>Olive / Golden-Beige</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="1" data-score="3" data-type="tone">
+                                    <span>Light Brown</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="1" data-score="4" data-type="tone">
+                                    <span>Dark Brown</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="1" data-score="5" data-type="tone">
+                                    <span>Deep Brown / Black</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Reaction to Sun -->
+                        <div class="quiz-step" id="quiz-step-2">
+                            <h4 class="quiz-question">Q2. What happens when you stay in the sun without sunscreen?</h4>
+                            <div class="quiz-options">
+                                <button class="quiz-option" data-step="2" data-score="0" data-type="reaction">
+                                    <span>Always burns, blisters & peels</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="2" data-score="1" data-type="reaction">
+                                    <span>Usually burns, peels extensively</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="2" data-score="2" data-type="reaction">
+                                    <span>Burns moderately, tans gradually</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="2" data-score="3" data-type="reaction">
+                                    <span>Rarely burns, tans easily</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="2" data-score="4" data-type="reaction">
+                                    <span>Very rarely burns, tans heavily</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="2" data-score="5" data-type="reaction">
+                                    <span>Never burns, deeply pigmented</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Tanning Behavior -->
+                        <div class="quiz-step" id="quiz-step-3">
+                            <h4 class="quiz-question">Q3. How does your skin react to multiple days of sun exposure?</h4>
+                            <div class="quiz-options">
+                                <button class="quiz-option" data-step="3" data-score="0" data-type="tanning">
+                                    <span>Never tans, peels immediately</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="3" data-score="1" data-type="tanning">
+                                    <span>Tans lightly, freckles often</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="3" data-score="2" data-type="tanning">
+                                    <span>Tans reasonably, burns occasionally</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="3" data-score="3" data-type="tanning">
+                                    <span>Tans deeply, rarely burns</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                                <button class="quiz-option" data-step="3" data-score="4" data-type="tanning">
+                                    <span>Tans extremely deeply, never burns</span>
+                                    <span class="quiz-option-bullet"></span>
+                                </button>
+                            </div>
+
+                            <!-- Lead Email Capture Box (Integrated at last step) -->
+                            <form id="leadForm" class="lead-form-container">
+                                <div class="form-group">
+                                    <label for="userEmail" class="form-label">Step 2: Where should we send your skin profile & guide?</label>
+                                    <input type="email" id="userEmail" class="form-input" placeholder="Enter your best email address" required>
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <span>Send Me the Safety Guide & Access Passport</span> 🛡️
+                                </button>
+                            </form>
+                            <p class="form-disclaimer">🔒 Anti-Spam: We hate fake reviews and spam. 100% Confidential.</p>
+                        </div>
+
+                        <!-- Progress Bar indicator -->
+                        <div class="quiz-progress-container">
+                            <div class="quiz-progress-bar">
+                                <div class="quiz-progress-fill"></div>
+                            </div>
+                            <span class="quiz-progress-text">Step 1 of 3</span>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Results Screen (Initially Hidden) -->
+                    <div id="quiz-results" style="display: none;">
+                        <div class="diagnostic-header text-center">
+                            <span class="diagnostic-step-title">Skin Diagnostic Passport</span>
+                            <h3 class="diagnostic-title" id="res-type-title">Fitzpatrick Type</h3>
+                        </div>
+
+                        <div class="skin-passport">
+                            <div class="passport-header">
+                                <span class="passport-badge">Verified Analysis</span>
+                                <span class="passport-type" id="res-type-num">Active</span>
+                            </div>
+                            
+                            <!-- Custom Scale Visualizer -->
+                            <div class="passport-bar-scale">
+                                <div class="scale-segment type-1"></div>
+                                <div class="scale-segment type-2"></div>
+                                <div class="scale-segment type-3"></div>
+                                <div class="scale-segment type-4"></div>
+                                <div class="scale-segment type-5"></div>
+                                <div class="scale-segment type-6"></div>
+                            </div>
+
+                            <div class="passport-detail-row">
+                                <span class="label">Sun Reaction Behavior:</span>
+                                <span class="value" id="res-behavior">...</span>
+                            </div>
+                            <div class="passport-detail-row">
+                                <span class="label">Recommended Laser Protocol:</span>
+                                <span class="value" id="res-lasers">...</span>
+                            </div>
+
+                            <div class="passport-warning-box">
+                                <span class="passport-warning-icon">⚠️</span>
+                                <div class="passport-warning-text" id="res-warning">
+                                    <strong>Fitzpatrick Safety Warning:</strong>
+                                    <p>...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <button id="btnOpenReaderResults" class="btn-primary">
+                                📖 <span>Open Safety Handbook Now</span>
+                            </button>
+                            <button onclick="restartQuiz()" class="btn-secondary" style="border: 1px solid var(--border-color); background: none; border-radius: 12px; padding: 12px; font-weight: 600; cursor: pointer; color: var(--text-secondary); transition: var(--transition-smooth);">
+                                🔄 Re-take skin diagnostic
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- The Reality (Pain Points) Section -->
+        <section class="section-reality">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="section-tag">The Reality</span>
+                    <h2 class="section-title">Why Factory Vouchers <span class="section-title-serif">will Cook Your Barrier</span></h2>
+                    <p class="section-subtitle">
+                        Standard mass-volume clinics prioritize patient turnover rate and sales margins over actual medical safety and parameters.
+                    </p>
+                </div>
+
+                <div class="pain-grid">
+                    <div class="pain-card">
+                        <div class="pain-icon">🧬</div>
+                        <h4>The Fitzpatrick Skin Blindspot</h4>
+                        <p>Most mass-market clinics use hard-coded laser settings calibrated strictly for East Asian skin types. Without custom pulse calibration, Western patients (Types I-II & V-VI) suffer severe PIH (hyperpigmentation) and laser burns.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-icon">👥</div>
+                        <h4>The "Ghost Doctor" Assembly Line</h4>
+                        <p>You spend an hour consulting with a commission-driven sales representative who aggressively pushes expensive packages, only for a doctor you've never met to fire lasers at your face for two minutes without analyzing your barrier.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-icon">⭐️</div>
+                        <h4>Pay-to-Play Platform Rankings</h4>
+                        <p>Major K-beauty booking platforms filter reviews based on clinic advertising spends. Clinics easily delete negative reviews or bribe clients with free sheet masks to manipulate star ratings.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Promise (Value Propositions) Section -->
+        <section class="section-promise">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="section-tag">Our Promise</span>
+                    <h2 class="section-title">The Safe & Boutique <span class="section-title-serif">Verification Standard</span></h2>
+                    <p class="section-subtitle">
+                        We vet clinics on strict physician-led parameters. No chains, no shadow doctors, no sponsored rankings.
+                    </p>
+                </div>
+
+                <div class="promise-grid">
+                    <div class="promise-card">
+                        <div class="promise-badge">🛡️</div>
+                        <h4>Zero Factory Chains</h4>
+                        <p>We partner exclusively with independent boutique clinics that enforce strict limits on hourly appointment bookings, ensuring the physician has ample time to consult and treat you.</p>
+                    </div>
+
+                    <div class="promise-card">
+                        <div class="promise-badge">🧾</div>
+                        <h4>100% Visit-Verified & Unedited</h4>
+                        <p>Every review requires an official Medical Tax Refund receipt verify code. We host databases offshore to legally bypass 'Truth-Based Defamation' removal requests from clinics.</p>
+                    </div>
+
+                    <div class="promise-card">
+                        <div class="promise-badge">🧬</div>
+                        <h4>Fitzpatrick Scale Calibration</h4>
+                        <p>Our clinics possess validated hardware (Nd:YAG lasers, dual-cooling heads) and documented medical track records calibrated for diverse global skin types.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Partners Directory & Receipt Demonstration -->
+        <section class="section-directory">
+            <div class="container">
+                <div class="section-title-wrapper text-center">
+                    <span class="section-tag">Boutique Directory</span>
+                    <h2 class="section-title">Verified Partner Clinics <span class="section-title-serif">& Validation Engine</span></h2>
+                    <p class="section-subtitle">
+                        Explore our certified clinics and see how we verify review authenticity while preserving patient anonymity.
+                    </p>
+                </div>
+
+                <div class="directory-layout">
+                    
+                    <!-- Clinic Showcase Column -->
+                    <div class="partner-list">
+                        
+                        <!-- Partner 1 -->
+                        <div class="partner-card">
+                            <div class="partner-top">
+                                <div class="partner-info">
+                                    <h4>Cheongdam Barrier Lab</h4>
+                                    <span class="partner-location">📍 Cheongdam-dong, Gangnam</span>
+                                </div>
+                                <div class="partner-rating">
+                                    <span>⭐ 4.9</span>
+                                </div>
+                            </div>
+                            <div class="partner-tags">
+                                <span class="partner-tag">Genuine Tip Certified</span>
+                                <span class="partner-tag slots">Max 3 Bookings/Hr</span>
+                                <span class="partner-tag">Nd:YAG Calibrated</span>
+                            </div>
+                            <div class="partner-doctors">
+                                <div class="doctor-profile">
+                                    <div class="doctor-avatar">JY</div>
+                                    <div class="doctor-meta">
+                                        <h5>Dr. Ji-Yeon Lee</h5>
+                                        <p>Board-Certified Dermatologist | Nd:YAG Specialist</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Partner 2 -->
+                        <div class="partner-card">
+                            <div class="partner-top">
+                                <div class="partner-info">
+                                    <h4>Myeongdong Forest Dermatology</h4>
+                                    <span class="partner-location">📍 Myeong-dong, Jung-gu</span>
+                                </div>
+                                <div class="partner-rating">
+                                    <span>⭐ 4.8</span>
+                                </div>
+                            </div>
+                            <div class="partner-tags">
+                                <span class="partner-tag">100% Doctor Consultation</span>
+                                <span class="partner-tag slots">Max 2 Bookings/Hr</span>
+                                <span class="partner-tag">Vascular Calibrated</span>
+                            </div>
+                            <div class="partner-doctors">
+                                <div class="doctor-profile">
+                                    <div class="doctor-avatar">MK</div>
+                                    <div class="doctor-meta">
+                                        <h5>Dr. Minji Kim</h5>
+                                        <p>Board-Certified Dermatologist | Barrier Recovery</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Receipt Masker Demo Column -->
+                    <div class="receipt-demo-card">
+                        <div class="receipt-demo-title">
+                            <h4>Receipt Privacy Masker</h4>
+                            <p>We blur sensitive financial logs client-side before review upload. Clinics can never trace bad reviews back to your passport or credit card.</p>
+                        </div>
+
+                        <!-- Interactive receipt container -->
+                        <div class="receipt-wrapper" id="receiptMockup">
+                            <div class="receipt-watermark">VERIFIED</div>
+                            <div class="receipt-header-txt">
+                                MEDICAL TAX REFUND CERTIFICATE<br>
+                                (환급용 확인서)
+                            </div>
+                            <div class="receipt-divider"></div>
+                            <div class="receipt-line">
+                                <span>CLINIC NAME:</span>
+                                <span>CHEONGDAM BARRIER LAB</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span>TREATMENT:</span>
+                                <span>PICO TONING (GENUINE TIP)</span>
+                            </div>
+                            <div class="receipt-divider"></div>
+                            <div class="receipt-line">
+                                <span>TX DATE:</span>
+                                <span class="masked-data">2026-06-22 14:32:01</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span>APPROVAL NO:</span>
+                                <span class="masked-data">TX-90812497-C</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span>REFUND ID:</span>
+                                <span class="masked-data">TR-KR-28491A</span>
+                            </div>
+                            <div class="receipt-divider"></div>
+                            <div class="receipt-line" style="font-weight: bold;">
+                                <span>TOTAL AMOUNT:</span>
+                                <span>350,000 KRW</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <span id="mask-status-badge" style="font-size: 12px; font-weight: 700; color: var(--color-danger); text-align: center;">
+                                ⚠️ Unmasked Plaintext Data Exists
+                            </span>
+                            <button id="btnMaskReceipt" class="mask-toggle-btn">
+                                🛡️ Simulate Tax Refund Masking
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Reviews Section -->
+        <section class="section-reviews">
+            <div class="container">
+                <div class="section-title-wrapper text-center">
+                    <span class="section-tag">Patient Feedback</span>
+                    <h2 class="section-title">100% Visit-Verified Reviews <span class="section-title-serif">Linked to Doctors</span></h2>
+                    <p class="section-subtitle">
+                        Every single review is matched to the exact operating physician through receipt check codes. Un-deletable.
+                    </p>
+                </div>
+
+                <div class="reviews-grid">
+                    
+                    <!-- Review 1 -->
+                    <div class="review-card">
+                        <div class="review-card-header">
+                            <div class="reviewer-profile">
+                                <div class="reviewer-avatar">JS</div>
+                                <div>
+                                    <div class="reviewer-name">Jessica S.</div>
+                                    <div class="reviewer-skin">Fitzpatrick Type I</div>
+                                </div>
+                            </div>
+                            <div class="review-meta">
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                <span class="review-verify-badge">✓ Receipt Verified</span>
+                            </div>
+                        </div>
+                        <p class="review-content">
+                            "I had a horrible experience at a factory clinic in Gangnam where they burned my skin with IPL. Dr. Minji Kim was a lifesaver. She immediately recognized my thin Type I skin barrier, manually set the laser to a safe wavelength, and focused on recovery. Highly recommend this boutique standard."
+                        </p>
+                        <div class="review-doctor-link">
+                            <span>Clinic: Myeongdong Forest</span>
+                            <span>Physician: <strong>Dr. Minji Kim</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card">
+                        <div class="review-card-header">
+                            <div class="reviewer-profile">
+                                <div class="reviewer-avatar">AM</div>
+                                <div>
+                                    <div class="reviewer-name">Amara M.</div>
+                                    <div class="reviewer-skin">Fitzpatrick Type V</div>
+                                </div>
+                            </div>
+                            <div class="review-meta">
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                <span class="review-verify-badge">✓ Receipt Verified</span>
+                            </div>
+                        </div>
+                        <p class="review-content">
+                            "As someone with dark skin, I was terrified of laser toning in Korea because of hypopigmentation risks. Dr. Ji-Yeon Lee checked my Fitzpatrick type, explained why she would use the Nd:YAG laser with a long pulse duration, and calibrated the cooling device. My skin has never looked cleaner."
+                        </p>
+                        <div class="review-doctor-link">
+                            <span>Clinic: Cheongdam Barrier Lab</span>
+                            <span>Physician: <strong>Dr. Ji-Yeon Lee</strong></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Founder Trust Section -->
+        <section class="section-founder">
+            <div class="container">
+                <div class="founder-card">
+                    <div class="founder-photo-container">
+                        <div class="founder-photo">🩺</div>
+                        <span class="founder-badge-cert">Board-Certified</span>
+                    </div>
+                    <div class="founder-message-content">
+                        <span class="section-tag" style="text-align: left;">Founder's Mission</span>
+                        <h3 class="founder-quote">
+                            "I built this platform because I was tired of treating tourists whose skin barriers had been completely cooked by factory-style chains."
+                        </h3>
+                        <p class="founder-text">
+                            "As a dermatologist practicing in Seoul, I saw too many international patients suffer from preventable laser complications. You invest thousands of dollars and your precious time—you deserve absolute safety, genuine tips, and physician-led care. Komicare validates every review and clinic on clinical parameters to restore trust in Korean dermatology."
+                        </p>
+                        <div class="founder-sign">
+                            <div class="founder-name">Dr. Minji Kim</div>
+                            <div class="founder-title">Founder & Board-Certified Dermatologist</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Interactive Dialog: E-Book Reader -->
+    <div class="modal-overlay" id="readerModal">
+        <div class="modal-content-wrapper">
+            
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h3>Essential K-Beauty Safety Handbook</h3>
+                    <p>A Dermatologist's Guide for Western Skin Types</p>
+                </div>
+                <button class="btn-close" id="btnCloseReader">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                
+                <!-- Sidebar TOC Navigation -->
+                <aside class="reader-sidebar">
+                    <button class="reader-toc-btn active" data-ch="1">
+                        <span class="ch-num">Chapter 1</span>
+                        <span>Decoding Your Skin Type</span>
+                    </button>
+                    <button class="reader-toc-btn" data-ch="2">
+                        <span class="ch-num">Chapter 2</span>
+                        <span>5 Questions to Expose Factories</span>
+                    </button>
+                    <button class="reader-toc-btn" data-ch="3">
+                        <span class="ch-num">Chapter 3</span>
+                        <span>Spotting a Factory Clinic</span>
+                    </button>
+                    <button class="reader-toc-btn" data-ch="4">
+                        <span class="ch-num">Chapter 4</span>
+                        <span>The Recovery Roadmap</span>
+                    </button>
+                </aside>
+
+                <!-- Page Reading Panels -->
+                <div class="reader-main">
+                    
+                    <!-- Chapter 1 -->
+                    <div class="reader-page active" id="reader-page-1">
+                        <h4>Chapter 1: Decoding Your Skin Type (Fitzpatrick Scale)</h4>
+                        <p>The **Fitzpatrick Scale** is the medical standard for classifying human skin coloring and how it reacts to ultraviolet radiation and laser wavelengths. It ranges from Type I (very pale, burns easily) to Type VI (deeply pigmented, never burns).</p>
+                        <p>The core problem in mass-volume clinics is the **melanin concentration disparity**. Standard Korean laser protocols are calibrated for local East Asian skin types, which typically hover around Type III and IV.</p>
+                        <blockquote>
+                            <strong>Why standard settings can be dangerous:</strong>
+                            If you possess Type I-II skin, standard settings are often too high, nuking your thin protective barrier and triggering chronic vascular redness or blistering. If you possess Type V-VI skin, active epidermal melanin absorbs the laser heat too quickly, causing permanent laser burns or post-inflammatory hypopigmentation (white spots).
+                        </blockquote>
+                        <p>Manually adjusting pulse duration and energy fluence for your specific Fitzpatrick type is a fundamental medical necessity—not an optional luxury package.</p>
+                    </div>
+
+                    <!-- Chapter 2 -->
+                    <div class="reader-page" id="reader-page-2">
+                        <h4>Chapter 2: The 5 Questions to Expose a "Skin Factory"</h4>
+                        <p>Before allowing a laser to touch your face in Seoul, ignore the front desk sales representatives and demand these answers from the actual performing physician:</p>
+                        
+                        <!-- Interactive Checklist -->
+                        <ul class="safety-checklist">
+                            <li class="checklist-item">
+                                <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
+                                <div class="checklist-details">
+                                    <h5>Q1. "Will the doctor consulting me right now be the exact person performing my procedure?"</h5>
+                                    <p>Exposes shadow-doctor bait-and-switches where sales reps consult and random practitioners fire lasers.</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
+                                <div class="checklist-details">
+                                    <h5>Q2. "What exact wavelength and pulse duration settings are you using for my Fitzpatrick type?"</h5>
+                                    <p>Verifies if the practitioner understands skin physiology or is simply pressing automatic presets.</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
+                                <div class="checklist-details">
+                                    <h5>Q3. "Can you show me the genuine, single-use tip packaging and activation log before we start?"</h5>
+                                    <p>Protects you from illegal, reloaded, or counterfeit tips that output unstable energy spikes.</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
+                                <div class="checklist-details">
+                                    <h5>Q4. "What is your clinic's immediate medical protocol and emergency contact for burns?"</h5>
+                                    <p>Ensures they have real emergency dermatological backup, not just a post-sales exit strategy.</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
+                                <div class="checklist-details">
+                                    <h5>Q5. "Can I see the practitioner's portfolio/track record with Western skin profiles?"</h5>
+                                    <p>Confirms actual medical experience treating Fitzpatrick Type I-II and V-VI skin types.</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <button id="btnCopyChecklist" onclick="copySafetyChecklist()" class="btn-primary" style="padding: 12px 20px; font-size: 13px; margin-top: 10px;">
+                            📋 Copy Questions Checklist to Clipboard
+                        </button>
+                    </div>
+
+                    <!-- Chapter 3 -->
+                    <div class="reader-page" id="reader-page-3">
+                        <h4>Chapter 3: Spotting the 'Factory' Clinic</h4>
+                        <p>Over 80% of "Skin Clinics" located in high-traffic tourist areas are managed by general practitioners (GP) without formal specialist dermatological training. You can spot a factory clinic by watching out for these three red flags:</p>
+                        <blockquote>
+                            <strong>Red Flag #1: Upfront Payments</strong><br>
+                            If they refuse to let you speak with a medical doctor until you have signed packages and swiped your card at the front desk, you are in a factory clinic.
+                        </blockquote>
+                        <p><strong>Red Flag #2: Extreme Price Dumps</strong><br>
+                        If the price of highly consumable tip cartridges (such as Ultherapy or Shurink) is 50-70% lower than the market average, the clinic is likely using counterfeit tips, reloaded cartridges, or cutting corners on safety diagnostics.</p>
+                        <p><strong>Red Flag #3: Abstract Review Metrics</strong><br>
+                        If reviews of the clinic only mention the "kind translation staff" or "fast service," but never name a specific doctor or comment on precise clinical parameters, ratings have likely been manipulated.</p>
+                    </div>
+
+                    <!-- Chapter 4 -->
+                    <div class="reader-page" id="reader-page-4">
+                        <h4>Chapter 4: The Post-Travel Recovery Roadmap</h4>
+                        <p>If you are returning to your home country immediately after a dermatological laser session in Korea, follow this emergency recovery checklist to protect your barrier:</p>
+                        <p><strong>1. The Post-Laser Flight Kit:</strong> Airplane cabins have humidity levels below 20%. Apply thick ceramide-based barrier creams and physical sunscreens (Zinc Oxide/Titanium Dioxide) before boarding. Avoid chemical filters on fresh micro-wounds.</p>
+                        <p><strong>2. Post-Inflammatory Hyperpigmentation (PIH) Prevention:</strong> Avoid direct sun exposure for 14 days post-laser. If you develop dark spots (PIH), do not apply aggressive chemical peels. Let the barrier rest and apply mild Cica (Centella Asiatica) or Panthenol derivatives.</p>
+                        <blockquote>
+                            <strong>Emergency Assistance:</strong><br>
+                            If you experience severe blistering, persistent swelling, or laser-induced burns after returning home, contact our remote teleconsult lines through the Komicare App for immediate guidance.
+                        </blockquote>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="reader-nav-btn" id="reader-prev-btn" disabled>&larr; Previous</button>
+                <div class="reader-coupon">
+                    <span>WAITLIST VIP PASSCODE:</span>
+                    <strong>KOMICARE-50-VIP</strong>
+                </div>
+                <button class="reader-nav-btn" id="reader-next-btn">Next &rarr;</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-logo">
+                        KOMI<span>CARE</span>
+                    </div>
+                    <p class="footer-about">
+                        Komicare is the first safety-verified boutique skin matchmaking platform for medical travelers. Our database is hosted in offshore jurisdictions to protect patient reviews from Truth-Based Defamation censorship laws.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h5>Trust Resources</h5>
+                    <a href="#" id="btnOpenReader">Safety Handbook</a>
+                    <a href="#">Privacy Architecture</a>
+                    <a href="#">Boutique Partner Application</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 KOMICARE Inc. All rights reserved.</span>
+                <span>Offshore Jurisdiction Server Node | Data Encrypted & Anonymized</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core App Scripts -->
+    <script src="app.js"></script>
+</body>
+
+</html>

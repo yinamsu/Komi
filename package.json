@@ -1,0 +1,9 @@
+{
+  "name": "komicare-landing",
+  "version": "2.0.0",
+  "description": "KOMICARE Premium Boutique Skin Match Landing Page",
+  "main": "api/subscribe.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}
