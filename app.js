@@ -107,9 +107,12 @@ function initQuiz() {
             // Loading state UI
             const originalBtnContent = submitBtn.innerHTML;
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Verifying Skin Profile...</span> ⏳';
+            submitBtn.innerHTML = '<span class="spinner">Securing Connection...</span> ⏳';
+
+            let shouldOpenModal = false;
 
             try {
+                // Point securely to the serverless Vercel function API
                 const response = await fetch('/api/subscribe', {
                     method: 'POST',
                     headers: {
@@ -124,19 +127,18 @@ function initQuiz() {
                 const result = await response.json();
 
                 if (!response.ok) {
-                    // If conflict (409) or other API errors
-                    if (response.status === 409) {
-                        console.log("Subscriber status: Already waitlisted. Opening passport.");
-                    } else {
-                        throw new Error(result.error || 'Server error occurred.');
-                    }
+                    throw new Error(result.error || 'Server error occurred.');
                 }
 
                 console.log("Waitlist success:", result.message);
+                shouldOpenModal = true;
 
-            } catch (err) {
-                console.warn("Waitlist sync warning: Offline fallback activated. Reason:", err.message);
-                // Resilient UX: Still allow the user to view the results offline
+            } catch (error) {
+                alert(`Subscription Status: ${error.message}`);
+                // If email already registered, open the handbook anyway to prevent user dropoff
+                if (error.message.toLowerCase().includes('already registered') || error.message.toLowerCase().includes('already waitlisted')) {
+                    shouldOpenModal = true;
+                }
             } finally {
                 // Restore button state
                 submitBtn.disabled = false;
@@ -144,6 +146,11 @@ function initQuiz() {
                 
                 // Transition to Result Screen
                 showResults();
+
+                // Open ebook modal immediately on success / duplicate check
+                if (shouldOpenModal) {
+                    openReaderModal();
+                }
             }
         });
     }
