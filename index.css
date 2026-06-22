@@ -559,8 +559,8 @@ a {
 .form-input:focus {
     outline: none;
     border-color: var(--color-primary);
-    background-color: #fff;
-    box-shadow: 0 0 0 4px rgba(11, 60, 44, 0.08);
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.08);
 }
 
 .btn-primary {
