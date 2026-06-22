@@ -18,8 +18,16 @@
             <a href="#" class="logo">
                 KOMI<span>CARE</span>
             </a>
-            <div class="badge-verified">
-                🛡️ <span>100% Verified Boutique Only</span>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <!-- Theme Switcher segmented controller -->
+                <div class="theme-switcher" id="themeSwitcher">
+                    <button class="theme-btn" data-theme="light" title="Light Mode">☀️</button>
+                    <button class="theme-btn" data-theme="dark" title="Dark Mode">🌙</button>
+                    <button class="theme-btn active" data-theme="system" title="System Settings">💻</button>
+                </div>
+                <div class="badge-verified">
+                    🛡️ <span>100% Verified Boutique Only</span>
+                </div>
             </div>
         </div>
     </header>

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initQuiz();
     initReceiptMasker();
     initReader();
+    initTheme();
 });
 
 // ==========================================
@@ -459,3 +460,57 @@ Q5. Practitioner Assignment & Track Record:
         alert('Failed to copy checklist to clipboard. Please copy manually.');
     });
 };
+
+// ==========================================
+// 4. Dark/Light Mode Theme controller
+// ==========================================
+
+function initTheme() {
+    const themeSwitcher = document.getElementById('themeSwitcher');
+    if (!themeSwitcher) return;
+
+    const themeButtons = themeSwitcher.querySelectorAll('.theme-btn');
+    
+    // Get saved theme or fallback to 'system'
+    const savedTheme = localStorage.getItem('komicare-theme') || 'system';
+    
+    // Set initial state
+    applyTheme(savedTheme);
+
+    // Bind click events
+    themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const selectedTheme = btn.getAttribute('data-theme');
+            applyTheme(selectedTheme);
+        });
+    });
+}
+
+function applyTheme(theme) {
+    const htmlEl = document.documentElement;
+    const themeSwitcher = document.getElementById('themeSwitcher');
+    
+    // Toggle HTML attributes
+    if (theme === 'light') {
+        htmlEl.setAttribute('data-theme', 'light');
+    } else if (theme === 'dark') {
+        htmlEl.setAttribute('data-theme', 'dark');
+    } else {
+        // System Settings
+        htmlEl.removeAttribute('data-theme');
+    }
+
+    // Save choice
+    localStorage.setItem('komicare-theme', theme);
+
+    // Update active button state
+    if (themeSwitcher) {
+        themeSwitcher.querySelectorAll('.theme-btn').forEach(btn => {
+            if (btn.getAttribute('data-theme') === theme) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+}
