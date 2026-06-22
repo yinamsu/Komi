@@ -5,12 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     initReceiptMasker();
     initReader();
     initTheme();
+    loadClinics();
     initClinicDetailModal();
 });
 
 // ==========================================
 // 1. Fitzpatrick Quiz Diagnostic Engine
 // ==========================================
+
+let activeClinicId = null;
 
 let quizData = {
     step: 1,
@@ -552,14 +555,13 @@ const clinicDetails = {
         rating: "⭐ 4.9 (120+ verified reviews)",
         description: "Specialized in non-invasive skin barrier recovery and pigmentation lasers for sensitive skin types. Known for ultra-conservative energy calibration and genuine, certified tips.",
         specialties: ["Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning"],
-        doctor: {
-            name: "Dr. Ji-Yeon Lee",
-            avatar: "JY",
-            title: "Board-Certified Dermatologist | Nd:YAG Specialist",
-            bio: "Dr. Lee has over 12 years of clinical dermatology experience, specializing in lasers for thin and reactive skin barriers. She is a recognized speaker on Nd:YAG customization."
-        },
+        doctor_name: "Dr. Ji-Yeon Lee",
+        doctor_avatar: "JY",
+        doctor_title: "Board-Certified Dermatologist | Nd:YAG Specialist",
+        doctor_bio: "Dr. Lee has over 12 years of clinical dermatology experience, specializing in lasers for thin and reactive skin barriers. She is a recognized speaker on Nd:YAG customization.",
         hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM",
-        mapIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr"
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr",
+        slots_tag: "Max 3 Bookings/Hr"
     },
     2: {
         name: "Myeongdong Forest Dermatology",
@@ -567,14 +569,13 @@ const clinicDetails = {
         rating: "⭐ 4.8 (94+ verified reviews)",
         description: "A tranquil sanctuary clinic in the heart of Myeongdong, prioritizing barrier safety over factory treatments. Enforces a strict maximum of 2 patient bookings per hour.",
         specialties: ["Vascular Laser Calibration", "Rosacea & Redness Recovery", "Ultrasonic Rejuvenation"],
-        doctor: {
-            name: "Dr. Minji Kim",
-            avatar: "MK",
-            title: "Board-Certified Dermatologist | Barrier Recovery",
-            bio: "Dr. Kim founded Myeongdong Forest to offer custom medical treatments for international travelers who frequently experience barrier breakdown due to travel and climate changes."
-        },
+        doctor_name: "Dr. Minji Kim",
+        doctor_avatar: "MK",
+        doctor_title: "Board-Certified Dermatologist | Barrier Recovery",
+        doctor_bio: "Dr. Kim founded Myeongdong Forest to offer custom medical treatments for international travelers who frequently experience barrier breakdown due to travel and climate changes.",
         hours: "Mon, Wed, Thu: 10:00 AM - 8:00 PM (Night Clinic) | Tue, Fri: 10:00 AM - 7:00 PM",
-        mapIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr"
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr",
+        slots_tag: "Max 2 Bookings/Hr"
     },
     3: {
         name: "Hannam Aesthetic & Laser House",
@@ -582,14 +583,13 @@ const clinicDetails = {
         rating: "⭐ 4.9 (78+ verified reviews)",
         description: "Boutique clinic catering to embassies and expats in Hannam. Equipped with premium dual-cooling laser systems and offering customized wavelength diagnostics.",
         specialties: ["1:1 Wavelength Tuning", "Dual-Cooling Safety Protocols", "High-Fluence Pigment Management"],
-        doctor: {
-            name: "Dr. Tae-Young Park",
-            avatar: "TP",
-            title: "Board-Certified Dermatologist | Custom Wavelengths",
-            bio: "Dr. Park completed his fellowship at Seoul National University Hospital. He speaks fluent English and is dedicated to making laser treatments safe for diverse Fitzpatrick skin types."
-        },
+        doctor_name: "Dr. Tae-Young Park",
+        doctor_avatar: "TP",
+        doctor_title: "Board-Certified Dermatologist | Custom Wavelengths",
+        doctor_bio: "Dr. Park completed his fellowship at Seoul National University Hospital. He speaks fluent English and is dedicated to making laser treatments safe for diverse Fitzpatrick skin types.",
         hours: "Tue - Fri: 11:00 AM - 8:00 PM | Sat: 10:00 AM - 5:00 PM | Sun, Mon: Closed",
-        mapIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7854653738096!2d127.00693597646618!3d37.53429397204558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3b98d24ebf5%3A0xefdf5a3c94248a0!2sHannam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035200000!5m2!1sen!2skr"
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7854653738096!2d127.00693597646618!3d37.53429397204558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3b98d24ebf5%3A0xefdf5a3c94248a0!2sHannam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035200000!5m2!1sen!2skr",
+        slots_tag: "Max 3 Bookings/Hr"
     },
     4: {
         name: "Sinsa Glow Dermatology",
@@ -597,14 +597,13 @@ const clinicDetails = {
         rating: "⭐ 4.7 (112+ verified reviews)",
         description: "Specializing in advanced anti-aging treatments with verified genuine consumables logging. We provide every patient with their single-use tip certificate and serial code.",
         specialties: ["Genuine Consumables Logged", "Ultherapy & Shurink custom setups", "Epidermal Thickness Diagnostic"],
-        doctor: {
-            name: "Dr. Seo-Jun Choi",
-            avatar: "SC",
-            title: "Board-Certified Dermatologist | Anti-Aging Specialist",
-            bio: "Dr. Choi is an expert in non-surgical lifting. He developed Sinsa Glow's 'Barrier First' lifting protocol to prevent post-treatment nerve complications and excessive swelling."
-        },
+        doctor_name: "Dr. Seo-Jun Choi",
+        doctor_avatar: "SC",
+        doctor_title: "Board-Certified Dermatologist | Anti-Aging Specialist",
+        doctor_bio: "Dr. Choi is an expert in non-surgical lifting. He developed Sinsa Glow's 'Barrier First' lifting protocol to prevent post-treatment nerve complications and excessive swelling.",
         hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 9:30 AM - 3:00 PM",
-        mapIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr"
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr",
+        slots_tag: "Max 2 Bookings/Hr"
     },
     5: {
         name: "Hongdae Calm Skin Clinic",
@@ -612,67 +611,271 @@ const clinicDetails = {
         rating: "⭐ 4.8 (85+ verified reviews)",
         description: "A trendy but medically rigorous clinic in Hongdae. Focuses on laser toning and vascular treatments for younger global patients with absolute physician presence.",
         specialties: ["Nd:YAG & Pico Laser Certified", "100% Physician Consultation", "Youth Acne Barrier Healing"],
-        doctor: {
-            name: "Dr. Eun-Ji Song",
-            avatar: "ES",
-            title: "Board-Certified Dermatologist | Pigmentation Expert",
-            bio: "Dr. Song is highly recognized for her gentle, layered laser approach. She rejects rapid 'one-size-fits-all' laser protocols, allocating 30+ minutes per patient treatment."
-        },
+        doctor_name: "Dr. Eun-Ji Song",
+        doctor_avatar: "ES",
+        doctor_title: "Board-Certified Dermatologist | Pigmentation Expert",
+        doctor_bio: "Dr. Song is highly recognized for her gentle, layered laser approach. She rejects rapid 'one-size-fits-all' laser protocols, allocating 30+ minutes per patient treatment.",
         hours: "Mon, Tue, Fri: 10:00 AM - 7:00 PM | Thu: 10:00 AM - 9:00 PM (Night Clinic) | Sat: 10:00 AM - 4:00 PM",
-        mapIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.0903332467554!2d126.91929527646698!3d37.5541201720392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98da5f87b8b5%3A0x6b6df7d6b8b0e8c0!2sSeogyo-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035400000!5m2!1sen!2skr"
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.0903332467554!2d126.91929527646698!3d37.5541201720392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98da5f87b8b5%3A0x6b6df7d6b8b0e8c0!2sSeogyo-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035400000!5m2!1sen!2skr",
+        slots_tag: "Max 4 Bookings/Hr"
     }
 };
 
+let loadedClinicsGlobal = [];
+
+async function loadClinics() {
+    try {
+        const response = await fetch('/api/clinics');
+        const result = await response.json();
+        
+        if (result && result.success && result.clinics) {
+            loadedClinicsGlobal = result.clinics;
+            // Sync Supabase clinic schemas into local mapping variable
+            result.clinics.forEach(c => {
+                clinicDetails[c.id] = c;
+            });
+            renderClinicCards(result.clinics);
+        } else {
+            throw new Error("Failed to parse clinics API payload");
+        }
+    } catch (error) {
+        console.warn("API clinics load failed, loading front-end local database fallback:", error);
+        // Render from local fallback
+        const fallbackArray = Object.keys(clinicDetails).map(key => ({
+            id: parseInt(key),
+            ...clinicDetails[key]
+        }));
+        loadedClinicsGlobal = fallbackArray;
+        renderClinicCards(fallbackArray);
+    }
+}
+
+function renderClinicCards(clinics) {
+    const container = document.getElementById('dynamic-partner-list');
+    if (!container) return;
+
+    if (!clinics || clinics.length === 0) {
+        container.innerHTML = `
+            <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;">
+                ⚠️ No verified boutique clinics available at the moment.
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = '';
+    clinics.forEach(clinic => {
+        const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
+        const tagsHTML = specs.map(spec => `<span class="partner-tag">${spec}</span>`).join('');
+        
+        // Grab numeric rating only (e.g. "4.9")
+        const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();
+
+        const cardHTML = `
+            <div class="partner-card" data-clinic-id="${clinic.id}">
+                <div class="partner-top">
+                    <div class="partner-info">
+                        <h4>${clinic.name}</h4>
+                        <span class="partner-location">${clinic.location}</span>
+                    </div>
+                    <div class="partner-rating">
+                        <span>⭐ ${ratingVal}</span>
+                    </div>
+                </div>
+                <div class="partner-tags">
+                    ${tagsHTML}
+                    <span class="partner-tag slots">${clinic.slots_tag}</span>
+                </div>
+                <div class="partner-doctors">
+                    <div class="doctor-profile">
+                        <div class="doctor-avatar">${clinic.doctor_avatar}</div>
+                        <div class="doctor-meta">
+                            <h5>${clinic.doctor_name}</h5>
+                            <p>${clinic.doctor_title}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', cardHTML);
+    });
+}
+
+function openClinicDetailModal(clinicId) {
+    const data = clinicDetails[clinicId];
+    if (!data) return;
+
+    activeClinicId = clinicId;
+
+    // Reset views inside booking wizard
+    resetBookingViews();
+
+    // Populate text details
+    document.getElementById('clinic-detail-name').textContent = data.name;
+    document.getElementById('clinic-detail-location').textContent = data.location;
+    document.getElementById('clinic-detail-rating').textContent = data.rating;
+    document.getElementById('clinic-detail-desc').textContent = data.description;
+    document.getElementById('clinic-detail-hours').textContent = data.hours;
+
+    // Populate Specialties tags
+    const specialtiesContainer = document.getElementById('clinic-detail-specialties');
+    specialtiesContainer.innerHTML = '';
+    const specs = Array.isArray(data.specialties) ? data.specialties : [];
+    specs.forEach(spec => {
+        const tag = document.createElement('span');
+        tag.className = 'partner-tag';
+        tag.textContent = spec;
+        specialtiesContainer.appendChild(tag);
+    });
+
+    // Populate Doctor Info
+    document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
+    document.getElementById('clinic-detail-doc-name').textContent = data.doctor_name;
+    document.getElementById('clinic-detail-doc-title').textContent = data.doctor_title;
+    document.getElementById('clinic-detail-doc-bio').textContent = data.doctor_bio;
+
+    // Load Map Iframe
+    const mapIframe = document.getElementById('clinic-detail-map-iframe');
+    if (mapIframe) {
+        mapIframe.src = data.map_iframe;
+    }
+
+    // Set today as minimum on date picker
+    const dateInput = document.getElementById('bookingDate');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+        dateInput.value = today;
+    }
+
+    // Open Modal
+    const modal = document.getElementById('clinicModal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function resetBookingViews() {
+    const mapView = document.getElementById('clinic-map-view');
+    const bookingView = document.getElementById('clinic-booking-view');
+    const bookingSuccess = document.getElementById('booking-success-view');
+    const bookingForm = document.getElementById('clinicBookingForm');
+
+    if (mapView && bookingView && bookingSuccess && bookingForm) {
+        mapView.classList.add('active');
+        bookingView.classList.remove('active');
+        bookingSuccess.style.display = 'none';
+        bookingForm.style.display = 'block';
+        bookingForm.reset();
+    }
+}
+
 function initClinicDetailModal() {
-    const clinicCards = document.querySelectorAll('.partner-card');
+    const container = document.getElementById('dynamic-partner-list');
     const modal = document.getElementById('clinicModal');
     const closeBtn = document.getElementById('btnCloseClinic');
 
+    // Switchers
+    const btnShowBookingForm = document.getElementById('btnShowBookingForm');
+    const btnBackToMap = document.getElementById('btnBackToMap');
+    const btnResetBookingModal = document.getElementById('btnResetBookingModal');
+
+    // Form
+    const bookingForm = document.getElementById('clinicBookingForm');
+
     if (!modal) return;
 
-    clinicCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const clinicId = card.getAttribute('data-clinic-id');
-            const data = clinicDetails[clinicId];
-
-            if (data) {
-                // Populate text details
-                document.getElementById('clinic-detail-name').textContent = data.name;
-                document.getElementById('clinic-detail-location').textContent = data.location;
-                document.getElementById('clinic-detail-rating').textContent = data.rating;
-                document.getElementById('clinic-detail-desc').textContent = data.description;
-                document.getElementById('clinic-detail-hours').textContent = data.hours;
-
-                // Populate Specialties tags
-                const specialtiesContainer = document.getElementById('clinic-detail-specialties');
-                specialtiesContainer.innerHTML = '';
-                data.specialties.forEach(spec => {
-                    const tag = document.createElement('span');
-                    tag.className = 'partner-tag';
-                    tag.textContent = spec;
-                    specialtiesContainer.appendChild(tag);
-                });
-
-                // Populate Doctor Info
-                document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor.avatar;
-                document.getElementById('clinic-detail-doc-name').textContent = data.doctor.name;
-                document.getElementById('clinic-detail-doc-title').textContent = data.doctor.title;
-                document.getElementById('clinic-detail-doc-bio').textContent = data.doctor.bio;
-
-                // Load Map Iframe
-                const mapIframe = document.getElementById('clinic-detail-map-iframe');
-                if (mapIframe) {
-                    mapIframe.src = data.mapIframe;
-                }
-
-                // Open Modal
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+    // 1. Event Delegation for Clinic list clicks
+    if (container) {
+        container.addEventListener('click', (e) => {
+            const card = e.target.closest('.partner-card');
+            if (card) {
+                const clinicId = card.getAttribute('data-clinic-id');
+                openClinicDetailModal(clinicId);
             }
         });
-    });
+    }
 
-    // Close Modal
+    // 2. View switch actions
+    if (btnShowBookingForm) {
+        btnShowBookingForm.addEventListener('click', () => {
+            document.getElementById('clinic-map-view').classList.remove('active');
+            document.getElementById('clinic-booking-view').classList.add('active');
+        });
+    }
+
+    if (btnBackToMap) {
+        btnBackToMap.addEventListener('click', () => {
+            resetBookingViews();
+        });
+    }
+
+    if (btnResetBookingModal) {
+        btnResetBookingModal.addEventListener('click', () => {
+            resetBookingViews();
+        });
+    }
+
+    // 3. Form Submission
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = bookingForm.querySelector('button[type="submit"]');
+            const originalBtnContent = submitBtn.innerHTML;
+
+            const clientName = document.getElementById('bookingName').value;
+            const clientEmail = document.getElementById('bookingEmail').value;
+            const bookingDate = document.getElementById('bookingDate').value;
+            const bookingTime = document.getElementById('bookingTime').value;
+            const treatment = document.getElementById('bookingTreatment').value;
+
+            // Loader state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner">Securing Slot...</span> ⏳';
+
+            try {
+                const response = await fetch('/api/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        clinicId: activeClinicId,
+                        clientName,
+                        clientEmail,
+                        bookingDate,
+                        bookingTime,
+                        treatment
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Server error occurred.');
+                }
+
+                // Show Success Screen
+                bookingForm.style.display = 'none';
+                const successView = document.getElementById('booking-success-view');
+                const successMsg = document.getElementById('booking-success-message');
+
+                const clinicNameStr = clinicDetails[activeClinicId]?.name || 'the clinic';
+                successMsg.innerHTML = `We have successfully reserved your premium 1:1 consultation slot with <strong>${clinicNameStr}</strong> on <strong>${bookingDate}</strong> at <strong>${bookingTime}</strong>.<br><br>🔒 Secure Receipt Code: <code>${result.bookingId}</code>. A confirmation receipt has been dispatched to <strong>${clientEmail}</strong>.`;
+                successView.style.display = 'block';
+
+            } catch (error) {
+                alert(`Booking Error: ${error.message}`);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            }
+        });
+    }
+
+    // 4. Close Modal Handlers
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
             closeClinicModal();
@@ -691,11 +894,12 @@ function closeClinicModal() {
     if (modal) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
-        // Clear iframe source to stop loading/performance footprint when closed
+        // Clear map iframe to stop CPU footprint
         const mapIframe = document.getElementById('clinic-detail-map-iframe');
         if (mapIframe) {
             mapIframe.src = '';
         }
     }
 }
+
 

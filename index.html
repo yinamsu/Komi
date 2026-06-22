@@ -306,144 +306,10 @@
 
                 <div class="directory-layout">
                     
-                    <!-- Clinic Showcase Column -->
-                    <div class="partner-list">
-                        
-                        <!-- Partner 1 -->
-                        <div class="partner-card" data-clinic-id="1">
-                            <div class="partner-top">
-                                <div class="partner-info">
-                                    <h4>Cheongdam Barrier Lab</h4>
-                                    <span class="partner-location">📍 Cheongdam-dong, Gangnam</span>
-                                </div>
-                                <div class="partner-rating">
-                                    <span>⭐ 4.9</span>
-                                </div>
-                            </div>
-                            <div class="partner-tags">
-                                <span class="partner-tag">Genuine Tip Certified</span>
-                                <span class="partner-tag slots">Max 3 Bookings/Hr</span>
-                                <span class="partner-tag">Nd:YAG Calibrated</span>
-                            </div>
-                            <div class="partner-doctors">
-                                <div class="doctor-profile">
-                                    <div class="doctor-avatar">JY</div>
-                                    <div class="doctor-meta">
-                                        <h5>Dr. Ji-Yeon Lee</h5>
-                                        <p>Board-Certified Dermatologist | Nd:YAG Specialist</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="partner-list" id="dynamic-partner-list">
+                        <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;">
+                            🔄 Loading verified boutique clinics...
                         </div>
-
-                        <!-- Partner 2 -->
-                        <div class="partner-card" data-clinic-id="2">
-                            <div class="partner-top">
-                                <div class="partner-info">
-                                    <h4>Myeongdong Forest Dermatology</h4>
-                                    <span class="partner-location">📍 Myeong-dong, Jung-gu</span>
-                                </div>
-                                <div class="partner-rating">
-                                    <span>⭐ 4.8</span>
-                                </div>
-                            </div>
-                            <div class="partner-tags">
-                                <span class="partner-tag">100% Doctor Consultation</span>
-                                <span class="partner-tag slots">Max 2 Bookings/Hr</span>
-                                <span class="partner-tag">Vascular Calibrated</span>
-                            </div>
-                            <div class="partner-doctors">
-                                <div class="doctor-profile">
-                                    <div class="doctor-avatar">MK</div>
-                                    <div class="doctor-meta">
-                                        <h5>Dr. Minji Kim</h5>
-                                        <p>Board-Certified Dermatologist | Barrier Recovery</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Partner 3 -->
-                        <div class="partner-card" data-clinic-id="3">
-                            <div class="partner-top">
-                                <div class="partner-info">
-                                    <h4>Hannam Aesthetic & Laser House</h4>
-                                    <span class="partner-location">📍 Hannam-dong, Yongsan</span>
-                                </div>
-                                <div class="partner-rating">
-                                    <span>⭐ 4.9</span>
-                                </div>
-                            </div>
-                            <div class="partner-tags">
-                                <span class="partner-tag">1:1 Wavelength Tuning</span>
-                                <span class="partner-tag slots">Max 3 Bookings/Hr</span>
-                                <span class="partner-tag">English Support</span>
-                            </div>
-                            <div class="partner-doctors">
-                                <div class="doctor-profile">
-                                    <div class="doctor-avatar">TP</div>
-                                    <div class="doctor-meta">
-                                        <h5>Dr. Tae-Young Park</h5>
-                                        <p>Board-Certified Dermatologist | Custom Energy Calibration</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Partner 4 -->
-                        <div class="partner-card" data-clinic-id="4">
-                            <div class="partner-top">
-                                <div class="partner-info">
-                                    <h4>Sinsa Glow Dermatology</h4>
-                                    <span class="partner-location">📍 Sinsa-dong, Gangnam</span>
-                                </div>
-                                <div class="partner-rating">
-                                    <span>⭐ 4.7</span>
-                                </div>
-                            </div>
-                            <div class="partner-tags">
-                                <span class="partner-tag">Genuine Consumables Logged</span>
-                                <span class="partner-tag slots">Max 2 Bookings/Hr</span>
-                                <span class="partner-tag">Barrier First Policy</span>
-                            </div>
-                            <div class="partner-doctors">
-                                <div class="doctor-profile">
-                                    <div class="doctor-avatar">SC</div>
-                                    <div class="doctor-meta">
-                                        <h5>Dr. Seo-Jun Choi</h5>
-                                        <p>Board-Certified Dermatologist | Anti-Aging Specialist</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Partner 5 -->
-                        <div class="partner-card" data-clinic-id="5">
-                            <div class="partner-top">
-                                <div class="partner-info">
-                                    <h4>Hongdae Calm Skin Clinic</h4>
-                                    <span class="partner-location">📍 Seokyo-dong, Mapo-gu</span>
-                                </div>
-                                <div class="partner-rating">
-                                    <span>⭐ 4.8</span>
-                                </div>
-                            </div>
-                            <div class="partner-tags">
-                                <span class="partner-tag">Nd:YAG & Pico Certified</span>
-                                <span class="partner-tag slots">Max 4 Bookings/Hr</span>
-                                <span class="partner-tag">100% Physician Consultation</span>
-                            </div>
-                            <div class="partner-doctors">
-                                <div class="doctor-profile">
-                                    <div class="doctor-avatar">ES</div>
-                                    <div class="doctor-meta">
-                                        <h5>Dr. Eun-Ji Song</h5>
-                                        <p>Board-Certified Dermatologist | Pigmentation Expert</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                     <!-- Receipt Masker Demo Column -->
@@ -779,24 +645,91 @@
                     </div>
                 </div>
 
-                <!-- Google Maps / Map Section -->
-                <div class="clinic-map-section">
-                    <span class="info-label" style="display: block; margin-bottom: 8px;">Clinic Location Map</span>
-                    <div class="map-iframe-container">
-                        <iframe 
-                            id="clinic-detail-map-iframe"
-                            src="" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0; border-radius: 12px;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                <!-- Right Side: Location Map & Inline Booking Wizard -->
+                <div class="clinic-action-section">
+                    
+                    <!-- View A: Google Maps / Map Section -->
+                    <div class="clinic-sub-view active" id="clinic-map-view">
+                        <span class="info-label" style="display: block; margin-bottom: 8px;">Clinic Location Map</span>
+                        <div class="map-iframe-container">
+                            <iframe 
+                                id="clinic-detail-map-iframe"
+                                src="" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; border-radius: 12px;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <button class="btn-primary" id="btnShowBookingForm" style="width: 100%; margin-top: 16px;">
+                            📅 Secure 1:1 Booking Slot
+                        </button>
                     </div>
-                    <button class="btn-primary" style="width: 100%; margin-top: 16px;" onclick="alert('Safe Consultation Booking initialized. An email has been sent to confirm booking slots!')">
-                        📅 Secure 1:1 Booking Slot
-                    </button>
+
+                    <!-- View B: Inline Booking Form (Initially Hidden) -->
+                    <div class="clinic-sub-view" id="clinic-booking-view">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="info-label">Direct Premium Booking</span>
+                            <button id="btnBackToMap" style="background: none; border: none; color: var(--color-accent); font-weight: 600; cursor: pointer; font-size: 12px;">&larr; Back to Map</button>
+                        </div>
+                        
+                        <form id="clinicBookingForm" class="lead-form-container">
+                            <div class="form-group">
+                                <label for="bookingName" class="form-label">Your Full Name</label>
+                                <input type="text" id="bookingName" class="form-input" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingEmail" class="form-label">Your Email</label>
+                                <input type="email" id="bookingEmail" class="form-input" placeholder="Enter your email address" required>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="form-group">
+                                    <label for="bookingDate" class="form-label">Date</label>
+                                    <input type="date" id="bookingDate" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bookingTime" class="form-label">Preferred Time</label>
+                                    <select id="bookingTime" class="form-input" style="padding: 15px;" required>
+                                        <option value="">Select time...</option>
+                                        <option value="10:00 AM">10:00 AM</option>
+                                        <option value="11:00 AM">11:00 AM</option>
+                                        <option value="02:00 PM">02:00 PM</option>
+                                        <option value="03:00 PM">03:00 PM</option>
+                                        <option value="04:00 PM">04:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingTreatment" class="form-label">Preferred Treatment</label>
+                                <select id="bookingTreatment" class="form-input" style="padding: 15px;">
+                                    <option value="Consultation Only">Consultation Only</option>
+                                    <option value="Pico Toning Laser">Pico Toning Laser</option>
+                                    <option value="Skin Barrier Reconstruction">Skin Barrier Reconstruction</option>
+                                    <option value="Vascular Redness Laser">Vascular Redness Laser</option>
+                                    <option value="Ultherapy Premium Lifting">Ultherapy Premium Lifting</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary" style="margin-top: 10px;">
+                                <span>Confirm Premium Booking</span> &rarr;
+                            </button>
+                        </form>
+
+                        <!-- Success Feedback screen -->
+                        <div id="booking-success-view" style="display: none; text-align: center; padding: 30px 10px; animation: fadeIn 0.4s ease;">
+                            <span style="font-size: 50px; display: block; margin-bottom: 16px;">🎉</span>
+                            <h4 style="color: var(--color-secondary); margin-bottom: 10px; font-weight: 700;">Booking Successfully Locked!</h4>
+                            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;" id="booking-success-message">
+                                We have reserved your slot with the dermatologist. A confirmation email has been dispatched to your inbox.
+                            </p>
+                            <button class="btn-primary" id="btnResetBookingModal" style="width: 100%;">
+                                Return to Clinic Map
+                            </button>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>
