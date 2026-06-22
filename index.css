@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
-/* LIGHT THEME (Default) */
 :root {
     /* Color Palette */
     --color-primary: #0b3c2c; /* Deep Luxury Emerald */
@@ -13,6 +12,7 @@
     --color-accent-light: #fbf9f6;
     
     --bg-primary: #faf9f6; /* Warm Off-White / Alabaster */
+    --bg-primary-rgb: 250, 249, 246;
     --bg-secondary: #ffffff;
     --bg-dark: #0b1420;
     
@@ -39,37 +39,16 @@
     
     --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Backgrounds distinct override */
+    --color-footer-bg: #0b1420;
+    --color-btn-bg: #0b1420;
+    --color-btn-text: #ffffff;
+    --color-badge-bg: #0b1420;
+    --color-badge-text: #ffffff;
 }
 
-/* SYSTEM DARK THEME (Fallback when no preference set) */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-primary: #165b45; /* Brighter emerald for dark bg contrast */
-        --color-primary-rgb: 22, 91, 69;
-        --color-primary-light: #12221b;
-        --color-secondary: #f3f4f6; /* Light text on dark bg for secondary elements */
-        --color-secondary-rgb: 243, 244, 246;
-        --color-accent: #dcbfa0; /* Brighter gold */
-        --color-accent-rgb: 220, 191, 160;
-        --color-accent-light: #161513;
-        
-        --bg-primary: #0a0f18; /* Deep Midnight */
-        --bg-secondary: #111827; /* Rich Dark Gray-Navy */
-        --bg-dark: #070a10;
-        
-        --text-primary: #f3f4f6;
-        --text-secondary: #9ca3af;
-        --text-light: #ffffff;
-        --text-muted: #6b7280;
-        
-        --border-color: #1f2937;
-        --border-glow: rgba(220, 191, 160, 0.1);
-        --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.2);
-        --shadow-medium: 0 12px 30px rgba(0, 0, 0, 0.4);
-    }
-}
-
-/* EXPLICIT THEME OVERRIDES */
+/* EXPLICIT THEME OVERRIDES (Enforced via JS) */
 html[data-theme="light"] {
     --color-primary: #0b3c2c;
     --color-primary-rgb: 11, 60, 44;
@@ -81,6 +60,7 @@ html[data-theme="light"] {
     --color-accent-light: #fbf9f6;
     
     --bg-primary: #faf9f6;
+    --bg-primary-rgb: 250, 249, 246;
     --bg-secondary: #ffffff;
     --bg-dark: #0b1420;
     
@@ -94,6 +74,12 @@ html[data-theme="light"] {
     
     --shadow-soft: 0 4px 20px rgba(11, 20, 32, 0.04);
     --shadow-medium: 0 12px 30px rgba(11, 20, 32, 0.08);
+
+    --color-footer-bg: #0b1420;
+    --color-btn-bg: #0b1420;
+    --color-btn-text: #ffffff;
+    --color-badge-bg: #0b1420;
+    --color-badge-text: #ffffff;
 }
 
 html[data-theme="dark"] {
@@ -107,6 +93,7 @@ html[data-theme="dark"] {
     --color-accent-light: #161513;
     
     --bg-primary: #0a0f18;
+    --bg-primary-rgb: 10, 15, 24;
     --bg-secondary: #111827;
     --bg-dark: #070a10;
     
@@ -119,6 +106,12 @@ html[data-theme="dark"] {
     --border-glow: rgba(220, 191, 160, 0.1);
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.2);
     --shadow-medium: 0 12px 30px rgba(0, 0, 0, 0.4);
+
+    --color-footer-bg: #070a10;
+    --color-btn-bg: #165b45;
+    --color-btn-text: #ffffff;
+    --color-badge-bg: #12221b;
+    --color-badge-text: #165b45;
 }
 
 /* Base Styles */
@@ -169,7 +162,7 @@ a {
 .app-header {
     padding: 24px 0;
     border-bottom: 1px solid var(--border-color);
-    background-color: rgba(250, 249, 246, 0.8);
+    background-color: rgba(var(--bg-primary-rgb), 0.8);
     backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
@@ -233,8 +226,8 @@ a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background-color: var(--color-secondary);
-    color: #fff;
+    background-color: var(--color-badge-bg);
+    color: var(--color-badge-text);
     padding: 6px 14px;
     border-radius: 50px;
     font-size: 13px;
@@ -570,8 +563,8 @@ a {
 }
 
 .btn-primary {
-    background-color: var(--color-secondary);
-    color: #fff;
+    background-color: var(--color-btn-bg);
+    color: var(--color-btn-text);
     border: none;
     border-radius: 12px;
     padding: 18px 24px;
@@ -1525,7 +1518,7 @@ a {
 
 /* Footer */
 .app-footer {
-    background-color: var(--color-secondary);
+    background-color: var(--color-footer-bg);
     color: #fff;
     padding: 60px 0 30px;
     font-size: 13px;

@@ -484,26 +484,51 @@ function initTheme() {
             applyTheme(selectedTheme);
         });
     });
+
+    // Listen for system theme changes dynamically
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        const currentStored = localStorage.getItem('komicare-theme') || 'system';
+        if (currentStored === 'system') {
+            applyTheme('system');
+        }
+    });
 }
 
 function applyTheme(theme) {
     const htmlEl = document.documentElement;
     const themeSwitcher = document.getElementById('themeSwitcher');
     
-    // Toggle HTML attributes
+    // Toggle HTML attributes explicitly to resolve forced browser overrides
     if (theme === 'light') {
         htmlEl.setAttribute('data-theme', 'light');
+        localStorage.setItem('komicare-theme', 'light');
     } else if (theme === 'dark') {
         htmlEl.setAttribute('data-theme', 'dark');
+        localStorage.setItem('komicare-theme', 'dark');
     } else {
-        // System Settings
-        htmlEl.removeAttribute('data-theme');
+        // System Settings: explicitly calculate and apply the class
+        const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (systemIsDark) {
+            htmlEl.setAttribute('data-theme', 'dark');
+        } else {
+            htmlEl.setAttribute('data-theme', 'light');
+        }
+        localStorage.setItem('komicare-theme', 'system');
+        
+        // Update switcher active button to system
+        if (themeSwitcher) {
+            themeSwitcher.querySelectorAll('.theme-btn').forEach(btn => {
+                if (btn.getAttribute('data-theme') === 'system') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        return;
     }
 
-    // Save choice
-    localStorage.setItem('komicare-theme', theme);
-
-    // Update active button state
+    // Update active button state for explicit light/dark
     if (themeSwitcher) {
         themeSwitcher.querySelectorAll('.theme-btn').forEach(btn => {
             if (btn.getAttribute('data-theme') === theme) {
