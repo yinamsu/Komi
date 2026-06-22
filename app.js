@@ -223,7 +223,7 @@ function showResults() {
         document.getElementById('res-type-title').textContent = profile.name;
         document.getElementById('res-behavior').textContent = profile.behavior;
         document.getElementById('res-lasers').textContent = profile.lasers;
-        document.getElementById('res-warning').innerHTML = `<strong>🛡️ Fitzpatrick ${quizData.fitzpatrickType} Safety Advisory:</strong> ${profile.warning}`;
+        document.getElementById('res-warning').innerHTML = `<strong>🛡️ Fitzpatrick ${quizData.fitzpatrickType} Safety Advisory:</strong><p>${profile.warning}</p>`;
 
         // Update visual color bar
         document.querySelectorAll('.scale-segment').forEach(seg => {
