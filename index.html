@@ -5,11 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOMICARE | Premium Boutique Skin Match & Safety Verification</title>
-    <meta name="description" content="Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. Custom Fitzpatrick Skin Type safety protocols.">
-    <!-- Premium Google Fonts and CSS Stylesheet -->
+    <meta name="description"
+        content="Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. Custom Fitzpatrick Skin Type safety protocols.">
+
+    <!-- KOMICARE 프리미엄 인라인 SVG 파비콘 -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3c2c'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23c5a880' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23c5a880' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+
+    <!-- Premium Google Fonts 프리커넥트 최적화 (Outfit, Playfair Display, Noto Sans KR 포함) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- 메인 CSS 스타일시트 -->
     <link rel="stylesheet" href="index.css">
 </head>
 
@@ -48,31 +58,36 @@
             <div class="hero-glow"></div>
             <div class="container">
                 <div class="social-proof-badge">
-                    ⚡ <span data-i18n="hero.social_proof">Join 540+ medical travelers</span> <span data-i18n="hero.social_proof_suffix">securing early access this month.</span>
+                    ⚡ <span data-i18n="hero.social_proof">Join 540+ medical travelers</span> <span
+                        data-i18n="hero.social_proof_suffix">securing early access this month.</span>
                 </div>
-                
+
                 <h1 class="hero-headline">
                     <span data-i18n-html="hero.headline">Tired of Fake Reviews and K-Beauty <br></span>
                     <span class="gradient-text" data-i18n="hero.headline_gradient">"Factory" Clinics?</span>
                 </h1>
-                
+
                 <p class="hero-subheadline" data-i18n="hero.subheadline">
-                    Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. No sponsored ads. No hidden fees. Just honest medical expertise tailored to your specific skin type.
+                    Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient
+                    reviews. No sponsored ads. No hidden fees. Just honest medical expertise tailored to your specific
+                    skin type.
                 </p>
 
                 <!-- Step-by-Step Fitzpatrick Diagnostic Quiz Card -->
                 <div class="diagnostic-container" style="display: none;">
-                    
+
                     <!-- Quiz Wizard Area -->
                     <div id="quiz-setup">
                         <div class="diagnostic-header">
-                            <span class="diagnostic-step-title" data-i18n="quiz.step_title">Step 1: Check Your Skin Behavior</span>
+                            <span class="diagnostic-step-title" data-i18n="quiz.step_title">Step 1: Check Your Skin
+                                Behavior</span>
                             <h3 class="diagnostic-title" data-i18n="quiz.title">Fitzpatrick Skin Type Quiz</h3>
                         </div>
 
                         <!-- Step 1: Skin Tone -->
                         <div class="quiz-step active" id="quiz-step-1">
-                            <h4 class="quiz-question" data-i18n="quiz.q1">Q1. What is the color of your untreated skin?</h4>
+                            <h4 class="quiz-question" data-i18n="quiz.q1">Q1. What is the color of your untreated skin?
+                            </h4>
                             <div class="quiz-options">
                                 <button class="quiz-option" data-step="1" data-score="0" data-type="tone">
                                     <span data-i18n="quiz.q1_a1">Pale White / Translucent</span>
@@ -103,7 +118,8 @@
 
                         <!-- Step 2: Reaction to Sun -->
                         <div class="quiz-step" id="quiz-step-2">
-                            <h4 class="quiz-question" data-i18n="quiz.q2">Q2. What happens when you stay in the sun without sunscreen?</h4>
+                            <h4 class="quiz-question" data-i18n="quiz.q2">Q2. What happens when you stay in the sun
+                                without sunscreen?</h4>
                             <div class="quiz-options">
                                 <button class="quiz-option" data-step="2" data-score="0" data-type="reaction">
                                     <span data-i18n="quiz.q2_a1">Always burns, blisters & peels</span>
@@ -134,7 +150,8 @@
 
                         <!-- Step 3: Tanning Behavior -->
                         <div class="quiz-step" id="quiz-step-3">
-                            <h4 class="quiz-question" data-i18n="quiz.q3">Q3. How does your skin react to multiple days of sun exposure?</h4>
+                            <h4 class="quiz-question" data-i18n="quiz.q3">Q3. How does your skin react to multiple days
+                                of sun exposure?</h4>
                             <div class="quiz-options">
                                 <button class="quiz-option" data-step="3" data-score="0" data-type="tanning">
                                     <span data-i18n="quiz.q3_a1">Never tans, peels immediately</span>
@@ -161,14 +178,19 @@
                             <!-- Lead Email Capture Box (Integrated at last step) -->
                             <form id="leadForm" class="lead-form-container">
                                 <div class="form-group">
-                                    <label for="userEmail" class="form-label" data-i18n="quiz.email_label">Step 2: Where should we send your skin profile & guide?</label>
-                                    <input type="email" id="userEmail" class="form-input" data-i18n-placeholder="quiz.email_placeholder" placeholder="Enter your best email address" required>
+                                    <label for="userEmail" class="form-label" data-i18n="quiz.email_label">Step 2: Where
+                                        should we send your skin profile & guide?</label>
+                                    <input type="email" id="userEmail" class="form-input"
+                                        data-i18n-placeholder="quiz.email_placeholder"
+                                        placeholder="Enter your best email address" required>
                                 </div>
                                 <button type="submit" class="btn-primary">
-                                    <span data-i18n="quiz.submit_btn">Send Me the Safety Guide & Access Passport</span> 🛡️
+                                    <span data-i18n="quiz.submit_btn">Send Me the Safety Guide & Access Passport</span>
+                                    🛡️
                                 </button>
                             </form>
-                            <p class="form-disclaimer" data-i18n="quiz.disclaimer">🔒 Anti-Spam: We hate fake reviews and spam. 100% Confidential.</p>
+                            <p class="form-disclaimer" data-i18n="quiz.disclaimer">🔒 Anti-Spam: We hate fake reviews
+                                and spam. 100% Confidential.</p>
                         </div>
 
                         <!-- Progress Bar indicator -->
@@ -183,7 +205,8 @@
                     <!-- Quiz Results Screen (Initially Hidden) -->
                     <div id="quiz-results" style="display: none;">
                         <div class="diagnostic-header text-center">
-                            <span class="diagnostic-step-title" data-i18n="results.step_title">Skin Diagnostic Passport</span>
+                            <span class="diagnostic-step-title" data-i18n="results.step_title">Skin Diagnostic
+                                Passport</span>
                             <h3 class="diagnostic-title" id="res-type-title">Fitzpatrick Type</h3>
                         </div>
 
@@ -192,7 +215,7 @@
                                 <span class="passport-badge" data-i18n="results.verified">Verified Analysis</span>
                                 <span class="passport-type" id="res-type-num" data-i18n="results.active">Active</span>
                             </div>
-                            
+
                             <!-- Custom Scale Visualizer -->
                             <div class="passport-bar-scale">
                                 <div class="scale-segment type-1"></div>
@@ -225,7 +248,9 @@
                             <button id="btnOpenReaderResults" class="btn-primary">
                                 <span data-i18n="results.open_handbook">📖 Open Safety Handbook Now</span>
                             </button>
-                            <button onclick="restartQuiz()" class="btn-secondary" style="border: 1px solid var(--border-color); background: none; border-radius: 12px; padding: 12px; font-weight: 600; cursor: pointer; color: var(--text-secondary); transition: var(--transition-smooth);" data-i18n="results.retake">
+                            <button onclick="restartQuiz()" class="btn-secondary"
+                                style="border: 1px solid var(--border-color); background: none; border-radius: 12px; padding: 12px; font-weight: 600; cursor: pointer; color: var(--text-secondary); transition: var(--transition-smooth);"
+                                data-i18n="results.retake">
                                 🔄 Re-take skin diagnostic
                             </button>
                         </div>
@@ -240,9 +265,11 @@
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="compare.title">Boutique Standard vs. Factory Clinic</span>
-                    <h2 class="section-title"><span data-i18n="compare.title">Boutique Standard vs. Factory Clinic</span></h2>
+                    <h2 class="section-title"><span data-i18n="compare.title">Boutique Standard vs. Factory
+                            Clinic</span></h2>
                     <p class="section-subtitle" data-i18n="compare.subtitle">
-                        Choose between cheap assembly-line laser settings or chief-physician customized design skin procedures.
+                        Choose between cheap assembly-line laser settings or chief-physician customized design skin
+                        procedures.
                     </p>
                 </div>
 
@@ -252,20 +279,23 @@
                         <div class="compare-card-header">
                             <span class="compare-type" data-i18n="compare.factory_title">Factory Clinic</span>
                             <div class="compare-price">100,000 <span>KRW</span></div>
-                            <p class="compare-desc" data-i18n="compare.factory_desc">3-minute treatment by random doctor, no safety calibration.</p>
+                            <p class="compare-desc" data-i18n="compare.factory_desc">3-minute treatment by random
+                                doctor, no safety calibration.</p>
                         </div>
                         <ul class="compare-features">
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">❌</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.factory_consult">Rushed consultation with sales rep</strong>
+                                    <strong data-i18n="compare.factory_consult">Rushed consultation with sales
+                                        rep</strong>
                                     <p>Sales rep pushes packages with commission margin goals.</p>
                                 </div>
                             </li>
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">❌</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.factory_risk">High burn & skin barrier damage risk</strong>
+                                    <strong data-i18n="compare.factory_risk">High burn & skin barrier damage
+                                        risk</strong>
                                     <p>Settings default to hardcoded presets, high danger for global skins.</p>
                                 </div>
                             </li>
@@ -284,29 +314,35 @@
                         <div class="compare-badge">VIP Standard</div>
                         <div class="compare-card-header">
                             <span class="compare-type" data-i18n="compare.boutique_title">Komicare Boutique</span>
-                            <div class="compare-price" style="color: var(--color-accent);">200,000 <span>KRW</span></div>
-                            <p class="compare-desc" data-i18n="compare.boutique_desc">1:1 chief physician custom design, pulse width calibration & recovery care.</p>
+                            <div class="compare-price" style="color: var(--color-accent);">200,000 <span>KRW</span>
+                            </div>
+                            <p class="compare-desc" data-i18n="compare.boutique_desc">1:1 chief physician custom design,
+                                pulse width calibration & recovery care.</p>
                         </div>
                         <ul class="compare-features">
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">✓</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.boutique_consult">In-depth medical consultation with chief physician</strong>
+                                    <strong data-i18n="compare.boutique_consult">In-depth medical consultation with
+                                        chief physician</strong>
                                     <p>1:1 design consultation directly analyzing skin thickness and barrier.</p>
                                 </div>
                             </li>
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">✓</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.boutique_risk">Optimized safety under certified specialist</strong>
+                                    <strong data-i18n="compare.boutique_risk">Optimized safety under certified
+                                        specialist</strong>
                                     <p>Adjusting pulse length and cooling parameters based on Fitzpatrick scale.</p>
                                 </div>
                             </li>
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">✓</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.boutique_care">Guaranteed post-departure remote care</strong>
-                                    <p>Dedicated recovery checklist support even after you return to your home country.</p>
+                                    <strong data-i18n="compare.boutique_care">Guaranteed post-departure remote
+                                        care</strong>
+                                    <p>Dedicated recovery checklist support even after you return to your home country.
+                                    </p>
                                 </div>
                             </li>
                         </ul>
@@ -320,9 +356,12 @@
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-tag" data-i18n="reality.tag">The Reality</span>
-                    <h2 class="section-title"><span data-i18n="reality.title">Why Factory Vouchers </span><span class="section-title-serif" data-i18n="reality.title_serif">will Cook Your Barrier</span></h2>
+                    <h2 class="section-title"><span data-i18n="reality.title">Why Factory Vouchers </span><span
+                            class="section-title-serif" data-i18n="reality.title_serif">will Cook Your Barrier</span>
+                    </h2>
                     <p class="section-subtitle" data-i18n="reality.subtitle">
-                        Standard mass-volume clinics prioritize patient turnover rate and sales margins over actual medical safety and parameters.
+                        Standard mass-volume clinics prioritize patient turnover rate and sales margins over actual
+                        medical safety and parameters.
                     </p>
                 </div>
 
@@ -330,19 +369,25 @@
                     <div class="pain-card">
                         <div class="pain-icon">🧬</div>
                         <h4 data-i18n="reality.card1_title">The Fitzpatrick Skin Blindspot</h4>
-                        <p data-i18n="reality.card1_text">Most mass-market clinics use hard-coded laser settings calibrated strictly for East Asian skin types. Without custom pulse calibration, Western patients (Types I-II & V-VI) suffer severe PIH (hyperpigmentation) and laser burns.</p>
+                        <p data-i18n="reality.card1_text">Most mass-market clinics use hard-coded laser settings
+                            calibrated strictly for East Asian skin types. Without custom pulse calibration, Western
+                            patients (Types I-II & V-VI) suffer severe PIH (hyperpigmentation) and laser burns.</p>
                     </div>
 
                     <div class="pain-card">
                         <div class="pain-icon">👥</div>
                         <h4 data-i18n="reality.card2_title">The "Ghost Doctor" Assembly Line</h4>
-                        <p data-i18n="reality.card2_text">You spend an hour consulting with a commission-driven sales representative who aggressively pushes expensive packages, only for a doctor you've never met to fire lasers at your face for two minutes without analyzing your barrier.</p>
+                        <p data-i18n="reality.card2_text">You spend an hour consulting with a commission-driven sales
+                            representative who aggressively pushes expensive packages, only for a doctor you've never
+                            met to fire lasers at your face for two minutes without analyzing your barrier.</p>
                     </div>
 
                     <div class="pain-card">
                         <div class="pain-icon">⭐️</div>
                         <h4 data-i18n="reality.card3_title">Pay-to-Play Platform Rankings</h4>
-                        <p data-i18n="reality.card3_text">Major K-beauty booking platforms filter reviews based on clinic advertising spends. Clinics easily delete negative reviews or bribe clients with free sheet masks to manipulate star ratings.</p>
+                        <p data-i18n="reality.card3_text">Major K-beauty booking platforms filter reviews based on
+                            clinic advertising spends. Clinics easily delete negative reviews or bribe clients with free
+                            sheet masks to manipulate star ratings.</p>
                     </div>
                 </div>
             </div>
@@ -371,46 +416,56 @@
                         <tbody>
                             <tr>
                                 <td data-i18n="diff.row1_feature">Review Manipulation</td>
-                                <td class="legacy-col" data-i18n="diff.row1_legacy">Easy to delete negative feedback / sponsored rankings</td>
+                                <td class="legacy-col" data-i18n="diff.row1_legacy">Easy to delete negative feedback /
+                                    sponsored rankings</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        🛡️ <span data-i18n="diff.row1_komi">One-strike permanent ban and delisting of clinics</span>
+                                        🛡️ <span data-i18n="diff.row1_komi">One-strike permanent ban and delisting of
+                                            clinics</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row2_feature">Clinic Rebates</td>
-                                <td class="legacy-col" data-i18n="diff.row2_legacy">Clinics bribe reviews with free sheets/vouchers</td>
+                                <td class="legacy-col" data-i18n="diff.row2_legacy">Clinics bribe reviews with free
+                                    sheets/vouchers</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        💰 <span data-i18n="diff.row2_komi">Bribe coercion whistleblower reporting with cash rewards</span>
+                                        💰 <span data-i18n="diff.row2_komi">Bribe coercion whistleblower reporting with
+                                            cash rewards</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row3_feature">Foreigner Verification</td>
-                                <td class="legacy-col" data-i18n="diff.row3_legacy">Simple phone number or email checks</td>
+                                <td class="legacy-col" data-i18n="diff.row3_legacy">Simple phone number or email checks
+                                </td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        🛂 <span data-i18n="diff.row3_komi">Mandatory passport scan & medical tax refund receipt validation</span>
+                                        🛂 <span data-i18n="diff.row3_komi">Mandatory passport scan & medical tax refund
+                                            receipt validation</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row4_feature">1-Month Long-Term Followup</td>
-                                <td class="legacy-col" data-i18n="diff.row4_legacy">None (Only instant review on checkout)</td>
+                                <td class="legacy-col" data-i18n="diff.row4_legacy">None (Only instant review on
+                                    checkout)</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        📆 <span data-i18n="diff.row4_komi">1-Month-later review gets skincare point rewards</span>
+                                        📆 <span data-i18n="diff.row4_komi">1-Month-later review gets skincare point
+                                            rewards</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row5_feature">Malicious Review Policy</td>
-                                <td class="legacy-col" data-i18n="diff.row5_legacy">Platform deletes them immediately upon clinic request</td>
+                                <td class="legacy-col" data-i18n="diff.row5_legacy">Platform deletes them immediately
+                                    upon clinic request</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        ⚖️ <span data-i18n="diff.row5_komi">Platform mediates only; clinic and client settle directly (Coupang Eats model)</span>
+                                        ⚖️ <span data-i18n="diff.row5_komi">Platform mediates only; clinic and client
+                                            settle directly (Coupang Eats model)</span>
                                     </div>
                                 </td>
                             </tr>
@@ -425,9 +480,12 @@
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-tag" data-i18n="promise.tag">Our Promise</span>
-                    <h2 class="section-title"><span data-i18n="promise.title">The Safe & Boutique </span><span class="section-title-serif" data-i18n="promise.title_serif">Verification Standard</span></h2>
+                    <h2 class="section-title"><span data-i18n="promise.title">The Safe & Boutique </span><span
+                            class="section-title-serif" data-i18n="promise.title_serif">Verification Standard</span>
+                    </h2>
                     <p class="section-subtitle" data-i18n="promise.subtitle">
-                        We vet clinics on strict physician-led parameters. No chains, no shadow doctors, no sponsored rankings.
+                        We vet clinics on strict physician-led parameters. No chains, no shadow doctors, no sponsored
+                        rankings.
                     </p>
                 </div>
 
@@ -435,19 +493,25 @@
                     <div class="promise-card">
                         <div class="promise-badge">🛡️</div>
                         <h4 data-i18n="promise.card1_title">Zero Factory Chains</h4>
-                        <p data-i18n="promise.card1_text">We partner exclusively with independent boutique clinics that enforce strict limits on hourly appointment bookings, ensuring the physician has ample time to consult and treat you.</p>
+                        <p data-i18n="promise.card1_text">We partner exclusively with independent boutique clinics that
+                            enforce strict limits on hourly appointment bookings, ensuring the physician has ample time
+                            to consult and treat you.</p>
                     </div>
 
                     <div class="promise-card">
                         <div class="promise-badge">🧾</div>
                         <h4 data-i18n="promise.card2_title">100% Visit-Verified & Unedited</h4>
-                        <p data-i18n="promise.card2_text">Every review requires an official Medical Tax Refund receipt verify code. We host databases offshore to legally bypass 'Truth-Based Defamation' removal requests from clinics.</p>
+                        <p data-i18n="promise.card2_text">Every review requires an official Medical Tax Refund receipt
+                            verify code. We host databases offshore to legally bypass 'Truth-Based Defamation' removal
+                            requests from clinics.</p>
                     </div>
 
                     <div class="promise-card">
                         <div class="promise-badge">🧬</div>
                         <h4 data-i18n="promise.card3_title">Fitzpatrick Scale Calibration</h4>
-                        <p data-i18n="promise.card3_text">Our clinics possess validated hardware (Nd:YAG lasers, dual-cooling heads) and documented medical track records calibrated for diverse global skin types.</p>
+                        <p data-i18n="promise.card3_text">Our clinics possess validated hardware (Nd:YAG lasers,
+                            dual-cooling heads) and documented medical track records calibrated for diverse global skin
+                            types.</p>
                     </div>
                 </div>
             </div>
@@ -458,9 +522,12 @@
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="directory.tag">Boutique Directory</span>
-                    <h2 class="section-title"><span data-i18n="directory.title">Verified Partner Clinics </span><span class="section-title-serif" data-i18n="directory.title_serif">& Validation Engine</span></h2>
+                    <h2 class="section-title"><span data-i18n="directory.title">Verified Partner Clinics </span><span
+                            class="section-title-serif" data-i18n="directory.title_serif">& Validation Engine</span>
+                    </h2>
                     <p class="section-subtitle" data-i18n="directory.subtitle">
-                        Explore our certified clinics and see how we verify review authenticity while preserving patient anonymity.
+                        Explore our certified clinics and see how we verify review authenticity while preserving patient
+                        anonymity.
                     </p>
                 </div>
 
@@ -468,24 +535,31 @@
                 <div class="search-filter-container">
                     <div class="directory-search-wrapper">
                         <span class="directory-search-icon">🔍</span>
-                        <input type="text" id="directorySearchInput" class="directory-search-input" data-i18n-placeholder="search.placeholder" placeholder="Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)">
+                        <input type="text" id="directorySearchInput" class="directory-search-input"
+                            data-i18n-placeholder="search.placeholder"
+                            placeholder="Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)">
                     </div>
                     <div class="filter-tags-wrapper" id="filterTagsWrapper">
-                        <button class="filter-tag active" data-specialty="all" data-i18n="filter.all">All Treatments</button>
+                        <button class="filter-tag active" data-specialty="all" data-i18n="filter.all">All
+                            Treatments</button>
                         <button class="filter-tag" data-specialty="Nd:YAG Laser Calibrations">Nd:YAG Laser</button>
-                        <button class="filter-tag" data-specialty="Skin Barrier Reconstruction">Skin Barrier Reconstruction</button>
+                        <button class="filter-tag" data-specialty="Skin Barrier Reconstruction">Skin Barrier
+                            Reconstruction</button>
                         <button class="filter-tag" data-specialty="Pico Toning">Pico Toning</button>
                         <button class="filter-tag" data-specialty="Vascular Laser Calibration">Vascular Laser</button>
                         <button class="filter-tag" data-specialty="Rosacea & Redness Recovery">Rosacea Recovery</button>
-                        <button class="filter-tag" data-specialty="Genuine Consumables Logged">Genuine Consumables</button>
-                        <button class="filter-tag" data-specialty="Ultherapy & Shurink custom setups">Ultherapy/Lifting</button>
+                        <button class="filter-tag" data-specialty="Genuine Consumables Logged">Genuine
+                            Consumables</button>
+                        <button class="filter-tag"
+                            data-specialty="Ultherapy & Shurink custom setups">Ultherapy/Lifting</button>
                     </div>
                 </div>
 
                 <div class="directory-layout">
-                    
+
                     <div class="partner-list" id="dynamic-partner-list">
-                        <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;" data-i18n="directory.loading">
+                        <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;"
+                            data-i18n="directory.loading">
                             🔄 Loading verified boutique clinics...
                         </div>
                     </div>
@@ -494,7 +568,8 @@
                     <div class="receipt-demo-card">
                         <div class="receipt-demo-title">
                             <h4 data-i18n="receipt.title">Receipt Privacy Masker</h4>
-                            <p data-i18n="receipt.desc">We blur sensitive financial logs client-side before review upload. Clinics can never trace bad reviews back to your passport or credit card.</p>
+                            <p data-i18n="receipt.desc">We blur sensitive financial logs client-side before review
+                                upload. Clinics can never trace bad reviews back to your passport or credit card.</p>
                         </div>
 
                         <!-- Interactive receipt container -->
@@ -534,7 +609,9 @@
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <span id="mask-status-badge" style="font-size: 12px; font-weight: 700; color: var(--color-danger); text-align: center;" data-i18n="receipt.status_unmasked">
+                            <span id="mask-status-badge"
+                                style="font-size: 12px; font-weight: 700; color: var(--color-danger); text-align: center;"
+                                data-i18n="receipt.status_unmasked">
                                 ⚠️ Unmasked Plaintext Data Exists
                             </span>
                             <button id="btnMaskReceipt" class="mask-toggle-btn" data-i18n="receipt.mask_btn">
@@ -552,14 +629,16 @@
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="reviews.tag">Patient Feedback</span>
-                    <h2 class="section-title"><span data-i18n="reviews.title">100% Visit-Verified Reviews </span><span class="section-title-serif" data-i18n="reviews.title_serif">Linked to Doctors</span></h2>
+                    <h2 class="section-title"><span data-i18n="reviews.title">100% Visit-Verified Reviews </span><span
+                            class="section-title-serif" data-i18n="reviews.title_serif">Linked to Doctors</span></h2>
                     <p class="section-subtitle" data-i18n="reviews.subtitle">
-                        Every single review is matched to the exact operating physician through receipt check codes. Un-deletable.
+                        Every single review is matched to the exact operating physician through receipt check codes.
+                        Un-deletable.
                     </p>
                 </div>
 
                 <div class="reviews-grid">
-                    
+
                     <!-- Review 1 -->
                     <div class="review-card">
                         <div class="review-card-header">
@@ -572,11 +651,15 @@
                             </div>
                             <div class="review-meta">
                                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt Verified</span>
+                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt
+                                    Verified</span>
                             </div>
                         </div>
                         <p class="review-content" data-i18n="reviews.r1_text">
-                            "I had a horrible experience at a factory clinic in Gangnam where they burned my skin with IPL. Dr. Minji Kim was a lifesaver. She immediately recognized my thin Type I skin barrier, manually set the laser to a safe wavelength, and focused on recovery. Highly recommend this boutique standard."
+                            "I had a horrible experience at a factory clinic in Gangnam where they burned my skin with
+                            IPL. Dr. Minji Kim was a lifesaver. She immediately recognized my thin Type I skin barrier,
+                            manually set the laser to a safe wavelength, and focused on recovery. Highly recommend this
+                            boutique standard."
                         </p>
                         <div class="review-doctor-link">
                             <span data-i18n="reviews.r1_clinic">Clinic: Myeongdong Forest</span>
@@ -596,11 +679,15 @@
                             </div>
                             <div class="review-meta">
                                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt Verified</span>
+                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt
+                                    Verified</span>
                             </div>
                         </div>
                         <p class="review-content" data-i18n="reviews.r2_text">
-                            "As someone with dark skin, I was terrified of laser toning in Korea because of hypopigmentation risks. Dr. Ji-Yeon Lee checked my Fitzpatrick type, explained why she would use the Nd:YAG laser with a long pulse duration, and calibrated the cooling device. My skin has never looked cleaner."
+                            "As someone with dark skin, I was terrified of laser toning in Korea because of
+                            hypopigmentation risks. Dr. Ji-Yeon Lee checked my Fitzpatrick type, explained why she would
+                            use the Nd:YAG laser with a long pulse duration, and calibrated the cooling device. My skin
+                            has never looked cleaner."
                         </p>
                         <div class="review-doctor-link">
                             <span data-i18n="reviews.r2_clinic">Clinic: Cheongdam Barrier Lab</span>
@@ -632,17 +719,23 @@
                     <div class="dr-card">
                         <div class="dr-card-icon">⚡</div>
                         <h4 data-i18n="dr_view.card1_title">1. Reward by Clinical Skill</h4>
-                        <p data-i18n="dr_view.card1_text">Excellent hand skills and treatment results speak for themselves. Transparent, un-deletable reviews organically build your signature procedure reputation.</p>
+                        <p data-i18n="dr_view.card1_text">Excellent hand skills and treatment results speak for
+                            themselves. Transparent, un-deletable reviews organically build your signature procedure
+                            reputation.</p>
                     </div>
                     <div class="dr-card">
                         <div class="dr-card-icon">🛡️</div>
                         <h4 data-i18n="dr_view.card2_title">2. Price Protection</h4>
-                        <p data-i18n="dr_view.card2_text">Foreigners fear botched procedures and complications. A signature treatment that the chief doctor confidently guarantees allows you to charge premium prices.</p>
+                        <p data-i18n="dr_view.card2_text">Foreigners fear botched procedures and complications. A
+                            signature treatment that the chief doctor confidently guarantees allows you to charge
+                            premium prices.</p>
                     </div>
                     <div class="dr-card">
                         <div class="dr-card-icon">🤝</div>
                         <h4 data-i18n="dr_view.card3_title">3. Broker-Free Ecosystem</h4>
-                        <p data-i18n="dr_view.card3_text">Accumulate genuine trust data to attract international patients directly, eliminating high broker commission cuts and creating a virtuous circle.</p>
+                        <p data-i18n="dr_view.card3_text">Accumulate genuine trust data to attract international
+                            patients directly, eliminating high broker commission cuts and creating a virtuous circle.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -657,16 +750,22 @@
                         <span class="founder-badge-cert" data-i18n="founder.badge">Board-Certified</span>
                     </div>
                     <div class="founder-message-content">
-                        <span class="section-tag" style="text-align: left;" data-i18n="founder.tag">Founder's Mission</span>
+                        <span class="section-tag" style="text-align: left;" data-i18n="founder.tag">Founder's
+                            Mission</span>
                         <h3 class="founder-quote" data-i18n="founder.quote">
-                            "I built this platform because I was tired of treating tourists whose skin barriers had been completely cooked by factory-style chains."
+                            "I built this platform because I was tired of treating tourists whose skin barriers had been
+                            completely cooked by factory-style chains."
                         </h3>
                         <p class="founder-text" data-i18n="founder.text">
-                            "As a dermatologist practicing in Seoul, I saw too many international patients suffer from preventable laser complications. You invest thousands of dollars and your precious time—you deserve absolute safety, genuine tips, and physician-led care. Komicare validates every review and clinic on clinical parameters to restore trust in Korean dermatology."
+                            "As a dermatologist practicing in Seoul, I saw too many international patients suffer from
+                            preventable laser complications. You invest thousands of dollars and your precious time—you
+                            deserve absolute safety, genuine tips, and physician-led care. Komicare validates every
+                            review and clinic on clinical parameters to restore trust in Korean dermatology."
                         </p>
                         <div class="founder-sign">
                             <div class="founder-name" data-i18n="founder.name">Dr. Minji Kim</div>
-                            <div class="founder-title" data-i18n="founder.title">Founder & Board-Certified Dermatologist</div>
+                            <div class="founder-title" data-i18n="founder.title">Founder & Board-Certified Dermatologist
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -678,7 +777,7 @@
     <!-- Modal Interactive Dialog: E-Book Reader -->
     <div class="modal-overlay" id="readerModal">
         <div class="modal-content-wrapper">
-            
+
             <div class="modal-header">
                 <div class="modal-title">
                     <h3 data-i18n="reader.title">Essential K-Beauty Safety Handbook</h3>
@@ -688,7 +787,7 @@
             </div>
 
             <div class="modal-body">
-                
+
                 <!-- Sidebar TOC Navigation -->
                 <aside class="reader-sidebar">
                     <button class="reader-toc-btn active" data-ch="1">
@@ -711,64 +810,84 @@
 
                 <!-- Page Reading Panels -->
                 <div class="reader-main">
-                    
+
                     <!-- Chapter 1 -->
                     <div class="reader-page active" id="reader-page-1">
                         <h4>Chapter 1: Decoding Your Skin Type (Fitzpatrick Scale)</h4>
-                        <p>The **Fitzpatrick Scale** is the medical standard for classifying human skin coloring and how it reacts to ultraviolet radiation and laser wavelengths. It ranges from Type I (very pale, burns easily) to Type VI (deeply pigmented, never burns).</p>
-                        <p>The core problem in mass-volume clinics is the **melanin concentration disparity**. Standard Korean laser protocols are calibrated for local East Asian skin types, which typically hover around Type III and IV.</p>
+                        <p>The **Fitzpatrick Scale** is the medical standard for classifying human skin coloring and how
+                            it reacts to ultraviolet radiation and laser wavelengths. It ranges from Type I (very pale,
+                            burns easily) to Type VI (deeply pigmented, never burns).</p>
+                        <p>The core problem in mass-volume clinics is the **melanin concentration disparity**. Standard
+                            Korean laser protocols are calibrated for local East Asian skin types, which typically hover
+                            around Type III and IV.</p>
                         <blockquote>
                             <strong>Why standard settings can be dangerous:</strong>
-                            If you possess Type I-II skin, standard settings are often too high, nuking your thin protective barrier and triggering chronic vascular redness or blistering. If you possess Type V-VI skin, active epidermal melanin absorbs the laser heat too quickly, causing permanent laser burns or post-inflammatory hypopigmentation (white spots).
+                            If you possess Type I-II skin, standard settings are often too high, nuking your thin
+                            protective barrier and triggering chronic vascular redness or blistering. If you possess
+                            Type V-VI skin, active epidermal melanin absorbs the laser heat too quickly, causing
+                            permanent laser burns or post-inflammatory hypopigmentation (white spots).
                         </blockquote>
-                        <p>Manually adjusting pulse duration and energy fluence for your specific Fitzpatrick type is a fundamental medical necessity—not an optional luxury package.</p>
+                        <p>Manually adjusting pulse duration and energy fluence for your specific Fitzpatrick type is a
+                            fundamental medical necessity—not an optional luxury package.</p>
                     </div>
 
                     <!-- Chapter 2 -->
                     <div class="reader-page" id="reader-page-2">
                         <h4>Chapter 2: The 5 Questions to Expose a "Skin Factory"</h4>
-                        <p>Before allowing a laser to touch your face in Seoul, ignore the front desk sales representatives and demand these answers from the actual performing physician:</p>
-                        
+                        <p>Before allowing a laser to touch your face in Seoul, ignore the front desk sales
+                            representatives and demand these answers from the actual performing physician:</p>
+
                         <!-- Interactive Checklist -->
                         <ul class="safety-checklist">
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q1. "Will the doctor consulting me right now be the exact person performing my procedure?"</h5>
-                                    <p>Exposes shadow-doctor bait-and-switches where sales reps consult and random practitioners fire lasers.</p>
+                                    <h5>Q1. "Will the doctor consulting me right now be the exact person performing my
+                                        procedure?"</h5>
+                                    <p>Exposes shadow-doctor bait-and-switches where sales reps consult and random
+                                        practitioners fire lasers.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q2. "What exact wavelength and pulse duration settings are you using for my Fitzpatrick type?"</h5>
-                                    <p>Verifies if the practitioner understands skin physiology or is simply pressing automatic presets.</p>
+                                    <h5>Q2. "What exact wavelength and pulse duration settings are you using for my
+                                        Fitzpatrick type?"</h5>
+                                    <p>Verifies if the practitioner understands skin physiology or is simply pressing
+                                        automatic presets.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q3. "Can you show me the genuine, single-use tip packaging and activation log before we start?"</h5>
-                                    <p>Protects you from illegal, reloaded, or counterfeit tips that output unstable energy spikes.</p>
+                                    <h5>Q3. "Can you show me the genuine, single-use tip packaging and activation log
+                                        before we start?"</h5>
+                                    <p>Protects you from illegal, reloaded, or counterfeit tips that output unstable
+                                        energy spikes.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q4. "What is your clinic's immediate medical protocol and emergency contact for burns?"</h5>
-                                    <p>Ensures they have real emergency dermatological backup, not just a post-sales exit strategy.</p>
+                                    <h5>Q4. "What is your clinic's immediate medical protocol and emergency contact for
+                                        burns?"</h5>
+                                    <p>Ensures they have real emergency dermatological backup, not just a post-sales
+                                        exit strategy.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q5. "Can I see the practitioner's portfolio/track record with Western skin profiles?"</h5>
-                                    <p>Confirms actual medical experience treating Fitzpatrick Type I-II and V-VI skin types.</p>
+                                    <h5>Q5. "Can I see the practitioner's portfolio/track record with Western skin
+                                        profiles?"</h5>
+                                    <p>Confirms actual medical experience treating Fitzpatrick Type I-II and V-VI skin
+                                        types.</p>
                                 </div>
                             </li>
                         </ul>
 
-                        <button id="btnCopyChecklist" onclick="copySafetyChecklist()" class="btn-primary" style="padding: 12px 20px; font-size: 13px; margin-top: 10px;">
+                        <button id="btnCopyChecklist" onclick="copySafetyChecklist()" class="btn-primary"
+                            style="padding: 12px 20px; font-size: 13px; margin-top: 10px;">
                             📋 Copy Questions Checklist to Clipboard
                         </button>
                     </div>
@@ -776,26 +895,41 @@
                     <!-- Chapter 3 -->
                     <div class="reader-page" id="reader-page-3">
                         <h4>Chapter 3: Spotting the 'Factory' Clinic</h4>
-                        <p>Over 80% of "Skin Clinics" located in high-traffic tourist areas are managed by general practitioners (GP) without formal specialist dermatological training. You can spot a factory clinic by watching out for these three red flags:</p>
+                        <p>Over 80% of "Skin Clinics" located in high-traffic tourist areas are managed by general
+                            practitioners (GP) without formal specialist dermatological training. You can spot a factory
+                            clinic by watching out for these three red flags:</p>
                         <blockquote>
                             <strong>Red Flag #1: Upfront Payments</strong><br>
-                            If they refuse to let you speak with a medical doctor until you have signed packages and swiped your card at the front desk, you are in a factory clinic.
+                            If they refuse to let you speak with a medical doctor until you have signed packages and
+                            swiped your card at the front desk, you are in a factory clinic.
                         </blockquote>
                         <p><strong>Red Flag #2: Extreme Price Dumps</strong><br>
-                        If the price of highly consumable tip cartridges (such as Ultherapy or Shurink) is 50-70% lower than the market average, the clinic is likely using counterfeit tips, reloaded cartridges, or cutting corners on safety diagnostics.</p>
+                            If the price of highly consumable tip cartridges (such as Ultherapy or Shurink) is 50-70%
+                            lower than the market average, the clinic is likely using counterfeit tips, reloaded
+                            cartridges, or cutting corners on safety diagnostics.</p>
                         <p><strong>Red Flag #3: Abstract Review Metrics</strong><br>
-                        If reviews of the clinic only mention the "kind translation staff" or "fast service," but never name a specific doctor or comment on precise clinical parameters, ratings have likely been manipulated.</p>
+                            If reviews of the clinic only mention the "kind translation staff" or "fast service," but
+                            never name a specific doctor or comment on precise clinical parameters, ratings have likely
+                            been manipulated.</p>
                     </div>
 
                     <!-- Chapter 4 -->
                     <div class="reader-page" id="reader-page-4">
                         <h4>Chapter 4: The Post-Travel Recovery Roadmap</h4>
-                        <p>If you are returning to your home country immediately after a dermatological laser session in Korea, follow this emergency recovery checklist to protect your barrier:</p>
-                        <p><strong>1. The Post-Laser Flight Kit:</strong> Airplane cabins have humidity levels below 20%. Apply thick ceramide-based barrier creams and physical sunscreens (Zinc Oxide/Titanium Dioxide) before boarding. Avoid chemical filters on fresh micro-wounds.</p>
-                        <p><strong>2. Post-Inflammatory Hyperpigmentation (PIH) Prevention:</strong> Avoid direct sun exposure for 14 days post-laser. If you develop dark spots (PIH), do not apply aggressive chemical peels. Let the barrier rest and apply mild Cica (Centella Asiatica) or Panthenol derivatives.</p>
+                        <p>If you are returning to your home country immediately after a dermatological laser session in
+                            Korea, follow this emergency recovery checklist to protect your barrier:</p>
+                        <p><strong>1. The Post-Laser Flight Kit:</strong> Airplane cabins have humidity levels below
+                            20%. Apply thick ceramide-based barrier creams and physical sunscreens (Zinc Oxide/Titanium
+                            Dioxide) before boarding. Avoid chemical filters on fresh micro-wounds.</p>
+                        <p><strong>2. Post-Inflammatory Hyperpigmentation (PIH) Prevention:</strong> Avoid direct sun
+                            exposure for 14 days post-laser. If you develop dark spots (PIH), do not apply aggressive
+                            chemical peels. Let the barrier rest and apply mild Cica (Centella Asiatica) or Panthenol
+                            derivatives.</p>
                         <blockquote>
                             <strong>Emergency Assistance:</strong><br>
-                            If you experience severe blistering, persistent swelling, or laser-induced burns after returning home, contact our remote teleconsult lines through the Komicare App for immediate guidance.
+                            If you experience severe blistering, persistent swelling, or laser-induced burns after
+                            returning home, contact our remote teleconsult lines through the Komicare App for immediate
+                            guidance.
                         </blockquote>
                     </div>
 
@@ -803,12 +937,14 @@
             </div>
 
             <div class="modal-footer">
-                <button class="reader-nav-btn" id="reader-prev-btn" disabled data-i18n="reader.prev_btn">&larr; Previous</button>
+                <button class="reader-nav-btn" id="reader-prev-btn" disabled data-i18n="reader.prev_btn">&larr;
+                    Previous</button>
                 <div class="reader-coupon">
                     <span data-i18n="reader.coupon_label">WAITLIST VIP PASSCODE:</span>
                     <strong>KOMICARE-50-VIP</strong>
                 </div>
-                <button class="reader-nav-btn" id="reader-next-btn" data-i18n-html="reader.next_btn">Next &rarr;</button>
+                <button class="reader-nav-btn" id="reader-next-btn" data-i18n-html="reader.next_btn">Next
+                    &rarr;</button>
             </div>
 
         </div>
@@ -817,7 +953,7 @@
     <!-- Modal Interactive Dialog: Clinic Details -->
     <div class="modal-overlay" id="clinicModal">
         <div class="modal-content-wrapper clinic-modal-wrapper">
-            
+
             <div class="modal-header">
                 <div class="modal-title">
                     <h3 id="clinic-detail-name">Cheongdam Barrier Lab</h3>
@@ -825,7 +961,7 @@
                 </div>
                 <button class="btn-close" id="btnCloseClinic">&times;</button>
             </div>
- 
+
             <div class="modal-body clinic-modal-body">
                 <div class="clinic-info-section">
                     <div class="info-block">
@@ -857,7 +993,9 @@
                                 <p id="clinic-detail-doc-title">Board-Certified Dermatologist | Nd:YAG Specialist</p>
                             </div>
                         </div>
-                        <p id="clinic-detail-doc-bio" style="font-size: 13px; margin-top: 10px; font-style: italic; line-height: 1.5; color: var(--text-secondary);">...</p>
+                        <p id="clinic-detail-doc-bio"
+                            style="font-size: 13px; margin-top: 10px; font-style: italic; line-height: 1.5; color: var(--text-secondary);">
+                            ...</p>
                     </div>
                     <div class="info-block">
                         <span class="info-label" data-i18n="clinic.hours_label">Operating Hours</span>
@@ -867,50 +1005,57 @@
 
                 <!-- Right Side: Location Map & Inline Booking Wizard -->
                 <div class="clinic-action-section">
-                    
+
                     <!-- View A: Google Maps / Map Section -->
                     <div class="clinic-sub-view active" id="clinic-map-view">
-                        <span class="info-label" style="display: block; margin-bottom: 8px;" data-i18n="clinic.map_label">Clinic Location Map</span>
+                        <span class="info-label" style="display: block; margin-bottom: 8px;"
+                            data-i18n="clinic.map_label">Clinic Location Map</span>
                         <div class="map-iframe-container">
-                            <iframe 
-                                id="clinic-detail-map-iframe"
-                                src="" 
-                                width="100%" 
-                                height="100%" 
-                                style="border:0; border-radius: 12px;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
+                            <iframe id="clinic-detail-map-iframe" src="" width="100%" height="100%"
+                                style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                        <button class="btn-primary" id="btnShowBookingForm" style="width: 100%; margin-top: 16px;" data-i18n="clinic.book_btn">
+                        <button class="btn-primary" id="btnShowBookingForm" style="width: 100%; margin-top: 16px;"
+                            data-i18n="clinic.book_btn">
                             📅 Secure 1:1 Booking Slot
                         </button>
                     </div>
 
                     <!-- View B: Inline Booking Form (Initially Hidden) -->
                     <div class="clinic-sub-view" id="clinic-booking-view">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                             <span class="info-label" data-i18n="clinic.booking_title">Direct Premium Booking</span>
-                            <button id="btnBackToMap" style="background: none; border: none; color: var(--color-accent); font-weight: 600; cursor: pointer; font-size: 12px;" data-i18n="clinic.back_to_map">&larr; Back to Map</button>
+                            <button id="btnBackToMap"
+                                style="background: none; border: none; color: var(--color-accent); font-weight: 600; cursor: pointer; font-size: 12px;"
+                                data-i18n="clinic.back_to_map">&larr; Back to Map</button>
                         </div>
-                        
+
                         <form id="clinicBookingForm" class="lead-form-container">
                             <div class="form-group">
-                                <label for="bookingName" class="form-label" data-i18n="booking.name_label">Your Full Name</label>
-                                <input type="text" id="bookingName" class="form-input" data-i18n-placeholder="booking.name_placeholder" placeholder="Enter your full name" required>
+                                <label for="bookingName" class="form-label" data-i18n="booking.name_label">Your Full
+                                    Name</label>
+                                <input type="text" id="bookingName" class="form-input"
+                                    data-i18n-placeholder="booking.name_placeholder" placeholder="Enter your full name"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="bookingEmail" class="form-label" data-i18n="booking.email_label">Your Email</label>
-                                <input type="email" id="bookingEmail" class="form-input" data-i18n-placeholder="booking.email_placeholder" placeholder="Enter your email address" required>
+                                <label for="bookingEmail" class="form-label" data-i18n="booking.email_label">Your
+                                    Email</label>
+                                <input type="email" id="bookingEmail" class="form-input"
+                                    data-i18n-placeholder="booking.email_placeholder"
+                                    placeholder="Enter your email address" required>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                                 <div class="form-group">
-                                    <label for="bookingDate" class="form-label" data-i18n="booking.date_label">Date</label>
+                                    <label for="bookingDate" class="form-label"
+                                        data-i18n="booking.date_label">Date</label>
                                     <input type="date" id="bookingDate" class="form-input" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="bookingTime" class="form-label" data-i18n="booking.time_label">Preferred Time</label>
+                                    <label for="bookingTime" class="form-label" data-i18n="booking.time_label">Preferred
+                                        Time</label>
                                     <select id="bookingTime" class="form-input" style="padding: 15px;" required>
                                         <option value="" data-i18n="booking.time_placeholder">Select time...</option>
                                         <option value="10:00 AM">10:00 AM</option>
@@ -922,13 +1067,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="bookingTreatment" class="form-label" data-i18n="booking.treatment_label">Preferred Treatment</label>
+                                <label for="bookingTreatment" class="form-label"
+                                    data-i18n="booking.treatment_label">Preferred Treatment</label>
                                 <select id="bookingTreatment" class="form-input" style="padding: 15px;">
-                                    <option value="Consultation Only" data-i18n="booking.treatment_consult">Consultation Only</option>
-                                    <option value="Pico Toning Laser" data-i18n="booking.treatment_pico">Pico Toning Laser</option>
-                                    <option value="Skin Barrier Reconstruction" data-i18n="booking.treatment_barrier">Skin Barrier Reconstruction</option>
-                                    <option value="Vascular Redness Laser" data-i18n="booking.treatment_vascular">Vascular Redness Laser</option>
-                                    <option value="Ultherapy Premium Lifting" data-i18n="booking.treatment_ulthera">Ultherapy Premium Lifting</option>
+                                    <option value="Consultation Only" data-i18n="booking.treatment_consult">Consultation
+                                        Only</option>
+                                    <option value="Pico Toning Laser" data-i18n="booking.treatment_pico">Pico Toning
+                                        Laser</option>
+                                    <option value="Skin Barrier Reconstruction" data-i18n="booking.treatment_barrier">
+                                        Skin Barrier Reconstruction</option>
+                                    <option value="Vascular Redness Laser" data-i18n="booking.treatment_vascular">
+                                        Vascular Redness Laser</option>
+                                    <option value="Ultherapy Premium Lifting" data-i18n="booking.treatment_ulthera">
+                                        Ultherapy Premium Lifting</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn-primary" style="margin-top: 10px;">
@@ -937,13 +1088,18 @@
                         </form>
 
                         <!-- Success Feedback screen -->
-                        <div id="booking-success-view" style="display: none; text-align: center; padding: 30px 10px; animation: fadeIn 0.4s ease;">
+                        <div id="booking-success-view"
+                            style="display: none; text-align: center; padding: 30px 10px; animation: fadeIn 0.4s ease;">
                             <span style="font-size: 50px; display: block; margin-bottom: 16px;">🎉</span>
-                            <h4 style="color: var(--color-secondary); margin-bottom: 10px; font-weight: 700;" data-i18n="booking.success_title">Booking Successfully Locked!</h4>
-                            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;" id="booking-success-message" data-i18n="booking.success_msg">
-                                We have reserved your slot with the dermatologist. A confirmation email has been dispatched to your inbox.
+                            <h4 style="color: var(--color-secondary); margin-bottom: 10px; font-weight: 700;"
+                                data-i18n="booking.success_title">Booking Successfully Locked!</h4>
+                            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;"
+                                id="booking-success-message" data-i18n="booking.success_msg">
+                                We have reserved your slot with the dermatologist. A confirmation email has been
+                                dispatched to your inbox.
                             </p>
-                            <button class="btn-primary" id="btnResetBookingModal" style="width: 100%;" data-i18n="booking.return_btn">
+                            <button class="btn-primary" id="btnResetBookingModal" style="width: 100%;"
+                                data-i18n="booking.return_btn">
                                 Return to Clinic Map
                             </button>
                         </div>
@@ -958,11 +1114,12 @@
     <!-- Modal Interactive Dialog: Review Writer Simulator -->
     <div class="modal-overlay" id="reviewWriterModal">
         <div class="modal-content-wrapper" style="max-width: 620px;">
-            
+
             <div class="modal-header">
                 <div class="modal-title">
                     <h3 data-i18n="rev_sim.modal_title">Visit-Verified Review Writer Simulator</h3>
-                    <p data-i18n="rev_sim.modal_subtitle">100% authenticated review matching to the operating physician</p>
+                    <p data-i18n="rev_sim.modal_subtitle">100% authenticated review matching to the operating physician
+                    </p>
                 </div>
                 <button class="btn-close" id="btnCloseReviewWriter">&times;</button>
             </div>
@@ -979,38 +1136,46 @@
                     <!-- Panel 1: Document Upload Simulation -->
                     <div class="writer-panel active" id="writer-panel-1">
                         <div class="form-group" style="margin-bottom: 20px;">
-                            <label class="form-label" data-i18n="rev_sim.doctor_select_label">Select Treating Physician</label>
+                            <label class="form-label" data-i18n="rev_sim.doctor_select_label">Select Treating
+                                Physician</label>
                             <select id="reviewDoctorSelect" class="form-input" required style="padding: 15px;">
                                 <!-- Dynamic Options will be injected by JavaScript -->
                             </select>
                         </div>
 
-                        <label class="form-label" data-i18n="rev_sim.passport_label">Passport Verification (Scan Info Page)</label>
+                        <label class="form-label" data-i18n="rev_sim.passport_label">Passport Verification (Scan Info
+                            Page)</label>
                         <div class="dropzone-simulator" id="passportDropzone">
                             <div class="dropzone-icon">🛂</div>
                             <span class="dropzone-label">Click or Drag Passport Image here</span>
-                            <span class="dropzone-help" data-i18n="rev_sim.passport_desc">Used strictly for country checking and duplicated review protection.</span>
-                            <div class="upload-success-indicator" id="passportSuccess">✓ Passport Authenticated & Hashed Client-Side</div>
+                            <span class="dropzone-help" data-i18n="rev_sim.passport_desc">Used strictly for country
+                                checking and duplicated review protection.</span>
+                            <div class="upload-success-indicator" id="passportSuccess">✓ Passport Authenticated & Hashed
+                                Client-Side</div>
                         </div>
 
                         <label class="form-label" data-i18n="rev_sim.receipt_label">Medical Tax Refund Receipt</label>
                         <div class="dropzone-simulator" id="receiptDropzone">
                             <div class="dropzone-icon">🧾</div>
                             <span class="dropzone-label">Click or Drag Tax Refund Receipt here</span>
-                            <span class="dropzone-help" data-i18n="rev_sim.receipt_desc">Tax Refund ID and TX codes verify your actual visitation.</span>
-                            <div class="upload-success-indicator" id="receiptSuccess">✓ Receipt Code Verified & Anonymized</div>
+                            <span class="dropzone-help" data-i18n="rev_sim.receipt_desc">Tax Refund ID and TX codes
+                                verify your actual visitation.</span>
+                            <div class="upload-success-indicator" id="receiptSuccess">✓ Receipt Code Verified &
+                                Anonymized</div>
                         </div>
                     </div>
 
                     <!-- Panel 2: 11 Rating Criteria -->
                     <div class="writer-panel" id="writer-panel-2">
-                        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 20px; color: var(--color-secondary);" data-i18n="rev_sim.criteria_label">Rate Your Experience (11 Evaluation Criteria)</h4>
-                        
+                        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 20px; color: var(--color-secondary);"
+                            data-i18n="rev_sim.criteria_label">Rate Your Experience (11 Evaluation Criteria)</h4>
+
                         <div style="max-height: 380px; overflow-y: auto; padding-right: 10px;">
                             <!-- 1. Booking -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_booking">1. Reservation (Language/Speed):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_booking">1. Reservation
+                                        (Language/Speed):</span>
                                     <span class="rating-value-badge" id="val-booking">5 / 5</span>
                                 </div>
                                 <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-booking">
@@ -1019,7 +1184,8 @@
                             <!-- 2. Visit -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_visit">2. Arrival & Wait (Schedule adherence):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_visit">2. Arrival & Wait (Schedule
+                                        adherence):</span>
                                     <span class="rating-value-badge" id="val-visit">5 / 5</span>
                                 </div>
                                 <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-visit">
@@ -1028,43 +1194,53 @@
                             <!-- 3. Procedure Consultation -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_doc_design">3. Procedure Consultation (Design, Explanation):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_doc_design">3. Procedure
+                                        Consultation (Design, Explanation):</span>
                                     <span class="rating-value-badge" id="val-doc-design">5 / 5</span>
                                 </div>
-                                <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-doc-design">
+                                <input type="range" min="1" max="5" value="5" class="rating-slider"
+                                    id="slide-doc-design">
                             </div>
 
                             <!-- 4. Post-procedure Care instructions -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_post_care">4. Aftercare Warning Guide (Post-treatment explanation):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_post_care">4. Aftercare Warning
+                                        Guide (Post-treatment explanation):</span>
                                     <span class="rating-value-badge" id="val-post-care">5 / 5</span>
                                 </div>
-                                <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-post-care">
+                                <input type="range" min="1" max="5" value="5" class="rating-slider"
+                                    id="slide-post-care">
                             </div>
 
                             <!-- 5. Pain & Side Effects -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_side_effect">5. Side Effects & Pain Intensity (Lower is better):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_side_effect">5. Side Effects &
+                                        Pain Intensity (Lower is better):</span>
                                     <span class="rating-value-badge" id="val-side-effect">1 / 5</span>
                                 </div>
-                                <input type="range" min="1" max="5" value="1" class="rating-slider" id="slide-side-effect">
+                                <input type="range" min="1" max="5" value="1" class="rating-slider"
+                                    id="slide-side-effect">
                             </div>
 
                             <!-- 6. Revisit Intent -->
                             <div class="review-rating-row">
-                                <span class="rating-title" style="display: block; margin-bottom: 8px;" data-i18n="rev_sim.cat_revisit">6. Intention to Revisit:</span>
+                                <span class="rating-title" style="display: block; margin-bottom: 8px;"
+                                    data-i18n="rev_sim.cat_revisit">6. Intention to Revisit:</span>
                                 <div class="rating-select-group">
-                                    <button type="button" class="rating-select-btn active" id="btn-revisit-yes" data-value="yes" data-i18n="rev_sim.revis_yes">Yes</button>
-                                    <button type="button" class="rating-select-btn" id="btn-revisit-no" data-value="no" data-i18n="rev_sim.revis_no">No</button>
+                                    <button type="button" class="rating-select-btn active" id="btn-revisit-yes"
+                                        data-value="yes" data-i18n="rev_sim.revis_yes">Yes</button>
+                                    <button type="button" class="rating-select-btn" id="btn-revisit-no" data-value="no"
+                                        data-i18n="rev_sim.revis_no">No</button>
                                 </div>
                             </div>
 
                             <!-- 9. Staff Kindness, Parking, Language Convenience -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_kindness">9. General Staff Kindness & Parking:</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_kindness">9. General Staff
+                                        Kindness & Parking:</span>
                                     <span class="rating-value-badge" id="val-kindness">5 / 5</span>
                                 </div>
                                 <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-kindness">
@@ -1072,23 +1248,32 @@
 
                             <!-- 10. Recommend Intent -->
                             <div class="review-rating-row">
-                                <span class="rating-title" style="display: block; margin-bottom: 8px;" data-i18n="rev_sim.cat_recommend">10. Willingness to Recommend to Friends:</span>
+                                <span class="rating-title" style="display: block; margin-bottom: 8px;"
+                                    data-i18n="rev_sim.cat_recommend">10. Willingness to Recommend to Friends:</span>
                                 <div class="rating-select-group">
-                                    <button type="button" class="rating-select-btn active" id="btn-recommend-yes" data-value="yes" data-i18n="rev_sim.recom_yes">Yes</button>
-                                    <button type="button" class="rating-select-btn" id="btn-recommend-no" data-value="no" data-i18n="rev_sim.recom_no">No</button>
+                                    <button type="button" class="rating-select-btn active" id="btn-recommend-yes"
+                                        data-value="yes" data-i18n="rev_sim.recom_yes">Yes</button>
+                                    <button type="button" class="rating-select-btn" id="btn-recommend-no"
+                                        data-value="no" data-i18n="rev_sim.recom_no">No</button>
                                 </div>
                             </div>
 
                             <!-- 7. Highlights text -->
                             <div class="form-group" style="margin-top: 14px; margin-bottom: 14px;">
-                                <label for="text-good" class="form-label" data-i18n="rev_sim.cat_good">7. Highlights (What went well):</label>
-                                <textarea id="text-good" class="form-input" rows="2" style="border-radius: 8px; resize: none;" required placeholder="Write details here..."></textarea>
+                                <label for="text-good" class="form-label" data-i18n="rev_sim.cat_good">7. Highlights
+                                    (What went well):</label>
+                                <textarea id="text-good" class="form-input" rows="2"
+                                    style="border-radius: 8px; resize: none;" required
+                                    placeholder="Write details here..."></textarea>
                             </div>
 
                             <!-- 8. Improvement text -->
                             <div class="form-group" style="margin-bottom: 14px;">
-                                <label for="text-bad" class="form-label" data-i18n="rev_sim.cat_bad">8. Areas for Improvement:</label>
-                                <textarea id="text-bad" class="form-input" rows="2" style="border-radius: 8px; resize: none;" placeholder="Write areas needing improvement..."></textarea>
+                                <label for="text-bad" class="form-label" data-i18n="rev_sim.cat_bad">8. Areas for
+                                    Improvement:</label>
+                                <textarea id="text-bad" class="form-input" rows="2"
+                                    style="border-radius: 8px; resize: none;"
+                                    placeholder="Write areas needing improvement..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -1097,10 +1282,15 @@
                     <div class="writer-panel" id="writer-panel-3">
                         <!-- 11. 1-Month later review opt-in -->
                         <div class="form-group" style="margin-bottom: 24px;">
-                            <label class="form-label" data-i18n="rev_sim.cat_onemonth">11. 1-Month Later Follow-up Opt-in</label>
-                            <label class="checklist-item" style="margin-top: 8px; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; gap: 12px; cursor: pointer; background-color: var(--bg-secondary);">
-                                <input type="checkbox" id="check-onemonth" style="width: 20px; height: 20px; accent-color: var(--color-accent);">
-                                <span style="font-size: 13px; color: var(--text-primary); font-weight: 500;" data-i18n="rev_sim.onemonth_opt">I agree to submit a 1-month-later review for skincare rewards.</span>
+                            <label class="form-label" data-i18n="rev_sim.cat_onemonth">11. 1-Month Later Follow-up
+                                Opt-in</label>
+                            <label class="checklist-item"
+                                style="margin-top: 8px; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; gap: 12px; cursor: pointer; background-color: var(--bg-secondary);">
+                                <input type="checkbox" id="check-onemonth"
+                                    style="width: 20px; height: 20px; accent-color: var(--color-accent);">
+                                <span style="font-size: 13px; color: var(--text-primary); font-weight: 500;"
+                                    data-i18n="rev_sim.onemonth_opt">I agree to submit a 1-month-later review for
+                                    skincare rewards.</span>
                             </label>
                         </div>
 
@@ -1110,12 +1300,15 @@
                                 🚨 Whistleblower & Bribe Declaration
                             </div>
                             <p data-i18n="rev_sim.whistleblower_desc">
-                                Did the hospital request a positive review in exchange for rebates, refunds, discount coupons, or gifts?
+                                Did the hospital request a positive review in exchange for rebates, refunds, discount
+                                coupons, or gifts?
                             </p>
-                            <button type="button" class="whistleblower-report-btn" id="btnReportBribe" data-i18n="rev_sim.whistleblower_btn">
+                            <button type="button" class="whistleblower-report-btn" id="btnReportBribe"
+                                data-i18n="rev_sim.whistleblower_btn">
                                 🚨 Report Bribe Attempt
                             </button>
-                            <div class="whistleblower-success-msg" id="whistleblowerSuccess" data-i18n="rev_sim.whistleblower_msg">
+                            <div class="whistleblower-success-msg" id="whistleblowerSuccess"
+                                data-i18n="rev_sim.whistleblower_msg">
                                 Whistleblower report registered successfully!
                             </div>
                         </div>
@@ -1127,14 +1320,16 @@
                             <div class="success-icon-badge">✓</div>
                             <h4 class="success-title" data-i18n="rev_sim.success_title">Verified Review Published!</h4>
                             <p class="success-text" data-i18n="rev_sim.success_desc">
-                                Thank you for your honest data. Your review is permanently stored on our offshore database node and cannot be deleted by the clinic.
+                                Thank you for your honest data. Your review is permanently stored on our offshore
+                                database node and cannot be deleted by the clinic.
                             </p>
                         </div>
                     </div>
-                    
+
                     <!-- Form Control actions -->
                     <div class="writer-controls" id="writerControls">
-                        <button type="button" class="btn-writer-nav prev" id="btnWriterPrev" disabled>&larr; Previous</button>
+                        <button type="button" class="btn-writer-nav prev" id="btnWriterPrev" disabled>&larr;
+                            Previous</button>
                         <button type="button" class="btn-writer-nav next" id="btnWriterNext">Next &rarr;</button>
                     </div>
                 </form>
@@ -1153,7 +1348,9 @@
                         KOMI<span>CARE</span>
                     </div>
                     <p class="footer-about" data-i18n="footer.about">
-                        Komicare is the first safety-verified boutique skin matchmaking platform for medical travelers. Our database is hosted in offshore jurisdictions to protect patient reviews from Truth-Based Defamation censorship laws.
+                        Komicare is the first safety-verified boutique skin matchmaking platform for medical travelers.
+                        Our database is hosted in offshore jurisdictions to protect patient reviews from Truth-Based
+                        Defamation censorship laws.
                     </p>
                 </div>
                 <div class="footer-links">

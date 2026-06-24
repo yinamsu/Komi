@@ -501,7 +501,7 @@ const translations = {
         "dr_view.card3_text": "정직하게 쌓인 평판과 데이터는 브로커 수수료 지불 없이 환자가 스스로 찾아오게 만들어 병원 재정을 건전하게 만듭니다.",
 
         "diff.tag": "차별점 분석",
-        "diff.title": "기존 강남언니, 여신티켓과의 차별점",
+        "diff.title": "기존 강남XX, XX티켓과의 차별점",
         "diff.subtitle": "단순 광고 노출 및 티켓 판매 앱과 다른 코미케어만의 정직한 데이터 생태계",
         "diff.col_feature": "운영 기준",
         "diff.col_legacy": "기존 예약 플랫폼",
