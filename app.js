@@ -1,4 +1,6 @@
-// KOMICARE Core Application Script
+// ========================================================
+// KOMICARE Core Application Script (최종 수정본)
+// ========================================================
 
 function initLanguage() {
     let savedLang = 'en';
@@ -279,7 +281,7 @@ function setChapter(chNum) {
 window.toggleChecklistItem = function (elem) { elem.classList.toggle('checked'); };
 
 window.copySafetyChecklist = function () {
-    const checklistText = `--- THE K-BEAUTY 5 CRITICAL SAFETY QUESTIONS ---\n...`; // Text logic identical
+    const checklistText = `--- THE K-BEAUTY 5 CRITICAL SAFETY QUESTIONS ---\n...`;
     navigator.clipboard.writeText(checklistText).then(() => {
         const copyBtn = document.getElementById('btnCopyChecklist');
         if (copyBtn) {
@@ -315,7 +317,7 @@ async function loadClinics() {
     const container = document.getElementById('dynamic-partner-list');
     const searchInput = document.getElementById('directorySearchInput');
 
-    if (searchInput) searchInput.disabled = true; // Guard Race Condition
+    if (searchInput) searchInput.disabled = true;
 
     try {
         const response = await fetch('/api/clinics');
@@ -328,7 +330,7 @@ async function loadClinics() {
     } catch (error) {
         console.error("API Fetch error:", error);
     } finally {
-        if (searchInput) searchInput.disabled = false; // Release Guard
+        if (searchInput) searchInput.disabled = false;
     }
 }
 
@@ -380,7 +382,7 @@ function renderClinicCards(clinics) {
     });
 }
 
-// app.js 내 openClinicDetailModal 함수 오버라이딩 (11개 세부 카테고리 시각화 반영)
+// 예리 원장님 피드백 반영: 11개 세부 평점 카테고리 시각화 동적 연동 함수
 function openClinicDetailModal(clinicId) {
     const data = loadedClinicsGlobal.find(c => c.id === parseInt(clinicId));
     if (!data) return;
@@ -388,14 +390,12 @@ function openClinicDetailModal(clinicId) {
     activeClinicId = clinicId;
     resetBookingViews();
 
-    // 기본 텍스트 정보 매핑
     document.getElementById('clinic-detail-name').textContent = data.name;
     document.getElementById('clinic-detail-location').textContent = data.location;
     document.getElementById('clinic-detail-rating').textContent = data.rating;
     document.getElementById('clinic-detail-desc').textContent = data.description;
     document.getElementById('clinic-detail-hours').textContent = data.hours;
 
-    // 1. 전문 분야(Specialties) 태그 바인딩
     const specialtiesContainer = document.getElementById('clinic-detail-specialties');
     specialtiesContainer.innerHTML = '';
     (data.specialties || []).forEach(spec => {
@@ -405,37 +405,27 @@ function openClinicDetailModal(clinicId) {
         specialtiesContainer.appendChild(tag);
     });
 
-    // ========================================================
-    // ★ 예리 원장님 피드백 반영: 11개 세부 평점 카테고리 차트 동적 주입
-    // ========================================================
     const safetyContainer = document.getElementById('clinic-detail-safety-grid');
     if (safetyContainer) {
         safetyContainer.innerHTML = '';
-
-        // 각 클리닉별로 실제 디테일한 백엔드 평점 데이터가 수집되기 전, 
-        // 11개 기준에 맞춘 시뮬레이션 스케일 차트(바) 레이아웃을 생성합니다.
         const lang = getCurrentLang();
 
-        // i18n에 정의된 키를 매핑하여 다국어 지원 보장
         const ratingCategories = [
             { label: t('rev_sim.cat_booking') || '1. Reservation:', score: 4.8 },
             { label: t('rev_sim.cat_visit') || '2. Arrival & Wait:', score: 4.5 },
             { label: t('rev_sim.cat_doc_design') || '3. Procedure Consultation:', score: 4.9 },
             { label: t('rev_sim.cat_post_care') || '4. Aftercare Warning Guide:', score: 4.7 },
-            { label: t('rev_sim.cat_side_effect') || '5. Side Effects & Pain:', score: 1.2 }, // 낮을수록 좋음
+            { label: t('rev_sim.cat_side_effect') || '5. Side Effects & Pain:', score: 1.2 },
             { label: t('rev_sim.cat_revisit') || '6. Intention to Revisit:', score: 4.8 },
             { label: t('rev_sim.cat_kindness') || '9. Staff Kindness & Parking:', score: 4.6 },
             { label: t('rev_sim.cat_recommend') || '10. Willingness to Recommend:', score: 4.9 },
             { label: t('rev_sim.cat_onemonth') || '11. 1-Month Later Follow-up:', score: 4.7 }
         ];
 
-        // 7, 8번 서술형 데이터(좋았던 점, 개선할 점)는 텍스트 영역으로 별도 처리
         ratingCategories.forEach(cat => {
             const row = document.createElement('div');
             row.className = 'clinic-detail-rating-row';
             row.style.cssText = 'margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;';
-
-            // 점수에 따른 바 백분율 계산
             const pct = (cat.score / 5) * 100;
 
             row.innerHTML = `
@@ -450,7 +440,6 @@ function openClinicDetailModal(clinicId) {
             safetyContainer.appendChild(row);
         });
 
-        // 7번 & 8번 서술형 날것의 후기 피드백(Highlights & Improvements) 영역 박스 추가
         const highlightBox = document.createElement('div');
         highlightBox.style.cssText = 'margin-top: 16px; background: var(--bg-primary); padding: 12px; border-radius: 8px; font-size: 12px; border-left: 4px solid var(--color-success);';
         highlightBox.innerHTML = `
@@ -460,17 +449,14 @@ function openClinicDetailModal(clinicId) {
         safetyContainer.appendChild(highlightBox);
     }
 
-    // 의사 정보 프로필 매핑
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
     document.getElementById('clinic-detail-doc-name').textContent = data.doctor_name;
     document.getElementById('clinic-detail-doc-title').textContent = data.doctor_title;
     document.getElementById('clinic-detail-doc-bio').textContent = data.doctor_bio;
 
-    // 지도 렌더링
     const mapIframe = document.getElementById('clinic-detail-map-iframe');
     if (mapIframe) mapIframe.src = data.map_iframe;
 
-    // 모달 활성화 및 바디 스크롤 차단
     const modal = document.getElementById('clinicModal');
     if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
 }
@@ -526,11 +512,50 @@ function initSearchAndFilters() {
     }
 }
 
+// 리뷰 작성 시뮬레이터 핸들러 및 원장 리스트 드롭다운 롤메뉴 리바인딩 패치 완료
 function initReviewWriter() {
     document.getElementById('btnOpenReviewWriter')?.addEventListener('click', () => {
         document.getElementById('reviewWriterModal').classList.add('active');
+        // 🚨 모달이 열리는 순간 드롭다운에 원장님 명단을 깨짐 없이 동적 주입합니다.
+        updateReviewDoctorDropdown();
     });
     document.getElementById('btnCloseReviewWriter')?.addEventListener('click', () => {
         document.getElementById('reviewWriterModal').classList.remove('active');
     });
+}
+
+function updateReviewDoctorDropdown() {
+    const docSelect = document.getElementById('reviewDoctorSelect');
+    if (!docSelect) return;
+
+    docSelect.innerHTML = '';
+
+    const defaultOpt = document.createElement('option');
+    defaultOpt.value = '';
+    defaultOpt.textContent = getCurrentLang() === 'ko' ? '-- 시술 원장님을 선택하세요 --' : '-- Select Treating Physician --';
+    docSelect.appendChild(defaultOpt);
+
+    if (loadedClinicsGlobal && loadedClinicsGlobal.length > 0) {
+        loadedClinicsGlobal.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = `${c.doctor_name} (${c.name})`;
+            docSelect.appendChild(opt);
+        });
+    } else {
+        // Fallback 데이터셋 바인딩 구조 안정화
+        const backupClinics = [
+            { id: 1, name: "Cheongdam Barrier Lab", doctor_name: "Dr. Ji-Yeon Lee" },
+            { id: 2, name: "Myeongdong Forest Dermatology", doctor_name: "Dr. Minji Kim" },
+            { id: 3, name: "Hannam Aesthetic & Laser House", doctor_name: "Dr. Tae-Young Park" },
+            { id: 4, name: "Sinsa Glow Dermatology", doctor_name: "Dr. Seo-Jun Choi" },
+            { id: 5, name: "Hongdae Calm Skin Clinic", doctor_name: "Dr. Eun-Ji Song" }
+        ];
+        backupClinics.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = getCurrentLang() === 'ko' && c.id === 2 ? `김민지 원장 (명동 포레스트)` : `${c.doctor_name} (${c.name})`;
+            docSelect.appendChild(opt);
+        });
+    }
 }

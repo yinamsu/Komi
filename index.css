@@ -2864,27 +2864,58 @@ html[data-theme="dark"] .diff-highlight-text {
 }
 
 /* ========================================================
-   한글 환경 세리프/이탤릭 서체 제거 및 프리미엄 고딕 통일 튜닝
+   [최종 패치] 한글 세리프/이탤릭 완전 제거 및 투명화 오타 복구
    ======================================================== */
 
-/* 1. 타이틀 서리프 태그 강제 오버라이드 */
+/* 1. 타이틀 서리프 태그 강제 오버라이드 및 색상 복구 */
 .section-title-serif {
     font-family: var(--font-sans) !important;
-    /* 궁서체 계열 배제, 프리미엄 고딕 통일 */
+    /* 궁서체 계열 배제, 세련된 고딕 통일 */
     font-style: normal !important;
-    /* 억지로 누운 글씨체 해제 */
+    /* 어색하게 눕는 이탤릭 해제 */
     font-weight: 800 !important;
-    /* 볼드하고 강렬한 무드로 전환 */
-    background: linear-gradient(135deg, var(--color-accent) 0%, %23ffffff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* 은은한 골드 그라디언트 포인트 주입 */
+    /* 볼드하고 묵직한 두께감 통일 */
+
+    /* 투명화 버그 복구: 올바른 헥사코드(#) 포맷팅 적용 */
+    background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    display: inline !important;
+    /* 줄바꿈 꼬임 방지 및 텍스트 강제 노출 */
 }
 
-/* 2. 에디터 리더 모달 내 인라인 블록 인용구 폰트 교정 */
+/* 2. 모달 내 기타 명조체 유발 태그 서체 일괄 안정화 */
 .reader-page h4,
 .reader-page font,
 .reader-page blockquote {
     font-family: var(--font-sans) !important;
     font-style: normal !important;
+}
+
+/* ========================================================
+   [마감 패치] 리뷰 시뮬레이터 내부 경계선 겹침 버그 진압
+   ======================================================== */
+
+/* 리뷰 모달 내부에서는 사이드바용 배경과 보더 경계선을 원천 차단 */
+#reviewWriterModal .modal-body {
+    display: block !important;
+    /* 2열 분할 강제 해제 */
+    background: transparent !important;
+    border-right: none !important;
+}
+
+/* 시뮬레이터 내부의 겹침 레이아웃 완전 청소 */
+#reviewWriterModal .writer-panel {
+    border-left: none !important;
+    padding-left: 0 !important;
+}
+
+/* 드롭다운 및 업로드 박스 간의 간격(마진) 안정화 */
+#reviewWriterModal .form-group {
+    margin-bottom: 24px !important;
+}
+
+#reviewWriterModal .dropzone-simulator {
+    margin-top: 8px !important;
+    margin-bottom: 24px !important;
 }
