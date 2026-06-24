@@ -288,8 +288,8 @@ const translations = {
         "header.badge": "100% 검증된 부티크 전용",
 
         // ---- Hero Section ----
-        "hero.social_proof": "540명 이상의 의료 여행자",
-        "hero.social_proof_suffix": "가 이번 달 얼리 액세스를 확보하고 있습니다.",
+        "hero.social_proof": "540명 이상의 의료 여행자가",
+        "hero.social_proof_suffix": "이번 달 얼리 액세스를 확보하고 있습니다.",
         "hero.headline": "가짜 리뷰와 K-뷰티 <br>",
         "hero.headline_gradient": "\"공장식\" 클리닉에 지치셨나요?",
         "hero.subheadline": "100% 방문 인증, 무삭제 환자 리뷰를 통해 서울 최고의 피부과 전문의를 만나보세요. 협찬 광고 없음. 숨겨진 비용 없음. 당신의 피부 타입에 맞춘 정직한 의료 전문성만을 제공합니다.",
@@ -362,8 +362,7 @@ const translations = {
 
         // ---- Directory Section ----
         "directory.tag": "부티크 디렉토리",
-        "directory.title": "인증 파트너 클리닉 ",
-        "directory.title_serif": "& 검증 엔진",
+        "directory.title": "인증 파트너 클리닉 및 검증 엔진",
         "directory.subtitle": "인증된 클리닉을 살펴보고 환자 익명성을 보장하면서 리뷰 진위를 어떻게 검증하는지 확인하세요.",
         "directory.loading": "🔄 인증된 부티크 클리닉을 불러오는 중...",
         "directory.empty": "⚠️ 현재 이용 가능한 인증 부티크 클리닉이 없습니다.",
@@ -380,8 +379,7 @@ const translations = {
 
         // ---- Reviews Section ----
         "reviews.tag": "환자 후기",
-        "reviews.title": "100% 방문 인증 리뷰 ",
-        "reviews.title_serif": "의사 실명 연동",
+        "reviews.title": "100% 방문 인증 리뷰 의사 실명 연동",
         "reviews.subtitle": "모든 리뷰는 영수증 인증 코드를 통해 실제 시술 의사와 매칭됩니다. 삭제 불가.",
         "reviews.r1_name": "Jessica S.",
         "reviews.r1_skin": "피츠패트릭 Type I",
