@@ -2919,3 +2919,43 @@ html[data-theme="dark"] .diff-highlight-text {
     margin-top: 8px !important;
     margin-bottom: 24px !important;
 }
+
+/* ========================================================
+   [최종 마감] 리뷰 시뮬레이터 하단 버튼 짤림 방지 (스크롤 가드)
+   ======================================================== */
+
+/* 1. 리뷰 모달의 콘텐츠 영역 전체에 스크롤 기능 주입 */
+#reviewWriterModal .modal-body {
+    max-height: calc(80vh - 160px) !important;
+    /* 모달 전체 높이에서 헤더/푸터 제외 */
+    overflow-y: auto !important;
+    /* 내용이 넘치면 내부에만 스크롤바 생성 */
+    padding-bottom: 20px !important;
+}
+
+/* 2. 스크롤바 스타일을 딥테마에 맞게 미니멀하게 튜닝 */
+#reviewWriterModal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+#reviewWriterModal .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#reviewWriterModal .modal-body::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 10px;
+}
+
+#reviewWriterModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent);
+}
+
+/* 3. 하단 컨트롤 버튼 영역이 무조건 하단에 고정되도록 마감 */
+#reviewWriterModal .writer-controls {
+    margin-top: 0 !important;
+    padding-top: 16px !important;
+    border-top: 1px solid var(--border-color) !important;
+    background-color: var(--bg-secondary) !important;
+    /* 뒤쪽 콘텐츠가 비치지 않게 배경 고정 */
+}
