@@ -1,13 +1,43 @@
 // KOMICARE Core Application Script
 
-document.addEventListener('DOMContentLoaded', () => {
+// ==========================================
+// Language Initialization (must run first)
+// ==========================================
+function initLanguage() {
+    let savedLang = 'en';
+    try {
+        savedLang = localStorage.getItem('komicare-lang');
+    } catch (e) { /* ignore */ }
+    if (!savedLang) {
+        savedLang = (navigator.language && navigator.language.startsWith('ko')) ? 'ko' : 'en';
+    }
+    setLanguage(savedLang);
+
+    // Bind click events to language switcher buttons
+    const langSwitcher = document.getElementById('langSwitcher');
+    if (langSwitcher) {
+        langSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                setLanguage(lang);
+            });
+        });
+    }
+}
+
+function initApp() {
+    initLanguage();      // Language first
     initQuiz();
     initReceiptMasker();
     initReader();
     initTheme();
     loadClinics();
     initClinicDetailModal();
-});
+    initSearchAndFilters();
+    initReviewWriter();
+}
+
+document.addEventListener('DOMContentLoaded', initApp);
 
 // ==========================================
 // 1. Fitzpatrick Quiz Diagnostic Engine
@@ -561,7 +591,13 @@ const clinicDetails = {
         doctor_bio: "Dr. Lee has over 12 years of clinical dermatology experience, specializing in lasers for thin and reactive skin barriers. She is a recognized speaker on Nd:YAG customization.",
         hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM",
         map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr",
-        slots_tag: "Max 3 Bookings/Hr"
+        slots_tag: "Max 3 Bookings/Hr",
+        doctor_type: "dermatologist",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
     },
     2: {
         name: "Myeongdong Forest Dermatology",
@@ -575,7 +611,13 @@ const clinicDetails = {
         doctor_bio: "Dr. Kim founded Myeongdong Forest to offer custom medical treatments for international travelers who frequently experience barrier breakdown due to travel and climate changes.",
         hours: "Mon, Wed, Thu: 10:00 AM - 8:00 PM (Night Clinic) | Tue, Fri: 10:00 AM - 7:00 PM",
         map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr",
-        slots_tag: "Max 2 Bookings/Hr"
+        slots_tag: "Max 2 Bookings/Hr",
+        doctor_type: "dermatologist",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
     },
     3: {
         name: "Hannam Aesthetic & Laser House",
@@ -589,7 +631,13 @@ const clinicDetails = {
         doctor_bio: "Dr. Park completed his fellowship at Seoul National University Hospital. He speaks fluent English and is dedicated to making laser treatments safe for diverse Fitzpatrick skin types.",
         hours: "Tue - Fri: 11:00 AM - 8:00 PM | Sat: 10:00 AM - 5:00 PM | Sun, Mon: Closed",
         map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7854653738096!2d127.00693597646618!3d37.53429397204558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3b98d24ebf5%3A0xefdf5a3c94248a0!2sHannam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035200000!5m2!1sen!2skr",
-        slots_tag: "Max 3 Bookings/Hr"
+        slots_tag: "Max 3 Bookings/Hr",
+        doctor_type: "specialist",
+        sleep_anesthesia: true,
+        anesthesiologist_resident: true,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: false
     },
     4: {
         name: "Sinsa Glow Dermatology",
@@ -603,7 +651,13 @@ const clinicDetails = {
         doctor_bio: "Dr. Choi is an expert in non-surgical lifting. He developed Sinsa Glow's 'Barrier First' lifting protocol to prevent post-treatment nerve complications and excessive swelling.",
         hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 9:30 AM - 3:00 PM",
         map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr",
-        slots_tag: "Max 2 Bookings/Hr"
+        slots_tag: "Max 2 Bookings/Hr",
+        doctor_type: "dermatologist",
+        sleep_anesthesia: true,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: false,
+        excellent_aftercare: false
     },
     5: {
         name: "Hongdae Calm Skin Clinic",
@@ -617,7 +671,13 @@ const clinicDetails = {
         doctor_bio: "Dr. Song is highly recognized for her gentle, layered laser approach. She rejects rapid 'one-size-fits-all' laser protocols, allocating 30+ minutes per patient treatment.",
         hours: "Mon, Tue, Fri: 10:00 AM - 7:00 PM | Thu: 10:00 AM - 9:00 PM (Night Clinic) | Sat: 10:00 AM - 4:00 PM",
         map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.0903332467554!2d126.91929527646698!3d37.5541201720392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98da5f87b8b5%3A0x6b6df7d6b8b0e8c0!2sSeogyo-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035400000!5m2!1sen!2skr",
-        slots_tag: "Max 4 Bookings/Hr"
+        slots_tag: "Max 4 Bookings/Hr",
+        doctor_type: "gp",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: false,
+        foreigner_insurance: true,
+        excellent_aftercare: false
     }
 };
 
@@ -671,6 +731,40 @@ function renderClinicCards(clinics) {
         // Grab numeric rating only (e.g. "4.9")
         const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();
 
+        // Safety Badges Localized
+        let doctorTypeLabel = '';
+        let doctorTypeClass = '';
+        if (clinic.doctor_type === 'dermatologist') {
+            doctorTypeLabel = (typeof t === 'function') ? t('badge.dermatologist') : 'Board-Certified Dermatologist';
+            doctorTypeClass = 'badge-dermatologist';
+        } else if (clinic.doctor_type === 'specialist') {
+            doctorTypeLabel = (typeof t === 'function') ? t('badge.specialist') : 'Specialist';
+            doctorTypeClass = 'badge-specialist';
+        } else {
+            doctorTypeLabel = (typeof t === 'function') ? t('badge.gp') : 'General Practitioner';
+            doctorTypeClass = 'badge-gp';
+        }
+
+        let anesthesiaLabel = '';
+        let anesthesiaClass = '';
+        if (clinic.sleep_anesthesia) {
+            if (clinic.anesthesiologist_resident) {
+                anesthesiaLabel = (typeof t === 'function') ? t('badge.anesthesiologist') : 'Anesthesiologist Residing';
+                anesthesiaClass = 'badge-anesthesiologist';
+            } else {
+                anesthesiaLabel = (typeof t === 'function') ? t('badge.no_anesthesiologist') : 'Local Anesthesia Only';
+                anesthesiaClass = 'badge-no_anesthesiologist';
+            }
+        }
+
+        const safetyBadgesHTML = `
+            <span class="safety-badge ${doctorTypeClass}">${doctorTypeLabel}</span>
+            ${anesthesiaLabel ? `<span class="safety-badge ${anesthesiaClass}">${anesthesiaLabel}</span>` : ''}
+            ${clinic.foreign_attraction_registered ? `<span class="safety-badge badge-registered">${(typeof t === 'function') ? t('badge.foreign_attraction') : 'Registered Attraction Clinic'}</span>` : ''}
+            ${clinic.foreigner_insurance ? `<span class="safety-badge badge-insurance">${(typeof t === 'function') ? t('badge.foreigner_insurance') : 'Foreigner Liability Insured'}</span>` : ''}
+            ${clinic.excellent_aftercare ? `<span class="safety-badge badge-aftercare">★ ${(typeof t === 'function') ? t('badge.aftercare_excellence') : 'Excellent Aftercare Selected'}</span>` : ''}
+        `;
+
         const cardHTML = `
             <div class="partner-card" data-clinic-id="${clinic.id}">
                 <div class="partner-top">
@@ -685,6 +779,9 @@ function renderClinicCards(clinics) {
                 <div class="partner-tags">
                     ${tagsHTML}
                     <span class="partner-tag slots">${clinic.slots_tag}</span>
+                </div>
+                <div class="safety-badges-row">
+                    ${safetyBadgesHTML}
                 </div>
                 <div class="partner-doctors">
                     <div class="doctor-profile">
@@ -727,6 +824,39 @@ function openClinicDetailModal(clinicId) {
         tag.textContent = spec;
         specialtiesContainer.appendChild(tag);
     });
+
+    // Populate Safety Details Grid
+    const safetyContainer = document.getElementById('clinic-detail-safety-grid');
+    if (safetyContainer) {
+        safetyContainer.innerHTML = '';
+        
+        let doctorTypeLabel = '';
+        if (data.doctor_type === 'dermatologist') {
+            doctorTypeLabel = (typeof t === 'function') ? t('badge.dermatologist') : 'Board-Certified Dermatologist';
+        } else if (data.doctor_type === 'specialist') {
+            doctorTypeLabel = (typeof t === 'function') ? t('badge.specialist') : 'Specialist';
+        } else {
+            doctorTypeLabel = (typeof t === 'function') ? t('badge.gp') : 'General Practitioner';
+        }
+
+        const items = [
+            { label: doctorTypeLabel, active: true },
+            { label: data.sleep_anesthesia ? (data.anesthesiologist_resident ? ((typeof t === 'function') ? t('badge.anesthesiologist') : 'Anesthesiologist Residing') : ((typeof t === 'function') ? t('badge.no_anesthesiologist') : 'Local Anesthesia Only')) : ((typeof t === 'function') ? t('badge.no_anesthesiologist') : 'Local Anesthesia Only'), active: data.sleep_anesthesia },
+            { label: (typeof t === 'function') ? t('badge.foreign_attraction') : 'Registered Attraction Clinic', active: data.foreign_attraction_registered },
+            { label: (typeof t === 'function') ? t('badge.foreigner_insurance') : 'Foreigner Liability Insured', active: data.foreigner_insurance },
+            { label: (typeof t === 'function') ? t('badge.aftercare_excellence') : 'Excellent Aftercare Selected', active: data.excellent_aftercare }
+        ];
+
+        items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'safety-detail-item';
+            div.innerHTML = `
+                <span class="safety-check-icon ${item.active ? 'active' : 'inactive'}">${item.active ? '✅' : '❌'}</span>
+                <span>${item.label}</span>
+            `;
+            safetyContainer.appendChild(div);
+        });
+    }
 
     // Populate Doctor Info
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
@@ -900,6 +1030,341 @@ function closeClinicModal() {
             mapIframe.src = '';
         }
     }
+}
+
+// ==========================================
+// 6. Specialty Filtering and Search Logic
+// ==========================================
+
+let activeSpecialtyFilter = 'all';
+let searchQuery = '';
+
+function initSearchAndFilters() {
+    const searchInput = document.getElementById('directorySearchInput');
+    const filterTags = document.querySelectorAll('.filter-tag');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            filterAndRenderClinics();
+        });
+    }
+
+    filterTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            filterTags.forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+            activeSpecialtyFilter = tag.getAttribute('data-specialty');
+            filterAndRenderClinics();
+        });
+    });
+}
+
+function filterAndRenderClinics() {
+    const filtered = loadedClinicsGlobal.filter(clinic => {
+        // Specialty filter
+        let matchesSpecialty = true;
+        if (activeSpecialtyFilter !== 'all') {
+            const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
+            matchesSpecialty = specs.some(s => s === activeSpecialtyFilter);
+        }
+
+        // Search query filter (matches clinic name, location, specialties, doctor name)
+        let matchesSearch = true;
+        if (searchQuery) {
+            const name = (clinic.name || '').toLowerCase();
+            const loc = (clinic.location || '').toLowerCase();
+            const doc = (clinic.doctor_name || '').toLowerCase();
+            const specs = (clinic.specialties || []).map(s => s.toLowerCase()).join(' ');
+            matchesSearch = name.includes(searchQuery) || loc.includes(searchQuery) || doc.includes(searchQuery) || specs.includes(searchQuery);
+        }
+
+        return matchesSpecialty && matchesSearch;
+    });
+
+    renderClinicCards(filtered);
+}
+
+// ==========================================
+// 7. Review Writer Wizard Simulator Logic
+// ==========================================
+
+let reviewWriterActiveStep = 1;
+
+function initReviewWriter() {
+    const openBtn = document.getElementById('btnOpenReviewWriter');
+    const closeBtn = document.getElementById('btnCloseReviewWriter');
+    const modal = document.getElementById('reviewWriterModal');
+    
+    const prevBtn = document.getElementById('btnWriterPrev');
+    const nextBtn = document.getElementById('btnWriterNext');
+    
+    // Sliders
+    const sliders = [
+        { id: 'slide-booking', valId: 'val-booking' },
+        { id: 'slide-visit', valId: 'val-visit' },
+        { id: 'slide-doc-design', valId: 'val-doc-design' },
+        { id: 'slide-post-care', valId: 'val-post-care' },
+        { id: 'slide-side-effect', valId: 'val-side-effect' },
+        { id: 'slide-kindness', valId: 'val-kindness' }
+    ];
+
+    // Initialize slider value badges
+    sliders.forEach(s => {
+        const sliderEl = document.getElementById(s.id);
+        const valEl = document.getElementById(s.valId);
+        if (sliderEl && valEl) {
+            sliderEl.addEventListener('input', (e) => {
+                valEl.textContent = `${e.target.value} / 5`;
+            });
+        }
+    });
+
+    // Intent button toggles
+    initSelectGroup('btn-revisit-yes', 'btn-revisit-no');
+    initSelectGroup('btn-recommend-yes', 'btn-recommend-no');
+
+    // Document dropzones simulation
+    initDropzone('passportDropzone', 'passportSuccess');
+    initDropzone('receiptDropzone', 'receiptSuccess');
+
+    // Whistleblower Report Simulation
+    const reportBribeBtn = document.getElementById('btnReportBribe');
+    const whistleblowerSuccess = document.getElementById('whistleblowerSuccess');
+    if (reportBribeBtn && whistleblowerSuccess) {
+        reportBribeBtn.addEventListener('click', () => {
+            reportBribeBtn.disabled = true;
+            reportBribeBtn.textContent = 'Registering Report... ⏳';
+            
+            setTimeout(() => {
+                reportBribeBtn.style.display = 'none';
+                whistleblowerSuccess.style.display = 'block';
+            }, 1200);
+        });
+    }
+
+    // Modal triggers
+    if (openBtn) {
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openReviewWriterModal();
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            closeReviewWriterModal();
+        });
+    }
+
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeReviewWriterModal();
+            }
+        });
+    }
+
+    // Step navigators
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (reviewWriterActiveStep > 1) {
+                setReviewWriterStep(reviewWriterActiveStep - 1);
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (reviewWriterActiveStep < 3) {
+                // Basic validation: must select doctor in step 1
+                if (reviewWriterActiveStep === 1) {
+                    const docSelect = document.getElementById('reviewDoctorSelect');
+                    if (!docSelect || !docSelect.value) {
+                        alert('Please select the operating physician.');
+                        return;
+                    }
+                }
+                setReviewWriterStep(reviewWriterActiveStep + 1);
+            } else if (reviewWriterActiveStep === 3) {
+                // Submit review writer
+                submitReviewSimulation();
+            }
+        });
+    }
+
+    // Sync language updates — only re-render if clinics are loaded
+    window.addEventListener('languageChanged', () => {
+        if (loadedClinicsGlobal.length > 0) {
+            filterAndRenderClinics();
+        }
+        if (activeClinicId) {
+            openClinicDetailModal(activeClinicId);
+        }
+        updateReviewDoctorDropdown();
+    });
+}
+
+function initSelectGroup(yesId, noId) {
+    const yesBtn = document.getElementById(yesId);
+    const noBtn = document.getElementById(noId);
+
+    if (yesBtn && noBtn) {
+        yesBtn.addEventListener('click', () => {
+            yesBtn.classList.add('active');
+            noBtn.classList.remove('active');
+        });
+        noBtn.addEventListener('click', () => {
+            noBtn.classList.add('active');
+            yesBtn.classList.remove('active');
+        });
+    }
+}
+
+function initDropzone(dzId, successId) {
+    const dz = document.getElementById(dzId);
+    const success = document.getElementById(successId);
+
+    if (dz && success) {
+        dz.addEventListener('click', () => {
+            dz.style.borderColor = 'var(--color-success)';
+            dz.style.backgroundColor = 'var(--color-success-light)';
+            success.style.display = 'flex';
+        });
+    }
+}
+
+function openReviewWriterModal() {
+    const modal = document.getElementById('reviewWriterModal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setReviewWriterStep(1);
+        
+        // Reset inputs and Whistleblower button
+        const form = document.getElementById('reviewWriterForm');
+        if (form) form.reset();
+        
+        const reportBribeBtn = document.getElementById('btnReportBribe');
+        const whistleblowerSuccess = document.getElementById('whistleblowerSuccess');
+        if (reportBribeBtn && whistleblowerSuccess) {
+            reportBribeBtn.style.display = 'block';
+            reportBribeBtn.disabled = false;
+            reportBribeBtn.textContent = (typeof t === 'function') ? t('rev_sim.whistleblower_btn') : '🚨 Report Bribe Attempt';
+            whistleblowerSuccess.style.display = 'none';
+        }
+
+        // Reset dropzones
+        const zones = [
+            { dz: 'passportDropzone', succ: 'passportSuccess' },
+            { dz: 'receiptDropzone', succ: 'receiptSuccess' }
+        ];
+        zones.forEach(z => {
+            const dzEl = document.getElementById(z.dz);
+            const succEl = document.getElementById(z.succ);
+            if (dzEl && succEl) {
+                dzEl.style.borderColor = '';
+                dzEl.style.backgroundColor = '';
+                succEl.style.display = 'none';
+            }
+        });
+
+        // Load doctors list
+        updateReviewDoctorDropdown();
+    }
+}
+
+function closeReviewWriterModal() {
+    const modal = document.getElementById('reviewWriterModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function updateReviewDoctorDropdown() {
+    const docSelect = document.getElementById('reviewDoctorSelect');
+    if (docSelect) {
+        docSelect.innerHTML = '';
+        
+        // Load options based on current database fallbacks
+        const fallbackArray = Object.keys(clinicDetails).map(key => ({
+            id: parseInt(key),
+            ...clinicDetails[key]
+        }));
+
+        const clinicsList = loadedClinicsGlobal.length ? loadedClinicsGlobal : fallbackArray;
+
+        clinicsList.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = `${c.doctor_name} (${c.name})`;
+            docSelect.appendChild(opt);
+        });
+    }
+}
+
+function setReviewWriterStep(stepNum) {
+    reviewWriterActiveStep = stepNum;
+
+    // Toggle panel displays
+    document.querySelectorAll('.writer-panel').forEach(p => p.classList.remove('active'));
+    const targetPanel = document.getElementById(`writer-panel-${stepNum}`);
+    if (targetPanel) targetPanel.classList.add('active');
+
+    // Toggle step indicators
+    document.querySelectorAll('.step-indicator').forEach((ind, idx) => {
+        ind.classList.remove('active', 'completed');
+        const num = idx + 1;
+        if (num === stepNum) {
+            ind.classList.add('active');
+        } else if (num < stepNum) {
+            ind.classList.add('completed');
+        }
+    });
+
+    // Control buttons visibility and labels
+    const prevBtn = document.getElementById('btnWriterPrev');
+    const nextBtn = document.getElementById('btnWriterNext');
+    const controls = document.getElementById('writerControls');
+
+    if (prevBtn && nextBtn && controls) {
+        controls.style.display = 'flex';
+        prevBtn.disabled = (stepNum === 1);
+        
+        if (stepNum === 3) {
+            nextBtn.textContent = (typeof t === 'function') ? t('rev_sim.submit') : 'Upload Authenticated Review';
+        } else {
+            nextBtn.textContent = 'Next ➔';
+        }
+    }
+}
+
+function submitReviewSimulation() {
+    const nextBtn = document.getElementById('btnWriterNext');
+    const originalText = nextBtn.textContent;
+    
+    nextBtn.disabled = true;
+    nextBtn.textContent = 'Publishing Review... ⏳';
+
+    setTimeout(() => {
+        nextBtn.disabled = false;
+        nextBtn.textContent = originalText;
+        
+        // Transition to Step 4 Success screen
+        document.querySelectorAll('.writer-panel').forEach(p => p.classList.remove('active'));
+        const panel4 = document.getElementById('writer-panel-4');
+        if (panel4) panel4.classList.add('active');
+
+        // Hide steps indicator and control actions
+        const controls = document.getElementById('writerControls');
+        if (controls) controls.style.display = 'none';
+
+        // Add visual success checklist styling to step indicators
+        document.querySelectorAll('.step-indicator').forEach(ind => {
+            ind.classList.add('completed');
+        });
+    }, 1500);
 }
 
 

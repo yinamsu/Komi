@@ -49,6 +49,12 @@ CREATE TABLE IF NOT EXISTS public.clinics (
     hours TEXT NOT NULL,
     map_iframe TEXT NOT NULL,
     slots_tag TEXT NOT NULL,
+    doctor_type TEXT DEFAULT 'gp' NOT NULL,
+    sleep_anesthesia BOOLEAN DEFAULT false NOT NULL,
+    anesthesiologist_resident BOOLEAN DEFAULT false NOT NULL,
+    foreign_attraction_registered BOOLEAN DEFAULT false NOT NULL,
+    foreigner_insurance BOOLEAN DEFAULT false NOT NULL,
+    excellent_aftercare BOOLEAN DEFAULT false NOT NULL,
     active BOOLEAN DEFAULT true NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -102,7 +108,7 @@ TO public
 USING (false);
 
 -- 9. Insert Initial 5 Boutique Partner Clinics
-INSERT INTO public.clinics (name, location, rating, description, specialties, doctor_name, doctor_avatar, doctor_title, doctor_bio, hours, map_iframe, slots_tag)
+INSERT INTO public.clinics (name, location, rating, description, specialties, doctor_name, doctor_avatar, doctor_title, doctor_bio, hours, map_iframe, slots_tag, doctor_type, sleep_anesthesia, anesthesiologist_resident, foreign_attraction_registered, foreigner_insurance, excellent_aftercare)
 VALUES 
 (
     'Cheongdam Barrier Lab', 
@@ -116,7 +122,13 @@ VALUES
     'Dr. Lee has over 12 years of clinical dermatology experience, specializing in lasers for thin and reactive skin barriers. She is a recognized speaker on Nd:YAG customization.', 
     'Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM', 
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr',
-    'Max 3 Bookings/Hr'
+    'Max 3 Bookings/Hr',
+    'dermatologist',
+    false,
+    false,
+    true,
+    true,
+    true
 ),
 (
     'Myeongdong Forest Dermatology', 
@@ -130,7 +142,13 @@ VALUES
     'Dr. Kim founded Myeongdong Forest to offer custom medical treatments for international travelers who frequently experience barrier breakdown due to travel and climate changes.', 
     'Mon, Wed, Thu: 10:00 AM - 8:00 PM (Night Clinic) | Tue, Fri: 10:00 AM - 7:00 PM', 
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr',
-    'Max 2 Bookings/Hr'
+    'Max 2 Bookings/Hr',
+    'dermatologist',
+    false,
+    false,
+    true,
+    true,
+    true
 ),
 (
     'Hannam Aesthetic & Laser House', 
@@ -144,7 +162,13 @@ VALUES
     'Dr. Park completed his fellowship at Seoul National University Hospital. He speaks fluent English and is dedicated to making laser treatments safe for diverse Fitzpatrick skin types.', 
     'Tue - Fri: 11:00 AM - 8:00 PM | Sat: 10:00 AM - 5:00 PM | Sun, Mon: Closed', 
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7854653738096!2d127.00693597646618!3d37.53429397204558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3b98d24ebf5%3A0xefdf5a3c94248a0!2sHannam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035200000!5m2!1sen!2skr',
-    'Max 3 Bookings/Hr'
+    'Max 3 Bookings/Hr',
+    'specialist',
+    true,
+    true,
+    true,
+    true,
+    false
 ),
 (
     'Sinsa Glow Dermatology', 
@@ -158,7 +182,13 @@ VALUES
     'Dr. Choi is an expert in non-surgical lifting. He developed Sinsa Glow''s ''Barrier First'' lifting protocol to prevent post-treatment nerve complications and excessive swelling.', 
     'Mon - Fri: 10:00 AM - 7:00 PM | Sat: 9:30 AM - 3:00 PM', 
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr',
-    'Max 2 Bookings/Hr'
+    'Max 2 Bookings/Hr',
+    'dermatologist',
+    true,
+    false,
+    true,
+    false,
+    false
 ),
 (
     'Hongdae Calm Skin Clinic', 
@@ -172,7 +202,13 @@ VALUES
     'Dr. Song is highly recognized for her gentle, layered laser approach. She rejects rapid ''one-size-fits-all'' laser protocols, allocating 30+ minutes per patient treatment.', 
     'Mon, Tue, Fri: 10:00 AM - 7:00 PM | Thu: 10:00 AM - 9:00 PM (Night Clinic) | Sat: 10:00 AM - 4:00 PM', 
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.0903332467554!2d126.91929527646698!3d37.5541201720392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98da5f87b8b5%3A0x6b6df7d6b8b0e8c0!2sSeogyo-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035400000!5m2!1sen!2skr',
-    'Max 4 Bookings/Hr'
+    'Max 4 Bookings/Hr',
+    'gp',
+    false,
+    false,
+    false,
+    true,
+    false
 )
 ON CONFLICT DO NOTHING;
 
