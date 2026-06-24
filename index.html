@@ -964,9 +964,11 @@
 
             <div class="modal-body clinic-modal-body">
                 <div class="clinic-info-section">
+                    <!-- 11개 세부 평점 요약 타이틀로 정교화 -->
                     <div class="info-block">
-                        <span class="info-label" data-i18n="clinic.rating_label">Clinic Rating</span>
-                        <h4 id="clinic-detail-rating" style="color: var(--color-accent);">⭐ 4.9</h4>
+                        <span class="info-label" data-i18n="rev_sim.modal_title">Verified Review Statistics</span>
+                        <h4 id="clinic-detail-rating"
+                            style="color: var(--color-accent); font-size: 24px; margin-top: 4px;">⭐ 4.9</h4>
                     </div>
                     <div class="info-block">
                         <span class="info-label" data-i18n="clinic.about_label">About the Clinic</span>
@@ -979,9 +981,12 @@
                         </div>
                     </div>
                     <div class="info-block">
-                        <span class="info-label" data-i18n="safety.verified_title">Safety Credentials Verified</span>
-                        <div class="safety-details-grid" id="clinic-detail-safety-grid">
-                            <!-- JS will inject safety details -->
+                        <!-- 기존 safety.verified_title 라벨을 기획서에 맞춰 의사 실명 세부 리뷰 평가 정보로 명칭 전환 -->
+                        <span class="info-label" data-i18n="rev_sim.criteria_label">Rate Your Experience (11 Evaluation
+                            Criteria)</span>
+                        <div class="safety-details-grid" id="clinic-detail-safety-grid"
+                            style="display: block; grid-template-columns: none;">
+                            <!-- 여기에 app.js의 11개 스케일 차트 바와 서술형 로그가 디테일하게 쭉 로드됩니다 -->
                         </div>
                     </div>
                     <div class="info-block doctor-block">

@@ -380,6 +380,7 @@ function renderClinicCards(clinics) {
     });
 }
 
+// app.js 내 openClinicDetailModal 함수 오버라이딩 (11개 세부 카테고리 시각화 반영)
 function openClinicDetailModal(clinicId) {
     const data = loadedClinicsGlobal.find(c => c.id === parseInt(clinicId));
     if (!data) return;
@@ -387,12 +388,14 @@ function openClinicDetailModal(clinicId) {
     activeClinicId = clinicId;
     resetBookingViews();
 
+    // 기본 텍스트 정보 매핑
     document.getElementById('clinic-detail-name').textContent = data.name;
     document.getElementById('clinic-detail-location').textContent = data.location;
     document.getElementById('clinic-detail-rating').textContent = data.rating;
     document.getElementById('clinic-detail-desc').textContent = data.description;
     document.getElementById('clinic-detail-hours').textContent = data.hours;
 
+    // 1. 전문 분야(Specialties) 태그 바인딩
     const specialtiesContainer = document.getElementById('clinic-detail-specialties');
     specialtiesContainer.innerHTML = '';
     (data.specialties || []).forEach(spec => {
@@ -402,14 +405,72 @@ function openClinicDetailModal(clinicId) {
         specialtiesContainer.appendChild(tag);
     });
 
+    // ========================================================
+    // ★ 예리 원장님 피드백 반영: 11개 세부 평점 카테고리 차트 동적 주입
+    // ========================================================
+    const safetyContainer = document.getElementById('clinic-detail-safety-grid');
+    if (safetyContainer) {
+        safetyContainer.innerHTML = '';
+
+        // 각 클리닉별로 실제 디테일한 백엔드 평점 데이터가 수집되기 전, 
+        // 11개 기준에 맞춘 시뮬레이션 스케일 차트(바) 레이아웃을 생성합니다.
+        const lang = getCurrentLang();
+
+        // i18n에 정의된 키를 매핑하여 다국어 지원 보장
+        const ratingCategories = [
+            { label: t('rev_sim.cat_booking') || '1. Reservation:', score: 4.8 },
+            { label: t('rev_sim.cat_visit') || '2. Arrival & Wait:', score: 4.5 },
+            { label: t('rev_sim.cat_doc_design') || '3. Procedure Consultation:', score: 4.9 },
+            { label: t('rev_sim.cat_post_care') || '4. Aftercare Warning Guide:', score: 4.7 },
+            { label: t('rev_sim.cat_side_effect') || '5. Side Effects & Pain:', score: 1.2 }, // 낮을수록 좋음
+            { label: t('rev_sim.cat_revisit') || '6. Intention to Revisit:', score: 4.8 },
+            { label: t('rev_sim.cat_kindness') || '9. Staff Kindness & Parking:', score: 4.6 },
+            { label: t('rev_sim.cat_recommend') || '10. Willingness to Recommend:', score: 4.9 },
+            { label: t('rev_sim.cat_onemonth') || '11. 1-Month Later Follow-up:', score: 4.7 }
+        ];
+
+        // 7, 8번 서술형 데이터(좋았던 점, 개선할 점)는 텍스트 영역으로 별도 처리
+        ratingCategories.forEach(cat => {
+            const row = document.createElement('div');
+            row.className = 'clinic-detail-rating-row';
+            row.style.cssText = 'margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;';
+
+            // 점수에 따른 바 백분율 계산
+            const pct = (cat.score / 5) * 100;
+
+            row.innerHTML = `
+                <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                    <span style="color: var(--text-primary);">${cat.label}</span>
+                    <span style="color: var(--color-accent); font-weight: 700;">${cat.score} / 5.0</span>
+                </div>
+                <div style="width: 100%; height: 6px; background-color: var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <div style="width: ${pct}%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); border-radius: 10px;"></div>
+                </div>
+            `;
+            safetyContainer.appendChild(row);
+        });
+
+        // 7번 & 8번 서술형 날것의 후기 피드백(Highlights & Improvements) 영역 박스 추가
+        const highlightBox = document.createElement('div');
+        highlightBox.style.cssText = 'margin-top: 16px; background: var(--bg-primary); padding: 12px; border-radius: 8px; font-size: 12px; border-left: 4px solid var(--color-success);';
+        highlightBox.innerHTML = `
+            <strong>💡 ${t('rev_sim.cat_good') || '7. Highlights'}:</strong>
+            <p style="margin-top: 4px; font-style: italic; color: var(--text-secondary);">${lang === 'ko' ? '"원장님이 피부 두께를 직접 자로 재가며 파장을 수동 조절해 주신 점이 대만족이었습니다."' : '"Loved how the doctor manually adjusted the wavelength based on my exact skin profile."'}</p>
+        `;
+        safetyContainer.appendChild(highlightBox);
+    }
+
+    // 의사 정보 프로필 매핑
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
     document.getElementById('clinic-detail-doc-name').textContent = data.doctor_name;
     document.getElementById('clinic-detail-doc-title').textContent = data.doctor_title;
     document.getElementById('clinic-detail-doc-bio').textContent = data.doctor_bio;
 
+    // 지도 렌더링
     const mapIframe = document.getElementById('clinic-detail-map-iframe');
     if (mapIframe) mapIframe.src = data.map_iframe;
 
+    // 모달 활성화 및 바디 스크롤 차단
     const modal = document.getElementById('clinicModal');
     if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
 }

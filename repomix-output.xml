@@ -155,6 +155,322 @@ module.exports = async (req, res) => {
 };
 </file>
 
+<file path="package.json">
+{
+  "name": "komicare-landing",
+  "version": "2.0.0",
+  "description": "KOMICARE Premium Boutique Skin Match Landing Page",
+  "main": "api/subscribe.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}
+</file>
+
+<file path="README.md">
+# 🚀 KOMICARE 배포 및 데이터베이스 연동 가이드
+
+본 프로젝트는 Vercel Serverless Function(백엔드)과 Supabase(데이터베이스)를 연동하여 안전하고 은밀하게 유저의 이메일과 피부 타입 정보를 수집합니다. 아래 실무 가이드를 순서대로 실행해 주세요.
+
+---
+
+## 1. Supabase 데이터베이스 설정
+
+1. [Supabase 공식 홈페이지](https://supabase.com)에 로그인하고 새 프로젝트(New Project)를 생성합니다.
+2. 프로젝트 대시보드 왼쪽 메뉴의 **SQL Editor**로 이동합니다.
+3. **New query**를 클릭하고, 본 프로젝트 루트에 생성된 [supabase_schema.sql](file:///e:/Komi/supabase_schema.sql) 파일의 내용을 전체 복사하여 붙여넣습니다.
+4. 오른쪽 하단의 **Run** 버튼을 클릭하여 `leads` 테이블과 개인 정보 보호를 위한 RLS(Row Level Security) 정책을 적용합니다.
+
+---
+
+## 2. API 인증 키 확인
+
+Supabase 프로젝트 대시보드 왼쪽 하단의 **Project Settings (톱니바퀴 아이콘)** > **API** 메뉴로 이동합니다.
+아래 두 가지 키를 복사하여 안전한 곳에 기록해 둡니다:
+* **Project URL**: `https://<your-project-id>.supabase.co` 형태의 주소 (Vercel 환경 변수 `SUPABASE_URL`로 사용)
+* **service_role API Key** (secret): 테이블 쓰기 권한을 가진 비공개 키 (Vercel 환경 변수 `SUPABASE_SERVICE_ROLE_KEY`로 사용)
+  > ⚠️ **주의**: `anon (public)` 키가 아닌, **`service_role` 키**를 사용해야 RLS 보안 규칙을 통과하여 백엔드 쓰기가 가능합니다.
+
+---
+
+## 3. GitHub 리포지토리 생성 및 푸시
+
+터미널을 열고 프로젝트 루트(`e:\Komi`) 경로에서 아래 깃 명령어를 차례로 입력합니다:
+
+```bash
+# 1. 깃 저장소 초기화
+git init
+
+# 2. 로컬 코드 스테이징 및 커밋
+git add .
+git commit -m "feat: KOMICARE V2 Refined with Supabase Integration"
+
+# 3. 깃허브 원격 저장소 추가 (GitHub에서 생성한 새 리포지토리 주소를 입력하세요)
+git branch -M main
+git remote add origin https://github.com/사용자이름/저장소이름.git
+
+# 4. 원격 저장소로 코드 푸시
+git push -u origin main
+```
+
+---
+
+## 4. Vercel 배포 및 환경 변수 연동
+
+1. [Vercel 대시보드](https://vercel.com)에 로그인하고 **Add New...** > **Project**를 클릭합니다.
+2. 방금 푸시한 GitHub 리포지토리를 가져옵니다(Import).
+3. **Environment Variables (환경 변수)** 탭을 펼친 후 아래 두 가지 항목을 추가합니다:
+   * **Key**: `SUPABASE_URL` / **Value**: *복사해둔 Supabase Project URL*
+   * **Key**: `SUPABASE_SERVICE_ROLE_KEY` / **Value**: *복사해둔 Supabase service_role Key*
+4. **Deploy** 버튼을 눌러 배포를 완료합니다.
+
+---
+
+## 5. 배포 완료 및 동작 검증
+
+* 배포가 완료되면 Vercel이 생성해 준 고유 라이브 URL로 접속합니다.
+* 피츠패트릭 진단 퀴즈를 풀고 이메일을 입력한 후 제출해 보세요.
+* Supabase 대시보드의 **Table Editor** > `leads` 테이블을 조회하여 수집된 데이터가 올바르게 저장되었는지 확인합니다.
+</file>
+
+<file path="walkthrough.md">
+# KOMICARE V2 Landing Page Walkthrough
+
+We have successfully upgraded the KOMICARE web application to a premium, boutique skin match landing page. The application meets all aspects of the approved implementation plan and the PRD guidelines.
+
+Below is a carousel showcasing screenshots of the interactive features:
+
+````carousel
+![1. Initial Page Load (Landing Header & Quiz Initial Step)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/initial_page_load_1782101039149.png)
+<!-- slide -->
+![2. Skin Passport Analysis Card (Results computed from Quiz responses)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/quiz_results_1782101081632.png)
+<!-- slide -->
+![3. Interactive Safety Handbook Modal (Toggling Checklist inside Chapter 2)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/modal_checklist_1782101143325.png)
+<!-- slide -->
+![4. Receipt Privacy Masking Demo (Blurred sensitive information client-side)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/receipt_after_masking_1782101167085.png)
+````
+
+---
+
+## What was Accomplished
+
+### 1. Code Architecture
+We migrated from simple inline HTML code with CDN scripts to a clean, modular structure in `e:\Komi`:
+- **[index.html](file:///e:/Komi/index.html)**: Contains semantic HTML5 tags structuring the site blocks: Hero Section, Pain Points Grid, Value Propositions, Directory, and Reviews.
+- **[index.css](file:///e:/Komi/index.css)**: Implements custom HSL design tokens, responsive breakpoints, luxury font pairings (*Outfit* and *Playfair Display*), custom scale indicators, and dialog overlay transitions.
+- **[app.js](file:///e:/Komi/app.js)**: Runs client-side state machine scripts for the quiz, receipt logs masking, modal control, checklist check-offs, and clipboard actions.
+
+### 2. Implemented Features
+- **Fitzpatrick Diagnostic Engine**: Step-by-step diagnostic questionnaire checking skin tone, sun sensitivity, and tanning behavior to compute Fitzpatrick Types (I to VI) and present customized advisory summaries.
+- **Privacy Tax Masker**: Interactive demonstration showing tax refund receipt processing. Blurs transaction IDs, codes, and timestamps client-side to prevent clinics tracking down patients who leave negative reviews.
+- **Dr. Minji Kim Message**: Dedicated trust section for the founder highlighting the medical necessity of individualized laser parameters.
+- **Verified Clinic Previews**: Previews partner boutique clinics showcasing their medical certifications and maximum hourly slot constraints.
+- **Handbook Reader Modal**: Renders the complete "Essential K-Beauty Safety Handbook" (Chapters 1 to 4) dynamically with previous/next pagination, active sidebar button highlights, and a copyable "5 Questions checklist".
+
+---
+
+## Verification & Testing
+The system was verified via a local web server (`http://localhost:8080`) using automated browser actions:
+- Checked logo, pill status indicators, and initial layout alignments.
+- Clicked through the quiz options, inputted a test email, verified correct calculation of Fitzpatrick Type I, and read the specific warning details.
+- Verified that opening the modal, reading Chapter 2, toggling checklist items, and copying the checklist works correctly.
+- Checked receipt masking simulation to ensure sensitive data is blurred on target.
+- Verified no JavaScript errors in the console log.
+</file>
+
+<file path="api/clinics.js">
+const { createClient } = require('@supabase/supabase-js');
+
+const fallbackClinics = [
+    {
+        id: 1,
+        name: "Cheongdam Barrier Lab",
+        location: "📍 Cheongdam-dong, Gangnam",
+        rating: "⭐ 4.9 (120+ verified reviews)",
+        description: "Specialized in non-invasive skin barrier recovery and pigmentation lasers for sensitive skin types. Known for ultra-conservative energy calibration and genuine, certified tips.",
+        specialties: ["Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning"],
+        doctor_name: "Dr. Ji-Yeon Lee",
+        doctor_avatar: "JY",
+        doctor_title: "Board-Certified Dermatologist | Nd:YAG Specialist",
+        doctor_bio: "Dr. Lee has over 12 years of clinical dermatology experience, specializing in lasers for thin and reactive skin barriers. She is a recognized speaker on Nd:YAG customization.",
+        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr",
+        slots_tag: "Max 3 Bookings/Hr",
+        doctor_type: "dermatologist",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
+    },
+    {
+        id: 2,
+        name: "Myeongdong Forest Dermatology",
+        location: "📍 Myeong-dong, Jung-gu",
+        rating: "⭐ 4.8 (94+ verified reviews)",
+        description: "A tranquil sanctuary clinic in the heart of Myeongdong, prioritizing barrier safety over factory treatments. Enforces a strict maximum of 2 patient bookings per hour.",
+        specialties: ["Vascular Laser Calibration", "Rosacea & Redness Recovery", "Ultrasonic Rejuvenation"],
+        doctor_name: "Dr. Minji Kim",
+        doctor_avatar: "MK",
+        doctor_title: "Board-Certified Dermatologist | Barrier Recovery",
+        doctor_bio: "Dr. Kim founded Myeongdong Forest to offer custom medical treatments for international travelers who frequently experience barrier breakdown due to travel and climate changes.",
+        hours: "Mon, Wed, Thu: 10:00 AM - 8:00 PM (Night Clinic) | Tue, Fri: 10:00 AM - 7:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr",
+        slots_tag: "Max 2 Bookings/Hr",
+        doctor_type: "dermatologist",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
+    },
+    {
+        id: 3,
+        name: "Hannam Aesthetic & Laser House",
+        location: "📍 Hannam-dong, Yongsan",
+        rating: "⭐ 4.9 (78+ verified reviews)",
+        description: "Boutique clinic catering to embassies and expats in Hannam. Equipped with premium dual-cooling laser systems and offering customized wavelength diagnostics.",
+        specialties: ["1:1 Wavelength Tuning", "Dual-Cooling Safety Protocols", "High-Fluence Pigment Management"],
+        doctor_name: "Dr. Tae-Young Park",
+        doctor_avatar: "TP",
+        doctor_title: "Board-Certified Dermatologist | Custom Wavelengths",
+        doctor_bio: "Dr. Park completed his fellowship at Seoul National University Hospital. He speaks fluent English and is dedicated to making laser treatments safe for diverse Fitzpatrick skin types.",
+        hours: "Tue - Fri: 11:00 AM - 8:00 PM | Sat: 10:00 AM - 5:00 PM | Sun, Mon: Closed",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7854653738096!2d127.00693597646618!3d37.53429397204558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3b98d24ebf5%3A0xefdf5a3c94248a0!2sHannam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035200000!5m2!1sen!2skr",
+        slots_tag: "Max 3 Bookings/Hr",
+        doctor_type: "specialist",
+        sleep_anesthesia: true,
+        anesthesiologist_resident: true,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: false
+    },
+    {
+        id: 4,
+        name: "Sinsa Glow Dermatology",
+        location: "📍 Sinsa-dong, Gangnam",
+        rating: "⭐ 4.7 (112+ verified reviews)",
+        description: "Specializing in advanced anti-aging treatments with verified genuine consumables logging. We provide every patient with their single-use tip certificate and serial code.",
+        specialties: ["Genuine Consumables Logged", "Ultherapy & Shurink custom setups", "Epidermal Thickness Diagnostic"],
+        doctor_name: "Dr. Seo-Jun Choi",
+        doctor_avatar: "SC",
+        doctor_title: "Board-Certified Dermatologist | Anti-Aging Specialist",
+        doctor_bio: "Dr. Choi is an expert in non-surgical lifting. He developed Sinsa Glow's 'Barrier First' lifting protocol to prevent post-treatment nerve complications and excessive swelling.",
+        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 9:30 AM - 3:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr",
+        slots_tag: "Max 2 Bookings/Hr",
+        doctor_type: "dermatologist",
+        sleep_anesthesia: true,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: false,
+        excellent_aftercare: false
+    },
+    {
+        id: 5,
+        name: "Hongdae Calm Skin Clinic",
+        location: "📍 Seokyo-dong, Mapo-gu",
+        rating: "⭐ 4.8 (85+ verified reviews)",
+        description: "A trendy but medically rigorous clinic in Hongdae. Focuses on laser toning and vascular treatments for younger global patients with absolute physician presence.",
+        specialties: ["Nd:YAG & Pico Laser Certified", "100% Physician Consultation", "Youth Acne Barrier Healing"],
+        doctor_name: "Dr. Eun-Ji Song",
+        doctor_avatar: "ES",
+        doctor_title: "Board-Certified Dermatologist | Pigmentation Expert",
+        doctor_bio: "Dr. Song is highly recognized for her gentle, layered laser approach. She rejects rapid 'one-size-fits-all' laser protocols, allocating 30+ minutes per patient treatment.",
+        hours: "Mon, Tue, Fri: 10:00 AM - 7:00 PM | Thu: 10:00 AM - 9:00 PM (Night Clinic) | Sat: 10:00 AM - 4:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.0903332467554!2d126.91929527646698!3d37.5541201720392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98da5f87b8b5%3A0x6b6df7d6b8b0e8c0!2sSeogyo-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035400000!5m2!1sen!2skr",
+        slots_tag: "Max 4 Bookings/Hr",
+        doctor_type: "gp",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: false,
+        foreigner_insurance: true,
+        excellent_aftercare: false
+    }
+];
+
+module.exports = async (req, res) => {
+    // Enable CORS
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+
+    if (req.method !== 'GET') {
+        return res.status(455).json({ error: 'Method Not Allowed' });
+    }
+
+    try {
+        const supabaseUrl = process.env.SUPABASE_URL;
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+        // Fallback simulation mode
+        if (!supabaseUrl || !supabaseKey) {
+            console.warn("WARNING: Supabase URL or Service Key missing. Serving fallback mock clinics.");
+            return res.status(200).json({ success: true, clinics: fallbackClinics, isSimulation: true });
+        }
+
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        // Fetch active clinics ordered by id ascending
+        const { data, error } = await supabase
+            .from('clinics')
+            .select('*')
+            .eq('active', true)
+            .order('id', { ascending: true });
+
+        if (error) {
+            throw error;
+        }
+
+        // Map column names to front-end keys (matching CamelCase/snakes mapping if required, or let client read database schema values)
+        // Since Supabase returns keys in snake_case (doctor_name, slots_tag, etc.),
+        // let's transform the DB schema to match the javascript object property format so the front-end code remains clean!
+        const mappedClinics = data.map(item => ({
+            id: item.id,
+            name: item.name,
+            location: item.location,
+            rating: item.rating,
+            description: item.description,
+            specialties: item.specialties,
+            doctor_name: item.doctor_name,
+            doctor_avatar: item.doctor_avatar,
+            doctor_title: item.doctor_title,
+            doctor_bio: item.doctor_bio,
+            hours: item.hours,
+            map_iframe: item.map_iframe,
+            slots_tag: item.slots_tag,
+            doctor_type: item.doctor_type,
+            sleep_anesthesia: item.sleep_anesthesia,
+            anesthesiologist_resident: item.anesthesiologist_resident,
+            foreign_attraction_registered: item.foreign_attraction_registered,
+            foreigner_insurance: item.foreigner_insurance,
+            excellent_aftercare: item.excellent_aftercare
+        }));
+
+        return res.status(200).json({ success: true, clinics: mappedClinics });
+
+    } catch (err) {
+        console.error("API error fetching clinics:", err);
+        // Serve fallback on DB connection error to keep the platform resilient
+        return res.status(200).json({ 
+            success: true, 
+            clinics: fallbackClinics, 
+            errorMsg: err.message,
+            isSimulationFallback: true 
+        });
+    }
+};
+</file>
+
 <file path="api/subscribe.js">
 const { createClient } = require('@supabase/supabase-js');
 
@@ -712,7 +1028,7 @@ const translations = {
         "dr_view.card3_text": "정직하게 쌓인 평판과 데이터는 브로커 수수료 지불 없이 환자가 스스로 찾아오게 만들어 병원 재정을 건전하게 만듭니다.",
 
         "diff.tag": "차별점 분석",
-        "diff.title": "기존 강남언니, 여신티켓과의 차별점",
+        "diff.title": "기존 강남XX, XX티켓과의 차별점",
         "diff.subtitle": "단순 광고 노출 및 티켓 판매 앱과 다른 코미케어만의 정직한 데이터 생태계",
         "diff.col_feature": "운영 기준",
         "diff.col_legacy": "기존 예약 플랫폼",
@@ -901,322 +1217,6 @@ function setLanguage(lang) {
 
     window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
 }
-</file>
-
-<file path="package.json">
-{
-  "name": "komicare-landing",
-  "version": "2.0.0",
-  "description": "KOMICARE Premium Boutique Skin Match Landing Page",
-  "main": "api/subscribe.js",
-  "dependencies": {
-    "@supabase/supabase-js": "^2.39.0"
-  }
-}
-</file>
-
-<file path="README.md">
-# 🚀 KOMICARE 배포 및 데이터베이스 연동 가이드
-
-본 프로젝트는 Vercel Serverless Function(백엔드)과 Supabase(데이터베이스)를 연동하여 안전하고 은밀하게 유저의 이메일과 피부 타입 정보를 수집합니다. 아래 실무 가이드를 순서대로 실행해 주세요.
-
----
-
-## 1. Supabase 데이터베이스 설정
-
-1. [Supabase 공식 홈페이지](https://supabase.com)에 로그인하고 새 프로젝트(New Project)를 생성합니다.
-2. 프로젝트 대시보드 왼쪽 메뉴의 **SQL Editor**로 이동합니다.
-3. **New query**를 클릭하고, 본 프로젝트 루트에 생성된 [supabase_schema.sql](file:///e:/Komi/supabase_schema.sql) 파일의 내용을 전체 복사하여 붙여넣습니다.
-4. 오른쪽 하단의 **Run** 버튼을 클릭하여 `leads` 테이블과 개인 정보 보호를 위한 RLS(Row Level Security) 정책을 적용합니다.
-
----
-
-## 2. API 인증 키 확인
-
-Supabase 프로젝트 대시보드 왼쪽 하단의 **Project Settings (톱니바퀴 아이콘)** > **API** 메뉴로 이동합니다.
-아래 두 가지 키를 복사하여 안전한 곳에 기록해 둡니다:
-* **Project URL**: `https://<your-project-id>.supabase.co` 형태의 주소 (Vercel 환경 변수 `SUPABASE_URL`로 사용)
-* **service_role API Key** (secret): 테이블 쓰기 권한을 가진 비공개 키 (Vercel 환경 변수 `SUPABASE_SERVICE_ROLE_KEY`로 사용)
-  > ⚠️ **주의**: `anon (public)` 키가 아닌, **`service_role` 키**를 사용해야 RLS 보안 규칙을 통과하여 백엔드 쓰기가 가능합니다.
-
----
-
-## 3. GitHub 리포지토리 생성 및 푸시
-
-터미널을 열고 프로젝트 루트(`e:\Komi`) 경로에서 아래 깃 명령어를 차례로 입력합니다:
-
-```bash
-# 1. 깃 저장소 초기화
-git init
-
-# 2. 로컬 코드 스테이징 및 커밋
-git add .
-git commit -m "feat: KOMICARE V2 Refined with Supabase Integration"
-
-# 3. 깃허브 원격 저장소 추가 (GitHub에서 생성한 새 리포지토리 주소를 입력하세요)
-git branch -M main
-git remote add origin https://github.com/사용자이름/저장소이름.git
-
-# 4. 원격 저장소로 코드 푸시
-git push -u origin main
-```
-
----
-
-## 4. Vercel 배포 및 환경 변수 연동
-
-1. [Vercel 대시보드](https://vercel.com)에 로그인하고 **Add New...** > **Project**를 클릭합니다.
-2. 방금 푸시한 GitHub 리포지토리를 가져옵니다(Import).
-3. **Environment Variables (환경 변수)** 탭을 펼친 후 아래 두 가지 항목을 추가합니다:
-   * **Key**: `SUPABASE_URL` / **Value**: *복사해둔 Supabase Project URL*
-   * **Key**: `SUPABASE_SERVICE_ROLE_KEY` / **Value**: *복사해둔 Supabase service_role Key*
-4. **Deploy** 버튼을 눌러 배포를 완료합니다.
-
----
-
-## 5. 배포 완료 및 동작 검증
-
-* 배포가 완료되면 Vercel이 생성해 준 고유 라이브 URL로 접속합니다.
-* 피츠패트릭 진단 퀴즈를 풀고 이메일을 입력한 후 제출해 보세요.
-* Supabase 대시보드의 **Table Editor** > `leads` 테이블을 조회하여 수집된 데이터가 올바르게 저장되었는지 확인합니다.
-</file>
-
-<file path="walkthrough.md">
-# KOMICARE V2 Landing Page Walkthrough
-
-We have successfully upgraded the KOMICARE web application to a premium, boutique skin match landing page. The application meets all aspects of the approved implementation plan and the PRD guidelines.
-
-Below is a carousel showcasing screenshots of the interactive features:
-
-````carousel
-![1. Initial Page Load (Landing Header & Quiz Initial Step)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/initial_page_load_1782101039149.png)
-<!-- slide -->
-![2. Skin Passport Analysis Card (Results computed from Quiz responses)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/quiz_results_1782101081632.png)
-<!-- slide -->
-![3. Interactive Safety Handbook Modal (Toggling Checklist inside Chapter 2)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/modal_checklist_1782101143325.png)
-<!-- slide -->
-![4. Receipt Privacy Masking Demo (Blurred sensitive information client-side)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/receipt_after_masking_1782101167085.png)
-````
-
----
-
-## What was Accomplished
-
-### 1. Code Architecture
-We migrated from simple inline HTML code with CDN scripts to a clean, modular structure in `e:\Komi`:
-- **[index.html](file:///e:/Komi/index.html)**: Contains semantic HTML5 tags structuring the site blocks: Hero Section, Pain Points Grid, Value Propositions, Directory, and Reviews.
-- **[index.css](file:///e:/Komi/index.css)**: Implements custom HSL design tokens, responsive breakpoints, luxury font pairings (*Outfit* and *Playfair Display*), custom scale indicators, and dialog overlay transitions.
-- **[app.js](file:///e:/Komi/app.js)**: Runs client-side state machine scripts for the quiz, receipt logs masking, modal control, checklist check-offs, and clipboard actions.
-
-### 2. Implemented Features
-- **Fitzpatrick Diagnostic Engine**: Step-by-step diagnostic questionnaire checking skin tone, sun sensitivity, and tanning behavior to compute Fitzpatrick Types (I to VI) and present customized advisory summaries.
-- **Privacy Tax Masker**: Interactive demonstration showing tax refund receipt processing. Blurs transaction IDs, codes, and timestamps client-side to prevent clinics tracking down patients who leave negative reviews.
-- **Dr. Minji Kim Message**: Dedicated trust section for the founder highlighting the medical necessity of individualized laser parameters.
-- **Verified Clinic Previews**: Previews partner boutique clinics showcasing their medical certifications and maximum hourly slot constraints.
-- **Handbook Reader Modal**: Renders the complete "Essential K-Beauty Safety Handbook" (Chapters 1 to 4) dynamically with previous/next pagination, active sidebar button highlights, and a copyable "5 Questions checklist".
-
----
-
-## Verification & Testing
-The system was verified via a local web server (`http://localhost:8080`) using automated browser actions:
-- Checked logo, pill status indicators, and initial layout alignments.
-- Clicked through the quiz options, inputted a test email, verified correct calculation of Fitzpatrick Type I, and read the specific warning details.
-- Verified that opening the modal, reading Chapter 2, toggling checklist items, and copying the checklist works correctly.
-- Checked receipt masking simulation to ensure sensitive data is blurred on target.
-- Verified no JavaScript errors in the console log.
-</file>
-
-<file path="api/clinics.js">
-const { createClient } = require('@supabase/supabase-js');
-
-const fallbackClinics = [
-    {
-        id: 1,
-        name: "Cheongdam Barrier Lab",
-        location: "📍 Cheongdam-dong, Gangnam",
-        rating: "⭐ 4.9 (120+ verified reviews)",
-        description: "Specialized in non-invasive skin barrier recovery and pigmentation lasers for sensitive skin types. Known for ultra-conservative energy calibration and genuine, certified tips.",
-        specialties: ["Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning"],
-        doctor_name: "Dr. Ji-Yeon Lee",
-        doctor_avatar: "JY",
-        doctor_title: "Board-Certified Dermatologist | Nd:YAG Specialist",
-        doctor_bio: "Dr. Lee has over 12 years of clinical dermatology experience, specializing in lasers for thin and reactive skin barriers. She is a recognized speaker on Nd:YAG customization.",
-        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr",
-        slots_tag: "Max 3 Bookings/Hr",
-        doctor_type: "dermatologist",
-        sleep_anesthesia: false,
-        anesthesiologist_resident: false,
-        foreign_attraction_registered: true,
-        foreigner_insurance: true,
-        excellent_aftercare: true
-    },
-    {
-        id: 2,
-        name: "Myeongdong Forest Dermatology",
-        location: "📍 Myeong-dong, Jung-gu",
-        rating: "⭐ 4.8 (94+ verified reviews)",
-        description: "A tranquil sanctuary clinic in the heart of Myeongdong, prioritizing barrier safety over factory treatments. Enforces a strict maximum of 2 patient bookings per hour.",
-        specialties: ["Vascular Laser Calibration", "Rosacea & Redness Recovery", "Ultrasonic Rejuvenation"],
-        doctor_name: "Dr. Minji Kim",
-        doctor_avatar: "MK",
-        doctor_title: "Board-Certified Dermatologist | Barrier Recovery",
-        doctor_bio: "Dr. Kim founded Myeongdong Forest to offer custom medical treatments for international travelers who frequently experience barrier breakdown due to travel and climate changes.",
-        hours: "Mon, Wed, Thu: 10:00 AM - 8:00 PM (Night Clinic) | Tue, Fri: 10:00 AM - 7:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr",
-        slots_tag: "Max 2 Bookings/Hr",
-        doctor_type: "dermatologist",
-        sleep_anesthesia: false,
-        anesthesiologist_resident: false,
-        foreign_attraction_registered: true,
-        foreigner_insurance: true,
-        excellent_aftercare: true
-    },
-    {
-        id: 3,
-        name: "Hannam Aesthetic & Laser House",
-        location: "📍 Hannam-dong, Yongsan",
-        rating: "⭐ 4.9 (78+ verified reviews)",
-        description: "Boutique clinic catering to embassies and expats in Hannam. Equipped with premium dual-cooling laser systems and offering customized wavelength diagnostics.",
-        specialties: ["1:1 Wavelength Tuning", "Dual-Cooling Safety Protocols", "High-Fluence Pigment Management"],
-        doctor_name: "Dr. Tae-Young Park",
-        doctor_avatar: "TP",
-        doctor_title: "Board-Certified Dermatologist | Custom Wavelengths",
-        doctor_bio: "Dr. Park completed his fellowship at Seoul National University Hospital. He speaks fluent English and is dedicated to making laser treatments safe for diverse Fitzpatrick skin types.",
-        hours: "Tue - Fri: 11:00 AM - 8:00 PM | Sat: 10:00 AM - 5:00 PM | Sun, Mon: Closed",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7854653738096!2d127.00693597646618!3d37.53429397204558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3b98d24ebf5%3A0xefdf5a3c94248a0!2sHannam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035200000!5m2!1sen!2skr",
-        slots_tag: "Max 3 Bookings/Hr",
-        doctor_type: "specialist",
-        sleep_anesthesia: true,
-        anesthesiologist_resident: true,
-        foreign_attraction_registered: true,
-        foreigner_insurance: true,
-        excellent_aftercare: false
-    },
-    {
-        id: 4,
-        name: "Sinsa Glow Dermatology",
-        location: "📍 Sinsa-dong, Gangnam",
-        rating: "⭐ 4.7 (112+ verified reviews)",
-        description: "Specializing in advanced anti-aging treatments with verified genuine consumables logging. We provide every patient with their single-use tip certificate and serial code.",
-        specialties: ["Genuine Consumables Logged", "Ultherapy & Shurink custom setups", "Epidermal Thickness Diagnostic"],
-        doctor_name: "Dr. Seo-Jun Choi",
-        doctor_avatar: "SC",
-        doctor_title: "Board-Certified Dermatologist | Anti-Aging Specialist",
-        doctor_bio: "Dr. Choi is an expert in non-surgical lifting. He developed Sinsa Glow's 'Barrier First' lifting protocol to prevent post-treatment nerve complications and excessive swelling.",
-        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 9:30 AM - 3:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr",
-        slots_tag: "Max 2 Bookings/Hr",
-        doctor_type: "dermatologist",
-        sleep_anesthesia: true,
-        anesthesiologist_resident: false,
-        foreign_attraction_registered: true,
-        foreigner_insurance: false,
-        excellent_aftercare: false
-    },
-    {
-        id: 5,
-        name: "Hongdae Calm Skin Clinic",
-        location: "📍 Seokyo-dong, Mapo-gu",
-        rating: "⭐ 4.8 (85+ verified reviews)",
-        description: "A trendy but medically rigorous clinic in Hongdae. Focuses on laser toning and vascular treatments for younger global patients with absolute physician presence.",
-        specialties: ["Nd:YAG & Pico Laser Certified", "100% Physician Consultation", "Youth Acne Barrier Healing"],
-        doctor_name: "Dr. Eun-Ji Song",
-        doctor_avatar: "ES",
-        doctor_title: "Board-Certified Dermatologist | Pigmentation Expert",
-        doctor_bio: "Dr. Song is highly recognized for her gentle, layered laser approach. She rejects rapid 'one-size-fits-all' laser protocols, allocating 30+ minutes per patient treatment.",
-        hours: "Mon, Tue, Fri: 10:00 AM - 7:00 PM | Thu: 10:00 AM - 9:00 PM (Night Clinic) | Sat: 10:00 AM - 4:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.0903332467554!2d126.91929527646698!3d37.5541201720392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98da5f87b8b5%3A0x6b6df7d6b8b0e8c0!2sSeogyo-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035400000!5m2!1sen!2skr",
-        slots_tag: "Max 4 Bookings/Hr",
-        doctor_type: "gp",
-        sleep_anesthesia: false,
-        anesthesiologist_resident: false,
-        foreign_attraction_registered: false,
-        foreigner_insurance: true,
-        excellent_aftercare: false
-    }
-];
-
-module.exports = async (req, res) => {
-    // Enable CORS
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
-
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
-
-    if (req.method !== 'GET') {
-        return res.status(455).json({ error: 'Method Not Allowed' });
-    }
-
-    try {
-        const supabaseUrl = process.env.SUPABASE_URL;
-        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-        // Fallback simulation mode
-        if (!supabaseUrl || !supabaseKey) {
-            console.warn("WARNING: Supabase URL or Service Key missing. Serving fallback mock clinics.");
-            return res.status(200).json({ success: true, clinics: fallbackClinics, isSimulation: true });
-        }
-
-        const supabase = createClient(supabaseUrl, supabaseKey);
-
-        // Fetch active clinics ordered by id ascending
-        const { data, error } = await supabase
-            .from('clinics')
-            .select('*')
-            .eq('active', true)
-            .order('id', { ascending: true });
-
-        if (error) {
-            throw error;
-        }
-
-        // Map column names to front-end keys (matching CamelCase/snakes mapping if required, or let client read database schema values)
-        // Since Supabase returns keys in snake_case (doctor_name, slots_tag, etc.),
-        // let's transform the DB schema to match the javascript object property format so the front-end code remains clean!
-        const mappedClinics = data.map(item => ({
-            id: item.id,
-            name: item.name,
-            location: item.location,
-            rating: item.rating,
-            description: item.description,
-            specialties: item.specialties,
-            doctor_name: item.doctor_name,
-            doctor_avatar: item.doctor_avatar,
-            doctor_title: item.doctor_title,
-            doctor_bio: item.doctor_bio,
-            hours: item.hours,
-            map_iframe: item.map_iframe,
-            slots_tag: item.slots_tag,
-            doctor_type: item.doctor_type,
-            sleep_anesthesia: item.sleep_anesthesia,
-            anesthesiologist_resident: item.anesthesiologist_resident,
-            foreign_attraction_registered: item.foreign_attraction_registered,
-            foreigner_insurance: item.foreigner_insurance,
-            excellent_aftercare: item.excellent_aftercare
-        }));
-
-        return res.status(200).json({ success: true, clinics: mappedClinics });
-
-    } catch (err) {
-        console.error("API error fetching clinics:", err);
-        // Serve fallback on DB connection error to keep the platform resilient
-        return res.status(200).json({ 
-            success: true, 
-            clinics: fallbackClinics, 
-            errorMsg: err.message,
-            isSimulationFallback: true 
-        });
-    }
-};
 </file>
 
 <file path="supabase_schema.sql">
@@ -1446,11 +1446,21 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOMICARE | Premium Boutique Skin Match & Safety Verification</title>
-    <meta name="description" content="Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. Custom Fitzpatrick Skin Type safety protocols.">
-    <!-- Premium Google Fonts and CSS Stylesheet -->
+    <meta name="description"
+        content="Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. Custom Fitzpatrick Skin Type safety protocols.">
+
+    <!-- KOMICARE 프리미엄 인라인 SVG 파비콘 -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3c2c'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23c5a880' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23c5a880' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+
+    <!-- Premium Google Fonts 프리커넥트 최적화 (Outfit, Playfair Display, Noto Sans KR 포함) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- 메인 CSS 스타일시트 -->
     <link rel="stylesheet" href="index.css">
 </head>
 
@@ -1489,31 +1499,36 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             <div class="hero-glow"></div>
             <div class="container">
                 <div class="social-proof-badge">
-                    ⚡ <span data-i18n="hero.social_proof">Join 540+ medical travelers</span> <span data-i18n="hero.social_proof_suffix">securing early access this month.</span>
+                    ⚡ <span data-i18n="hero.social_proof">Join 540+ medical travelers</span> <span
+                        data-i18n="hero.social_proof_suffix">securing early access this month.</span>
                 </div>
-                
+
                 <h1 class="hero-headline">
                     <span data-i18n-html="hero.headline">Tired of Fake Reviews and K-Beauty <br></span>
                     <span class="gradient-text" data-i18n="hero.headline_gradient">"Factory" Clinics?</span>
                 </h1>
-                
+
                 <p class="hero-subheadline" data-i18n="hero.subheadline">
-                    Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient reviews. No sponsored ads. No hidden fees. Just honest medical expertise tailored to your specific skin type.
+                    Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient
+                    reviews. No sponsored ads. No hidden fees. Just honest medical expertise tailored to your specific
+                    skin type.
                 </p>
 
                 <!-- Step-by-Step Fitzpatrick Diagnostic Quiz Card -->
                 <div class="diagnostic-container" style="display: none;">
-                    
+
                     <!-- Quiz Wizard Area -->
                     <div id="quiz-setup">
                         <div class="diagnostic-header">
-                            <span class="diagnostic-step-title" data-i18n="quiz.step_title">Step 1: Check Your Skin Behavior</span>
+                            <span class="diagnostic-step-title" data-i18n="quiz.step_title">Step 1: Check Your Skin
+                                Behavior</span>
                             <h3 class="diagnostic-title" data-i18n="quiz.title">Fitzpatrick Skin Type Quiz</h3>
                         </div>
 
                         <!-- Step 1: Skin Tone -->
                         <div class="quiz-step active" id="quiz-step-1">
-                            <h4 class="quiz-question" data-i18n="quiz.q1">Q1. What is the color of your untreated skin?</h4>
+                            <h4 class="quiz-question" data-i18n="quiz.q1">Q1. What is the color of your untreated skin?
+                            </h4>
                             <div class="quiz-options">
                                 <button class="quiz-option" data-step="1" data-score="0" data-type="tone">
                                     <span data-i18n="quiz.q1_a1">Pale White / Translucent</span>
@@ -1544,7 +1559,8 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
 
                         <!-- Step 2: Reaction to Sun -->
                         <div class="quiz-step" id="quiz-step-2">
-                            <h4 class="quiz-question" data-i18n="quiz.q2">Q2. What happens when you stay in the sun without sunscreen?</h4>
+                            <h4 class="quiz-question" data-i18n="quiz.q2">Q2. What happens when you stay in the sun
+                                without sunscreen?</h4>
                             <div class="quiz-options">
                                 <button class="quiz-option" data-step="2" data-score="0" data-type="reaction">
                                     <span data-i18n="quiz.q2_a1">Always burns, blisters & peels</span>
@@ -1575,7 +1591,8 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
 
                         <!-- Step 3: Tanning Behavior -->
                         <div class="quiz-step" id="quiz-step-3">
-                            <h4 class="quiz-question" data-i18n="quiz.q3">Q3. How does your skin react to multiple days of sun exposure?</h4>
+                            <h4 class="quiz-question" data-i18n="quiz.q3">Q3. How does your skin react to multiple days
+                                of sun exposure?</h4>
                             <div class="quiz-options">
                                 <button class="quiz-option" data-step="3" data-score="0" data-type="tanning">
                                     <span data-i18n="quiz.q3_a1">Never tans, peels immediately</span>
@@ -1602,14 +1619,19 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                             <!-- Lead Email Capture Box (Integrated at last step) -->
                             <form id="leadForm" class="lead-form-container">
                                 <div class="form-group">
-                                    <label for="userEmail" class="form-label" data-i18n="quiz.email_label">Step 2: Where should we send your skin profile & guide?</label>
-                                    <input type="email" id="userEmail" class="form-input" data-i18n-placeholder="quiz.email_placeholder" placeholder="Enter your best email address" required>
+                                    <label for="userEmail" class="form-label" data-i18n="quiz.email_label">Step 2: Where
+                                        should we send your skin profile & guide?</label>
+                                    <input type="email" id="userEmail" class="form-input"
+                                        data-i18n-placeholder="quiz.email_placeholder"
+                                        placeholder="Enter your best email address" required>
                                 </div>
                                 <button type="submit" class="btn-primary">
-                                    <span data-i18n="quiz.submit_btn">Send Me the Safety Guide & Access Passport</span> 🛡️
+                                    <span data-i18n="quiz.submit_btn">Send Me the Safety Guide & Access Passport</span>
+                                    🛡️
                                 </button>
                             </form>
-                            <p class="form-disclaimer" data-i18n="quiz.disclaimer">🔒 Anti-Spam: We hate fake reviews and spam. 100% Confidential.</p>
+                            <p class="form-disclaimer" data-i18n="quiz.disclaimer">🔒 Anti-Spam: We hate fake reviews
+                                and spam. 100% Confidential.</p>
                         </div>
 
                         <!-- Progress Bar indicator -->
@@ -1624,7 +1646,8 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <!-- Quiz Results Screen (Initially Hidden) -->
                     <div id="quiz-results" style="display: none;">
                         <div class="diagnostic-header text-center">
-                            <span class="diagnostic-step-title" data-i18n="results.step_title">Skin Diagnostic Passport</span>
+                            <span class="diagnostic-step-title" data-i18n="results.step_title">Skin Diagnostic
+                                Passport</span>
                             <h3 class="diagnostic-title" id="res-type-title">Fitzpatrick Type</h3>
                         </div>
 
@@ -1633,7 +1656,7 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                                 <span class="passport-badge" data-i18n="results.verified">Verified Analysis</span>
                                 <span class="passport-type" id="res-type-num" data-i18n="results.active">Active</span>
                             </div>
-                            
+
                             <!-- Custom Scale Visualizer -->
                             <div class="passport-bar-scale">
                                 <div class="scale-segment type-1"></div>
@@ -1666,7 +1689,9 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                             <button id="btnOpenReaderResults" class="btn-primary">
                                 <span data-i18n="results.open_handbook">📖 Open Safety Handbook Now</span>
                             </button>
-                            <button onclick="restartQuiz()" class="btn-secondary" style="border: 1px solid var(--border-color); background: none; border-radius: 12px; padding: 12px; font-weight: 600; cursor: pointer; color: var(--text-secondary); transition: var(--transition-smooth);" data-i18n="results.retake">
+                            <button onclick="restartQuiz()" class="btn-secondary"
+                                style="border: 1px solid var(--border-color); background: none; border-radius: 12px; padding: 12px; font-weight: 600; cursor: pointer; color: var(--text-secondary); transition: var(--transition-smooth);"
+                                data-i18n="results.retake">
                                 🔄 Re-take skin diagnostic
                             </button>
                         </div>
@@ -1681,9 +1706,11 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="compare.title">Boutique Standard vs. Factory Clinic</span>
-                    <h2 class="section-title"><span data-i18n="compare.title">Boutique Standard vs. Factory Clinic</span></h2>
+                    <h2 class="section-title"><span data-i18n="compare.title">Boutique Standard vs. Factory
+                            Clinic</span></h2>
                     <p class="section-subtitle" data-i18n="compare.subtitle">
-                        Choose between cheap assembly-line laser settings or chief-physician customized design skin procedures.
+                        Choose between cheap assembly-line laser settings or chief-physician customized design skin
+                        procedures.
                     </p>
                 </div>
 
@@ -1693,20 +1720,23 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         <div class="compare-card-header">
                             <span class="compare-type" data-i18n="compare.factory_title">Factory Clinic</span>
                             <div class="compare-price">100,000 <span>KRW</span></div>
-                            <p class="compare-desc" data-i18n="compare.factory_desc">3-minute treatment by random doctor, no safety calibration.</p>
+                            <p class="compare-desc" data-i18n="compare.factory_desc">3-minute treatment by random
+                                doctor, no safety calibration.</p>
                         </div>
                         <ul class="compare-features">
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">❌</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.factory_consult">Rushed consultation with sales rep</strong>
+                                    <strong data-i18n="compare.factory_consult">Rushed consultation with sales
+                                        rep</strong>
                                     <p>Sales rep pushes packages with commission margin goals.</p>
                                 </div>
                             </li>
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">❌</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.factory_risk">High burn & skin barrier damage risk</strong>
+                                    <strong data-i18n="compare.factory_risk">High burn & skin barrier damage
+                                        risk</strong>
                                     <p>Settings default to hardcoded presets, high danger for global skins.</p>
                                 </div>
                             </li>
@@ -1725,29 +1755,35 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         <div class="compare-badge">VIP Standard</div>
                         <div class="compare-card-header">
                             <span class="compare-type" data-i18n="compare.boutique_title">Komicare Boutique</span>
-                            <div class="compare-price" style="color: var(--color-accent);">200,000 <span>KRW</span></div>
-                            <p class="compare-desc" data-i18n="compare.boutique_desc">1:1 chief physician custom design, pulse width calibration & recovery care.</p>
+                            <div class="compare-price" style="color: var(--color-accent);">200,000 <span>KRW</span>
+                            </div>
+                            <p class="compare-desc" data-i18n="compare.boutique_desc">1:1 chief physician custom design,
+                                pulse width calibration & recovery care.</p>
                         </div>
                         <ul class="compare-features">
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">✓</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.boutique_consult">In-depth medical consultation with chief physician</strong>
+                                    <strong data-i18n="compare.boutique_consult">In-depth medical consultation with
+                                        chief physician</strong>
                                     <p>1:1 design consultation directly analyzing skin thickness and barrier.</p>
                                 </div>
                             </li>
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">✓</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.boutique_risk">Optimized safety under certified specialist</strong>
+                                    <strong data-i18n="compare.boutique_risk">Optimized safety under certified
+                                        specialist</strong>
                                     <p>Adjusting pulse length and cooling parameters based on Fitzpatrick scale.</p>
                                 </div>
                             </li>
                             <li class="compare-feature-item">
                                 <span class="compare-feature-icon">✓</span>
                                 <div class="compare-feature-text">
-                                    <strong data-i18n="compare.boutique_care">Guaranteed post-departure remote care</strong>
-                                    <p>Dedicated recovery checklist support even after you return to your home country.</p>
+                                    <strong data-i18n="compare.boutique_care">Guaranteed post-departure remote
+                                        care</strong>
+                                    <p>Dedicated recovery checklist support even after you return to your home country.
+                                    </p>
                                 </div>
                             </li>
                         </ul>
@@ -1761,9 +1797,12 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-tag" data-i18n="reality.tag">The Reality</span>
-                    <h2 class="section-title"><span data-i18n="reality.title">Why Factory Vouchers </span><span class="section-title-serif" data-i18n="reality.title_serif">will Cook Your Barrier</span></h2>
+                    <h2 class="section-title"><span data-i18n="reality.title">Why Factory Vouchers </span><span
+                            class="section-title-serif" data-i18n="reality.title_serif">will Cook Your Barrier</span>
+                    </h2>
                     <p class="section-subtitle" data-i18n="reality.subtitle">
-                        Standard mass-volume clinics prioritize patient turnover rate and sales margins over actual medical safety and parameters.
+                        Standard mass-volume clinics prioritize patient turnover rate and sales margins over actual
+                        medical safety and parameters.
                     </p>
                 </div>
 
@@ -1771,19 +1810,25 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <div class="pain-card">
                         <div class="pain-icon">🧬</div>
                         <h4 data-i18n="reality.card1_title">The Fitzpatrick Skin Blindspot</h4>
-                        <p data-i18n="reality.card1_text">Most mass-market clinics use hard-coded laser settings calibrated strictly for East Asian skin types. Without custom pulse calibration, Western patients (Types I-II & V-VI) suffer severe PIH (hyperpigmentation) and laser burns.</p>
+                        <p data-i18n="reality.card1_text">Most mass-market clinics use hard-coded laser settings
+                            calibrated strictly for East Asian skin types. Without custom pulse calibration, Western
+                            patients (Types I-II & V-VI) suffer severe PIH (hyperpigmentation) and laser burns.</p>
                     </div>
 
                     <div class="pain-card">
                         <div class="pain-icon">👥</div>
                         <h4 data-i18n="reality.card2_title">The "Ghost Doctor" Assembly Line</h4>
-                        <p data-i18n="reality.card2_text">You spend an hour consulting with a commission-driven sales representative who aggressively pushes expensive packages, only for a doctor you've never met to fire lasers at your face for two minutes without analyzing your barrier.</p>
+                        <p data-i18n="reality.card2_text">You spend an hour consulting with a commission-driven sales
+                            representative who aggressively pushes expensive packages, only for a doctor you've never
+                            met to fire lasers at your face for two minutes without analyzing your barrier.</p>
                     </div>
 
                     <div class="pain-card">
                         <div class="pain-icon">⭐️</div>
                         <h4 data-i18n="reality.card3_title">Pay-to-Play Platform Rankings</h4>
-                        <p data-i18n="reality.card3_text">Major K-beauty booking platforms filter reviews based on clinic advertising spends. Clinics easily delete negative reviews or bribe clients with free sheet masks to manipulate star ratings.</p>
+                        <p data-i18n="reality.card3_text">Major K-beauty booking platforms filter reviews based on
+                            clinic advertising spends. Clinics easily delete negative reviews or bribe clients with free
+                            sheet masks to manipulate star ratings.</p>
                     </div>
                 </div>
             </div>
@@ -1812,46 +1857,56 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         <tbody>
                             <tr>
                                 <td data-i18n="diff.row1_feature">Review Manipulation</td>
-                                <td class="legacy-col" data-i18n="diff.row1_legacy">Easy to delete negative feedback / sponsored rankings</td>
+                                <td class="legacy-col" data-i18n="diff.row1_legacy">Easy to delete negative feedback /
+                                    sponsored rankings</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        🛡️ <span data-i18n="diff.row1_komi">One-strike permanent ban and delisting of clinics</span>
+                                        🛡️ <span data-i18n="diff.row1_komi">One-strike permanent ban and delisting of
+                                            clinics</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row2_feature">Clinic Rebates</td>
-                                <td class="legacy-col" data-i18n="diff.row2_legacy">Clinics bribe reviews with free sheets/vouchers</td>
+                                <td class="legacy-col" data-i18n="diff.row2_legacy">Clinics bribe reviews with free
+                                    sheets/vouchers</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        💰 <span data-i18n="diff.row2_komi">Bribe coercion whistleblower reporting with cash rewards</span>
+                                        💰 <span data-i18n="diff.row2_komi">Bribe coercion whistleblower reporting with
+                                            cash rewards</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row3_feature">Foreigner Verification</td>
-                                <td class="legacy-col" data-i18n="diff.row3_legacy">Simple phone number or email checks</td>
+                                <td class="legacy-col" data-i18n="diff.row3_legacy">Simple phone number or email checks
+                                </td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        🛂 <span data-i18n="diff.row3_komi">Mandatory passport scan & medical tax refund receipt validation</span>
+                                        🛂 <span data-i18n="diff.row3_komi">Mandatory passport scan & medical tax refund
+                                            receipt validation</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row4_feature">1-Month Long-Term Followup</td>
-                                <td class="legacy-col" data-i18n="diff.row4_legacy">None (Only instant review on checkout)</td>
+                                <td class="legacy-col" data-i18n="diff.row4_legacy">None (Only instant review on
+                                    checkout)</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        📆 <span data-i18n="diff.row4_komi">1-Month-later review gets skincare point rewards</span>
+                                        📆 <span data-i18n="diff.row4_komi">1-Month-later review gets skincare point
+                                            rewards</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-i18n="diff.row5_feature">Malicious Review Policy</td>
-                                <td class="legacy-col" data-i18n="diff.row5_legacy">Platform deletes them immediately upon clinic request</td>
+                                <td class="legacy-col" data-i18n="diff.row5_legacy">Platform deletes them immediately
+                                    upon clinic request</td>
                                 <td class="komi-col">
                                     <div class="diff-highlight-text">
-                                        ⚖️ <span data-i18n="diff.row5_komi">Platform mediates only; clinic and client settle directly (Coupang Eats model)</span>
+                                        ⚖️ <span data-i18n="diff.row5_komi">Platform mediates only; clinic and client
+                                            settle directly (Coupang Eats model)</span>
                                     </div>
                                 </td>
                             </tr>
@@ -1866,9 +1921,12 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-tag" data-i18n="promise.tag">Our Promise</span>
-                    <h2 class="section-title"><span data-i18n="promise.title">The Safe & Boutique </span><span class="section-title-serif" data-i18n="promise.title_serif">Verification Standard</span></h2>
+                    <h2 class="section-title"><span data-i18n="promise.title">The Safe & Boutique </span><span
+                            class="section-title-serif" data-i18n="promise.title_serif">Verification Standard</span>
+                    </h2>
                     <p class="section-subtitle" data-i18n="promise.subtitle">
-                        We vet clinics on strict physician-led parameters. No chains, no shadow doctors, no sponsored rankings.
+                        We vet clinics on strict physician-led parameters. No chains, no shadow doctors, no sponsored
+                        rankings.
                     </p>
                 </div>
 
@@ -1876,19 +1934,25 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <div class="promise-card">
                         <div class="promise-badge">🛡️</div>
                         <h4 data-i18n="promise.card1_title">Zero Factory Chains</h4>
-                        <p data-i18n="promise.card1_text">We partner exclusively with independent boutique clinics that enforce strict limits on hourly appointment bookings, ensuring the physician has ample time to consult and treat you.</p>
+                        <p data-i18n="promise.card1_text">We partner exclusively with independent boutique clinics that
+                            enforce strict limits on hourly appointment bookings, ensuring the physician has ample time
+                            to consult and treat you.</p>
                     </div>
 
                     <div class="promise-card">
                         <div class="promise-badge">🧾</div>
                         <h4 data-i18n="promise.card2_title">100% Visit-Verified & Unedited</h4>
-                        <p data-i18n="promise.card2_text">Every review requires an official Medical Tax Refund receipt verify code. We host databases offshore to legally bypass 'Truth-Based Defamation' removal requests from clinics.</p>
+                        <p data-i18n="promise.card2_text">Every review requires an official Medical Tax Refund receipt
+                            verify code. We host databases offshore to legally bypass 'Truth-Based Defamation' removal
+                            requests from clinics.</p>
                     </div>
 
                     <div class="promise-card">
                         <div class="promise-badge">🧬</div>
                         <h4 data-i18n="promise.card3_title">Fitzpatrick Scale Calibration</h4>
-                        <p data-i18n="promise.card3_text">Our clinics possess validated hardware (Nd:YAG lasers, dual-cooling heads) and documented medical track records calibrated for diverse global skin types.</p>
+                        <p data-i18n="promise.card3_text">Our clinics possess validated hardware (Nd:YAG lasers,
+                            dual-cooling heads) and documented medical track records calibrated for diverse global skin
+                            types.</p>
                     </div>
                 </div>
             </div>
@@ -1899,9 +1963,12 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="directory.tag">Boutique Directory</span>
-                    <h2 class="section-title"><span data-i18n="directory.title">Verified Partner Clinics </span><span class="section-title-serif" data-i18n="directory.title_serif">& Validation Engine</span></h2>
+                    <h2 class="section-title"><span data-i18n="directory.title">Verified Partner Clinics </span><span
+                            class="section-title-serif" data-i18n="directory.title_serif">& Validation Engine</span>
+                    </h2>
                     <p class="section-subtitle" data-i18n="directory.subtitle">
-                        Explore our certified clinics and see how we verify review authenticity while preserving patient anonymity.
+                        Explore our certified clinics and see how we verify review authenticity while preserving patient
+                        anonymity.
                     </p>
                 </div>
 
@@ -1909,24 +1976,31 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                 <div class="search-filter-container">
                     <div class="directory-search-wrapper">
                         <span class="directory-search-icon">🔍</span>
-                        <input type="text" id="directorySearchInput" class="directory-search-input" data-i18n-placeholder="search.placeholder" placeholder="Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)">
+                        <input type="text" id="directorySearchInput" class="directory-search-input"
+                            data-i18n-placeholder="search.placeholder"
+                            placeholder="Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)">
                     </div>
                     <div class="filter-tags-wrapper" id="filterTagsWrapper">
-                        <button class="filter-tag active" data-specialty="all" data-i18n="filter.all">All Treatments</button>
+                        <button class="filter-tag active" data-specialty="all" data-i18n="filter.all">All
+                            Treatments</button>
                         <button class="filter-tag" data-specialty="Nd:YAG Laser Calibrations">Nd:YAG Laser</button>
-                        <button class="filter-tag" data-specialty="Skin Barrier Reconstruction">Skin Barrier Reconstruction</button>
+                        <button class="filter-tag" data-specialty="Skin Barrier Reconstruction">Skin Barrier
+                            Reconstruction</button>
                         <button class="filter-tag" data-specialty="Pico Toning">Pico Toning</button>
                         <button class="filter-tag" data-specialty="Vascular Laser Calibration">Vascular Laser</button>
                         <button class="filter-tag" data-specialty="Rosacea & Redness Recovery">Rosacea Recovery</button>
-                        <button class="filter-tag" data-specialty="Genuine Consumables Logged">Genuine Consumables</button>
-                        <button class="filter-tag" data-specialty="Ultherapy & Shurink custom setups">Ultherapy/Lifting</button>
+                        <button class="filter-tag" data-specialty="Genuine Consumables Logged">Genuine
+                            Consumables</button>
+                        <button class="filter-tag"
+                            data-specialty="Ultherapy & Shurink custom setups">Ultherapy/Lifting</button>
                     </div>
                 </div>
 
                 <div class="directory-layout">
-                    
+
                     <div class="partner-list" id="dynamic-partner-list">
-                        <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;" data-i18n="directory.loading">
+                        <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;"
+                            data-i18n="directory.loading">
                             🔄 Loading verified boutique clinics...
                         </div>
                     </div>
@@ -1935,7 +2009,8 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <div class="receipt-demo-card">
                         <div class="receipt-demo-title">
                             <h4 data-i18n="receipt.title">Receipt Privacy Masker</h4>
-                            <p data-i18n="receipt.desc">We blur sensitive financial logs client-side before review upload. Clinics can never trace bad reviews back to your passport or credit card.</p>
+                            <p data-i18n="receipt.desc">We blur sensitive financial logs client-side before review
+                                upload. Clinics can never trace bad reviews back to your passport or credit card.</p>
                         </div>
 
                         <!-- Interactive receipt container -->
@@ -1975,7 +2050,9 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <span id="mask-status-badge" style="font-size: 12px; font-weight: 700; color: var(--color-danger); text-align: center;" data-i18n="receipt.status_unmasked">
+                            <span id="mask-status-badge"
+                                style="font-size: 12px; font-weight: 700; color: var(--color-danger); text-align: center;"
+                                data-i18n="receipt.status_unmasked">
                                 ⚠️ Unmasked Plaintext Data Exists
                             </span>
                             <button id="btnMaskReceipt" class="mask-toggle-btn" data-i18n="receipt.mask_btn">
@@ -1993,14 +2070,16 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="reviews.tag">Patient Feedback</span>
-                    <h2 class="section-title"><span data-i18n="reviews.title">100% Visit-Verified Reviews </span><span class="section-title-serif" data-i18n="reviews.title_serif">Linked to Doctors</span></h2>
+                    <h2 class="section-title"><span data-i18n="reviews.title">100% Visit-Verified Reviews </span><span
+                            class="section-title-serif" data-i18n="reviews.title_serif">Linked to Doctors</span></h2>
                     <p class="section-subtitle" data-i18n="reviews.subtitle">
-                        Every single review is matched to the exact operating physician through receipt check codes. Un-deletable.
+                        Every single review is matched to the exact operating physician through receipt check codes.
+                        Un-deletable.
                     </p>
                 </div>
 
                 <div class="reviews-grid">
-                    
+
                     <!-- Review 1 -->
                     <div class="review-card">
                         <div class="review-card-header">
@@ -2013,11 +2092,15 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                             </div>
                             <div class="review-meta">
                                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt Verified</span>
+                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt
+                                    Verified</span>
                             </div>
                         </div>
                         <p class="review-content" data-i18n="reviews.r1_text">
-                            "I had a horrible experience at a factory clinic in Gangnam where they burned my skin with IPL. Dr. Minji Kim was a lifesaver. She immediately recognized my thin Type I skin barrier, manually set the laser to a safe wavelength, and focused on recovery. Highly recommend this boutique standard."
+                            "I had a horrible experience at a factory clinic in Gangnam where they burned my skin with
+                            IPL. Dr. Minji Kim was a lifesaver. She immediately recognized my thin Type I skin barrier,
+                            manually set the laser to a safe wavelength, and focused on recovery. Highly recommend this
+                            boutique standard."
                         </p>
                         <div class="review-doctor-link">
                             <span data-i18n="reviews.r1_clinic">Clinic: Myeongdong Forest</span>
@@ -2037,11 +2120,15 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                             </div>
                             <div class="review-meta">
                                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt Verified</span>
+                                <span class="review-verify-badge" data-i18n="reviews.verified_badge">✓ Receipt
+                                    Verified</span>
                             </div>
                         </div>
                         <p class="review-content" data-i18n="reviews.r2_text">
-                            "As someone with dark skin, I was terrified of laser toning in Korea because of hypopigmentation risks. Dr. Ji-Yeon Lee checked my Fitzpatrick type, explained why she would use the Nd:YAG laser with a long pulse duration, and calibrated the cooling device. My skin has never looked cleaner."
+                            "As someone with dark skin, I was terrified of laser toning in Korea because of
+                            hypopigmentation risks. Dr. Ji-Yeon Lee checked my Fitzpatrick type, explained why she would
+                            use the Nd:YAG laser with a long pulse duration, and calibrated the cooling device. My skin
+                            has never looked cleaner."
                         </p>
                         <div class="review-doctor-link">
                             <span data-i18n="reviews.r2_clinic">Clinic: Cheongdam Barrier Lab</span>
@@ -2073,17 +2160,23 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <div class="dr-card">
                         <div class="dr-card-icon">⚡</div>
                         <h4 data-i18n="dr_view.card1_title">1. Reward by Clinical Skill</h4>
-                        <p data-i18n="dr_view.card1_text">Excellent hand skills and treatment results speak for themselves. Transparent, un-deletable reviews organically build your signature procedure reputation.</p>
+                        <p data-i18n="dr_view.card1_text">Excellent hand skills and treatment results speak for
+                            themselves. Transparent, un-deletable reviews organically build your signature procedure
+                            reputation.</p>
                     </div>
                     <div class="dr-card">
                         <div class="dr-card-icon">🛡️</div>
                         <h4 data-i18n="dr_view.card2_title">2. Price Protection</h4>
-                        <p data-i18n="dr_view.card2_text">Foreigners fear botched procedures and complications. A signature treatment that the chief doctor confidently guarantees allows you to charge premium prices.</p>
+                        <p data-i18n="dr_view.card2_text">Foreigners fear botched procedures and complications. A
+                            signature treatment that the chief doctor confidently guarantees allows you to charge
+                            premium prices.</p>
                     </div>
                     <div class="dr-card">
                         <div class="dr-card-icon">🤝</div>
                         <h4 data-i18n="dr_view.card3_title">3. Broker-Free Ecosystem</h4>
-                        <p data-i18n="dr_view.card3_text">Accumulate genuine trust data to attract international patients directly, eliminating high broker commission cuts and creating a virtuous circle.</p>
+                        <p data-i18n="dr_view.card3_text">Accumulate genuine trust data to attract international
+                            patients directly, eliminating high broker commission cuts and creating a virtuous circle.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -2098,16 +2191,22 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         <span class="founder-badge-cert" data-i18n="founder.badge">Board-Certified</span>
                     </div>
                     <div class="founder-message-content">
-                        <span class="section-tag" style="text-align: left;" data-i18n="founder.tag">Founder's Mission</span>
+                        <span class="section-tag" style="text-align: left;" data-i18n="founder.tag">Founder's
+                            Mission</span>
                         <h3 class="founder-quote" data-i18n="founder.quote">
-                            "I built this platform because I was tired of treating tourists whose skin barriers had been completely cooked by factory-style chains."
+                            "I built this platform because I was tired of treating tourists whose skin barriers had been
+                            completely cooked by factory-style chains."
                         </h3>
                         <p class="founder-text" data-i18n="founder.text">
-                            "As a dermatologist practicing in Seoul, I saw too many international patients suffer from preventable laser complications. You invest thousands of dollars and your precious time—you deserve absolute safety, genuine tips, and physician-led care. Komicare validates every review and clinic on clinical parameters to restore trust in Korean dermatology."
+                            "As a dermatologist practicing in Seoul, I saw too many international patients suffer from
+                            preventable laser complications. You invest thousands of dollars and your precious time—you
+                            deserve absolute safety, genuine tips, and physician-led care. Komicare validates every
+                            review and clinic on clinical parameters to restore trust in Korean dermatology."
                         </p>
                         <div class="founder-sign">
                             <div class="founder-name" data-i18n="founder.name">Dr. Minji Kim</div>
-                            <div class="founder-title" data-i18n="founder.title">Founder & Board-Certified Dermatologist</div>
+                            <div class="founder-title" data-i18n="founder.title">Founder & Board-Certified Dermatologist
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2119,7 +2218,7 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
     <!-- Modal Interactive Dialog: E-Book Reader -->
     <div class="modal-overlay" id="readerModal">
         <div class="modal-content-wrapper">
-            
+
             <div class="modal-header">
                 <div class="modal-title">
                     <h3 data-i18n="reader.title">Essential K-Beauty Safety Handbook</h3>
@@ -2129,7 +2228,7 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             </div>
 
             <div class="modal-body">
-                
+
                 <!-- Sidebar TOC Navigation -->
                 <aside class="reader-sidebar">
                     <button class="reader-toc-btn active" data-ch="1">
@@ -2152,64 +2251,84 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
 
                 <!-- Page Reading Panels -->
                 <div class="reader-main">
-                    
+
                     <!-- Chapter 1 -->
                     <div class="reader-page active" id="reader-page-1">
                         <h4>Chapter 1: Decoding Your Skin Type (Fitzpatrick Scale)</h4>
-                        <p>The **Fitzpatrick Scale** is the medical standard for classifying human skin coloring and how it reacts to ultraviolet radiation and laser wavelengths. It ranges from Type I (very pale, burns easily) to Type VI (deeply pigmented, never burns).</p>
-                        <p>The core problem in mass-volume clinics is the **melanin concentration disparity**. Standard Korean laser protocols are calibrated for local East Asian skin types, which typically hover around Type III and IV.</p>
+                        <p>The **Fitzpatrick Scale** is the medical standard for classifying human skin coloring and how
+                            it reacts to ultraviolet radiation and laser wavelengths. It ranges from Type I (very pale,
+                            burns easily) to Type VI (deeply pigmented, never burns).</p>
+                        <p>The core problem in mass-volume clinics is the **melanin concentration disparity**. Standard
+                            Korean laser protocols are calibrated for local East Asian skin types, which typically hover
+                            around Type III and IV.</p>
                         <blockquote>
                             <strong>Why standard settings can be dangerous:</strong>
-                            If you possess Type I-II skin, standard settings are often too high, nuking your thin protective barrier and triggering chronic vascular redness or blistering. If you possess Type V-VI skin, active epidermal melanin absorbs the laser heat too quickly, causing permanent laser burns or post-inflammatory hypopigmentation (white spots).
+                            If you possess Type I-II skin, standard settings are often too high, nuking your thin
+                            protective barrier and triggering chronic vascular redness or blistering. If you possess
+                            Type V-VI skin, active epidermal melanin absorbs the laser heat too quickly, causing
+                            permanent laser burns or post-inflammatory hypopigmentation (white spots).
                         </blockquote>
-                        <p>Manually adjusting pulse duration and energy fluence for your specific Fitzpatrick type is a fundamental medical necessity—not an optional luxury package.</p>
+                        <p>Manually adjusting pulse duration and energy fluence for your specific Fitzpatrick type is a
+                            fundamental medical necessity—not an optional luxury package.</p>
                     </div>
 
                     <!-- Chapter 2 -->
                     <div class="reader-page" id="reader-page-2">
                         <h4>Chapter 2: The 5 Questions to Expose a "Skin Factory"</h4>
-                        <p>Before allowing a laser to touch your face in Seoul, ignore the front desk sales representatives and demand these answers from the actual performing physician:</p>
-                        
+                        <p>Before allowing a laser to touch your face in Seoul, ignore the front desk sales
+                            representatives and demand these answers from the actual performing physician:</p>
+
                         <!-- Interactive Checklist -->
                         <ul class="safety-checklist">
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q1. "Will the doctor consulting me right now be the exact person performing my procedure?"</h5>
-                                    <p>Exposes shadow-doctor bait-and-switches where sales reps consult and random practitioners fire lasers.</p>
+                                    <h5>Q1. "Will the doctor consulting me right now be the exact person performing my
+                                        procedure?"</h5>
+                                    <p>Exposes shadow-doctor bait-and-switches where sales reps consult and random
+                                        practitioners fire lasers.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q2. "What exact wavelength and pulse duration settings are you using for my Fitzpatrick type?"</h5>
-                                    <p>Verifies if the practitioner understands skin physiology or is simply pressing automatic presets.</p>
+                                    <h5>Q2. "What exact wavelength and pulse duration settings are you using for my
+                                        Fitzpatrick type?"</h5>
+                                    <p>Verifies if the practitioner understands skin physiology or is simply pressing
+                                        automatic presets.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q3. "Can you show me the genuine, single-use tip packaging and activation log before we start?"</h5>
-                                    <p>Protects you from illegal, reloaded, or counterfeit tips that output unstable energy spikes.</p>
+                                    <h5>Q3. "Can you show me the genuine, single-use tip packaging and activation log
+                                        before we start?"</h5>
+                                    <p>Protects you from illegal, reloaded, or counterfeit tips that output unstable
+                                        energy spikes.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q4. "What is your clinic's immediate medical protocol and emergency contact for burns?"</h5>
-                                    <p>Ensures they have real emergency dermatological backup, not just a post-sales exit strategy.</p>
+                                    <h5>Q4. "What is your clinic's immediate medical protocol and emergency contact for
+                                        burns?"</h5>
+                                    <p>Ensures they have real emergency dermatological backup, not just a post-sales
+                                        exit strategy.</p>
                                 </div>
                             </li>
                             <li class="checklist-item">
                                 <div class="checklist-checkbox" onclick="toggleChecklistItem(this)"></div>
                                 <div class="checklist-details">
-                                    <h5>Q5. "Can I see the practitioner's portfolio/track record with Western skin profiles?"</h5>
-                                    <p>Confirms actual medical experience treating Fitzpatrick Type I-II and V-VI skin types.</p>
+                                    <h5>Q5. "Can I see the practitioner's portfolio/track record with Western skin
+                                        profiles?"</h5>
+                                    <p>Confirms actual medical experience treating Fitzpatrick Type I-II and V-VI skin
+                                        types.</p>
                                 </div>
                             </li>
                         </ul>
 
-                        <button id="btnCopyChecklist" onclick="copySafetyChecklist()" class="btn-primary" style="padding: 12px 20px; font-size: 13px; margin-top: 10px;">
+                        <button id="btnCopyChecklist" onclick="copySafetyChecklist()" class="btn-primary"
+                            style="padding: 12px 20px; font-size: 13px; margin-top: 10px;">
                             📋 Copy Questions Checklist to Clipboard
                         </button>
                     </div>
@@ -2217,26 +2336,41 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <!-- Chapter 3 -->
                     <div class="reader-page" id="reader-page-3">
                         <h4>Chapter 3: Spotting the 'Factory' Clinic</h4>
-                        <p>Over 80% of "Skin Clinics" located in high-traffic tourist areas are managed by general practitioners (GP) without formal specialist dermatological training. You can spot a factory clinic by watching out for these three red flags:</p>
+                        <p>Over 80% of "Skin Clinics" located in high-traffic tourist areas are managed by general
+                            practitioners (GP) without formal specialist dermatological training. You can spot a factory
+                            clinic by watching out for these three red flags:</p>
                         <blockquote>
                             <strong>Red Flag #1: Upfront Payments</strong><br>
-                            If they refuse to let you speak with a medical doctor until you have signed packages and swiped your card at the front desk, you are in a factory clinic.
+                            If they refuse to let you speak with a medical doctor until you have signed packages and
+                            swiped your card at the front desk, you are in a factory clinic.
                         </blockquote>
                         <p><strong>Red Flag #2: Extreme Price Dumps</strong><br>
-                        If the price of highly consumable tip cartridges (such as Ultherapy or Shurink) is 50-70% lower than the market average, the clinic is likely using counterfeit tips, reloaded cartridges, or cutting corners on safety diagnostics.</p>
+                            If the price of highly consumable tip cartridges (such as Ultherapy or Shurink) is 50-70%
+                            lower than the market average, the clinic is likely using counterfeit tips, reloaded
+                            cartridges, or cutting corners on safety diagnostics.</p>
                         <p><strong>Red Flag #3: Abstract Review Metrics</strong><br>
-                        If reviews of the clinic only mention the "kind translation staff" or "fast service," but never name a specific doctor or comment on precise clinical parameters, ratings have likely been manipulated.</p>
+                            If reviews of the clinic only mention the "kind translation staff" or "fast service," but
+                            never name a specific doctor or comment on precise clinical parameters, ratings have likely
+                            been manipulated.</p>
                     </div>
 
                     <!-- Chapter 4 -->
                     <div class="reader-page" id="reader-page-4">
                         <h4>Chapter 4: The Post-Travel Recovery Roadmap</h4>
-                        <p>If you are returning to your home country immediately after a dermatological laser session in Korea, follow this emergency recovery checklist to protect your barrier:</p>
-                        <p><strong>1. The Post-Laser Flight Kit:</strong> Airplane cabins have humidity levels below 20%. Apply thick ceramide-based barrier creams and physical sunscreens (Zinc Oxide/Titanium Dioxide) before boarding. Avoid chemical filters on fresh micro-wounds.</p>
-                        <p><strong>2. Post-Inflammatory Hyperpigmentation (PIH) Prevention:</strong> Avoid direct sun exposure for 14 days post-laser. If you develop dark spots (PIH), do not apply aggressive chemical peels. Let the barrier rest and apply mild Cica (Centella Asiatica) or Panthenol derivatives.</p>
+                        <p>If you are returning to your home country immediately after a dermatological laser session in
+                            Korea, follow this emergency recovery checklist to protect your barrier:</p>
+                        <p><strong>1. The Post-Laser Flight Kit:</strong> Airplane cabins have humidity levels below
+                            20%. Apply thick ceramide-based barrier creams and physical sunscreens (Zinc Oxide/Titanium
+                            Dioxide) before boarding. Avoid chemical filters on fresh micro-wounds.</p>
+                        <p><strong>2. Post-Inflammatory Hyperpigmentation (PIH) Prevention:</strong> Avoid direct sun
+                            exposure for 14 days post-laser. If you develop dark spots (PIH), do not apply aggressive
+                            chemical peels. Let the barrier rest and apply mild Cica (Centella Asiatica) or Panthenol
+                            derivatives.</p>
                         <blockquote>
                             <strong>Emergency Assistance:</strong><br>
-                            If you experience severe blistering, persistent swelling, or laser-induced burns after returning home, contact our remote teleconsult lines through the Komicare App for immediate guidance.
+                            If you experience severe blistering, persistent swelling, or laser-induced burns after
+                            returning home, contact our remote teleconsult lines through the Komicare App for immediate
+                            guidance.
                         </blockquote>
                     </div>
 
@@ -2244,12 +2378,14 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
             </div>
 
             <div class="modal-footer">
-                <button class="reader-nav-btn" id="reader-prev-btn" disabled data-i18n="reader.prev_btn">&larr; Previous</button>
+                <button class="reader-nav-btn" id="reader-prev-btn" disabled data-i18n="reader.prev_btn">&larr;
+                    Previous</button>
                 <div class="reader-coupon">
                     <span data-i18n="reader.coupon_label">WAITLIST VIP PASSCODE:</span>
                     <strong>KOMICARE-50-VIP</strong>
                 </div>
-                <button class="reader-nav-btn" id="reader-next-btn" data-i18n-html="reader.next_btn">Next &rarr;</button>
+                <button class="reader-nav-btn" id="reader-next-btn" data-i18n-html="reader.next_btn">Next
+                    &rarr;</button>
             </div>
 
         </div>
@@ -2258,7 +2394,7 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
     <!-- Modal Interactive Dialog: Clinic Details -->
     <div class="modal-overlay" id="clinicModal">
         <div class="modal-content-wrapper clinic-modal-wrapper">
-            
+
             <div class="modal-header">
                 <div class="modal-title">
                     <h3 id="clinic-detail-name">Cheongdam Barrier Lab</h3>
@@ -2266,12 +2402,14 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                 </div>
                 <button class="btn-close" id="btnCloseClinic">&times;</button>
             </div>
- 
+
             <div class="modal-body clinic-modal-body">
                 <div class="clinic-info-section">
+                    <!-- 11개 세부 평점 요약 타이틀로 정교화 -->
                     <div class="info-block">
-                        <span class="info-label" data-i18n="clinic.rating_label">Clinic Rating</span>
-                        <h4 id="clinic-detail-rating" style="color: var(--color-accent);">⭐ 4.9</h4>
+                        <span class="info-label" data-i18n="rev_sim.modal_title">Verified Review Statistics</span>
+                        <h4 id="clinic-detail-rating"
+                            style="color: var(--color-accent); font-size: 24px; margin-top: 4px;">⭐ 4.9</h4>
                     </div>
                     <div class="info-block">
                         <span class="info-label" data-i18n="clinic.about_label">About the Clinic</span>
@@ -2284,9 +2422,12 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         </div>
                     </div>
                     <div class="info-block">
-                        <span class="info-label" data-i18n="safety.verified_title">Safety Credentials Verified</span>
-                        <div class="safety-details-grid" id="clinic-detail-safety-grid">
-                            <!-- JS will inject safety details -->
+                        <!-- 기존 safety.verified_title 라벨을 기획서에 맞춰 의사 실명 세부 리뷰 평가 정보로 명칭 전환 -->
+                        <span class="info-label" data-i18n="rev_sim.criteria_label">Rate Your Experience (11 Evaluation
+                            Criteria)</span>
+                        <div class="safety-details-grid" id="clinic-detail-safety-grid"
+                            style="display: block; grid-template-columns: none;">
+                            <!-- 여기에 app.js의 11개 스케일 차트 바와 서술형 로그가 디테일하게 쭉 로드됩니다 -->
                         </div>
                     </div>
                     <div class="info-block doctor-block">
@@ -2298,7 +2439,9 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                                 <p id="clinic-detail-doc-title">Board-Certified Dermatologist | Nd:YAG Specialist</p>
                             </div>
                         </div>
-                        <p id="clinic-detail-doc-bio" style="font-size: 13px; margin-top: 10px; font-style: italic; line-height: 1.5; color: var(--text-secondary);">...</p>
+                        <p id="clinic-detail-doc-bio"
+                            style="font-size: 13px; margin-top: 10px; font-style: italic; line-height: 1.5; color: var(--text-secondary);">
+                            ...</p>
                     </div>
                     <div class="info-block">
                         <span class="info-label" data-i18n="clinic.hours_label">Operating Hours</span>
@@ -2308,50 +2451,57 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
 
                 <!-- Right Side: Location Map & Inline Booking Wizard -->
                 <div class="clinic-action-section">
-                    
+
                     <!-- View A: Google Maps / Map Section -->
                     <div class="clinic-sub-view active" id="clinic-map-view">
-                        <span class="info-label" style="display: block; margin-bottom: 8px;" data-i18n="clinic.map_label">Clinic Location Map</span>
+                        <span class="info-label" style="display: block; margin-bottom: 8px;"
+                            data-i18n="clinic.map_label">Clinic Location Map</span>
                         <div class="map-iframe-container">
-                            <iframe 
-                                id="clinic-detail-map-iframe"
-                                src="" 
-                                width="100%" 
-                                height="100%" 
-                                style="border:0; border-radius: 12px;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
+                            <iframe id="clinic-detail-map-iframe" src="" width="100%" height="100%"
+                                style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                        <button class="btn-primary" id="btnShowBookingForm" style="width: 100%; margin-top: 16px;" data-i18n="clinic.book_btn">
+                        <button class="btn-primary" id="btnShowBookingForm" style="width: 100%; margin-top: 16px;"
+                            data-i18n="clinic.book_btn">
                             📅 Secure 1:1 Booking Slot
                         </button>
                     </div>
 
                     <!-- View B: Inline Booking Form (Initially Hidden) -->
                     <div class="clinic-sub-view" id="clinic-booking-view">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                             <span class="info-label" data-i18n="clinic.booking_title">Direct Premium Booking</span>
-                            <button id="btnBackToMap" style="background: none; border: none; color: var(--color-accent); font-weight: 600; cursor: pointer; font-size: 12px;" data-i18n="clinic.back_to_map">&larr; Back to Map</button>
+                            <button id="btnBackToMap"
+                                style="background: none; border: none; color: var(--color-accent); font-weight: 600; cursor: pointer; font-size: 12px;"
+                                data-i18n="clinic.back_to_map">&larr; Back to Map</button>
                         </div>
-                        
+
                         <form id="clinicBookingForm" class="lead-form-container">
                             <div class="form-group">
-                                <label for="bookingName" class="form-label" data-i18n="booking.name_label">Your Full Name</label>
-                                <input type="text" id="bookingName" class="form-input" data-i18n-placeholder="booking.name_placeholder" placeholder="Enter your full name" required>
+                                <label for="bookingName" class="form-label" data-i18n="booking.name_label">Your Full
+                                    Name</label>
+                                <input type="text" id="bookingName" class="form-input"
+                                    data-i18n-placeholder="booking.name_placeholder" placeholder="Enter your full name"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="bookingEmail" class="form-label" data-i18n="booking.email_label">Your Email</label>
-                                <input type="email" id="bookingEmail" class="form-input" data-i18n-placeholder="booking.email_placeholder" placeholder="Enter your email address" required>
+                                <label for="bookingEmail" class="form-label" data-i18n="booking.email_label">Your
+                                    Email</label>
+                                <input type="email" id="bookingEmail" class="form-input"
+                                    data-i18n-placeholder="booking.email_placeholder"
+                                    placeholder="Enter your email address" required>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                                 <div class="form-group">
-                                    <label for="bookingDate" class="form-label" data-i18n="booking.date_label">Date</label>
+                                    <label for="bookingDate" class="form-label"
+                                        data-i18n="booking.date_label">Date</label>
                                     <input type="date" id="bookingDate" class="form-input" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="bookingTime" class="form-label" data-i18n="booking.time_label">Preferred Time</label>
+                                    <label for="bookingTime" class="form-label" data-i18n="booking.time_label">Preferred
+                                        Time</label>
                                     <select id="bookingTime" class="form-input" style="padding: 15px;" required>
                                         <option value="" data-i18n="booking.time_placeholder">Select time...</option>
                                         <option value="10:00 AM">10:00 AM</option>
@@ -2363,13 +2513,19 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="bookingTreatment" class="form-label" data-i18n="booking.treatment_label">Preferred Treatment</label>
+                                <label for="bookingTreatment" class="form-label"
+                                    data-i18n="booking.treatment_label">Preferred Treatment</label>
                                 <select id="bookingTreatment" class="form-input" style="padding: 15px;">
-                                    <option value="Consultation Only" data-i18n="booking.treatment_consult">Consultation Only</option>
-                                    <option value="Pico Toning Laser" data-i18n="booking.treatment_pico">Pico Toning Laser</option>
-                                    <option value="Skin Barrier Reconstruction" data-i18n="booking.treatment_barrier">Skin Barrier Reconstruction</option>
-                                    <option value="Vascular Redness Laser" data-i18n="booking.treatment_vascular">Vascular Redness Laser</option>
-                                    <option value="Ultherapy Premium Lifting" data-i18n="booking.treatment_ulthera">Ultherapy Premium Lifting</option>
+                                    <option value="Consultation Only" data-i18n="booking.treatment_consult">Consultation
+                                        Only</option>
+                                    <option value="Pico Toning Laser" data-i18n="booking.treatment_pico">Pico Toning
+                                        Laser</option>
+                                    <option value="Skin Barrier Reconstruction" data-i18n="booking.treatment_barrier">
+                                        Skin Barrier Reconstruction</option>
+                                    <option value="Vascular Redness Laser" data-i18n="booking.treatment_vascular">
+                                        Vascular Redness Laser</option>
+                                    <option value="Ultherapy Premium Lifting" data-i18n="booking.treatment_ulthera">
+                                        Ultherapy Premium Lifting</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn-primary" style="margin-top: 10px;">
@@ -2378,13 +2534,18 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         </form>
 
                         <!-- Success Feedback screen -->
-                        <div id="booking-success-view" style="display: none; text-align: center; padding: 30px 10px; animation: fadeIn 0.4s ease;">
+                        <div id="booking-success-view"
+                            style="display: none; text-align: center; padding: 30px 10px; animation: fadeIn 0.4s ease;">
                             <span style="font-size: 50px; display: block; margin-bottom: 16px;">🎉</span>
-                            <h4 style="color: var(--color-secondary); margin-bottom: 10px; font-weight: 700;" data-i18n="booking.success_title">Booking Successfully Locked!</h4>
-                            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;" id="booking-success-message" data-i18n="booking.success_msg">
-                                We have reserved your slot with the dermatologist. A confirmation email has been dispatched to your inbox.
+                            <h4 style="color: var(--color-secondary); margin-bottom: 10px; font-weight: 700;"
+                                data-i18n="booking.success_title">Booking Successfully Locked!</h4>
+                            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;"
+                                id="booking-success-message" data-i18n="booking.success_msg">
+                                We have reserved your slot with the dermatologist. A confirmation email has been
+                                dispatched to your inbox.
                             </p>
-                            <button class="btn-primary" id="btnResetBookingModal" style="width: 100%;" data-i18n="booking.return_btn">
+                            <button class="btn-primary" id="btnResetBookingModal" style="width: 100%;"
+                                data-i18n="booking.return_btn">
                                 Return to Clinic Map
                             </button>
                         </div>
@@ -2399,11 +2560,12 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
     <!-- Modal Interactive Dialog: Review Writer Simulator -->
     <div class="modal-overlay" id="reviewWriterModal">
         <div class="modal-content-wrapper" style="max-width: 620px;">
-            
+
             <div class="modal-header">
                 <div class="modal-title">
                     <h3 data-i18n="rev_sim.modal_title">Visit-Verified Review Writer Simulator</h3>
-                    <p data-i18n="rev_sim.modal_subtitle">100% authenticated review matching to the operating physician</p>
+                    <p data-i18n="rev_sim.modal_subtitle">100% authenticated review matching to the operating physician
+                    </p>
                 </div>
                 <button class="btn-close" id="btnCloseReviewWriter">&times;</button>
             </div>
@@ -2420,38 +2582,46 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <!-- Panel 1: Document Upload Simulation -->
                     <div class="writer-panel active" id="writer-panel-1">
                         <div class="form-group" style="margin-bottom: 20px;">
-                            <label class="form-label" data-i18n="rev_sim.doctor_select_label">Select Treating Physician</label>
+                            <label class="form-label" data-i18n="rev_sim.doctor_select_label">Select Treating
+                                Physician</label>
                             <select id="reviewDoctorSelect" class="form-input" required style="padding: 15px;">
                                 <!-- Dynamic Options will be injected by JavaScript -->
                             </select>
                         </div>
 
-                        <label class="form-label" data-i18n="rev_sim.passport_label">Passport Verification (Scan Info Page)</label>
+                        <label class="form-label" data-i18n="rev_sim.passport_label">Passport Verification (Scan Info
+                            Page)</label>
                         <div class="dropzone-simulator" id="passportDropzone">
                             <div class="dropzone-icon">🛂</div>
                             <span class="dropzone-label">Click or Drag Passport Image here</span>
-                            <span class="dropzone-help" data-i18n="rev_sim.passport_desc">Used strictly for country checking and duplicated review protection.</span>
-                            <div class="upload-success-indicator" id="passportSuccess">✓ Passport Authenticated & Hashed Client-Side</div>
+                            <span class="dropzone-help" data-i18n="rev_sim.passport_desc">Used strictly for country
+                                checking and duplicated review protection.</span>
+                            <div class="upload-success-indicator" id="passportSuccess">✓ Passport Authenticated & Hashed
+                                Client-Side</div>
                         </div>
 
                         <label class="form-label" data-i18n="rev_sim.receipt_label">Medical Tax Refund Receipt</label>
                         <div class="dropzone-simulator" id="receiptDropzone">
                             <div class="dropzone-icon">🧾</div>
                             <span class="dropzone-label">Click or Drag Tax Refund Receipt here</span>
-                            <span class="dropzone-help" data-i18n="rev_sim.receipt_desc">Tax Refund ID and TX codes verify your actual visitation.</span>
-                            <div class="upload-success-indicator" id="receiptSuccess">✓ Receipt Code Verified & Anonymized</div>
+                            <span class="dropzone-help" data-i18n="rev_sim.receipt_desc">Tax Refund ID and TX codes
+                                verify your actual visitation.</span>
+                            <div class="upload-success-indicator" id="receiptSuccess">✓ Receipt Code Verified &
+                                Anonymized</div>
                         </div>
                     </div>
 
                     <!-- Panel 2: 11 Rating Criteria -->
                     <div class="writer-panel" id="writer-panel-2">
-                        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 20px; color: var(--color-secondary);" data-i18n="rev_sim.criteria_label">Rate Your Experience (11 Evaluation Criteria)</h4>
-                        
+                        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 20px; color: var(--color-secondary);"
+                            data-i18n="rev_sim.criteria_label">Rate Your Experience (11 Evaluation Criteria)</h4>
+
                         <div style="max-height: 380px; overflow-y: auto; padding-right: 10px;">
                             <!-- 1. Booking -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_booking">1. Reservation (Language/Speed):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_booking">1. Reservation
+                                        (Language/Speed):</span>
                                     <span class="rating-value-badge" id="val-booking">5 / 5</span>
                                 </div>
                                 <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-booking">
@@ -2460,7 +2630,8 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                             <!-- 2. Visit -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_visit">2. Arrival & Wait (Schedule adherence):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_visit">2. Arrival & Wait (Schedule
+                                        adherence):</span>
                                     <span class="rating-value-badge" id="val-visit">5 / 5</span>
                                 </div>
                                 <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-visit">
@@ -2469,43 +2640,53 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                             <!-- 3. Procedure Consultation -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_doc_design">3. Procedure Consultation (Design, Explanation):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_doc_design">3. Procedure
+                                        Consultation (Design, Explanation):</span>
                                     <span class="rating-value-badge" id="val-doc-design">5 / 5</span>
                                 </div>
-                                <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-doc-design">
+                                <input type="range" min="1" max="5" value="5" class="rating-slider"
+                                    id="slide-doc-design">
                             </div>
 
                             <!-- 4. Post-procedure Care instructions -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_post_care">4. Aftercare Warning Guide (Post-treatment explanation):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_post_care">4. Aftercare Warning
+                                        Guide (Post-treatment explanation):</span>
                                     <span class="rating-value-badge" id="val-post-care">5 / 5</span>
                                 </div>
-                                <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-post-care">
+                                <input type="range" min="1" max="5" value="5" class="rating-slider"
+                                    id="slide-post-care">
                             </div>
 
                             <!-- 5. Pain & Side Effects -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_side_effect">5. Side Effects & Pain Intensity (Lower is better):</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_side_effect">5. Side Effects &
+                                        Pain Intensity (Lower is better):</span>
                                     <span class="rating-value-badge" id="val-side-effect">1 / 5</span>
                                 </div>
-                                <input type="range" min="1" max="5" value="1" class="rating-slider" id="slide-side-effect">
+                                <input type="range" min="1" max="5" value="1" class="rating-slider"
+                                    id="slide-side-effect">
                             </div>
 
                             <!-- 6. Revisit Intent -->
                             <div class="review-rating-row">
-                                <span class="rating-title" style="display: block; margin-bottom: 8px;" data-i18n="rev_sim.cat_revisit">6. Intention to Revisit:</span>
+                                <span class="rating-title" style="display: block; margin-bottom: 8px;"
+                                    data-i18n="rev_sim.cat_revisit">6. Intention to Revisit:</span>
                                 <div class="rating-select-group">
-                                    <button type="button" class="rating-select-btn active" id="btn-revisit-yes" data-value="yes" data-i18n="rev_sim.revis_yes">Yes</button>
-                                    <button type="button" class="rating-select-btn" id="btn-revisit-no" data-value="no" data-i18n="rev_sim.revis_no">No</button>
+                                    <button type="button" class="rating-select-btn active" id="btn-revisit-yes"
+                                        data-value="yes" data-i18n="rev_sim.revis_yes">Yes</button>
+                                    <button type="button" class="rating-select-btn" id="btn-revisit-no" data-value="no"
+                                        data-i18n="rev_sim.revis_no">No</button>
                                 </div>
                             </div>
 
                             <!-- 9. Staff Kindness, Parking, Language Convenience -->
                             <div class="review-rating-row">
                                 <div class="rating-header">
-                                    <span class="rating-title" data-i18n="rev_sim.cat_kindness">9. General Staff Kindness & Parking:</span>
+                                    <span class="rating-title" data-i18n="rev_sim.cat_kindness">9. General Staff
+                                        Kindness & Parking:</span>
                                     <span class="rating-value-badge" id="val-kindness">5 / 5</span>
                                 </div>
                                 <input type="range" min="1" max="5" value="5" class="rating-slider" id="slide-kindness">
@@ -2513,23 +2694,32 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
 
                             <!-- 10. Recommend Intent -->
                             <div class="review-rating-row">
-                                <span class="rating-title" style="display: block; margin-bottom: 8px;" data-i18n="rev_sim.cat_recommend">10. Willingness to Recommend to Friends:</span>
+                                <span class="rating-title" style="display: block; margin-bottom: 8px;"
+                                    data-i18n="rev_sim.cat_recommend">10. Willingness to Recommend to Friends:</span>
                                 <div class="rating-select-group">
-                                    <button type="button" class="rating-select-btn active" id="btn-recommend-yes" data-value="yes" data-i18n="rev_sim.recom_yes">Yes</button>
-                                    <button type="button" class="rating-select-btn" id="btn-recommend-no" data-value="no" data-i18n="rev_sim.recom_no">No</button>
+                                    <button type="button" class="rating-select-btn active" id="btn-recommend-yes"
+                                        data-value="yes" data-i18n="rev_sim.recom_yes">Yes</button>
+                                    <button type="button" class="rating-select-btn" id="btn-recommend-no"
+                                        data-value="no" data-i18n="rev_sim.recom_no">No</button>
                                 </div>
                             </div>
 
                             <!-- 7. Highlights text -->
                             <div class="form-group" style="margin-top: 14px; margin-bottom: 14px;">
-                                <label for="text-good" class="form-label" data-i18n="rev_sim.cat_good">7. Highlights (What went well):</label>
-                                <textarea id="text-good" class="form-input" rows="2" style="border-radius: 8px; resize: none;" required placeholder="Write details here..."></textarea>
+                                <label for="text-good" class="form-label" data-i18n="rev_sim.cat_good">7. Highlights
+                                    (What went well):</label>
+                                <textarea id="text-good" class="form-input" rows="2"
+                                    style="border-radius: 8px; resize: none;" required
+                                    placeholder="Write details here..."></textarea>
                             </div>
 
                             <!-- 8. Improvement text -->
                             <div class="form-group" style="margin-bottom: 14px;">
-                                <label for="text-bad" class="form-label" data-i18n="rev_sim.cat_bad">8. Areas for Improvement:</label>
-                                <textarea id="text-bad" class="form-input" rows="2" style="border-radius: 8px; resize: none;" placeholder="Write areas needing improvement..."></textarea>
+                                <label for="text-bad" class="form-label" data-i18n="rev_sim.cat_bad">8. Areas for
+                                    Improvement:</label>
+                                <textarea id="text-bad" class="form-input" rows="2"
+                                    style="border-radius: 8px; resize: none;"
+                                    placeholder="Write areas needing improvement..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -2538,10 +2728,15 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                     <div class="writer-panel" id="writer-panel-3">
                         <!-- 11. 1-Month later review opt-in -->
                         <div class="form-group" style="margin-bottom: 24px;">
-                            <label class="form-label" data-i18n="rev_sim.cat_onemonth">11. 1-Month Later Follow-up Opt-in</label>
-                            <label class="checklist-item" style="margin-top: 8px; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; gap: 12px; cursor: pointer; background-color: var(--bg-secondary);">
-                                <input type="checkbox" id="check-onemonth" style="width: 20px; height: 20px; accent-color: var(--color-accent);">
-                                <span style="font-size: 13px; color: var(--text-primary); font-weight: 500;" data-i18n="rev_sim.onemonth_opt">I agree to submit a 1-month-later review for skincare rewards.</span>
+                            <label class="form-label" data-i18n="rev_sim.cat_onemonth">11. 1-Month Later Follow-up
+                                Opt-in</label>
+                            <label class="checklist-item"
+                                style="margin-top: 8px; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; gap: 12px; cursor: pointer; background-color: var(--bg-secondary);">
+                                <input type="checkbox" id="check-onemonth"
+                                    style="width: 20px; height: 20px; accent-color: var(--color-accent);">
+                                <span style="font-size: 13px; color: var(--text-primary); font-weight: 500;"
+                                    data-i18n="rev_sim.onemonth_opt">I agree to submit a 1-month-later review for
+                                    skincare rewards.</span>
                             </label>
                         </div>
 
@@ -2551,12 +2746,15 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                                 🚨 Whistleblower & Bribe Declaration
                             </div>
                             <p data-i18n="rev_sim.whistleblower_desc">
-                                Did the hospital request a positive review in exchange for rebates, refunds, discount coupons, or gifts?
+                                Did the hospital request a positive review in exchange for rebates, refunds, discount
+                                coupons, or gifts?
                             </p>
-                            <button type="button" class="whistleblower-report-btn" id="btnReportBribe" data-i18n="rev_sim.whistleblower_btn">
+                            <button type="button" class="whistleblower-report-btn" id="btnReportBribe"
+                                data-i18n="rev_sim.whistleblower_btn">
                                 🚨 Report Bribe Attempt
                             </button>
-                            <div class="whistleblower-success-msg" id="whistleblowerSuccess" data-i18n="rev_sim.whistleblower_msg">
+                            <div class="whistleblower-success-msg" id="whistleblowerSuccess"
+                                data-i18n="rev_sim.whistleblower_msg">
                                 Whistleblower report registered successfully!
                             </div>
                         </div>
@@ -2568,14 +2766,16 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                             <div class="success-icon-badge">✓</div>
                             <h4 class="success-title" data-i18n="rev_sim.success_title">Verified Review Published!</h4>
                             <p class="success-text" data-i18n="rev_sim.success_desc">
-                                Thank you for your honest data. Your review is permanently stored on our offshore database node and cannot be deleted by the clinic.
+                                Thank you for your honest data. Your review is permanently stored on our offshore
+                                database node and cannot be deleted by the clinic.
                             </p>
                         </div>
                     </div>
-                    
+
                     <!-- Form Control actions -->
                     <div class="writer-controls" id="writerControls">
-                        <button type="button" class="btn-writer-nav prev" id="btnWriterPrev" disabled>&larr; Previous</button>
+                        <button type="button" class="btn-writer-nav prev" id="btnWriterPrev" disabled>&larr;
+                            Previous</button>
                         <button type="button" class="btn-writer-nav next" id="btnWriterNext">Next &rarr;</button>
                     </div>
                 </form>
@@ -2594,7 +2794,9 @@ CREATE INDEX IF NOT EXISTS idx_bookings_clinic_id ON public.bookings(clinic_id);
                         KOMI<span>CARE</span>
                     </div>
                     <p class="footer-about" data-i18n="footer.about">
-                        Komicare is the first safety-verified boutique skin matchmaking platform for medical travelers. Our database is hosted in offshore jurisdictions to protect patient reviews from Truth-Based Defamation censorship laws.
+                        Komicare is the first safety-verified boutique skin matchmaking platform for medical travelers.
+                        Our database is hosted in offshore jurisdictions to protect patient reviews from Truth-Based
+                        Defamation censorship laws.
                     </p>
                 </div>
                 <div class="footer-links">
@@ -3002,6 +3204,7 @@ function renderClinicCards(clinics) {
     });
 }
 
+// app.js 내 openClinicDetailModal 함수 오버라이딩 (11개 세부 카테고리 시각화 반영)
 function openClinicDetailModal(clinicId) {
     const data = loadedClinicsGlobal.find(c => c.id === parseInt(clinicId));
     if (!data) return;
@@ -3009,12 +3212,14 @@ function openClinicDetailModal(clinicId) {
     activeClinicId = clinicId;
     resetBookingViews();
 
+    // 기본 텍스트 정보 매핑
     document.getElementById('clinic-detail-name').textContent = data.name;
     document.getElementById('clinic-detail-location').textContent = data.location;
     document.getElementById('clinic-detail-rating').textContent = data.rating;
     document.getElementById('clinic-detail-desc').textContent = data.description;
     document.getElementById('clinic-detail-hours').textContent = data.hours;
 
+    // 1. 전문 분야(Specialties) 태그 바인딩
     const specialtiesContainer = document.getElementById('clinic-detail-specialties');
     specialtiesContainer.innerHTML = '';
     (data.specialties || []).forEach(spec => {
@@ -3024,14 +3229,72 @@ function openClinicDetailModal(clinicId) {
         specialtiesContainer.appendChild(tag);
     });
 
+    // ========================================================
+    // ★ 예리 원장님 피드백 반영: 11개 세부 평점 카테고리 차트 동적 주입
+    // ========================================================
+    const safetyContainer = document.getElementById('clinic-detail-safety-grid');
+    if (safetyContainer) {
+        safetyContainer.innerHTML = '';
+
+        // 각 클리닉별로 실제 디테일한 백엔드 평점 데이터가 수집되기 전, 
+        // 11개 기준에 맞춘 시뮬레이션 스케일 차트(바) 레이아웃을 생성합니다.
+        const lang = getCurrentLang();
+
+        // i18n에 정의된 키를 매핑하여 다국어 지원 보장
+        const ratingCategories = [
+            { label: t('rev_sim.cat_booking') || '1. Reservation:', score: 4.8 },
+            { label: t('rev_sim.cat_visit') || '2. Arrival & Wait:', score: 4.5 },
+            { label: t('rev_sim.cat_doc_design') || '3. Procedure Consultation:', score: 4.9 },
+            { label: t('rev_sim.cat_post_care') || '4. Aftercare Warning Guide:', score: 4.7 },
+            { label: t('rev_sim.cat_side_effect') || '5. Side Effects & Pain:', score: 1.2 }, // 낮을수록 좋음
+            { label: t('rev_sim.cat_revisit') || '6. Intention to Revisit:', score: 4.8 },
+            { label: t('rev_sim.cat_kindness') || '9. Staff Kindness & Parking:', score: 4.6 },
+            { label: t('rev_sim.cat_recommend') || '10. Willingness to Recommend:', score: 4.9 },
+            { label: t('rev_sim.cat_onemonth') || '11. 1-Month Later Follow-up:', score: 4.7 }
+        ];
+
+        // 7, 8번 서술형 데이터(좋았던 점, 개선할 점)는 텍스트 영역으로 별도 처리
+        ratingCategories.forEach(cat => {
+            const row = document.createElement('div');
+            row.className = 'clinic-detail-rating-row';
+            row.style.cssText = 'margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;';
+
+            // 점수에 따른 바 백분율 계산
+            const pct = (cat.score / 5) * 100;
+
+            row.innerHTML = `
+                <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                    <span style="color: var(--text-primary);">${cat.label}</span>
+                    <span style="color: var(--color-accent); font-weight: 700;">${cat.score} / 5.0</span>
+                </div>
+                <div style="width: 100%; height: 6px; background-color: var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <div style="width: ${pct}%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); border-radius: 10px;"></div>
+                </div>
+            `;
+            safetyContainer.appendChild(row);
+        });
+
+        // 7번 & 8번 서술형 날것의 후기 피드백(Highlights & Improvements) 영역 박스 추가
+        const highlightBox = document.createElement('div');
+        highlightBox.style.cssText = 'margin-top: 16px; background: var(--bg-primary); padding: 12px; border-radius: 8px; font-size: 12px; border-left: 4px solid var(--color-success);';
+        highlightBox.innerHTML = `
+            <strong>💡 ${t('rev_sim.cat_good') || '7. Highlights'}:</strong>
+            <p style="margin-top: 4px; font-style: italic; color: var(--text-secondary);">${lang === 'ko' ? '"원장님이 피부 두께를 직접 자로 재가며 파장을 수동 조절해 주신 점이 대만족이었습니다."' : '"Loved how the doctor manually adjusted the wavelength based on my exact skin profile."'}</p>
+        `;
+        safetyContainer.appendChild(highlightBox);
+    }
+
+    // 의사 정보 프로필 매핑
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
     document.getElementById('clinic-detail-doc-name').textContent = data.doctor_name;
     document.getElementById('clinic-detail-doc-title').textContent = data.doctor_title;
     document.getElementById('clinic-detail-doc-bio').textContent = data.doctor_bio;
 
+    // 지도 렌더링
     const mapIframe = document.getElementById('clinic-detail-map-iframe');
     if (mapIframe) mapIframe.src = data.map_iframe;
 
+    // 모달 활성화 및 바디 스크롤 차단
     const modal = document.getElementById('clinicModal');
     if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
 }
