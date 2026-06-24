@@ -186,6 +186,7 @@ const translations = {
 
         // ---- New Platform Restructured Keys ----
         "compare.title": "Boutique Standard vs. Factory Clinic",
+        "compare.subtitle": "Choose between cheap assembly-line laser settings or chief-physician customized design skin procedures.",
         "compare.factory_title": "Factory Clinic",
         "compare.boutique_title": "Komicare Boutique",
         "compare.factory_price": "100,000 KRW",
@@ -463,6 +464,7 @@ const translations = {
 
         // ---- New Platform Restructured Keys ----
         "compare.title": "부티크 디자인 시술 vs 공장식 시술",
+        "compare.subtitle": "단순 광고 노출 및 티켓 판매 앱과 다른 코미케어만의 정직한 데이터 생태계",
         "compare.factory_title": "공장식 시술",
         "compare.boutique_title": "코미케어 부티크 디자인",
         "compare.factory_price": "10만 원",
