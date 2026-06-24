@@ -560,7 +560,46 @@ const translations = {
     }
 };
 
-// ---- Fitzpatrick Profiles (Korean) ----
+// ---- Fitzpatrick Profiles (Dynamic Integration) ----
+const fitzpatrickProfiles_en = {
+    1: {
+        name: "Fitzpatrick Type I (Pale White / Fair)",
+        behavior: "Always burns, never tans. High freckling.",
+        lasers: "Gentle custom energy settings only. High risk with standard fractional lasers.",
+        warning: "EXTREME BURN & REDNESS RISK. Mass-market factory settings are calibrated for East Asian skin (Type III-IV). Firing these high-intensity settings on Type I skin will easily cook your skin barrier, causing chronic redness, blistering, or scarring. You must demand lower fluence and longer pulse durations."
+    },
+    2: {
+        name: "Fitzpatrick Type II (Fair / Light Blond)",
+        behavior: "Burns easily, tans minimally. Highly sensitive.",
+        lasers: "Requires customized pulse duration. Safe with specialized vascular/pigment lasers under low settings.",
+        warning: "HIGH BURN & BARRIER DAMAGE RISK. Standard 'Seoul Factory' preset settings will likely cause severe laser redness or micro-scarring on Type II skin. Doctor-Direct consultation is mandatory to manually calibrate the energy output, instead of letting a technician use automated presets."
+    },
+    3: {
+        name: "Fitzpatrick Type III (Beige / Olive-tinted)",
+        behavior: "Burns moderately, tans gradually to light brown.",
+        lasers: "Requires careful calibration for pigment rebound. Moderate risk of post-inflammatory hyperpigmentation (PIH).",
+        warning: "MODERATE PIGMENT REBOUND RISK. While Type III skin is more resilient, factory chains operating on 15-minute cycles will rush through settings. This often triggers rebound melasma or PIH. Ensure the clinic uses genuine tips and EMR logging to track parameters."
+    },
+    4: {
+        name: "Fitzpatrick Type IV (Light Brown / Olive)",
+        behavior: "Burns minimally, tans easily to moderate brown.",
+        lasers: "Medium-risk pigment reactivity. Requires Nd:YAG or fractional devices set with conservative fluences.",
+        warning: "PIH (HYPERPIGMENTATION) RISK. Standard settings intended for lighter skin can trigger massive melanin responses in Type IV skin, leading to dark patches that take months to clear. The doctor must check your active tan state and adjust cooling parameters accordingly."
+    },
+    5: {
+        name: "Fitzpatrick Type V (Dark Brown)",
+        behavior: "Rarely burns, tans easily to dark brown.",
+        lasers: "ND:YAG laser only for hair removal/toning. Standard IPL or Alex lasers are highly contraindicated.",
+        warning: "SEVERE HYPERPIGMENTATION & BURN RISK. Type V skin has highly active melanin. Factory clinics using standard Alexandrite or IPL wavelengths will literally cook the epidermis because the laser cannot differentiate between hair/pigment and the surrounding skin. Safe treatment requires a specialized Nd:YAG laser."
+    },
+    6: {
+        name: "Fitzpatrick Type VI (Deeply Pigmented Black)",
+        behavior: "Never burns, deeply pigmented.",
+        lasers: "Nd:YAG laser with long pulse width only. Cooling mechanism must be set to maximum.",
+        warning: "CRITICAL MELANIN REACTIVITY WARNING. Factory-style chains are highly dangerous for Type VI skin. Standard laser settings will result in permanent pigment loss (hypopigmentation white spots) or severe chemical burns. You must select clinics that possess specific Nd:YAG hardware and long-pulse calibration track records."
+    }
+};
+
 const fitzpatrickProfiles_ko = {
     1: {
         name: "피츠패트릭 Type I (매우 창백 / 밝은 피부)",
@@ -600,145 +639,9 @@ const fitzpatrickProfiles_ko = {
     }
 };
 
-// ---- Clinic Details (Korean) ----
-const clinicDetails_ko = {
-    1: {
-        name: "청담 배리어 랩",
-        location: "📍 청담동, 강남구",
-        rating: "⭐ 4.9 (120+ 인증 리뷰)",
-        description: "민감한 피부 타입을 위한 비침습적 피부 장벽 회복과 색소 레이저를 전문으로 합니다. 초보수적 에너지 캘리브레이션과 인증된 정품 팁으로 유명합니다.",
-        specialties: ["Nd:YAG 레이저 캘리브레이션", "피부 장벽 재건", "피코 토닝"],
-        doctor_name: "이지연 원장",
-        doctor_avatar: "JY",
-        doctor_title: "피부과 전문의 | Nd:YAG 전문가",
-        doctor_bio: "이지연 원장은 12년 이상의 임상 피부과 경험을 보유하고 있으며, 얇고 반응성이 높은 피부 장벽을 위한 레이저를 전문으로 합니다. Nd:YAG 커스터마이제이션 분야의 인정받는 연자입니다.",
-        hours: "월-금: 오전 10:00 - 오후 7:00 | 토: 오전 10:00 - 오후 4:00",
-        slots_tag: "시간당 최대 3건"
-    },
-    2: {
-        name: "명동 포레스트 피부과",
-        location: "📍 명동, 중구",
-        rating: "⭐ 4.8 (94+ 인증 리뷰)",
-        description: "명동 한복판의 안식처 클리닉으로, 공장식 시술보다 장벽 안전을 우선시합니다. 시간당 최대 2건의 예약만 엄격히 제한합니다.",
-        specialties: ["혈관 레이저 캘리브레이션", "주사 & 홍조 회복", "초음파 리쥬버네이션"],
-        doctor_name: "김민지 원장",
-        doctor_avatar: "MK",
-        doctor_title: "피부과 전문의 | 장벽 회복 전문",
-        doctor_bio: "김민지 원장은 여행과 기후 변화로 인해 자주 장벽 손상을 경험하는 해외 여행자를 위한 맞춤 의료 시술을 제공하기 위해 명동 포레스트를 설립했습니다.",
-        hours: "월, 수, 목: 오전 10:00 - 오후 8:00 (야간진료) | 화, 금: 오전 10:00 - 오후 7:00",
-        slots_tag: "시간당 최대 2건"
-    },
-    3: {
-        name: "한남 에스테틱 & 레이저 하우스",
-        location: "📍 한남동, 용산구",
-        rating: "⭐ 4.9 (78+ 인증 리뷰)",
-        description: "한남동의 대사관과 외국인을 위한 부티크 클리닉입니다. 프리미엄 듀얼 쿨링 레이저 시스템을 갖추고 맞춤형 파장 진단을 제공합니다.",
-        specialties: ["1:1 파장 튜닝", "듀얼 쿨링 안전 프로토콜", "고강도 색소 관리"],
-        doctor_name: "박태영 원장",
-        doctor_avatar: "TP",
-        doctor_title: "피부과 전문의 | 커스텀 파장 전문",
-        doctor_bio: "박태영 원장은 서울대학교 병원에서 펠로우십을 수료했습니다. 영어에 능통하며, 다양한 피츠패트릭 피부 타입에 안전한 레이저 시술을 위해 전념하고 있습니다.",
-        hours: "화-금: 오전 11:00 - 오후 8:00 | 토: 오전 10:00 - 오후 5:00 | 일, 월: 휴진",
-        slots_tag: "시간당 최대 3건"
-    },
-    4: {
-        name: "신사 글로우 피부과",
-        location: "📍 신사동, 강남구",
-        rating: "⭐ 4.7 (112+ 인증 리뷰)",
-        description: "인증된 정품 소모품 로깅을 통한 고급 안티에이징 시술을 전문으로 합니다. 모든 환자에게 일회용 팁 인증서와 시리얼 코드를 제공합니다.",
-        specialties: ["정품 소모품 로깅", "울쎄라 & 슈링크 커스텀 셋업", "표피 두께 진단"],
-        doctor_name: "최서준 원장",
-        doctor_avatar: "SC",
-        doctor_title: "피부과 전문의 | 안티에이징 전문",
-        doctor_bio: "최서준 원장은 비수술 리프팅 전문가입니다. 시술 후 신경 합병증과 과도한 부기를 예방하기 위해 신사 글로우의 '장벽 우선' 리프팅 프로토콜을 개발했습니다.",
-        hours: "월-금: 오전 10:00 - 오후 7:00 | 토: 오전 9:30 - 오후 3:00",
-        slots_tag: "시간당 최대 2건"
-    },
-    5: {
-        name: "홍대 캄 스킨 클리닉",
-        location: "📍 서교동, 마포구",
-        rating: "⭐ 4.8 (85+ 인증 리뷰)",
-        description: "홍대의 트렌디하면서도 의학적으로 엄격한 클리닉입니다. 절대적인 전문의 상주 하에 젊은 글로벌 환자를 위한 레이저 토닝과 혈관 시술에 집중합니다.",
-        specialties: ["Nd:YAG & 피코 레이저 인증", "100% 전문의 상담", "청소년 여드름 장벽 치유"],
-        doctor_name: "송은지 원장",
-        doctor_avatar: "ES",
-        doctor_title: "피부과 전문의 | 색소 전문가",
-        doctor_bio: "송은지 원장은 부드럽고 레이어드된 레이저 접근법으로 높이 평가받고 있습니다. 빠른 '모든 피부에 동일한' 레이저 프로토콜을 거부하며, 환자당 30분 이상의 시술 시간을 배정합니다.",
-        hours: "월, 화, 금: 오전 10:00 - 오후 7:00 | 목: 오전 10:00 - 오후 9:00 (야간진료) | 토: 오전 10:00 - 오후 4:00",
-        slots_tag: "시간당 최대 4건"
-    }
-};
-
-// ---- Handbook Chapter Content (Korean) ----
-const handbookContent_ko = {
-    1: {
-        title: "제1장: 피부 타입 해독하기 (피츠패트릭 스케일)",
-        content: `<p><strong>피츠패트릭 스케일</strong>은 인간의 피부색과 자외선 및 레이저 파장에 대한 반응을 분류하는 의학적 표준입니다. Type I(매우 창백, 쉽게 화상)부터 Type VI(깊은 색소 침착, 절대 화상 없음)까지 분류됩니다.</p>
-        <p>대량 환자 수용 클리닉의 핵심 문제는 <strong>멜라닌 농도 불일치</strong>입니다. 표준 한국 레이저 프로토콜은 일반적으로 Type III과 IV에 해당하는 동아시아 피부 타입에 맞춰 캘리브레이션되어 있습니다.</p>
-        <blockquote>
-            <strong>표준 세팅이 위험한 이유:</strong>
-            Type I-II 피부를 가진 분은 표준 세팅이 너무 높아 얇은 보호 장벽을 파괴하고 만성 혈관 홍조나 물집을 유발합니다. Type V-VI 피부를 가진 분은 활성 표피 멜라닌이 레이저 열을 너무 빠르게 흡수하여 영구적인 레이저 화상이나 염증 후 저색소증(흰 반점)을 유발합니다.
-        </blockquote>
-        <p>특정 피츠패트릭 타입에 맞춰 펄스 지속 시간과 에너지 플루언스를 수동 조절하는 것은 기본적인 의학적 필수 사항이며, 선택적 고급 패키지가 아닙니다.</p>`
-    },
-    2: {
-        title: "제2장: 공장식 클리닉을 가려내는 5가지 질문",
-        intro: `<p>서울에서 레이저가 얼굴에 닿기 전, 프론트 데스크 상담사를 무시하고 실제 시술 의사에게 다음 답변을 요구하세요:</p>`,
-        questions: [
-            { q: "Q1. \"지금 저와 상담하고 있는 의사 선생님이 실제로 시술하시는 분인가요?\"", a: "유령 의사 교체 수법을 밝혀냅니다." },
-            { q: "Q2. \"제 피츠패트릭 피부 타입에 기반하여 어떤 정확한 파장과 펄스 지속 시간 세팅을 사용하시나요?\"", a: "시술자가 피부 생리학을 이해하는지, 단순히 자동 프리셋을 누르는지 확인합니다." },
-            { q: "Q3. \"시작 전에 정품 일회용 팁 포장과 활성화 로그를 보여주실 수 있나요?\"", a: "불안정한 에너지 스파이크를 출력하는 불법, 재충전 또는 위조 팁으로부터 보호합니다." },
-            { q: "Q4. \"화상에 대한 클리닉의 즉각적인 의료 프로토콜과 긴급 연락처는 무엇인가요?\"", a: "판매 전략만 있는 게 아니라 실제 응급 피부과적 백업이 있는지 확인합니다." },
-            { q: "Q5. \"이 의사의 서양 피부 프로필에 대한 포트폴리오/실적을 볼 수 있나요?\"", a: "피츠패트릭 Type I-II 및 V-VI 피부 타입 시술 경험을 확인합니다." }
-        ]
-    },
-    3: {
-        title: "제3장: '공장식' 클리닉 구별법",
-        content: `<p>관광 밀집 지역에 위치한 \"피부 클리닉\"의 80% 이상이 정식 피부과 전문의 수련 없이 일반 개원의(GP)에 의해 운영됩니다. 다음 세 가지 적신호를 주의하면 공장식 클리닉을 구별할 수 있습니다:</p>
-        <blockquote>
-            <strong>적신호 #1: 선불 결제</strong><br>
-            카드를 긁고 패키지에 서명할 때까지 의사와 대화하는 것을 거부한다면, 그곳은 공장식 클리닉입니다.
-        </blockquote>
-        <p><strong>적신호 #2: 극단적 가격 덤핑</strong><br>
-        고가 소모성 팁 카트리지(울쎄라 또는 슈링크 등)의 가격이 시장 평균보다 50-70% 낮다면, 해당 클리닉은 위조 팁, 재충전 카트리지를 사용하거나 안전 진단을 생략하고 있을 가능성이 높습니다.</p>
-        <p><strong>적신호 #3: 추상적 리뷰 지표</strong><br>
-        클리닉 리뷰가 \"친절한 통역 직원\"이나 \"빠른 서비스\"만 언급하고 특정 의사 이름이나 정확한 임상 파라미터에 대한 언급이 없다면, 평점이 조작되었을 가능성이 높습니다.</p>`
-    },
-    4: {
-        title: "제4장: 귀국 후 회복 로드맵",
-        content: `<p>한국에서 피부과 레이저 시술 직후 귀국하는 경우, 다음 응급 회복 체크리스트를 따라 피부 장벽을 보호하세요:</p>
-        <p><strong>1. 시술 후 기내 키트:</strong> 비행기 기내 습도는 20% 이하입니다. 탑승 전 두꺼운 세라마이드 기반 장벽 크림과 물리적 자외선 차단제(산화아연/이산화티타늄)를 바르세요. 신선한 미세 상처에 화학적 자외선 필터를 피하세요.</p>
-        <p><strong>2. 염증 후 과색소침착(PIH) 예방:</strong> 시술 후 14일간 직사광선 노출을 피하세요. 어두운 반점(PIH)이 발생하면 공격적인 화학 필링을 적용하지 마세요. 장벽을 쉬게 하고 순한 시카(센텔라 아시아티카) 또는 판테놀 유도체를 바르세요.</p>
-        <blockquote>
-            <strong>긴급 지원:</strong><br>
-            귀국 후 심각한 물집, 지속적인 부기 또는 레이저 유발 화상이 나타나면, 코미케어 앱을 통해 원격 상담 라인에 즉시 연락하여 안내를 받으세요.
-        </blockquote>`
-    }
-};
-
-// ---- Korean Checklist Text for Clipboard ----
-const checklistText_ko = `--- K-뷰티 5가지 핵심 안전 질문 ---
-레이저가 얼굴에 닿기 전, 피부과 전문의에게 다음 다섯 가지 질문을 반드시 하세요:
-
-Q1. 의사 직접 상담:
-"지금 저와 상담하고 있는 의사 선생님이 실제로 레이저 시술하시는 분인가요?" (유령 의사 교체 수법 밝히기)
-
-Q2. 피츠패트릭 맞춤 커스터마이제이션:
-"제 피츠패트릭 피부 타입에 기반하여 PIH나 화상을 피하기 위해 어떤 정확한 파장과 펄스 지속 시간 세팅을 사용하시나요?" (공장식 프리셋 vs 의학 전문성 테스트)
-
-Q3. 정품 팁 확인:
-"시작 전에 정품 일회용 팁(정품팁) 포장과 장비의 활성화 로그를 보여주실 수 있나요?" (불법, 재충전 또는 위조 팁 사용 방지)
-
-Q4. 부작용 프로토콜:
-"시술 후 이상 반응이나 화상이 발생하면 클리닉의 즉각적인 의료 프로토콜과 긴급 연락처는 무엇인가요?" (판매 목표가 아닌 안전망 확인)
-
-Q5. 시술자 배정 & 실적:
-"이 의사의 서양 피부 타입에 대한 구체적인 실적이나 포트폴리오를 볼 수 있나요?" (클리닉 브랜드가 아닌 시술자의 실력 확인)`;
-
-
-// ==========================================
-// Translation Engine Functions
-// ==========================================
+// Extracted globally for data tracking
+window.fitzpatrickProfiles_en = fitzpatrickProfiles_en;
+window.fitzpatrickProfiles_ko = fitzpatrickProfiles_ko;
 
 function t(key) {
     const dict = translations[currentLang] || translations['en'];
@@ -757,28 +660,23 @@ function setLanguage(lang) {
         console.warn("localStorage setItem failed:", e);
     }
 
-    // Update HTML lang attribute
     document.documentElement.lang = lang;
 
-    // Swap all data-i18n elements (textContent)
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         el.textContent = t(key);
     });
 
-    // Swap all data-i18n-html elements (innerHTML)
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
         const key = el.getAttribute('data-i18n-html');
         el.innerHTML = t(key);
     });
 
-    // Swap all data-i18n-placeholder elements
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         el.placeholder = t(key);
     });
 
-    // Update active language button
     const langSwitcher = document.getElementById('langSwitcher');
     if (langSwitcher) {
         langSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
@@ -790,8 +688,5 @@ function setLanguage(lang) {
         });
     }
 
-    // Dispatch custom event for app.js to handle dynamic content
     window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
 }
-
-// Note: Initialization is handled by app.js initLanguage() to avoid race conditions
