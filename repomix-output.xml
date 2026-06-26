@@ -386,6 +386,111 @@ const fallbackClinics = [
         foreign_attraction_registered: false,
         foreigner_insurance: true,
         excellent_aftercare: false
+    },
+    {
+        id: 6,
+        name: "Gangnam Eye & Youth Center",
+        location: "📍 Gangnam-daero, Gangnam",
+        rating: "⭐ 4.9 (142+ verified reviews)",
+        description: "A premier eye-focused surgery center in Gangnam, specializing in natural double eyelids, non-incisional ptosis corrections, and delicate under-eye fat relocations.",
+        specialties: ["Natural Adhesion Double Eyelid", "Non-incisional Ptosis Correction", "Under-Eye Fat Relocation", "매몰/자연유착 쌍꺼풀", "비절개 눈매교정", "눈밑지방재배치"],
+        doctor_name: "Dr. Min-Seok Song",
+        doctor_avatar: "MS",
+        doctor_title: "Board-Certified Plastic Surgeon | Eye Specialist",
+        doctor_bio: "Dr. Song is a leading eye rejuvenation specialist with 15+ years of experience, renowned for natural double eyelid and delicate fat redistribution.",
+        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.8384950669147!2d127.02752537646513!3d37.502011972054235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a31a54727%3A0x6b6df7d6b8b0e8c0!2sGangnam-daero%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035500000!5m2!1sen!2skr",
+        slots_tag: "Max 2 Bookings/Hr",
+        doctor_type: "specialist",
+        sleep_anesthesia: true,
+        anesthesiologist_resident: true,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
+    },
+    {
+        id: 7,
+        name: "Prestige Rhinoplasty House",
+        location: "📍 Sinsa-dong, Gangnam",
+        rating: "⭐ 4.8 (89+ verified reviews)",
+        description: "Specialized in structural rhinoplasty and functional nose surgeries. Resolves nasal breathing issues while simultaneously optimizing nasal aesthetic contours.",
+        specialties: ["Silicone Rhinoplasty", "Functional Rhinoplasty (Rhinitis/Septal Deviation)", "Alar Reduction", "기능코 성형 (비염/비중격만곡증 개선)", "콧볼 축소"],
+        doctor_name: "Dr. Jae-Hee Park",
+        doctor_avatar: "JP",
+        doctor_title: "Board-Certified Plastic Surgeon | Rhinoplasty Specialist",
+        doctor_bio: "Dr. Park completed his residency at Yonsei Severance Hospital, specializing in functional rhinoplasty that cures breathing issues while enhancing nasal aesthetics.",
+        hours: "Mon - Fri: 10:30 AM - 7:30 PM | Sat: 10:00 AM - 5:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr",
+        slots_tag: "Max 1 Booking/Hr",
+        doctor_type: "specialist",
+        sleep_anesthesia: true,
+        anesthesiologist_resident: true,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
+    },
+    {
+        id: 8,
+        name: "Cheongdam Line Breast Clinic",
+        location: "📍 Cheongdam-dong, Gangnam",
+        rating: "⭐ 4.9 (97+ verified reviews)",
+        description: "An internationally recognized boutique clinic for premium breast augmentations and lifts, focusing on natural breast kinetics and verified safe implant tip logs.",
+        specialties: ["Motiva Breast Augmentation", "Autologous Fat Breast Augmentation", "모티바 가슴 확대", "자가지방 가슴 확대"],
+        doctor_name: "Dr. Sang-Woo Nam",
+        doctor_avatar: "SN",
+        doctor_title: "Board-Certified Plastic Surgeon | Breast Specialist",
+        doctor_bio: "Dr. Nam is an internationally recognized speaker on Motiva Ergonomix implants, prioritizing tissue safety and natural kinetics.",
+        hours: "Mon - Fri: 10:00 AM - 6:30 PM | Sat: 10:00 AM - 3:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr",
+        slots_tag: "Max 2 Bookings/Hr",
+        doctor_type: "specialist",
+        sleep_anesthesia: true,
+        anesthesiologist_resident: true,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
+    },
+    {
+        id: 9,
+        name: "Sinsa Top Dental House",
+        location: "📍 Sinsa-dong, Gangnam",
+        rating: "⭐ 4.7 (104+ verified reviews)",
+        description: "Specializing in aesthetic dentistry, minimum-prep laminates, and clear orthodontics. We design natural-looking smiles based on computer-guided tooth thickness models.",
+        specialties: ["Laminate", "Clear Aligners", "Teeth Whitening", "라미네이트", "투명교정", "치아 미백"],
+        doctor_name: "Dr. Soo-Hyun Kim",
+        doctor_avatar: "SK",
+        doctor_title: "Chief Dentist | Orthodontic Specialist",
+        doctor_bio: "Dr. Kim focuses on ultra-thin laminate veneers and digital clear aligner planning with minimal tooth prep.",
+        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 2:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr",
+        slots_tag: "Max 3 Bookings/Hr",
+        doctor_type: "specialist",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: false,
+        excellent_aftercare: true
+    },
+    {
+        id: 10,
+        name: "Kyunghee Diet Herbal Clinic",
+        location: "📍 Myeong-dong, Jung-gu",
+        rating: "⭐ 4.8 (115+ verified reviews)",
+        description: "Provides medical herbal weight management programs and facial cosmetic acupuncture designed by certified Korean Traditional Medicine Doctors.",
+        specialties: ["Herbal Diet Medicine", "Acupuncture Thread Lifting", "다이어트 한약", "매선 침"],
+        doctor_name: "Dr. Jin-Woo Lee",
+        doctor_avatar: "JL",
+        doctor_title: "Korean Medicine Doctor | Diet Specialist",
+        doctor_bio: "Dr. Lee graduated from Kyunghee University Korean Medicine College and developed custom herbal diet formulas with high compliance and low rebound rate.",
+        hours: "Mon - Fri: 09:30 AM - 6:30 PM | Sat: 09:30 AM - 1:00 PM",
+        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr",
+        slots_tag: "Max 4 Bookings/Hr",
+        doctor_type: "specialist",
+        sleep_anesthesia: false,
+        anesthesiologist_resident: false,
+        foreign_attraction_registered: true,
+        foreigner_insurance: true,
+        excellent_aftercare: true
     }
 ];
 
@@ -736,6 +841,106 @@ VALUES
     false,
     true,
     false
+),
+(
+    'Gangnam Eye & Youth Center', 
+    '📍 Gangnam-daero, Gangnam', 
+    '⭐ 4.9 (142+ verified reviews)', 
+    'A premier eye-focused surgery center in Gangnam, specializing in natural double eyelids, non-incisional ptosis corrections, and delicate under-eye fat relocations.', 
+    ARRAY['Natural Adhesion Double Eyelid', 'Non-incisional Ptosis Correction', 'Under-Eye Fat Relocation', '매몰/자연유착 쌍꺼풀', '비절개 눈매교정', '눈밑지방재배치'], 
+    'Dr. Min-Seok Song', 
+    'MS', 
+    'Board-Certified Plastic Surgeon | Eye Specialist', 
+    'Dr. Song is a leading eye rejuvenation specialist with 15+ years of experience, renowned for natural double eyelid and delicate fat redistribution.', 
+    'Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM', 
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.8384950669147!2d127.02752537646513!3d37.502011972054235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a31a54727%3A0x6b6df7d6b8b0e8c0!2sGangnam-daero%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035500000!5m2!1sen!2skr',
+    'Max 2 Bookings/Hr',
+    'specialist',
+    true,
+    true,
+    true,
+    true,
+    true
+),
+(
+    'Prestige Rhinoplasty House', 
+    '📍 Sinsa-dong, Gangnam', 
+    '⭐ 4.8 (89+ verified reviews)', 
+    'Specialized in structural rhinoplasty and functional nose surgeries. Resolves nasal breathing issues while simultaneously optimizing nasal aesthetic contours.', 
+    ARRAY['Silicone Rhinoplasty', 'Functional Rhinoplasty (Rhinitis/Septal Deviation)', 'Alar Reduction', '기능코 성형 (비염/비중격만곡증 개선)', '콧볼 축소'], 
+    'Dr. Jae-Hee Park', 
+    'JP', 
+    'Board-Certified Plastic Surgeon | Rhinoplasty Specialist', 
+    'Dr. Park completed his residency at Yonsei Severance Hospital, specializing in functional rhinoplasty that cures breathing issues while enhancing nasal aesthetics.', 
+    'Mon - Fri: 10:30 AM - 7:30 PM | Sat: 10:00 AM - 5:00 PM', 
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr',
+    'Max 1 Booking/Hr',
+    'specialist',
+    true,
+    true,
+    true,
+    true,
+    true
+),
+(
+    'Cheongdam Line Breast Clinic', 
+    '📍 Cheongdam-dong, Gangnam', 
+    '⭐ 4.9 (97+ verified reviews)', 
+    'An internationally recognized boutique clinic for premium breast augmentations and lifts, focusing on natural breast kinetics and verified safe implant tip logs.', 
+    ARRAY['Motiva Breast Augmentation', 'Autologous Fat Breast Augmentation', '모티바 가슴 확대', '자가지방 가슴 확대'], 
+    'Dr. Sang-Woo Nam', 
+    'SN', 
+    'Board-Certified Plastic Surgeon | Breast Specialist', 
+    'Dr. Nam is an internationally recognized speaker on Motiva Ergonomix implants, prioritizing tissue safety and natural kinetics.', 
+    'Mon - Fri: 10:00 AM - 6:30 PM | Sat: 10:00 AM - 3:00 PM', 
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr',
+    'Max 2 Bookings/Hr',
+    'specialist',
+    true,
+    true,
+    true,
+    true,
+    true
+),
+(
+    'Sinsa Top Dental House', 
+    '📍 Sinsa-dong, Gangnam', 
+    '⭐ 4.7 (104+ verified reviews)', 
+    'Specializing in aesthetic dentistry, minimum-prep laminates, and clear orthodontics. We design natural-looking smiles based on computer-guided tooth thickness models.', 
+    ARRAY['Laminate', 'Clear Aligners', 'Teeth Whitening', '라미네이트', '투명교정', '치아 미백'], 
+    'Dr. Soo-Hyun Kim', 
+    'SK', 
+    'Chief Dentist | Orthodontic Specialist', 
+    'Dr. Kim focuses on ultra-thin laminate veneers and digital clear aligner planning with minimal tooth prep.', 
+    'Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 2:00 PM', 
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr',
+    'Max 3 Bookings/Hr',
+    'specialist',
+    false,
+    false,
+    true,
+    false,
+    true
+),
+(
+    'Kyunghee Diet Herbal Clinic', 
+    '📍 Myeong-dong, Jung-gu', 
+    '⭐ 4.8 (115+ verified reviews)', 
+    'Provides medical herbal weight management programs and facial cosmetic acupuncture designed by certified Korean Traditional Medicine Doctors.', 
+    ARRAY['Herbal Diet Medicine', 'Acupuncture Thread Lifting', '다이어트 한약', '매선 침'], 
+    'Dr. Jin-Woo Lee', 
+    'JL', 
+    'Korean Medicine Doctor | Diet Specialist', 
+    'Dr. Lee graduated from Kyunghee University Korean Medicine College and developed custom herbal diet formulas with high compliance and low rebound rate.', 
+    'Mon - Fri: 09:30 AM - 6:30 PM | Sat: 09:30 AM - 1:00 PM', 
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr',
+    'Max 4 Bookings/Hr',
+    'specialist',
+    false,
+    false,
+    true,
+    true,
+    true
 )
 ON CONFLICT DO NOTHING;
 
@@ -950,6 +1155,175 @@ const translations = {
         "search.placeholder": "Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)",
         "filter.all": "All Treatments",
 
+        "cat.skin": "Skin",
+        "cat.lifting": "Lifting",
+        "cat.botox": "Botox",
+        "cat.filler": "Filler",
+        "cat.eye": "Eye Surgery",
+        "cat.nose": "Rhinoplasty",
+        "cat.contour": "Facial Contour/Orthognathic",
+        "cat.fat": "Fat Surgery",
+        "cat.breast": "Breast Surgery",
+        "cat.hair": "Hair Transplant",
+        "cat.epilation": "Hair Removal",
+        "cat.dental": "Dental",
+        "cat.herbal": "Oriental Medicine",
+        "cat.others": "Others",
+
+        "subcat.skin_booster": "Skin Boosters",
+        "subcat.peeling": "Peeling/Exfoliation",
+        "subcat.whitening": "Whitening/Pigmentation",
+        "subcat.acne": "Acne/Scars",
+        "subcat.mole": "Mole/Wart",
+        "subcat.laser_lifting": "Laser Lifting",
+        "subcat.thread_lifting": "Thread Lifting",
+        "subcat.lifting_injection": "Lifting Injections",
+        "subcat.wrinkle_botox": "Wrinkle Botox",
+        "subcat.area_botox": "Area-Specific Botox",
+        "subcat.volume_filler": "Facial Volume Filler",
+        "subcat.feature_filler": "Feature Filler",
+        "subcat.body_filler": "Body Filler",
+        "subcat.double_eyelid": "Double Eyelid",
+        "subcat.canthoplasty": "Epicanthoplasty/Canthoplasty",
+        "subcat.ptosis_correction": "Ptosis Correction",
+        "subcat.eye_aging": "Eye Rejuvenation",
+        "subcat.eye_revision": "Eye Revision",
+        "subcat.nose_structure": "Bridge/Tip Surgery",
+        "subcat.functional_nose": "Functional Rhinoplasty",
+        "subcat.nose_correction": "Nose Shape Correction",
+        "subcat.nose_revision": "Rhinoplasty Revision",
+        "subcat.facial_contour": "Facial Contouring",
+        "subcat.orthognathic": "Orthognathic Surgery",
+        "subcat.forehead_implant": "Forehead Contouring",
+        "subcat.liposuction": "Liposuction",
+        "subcat.fat_graft": "Fat Grafting",
+        "subcat.breast_aug": "Breast Augmentation",
+        "subcat.breast_reduction": "Breast Reduction/Lift",
+        "subcat.nipple_gyne": "Nipple/Gynecomastia",
+        "subcat.hair_transplant": "Hair Transplant",
+        "subcat.hair_loss_treat": "Hair Loss Treatment",
+        "subcat.laser_epilation": "Laser Hair Removal",
+        "subcat.aesthetic_dental": "Aesthetic Dental",
+        "subcat.orthodontic_dental": "Orthodontics",
+        "subcat.whitening_implant": "Whitening/Implant",
+        "subcat.herbal_diet": "Herbal Diet",
+        "subcat.herbal_proc": "Herbal Procedure",
+        "subcat.misc_treat": "Miscellaneous",
+
+        "treat.rejuran": "Rejuran Healer",
+        "treat.exosome": "Exosome",
+        "treat.juvelook": "Juvelook",
+        "treat.water_glow": "Water Glow Injection",
+        "treat.aqua_peel": "Aqua Peel",
+        "treat.aladdin_peel": "Aladdin Peel",
+        "treat.milk_peel": "Milk Peel",
+        "treat.toning": "Laser Toning",
+        "treat.ipl": "IPL",
+        "treat.pico": "Pico Toning",
+        "treat.co2": "CO2 Laser",
+        "treat.fraxel": "Fraxel",
+        "treat.agnes": "Agnes",
+        "treat.pdt": "PDT",
+        "treat.mole_removal": "Mole/Wart Removal",
+        "treat.ulthera": "Ulthera",
+        "treat.shurink": "Shurink",
+        "treat.inmode": "Inmode",
+        "treat.thermage": "Thermage",
+        "treat.oligio": "Oligio",
+        "treat.mint": "Mint Thread",
+        "treat.silhouette": "Silhouette Soft",
+        "treat.contour_inj": "Contour Injection",
+        "treat.sculpt_inj": "Sculpting Injection",
+        "treat.double_chin_inj": "Double Chin Injection",
+        "treat.frown": "Frown Lines Botox",
+        "treat.forehead_b": "Forehead Botox",
+        "treat.crow": "Crow's Feet Botox",
+        "treat.lips_b": "Lips Botox",
+        "treat.pebbled_chin": "Pebbled Chin Botox",
+        "treat.jaw_b": "Square Jaw Botox",
+        "treat.salivary": "Salivary Glands Botox",
+        "treat.trapezius": "Trapezius Botox",
+        "treat.calves": "Calves Botox",
+        "treat.hyperhidrosis": "Hyperhidrosis Botox",
+        "treat.forehead_f": "Forehead Filler",
+        "treat.cheek_f": "Front Cheek Filler",
+        "treat.cheek_vol": "Cheek Filler",
+        "treat.nasolabial": "Nasolabial Folds Filler",
+        "treat.chin_tip": "Chin Tip Filler",
+        "treat.nose_f": "Nose Filler",
+        "treat.lips_f": "Lips Filler",
+        "treat.lip_corners": "Lip Corners Filler",
+        "treat.aegyo": "Under-Eye Aegyo Sal",
+        "treat.pelvis_f": "Pelvis Filler",
+        "treat.hip_up": "Hip-Up Filler",
+        "treat.natural_double": "Natural Adhesion Double Eyelid",
+        "treat.incisional_double": "Incisional Double Eyelid",
+        "treat.partial_double": "Partial Incisional Double Eyelid",
+        "treat.front_cant": "Front Canthoplasty",
+        "treat.top_cant": "Top Canthoplasty",
+        "treat.back_cant": "Back Canthoplasty",
+        "treat.bottom_cant": "Bottom Canthoplasty",
+        "treat.non_incisional_ptosis": "Non-incisional Ptosis Correction",
+        "treat.incisional_ptosis": "Incisional Ptosis Correction",
+        "treat.undereye_fat": "Under-Eye Fat Relocation",
+        "treat.upper_bleph": "Upper Blepharoplasty",
+        "treat.lower_bleph": "Lower Blepharoplasty",
+        "treat.eye_revision": "Eye Revision Surgery",
+        "treat.silicone_nose": "Silicone Rhinoplasty",
+        "treat.cartilage_nose": "Autologous Cartilage Rhinoplasty",
+        "treat.functional_nose": "Functional Rhinoplasty (Rhinitis/Septal Deviation)",
+        "treat.alar_reduction": "Alar Reduction",
+        "treat.bulbous_nose": "Bulbous Nose Correction",
+        "treat.hump_nose": "Hump Nose Correction",
+        "treat.nose_revision": "Rhinoplasty Revision",
+        "treat.jaw_reduction": "Square Jaw Reduction",
+        "treat.cheekbone_red": "Cheekbone Reduction",
+        "treat.chin_surg": "Chin Surgery",
+        "treat.orthognathic": "Orthognathic Surgery",
+        "treat.protruding_mouth": "Protruding Mouth Surgery",
+        "treat.forehead_contour": "Forehead Contouring",
+        "treat.implant_insert": "Implant Insertion",
+        "treat.abdomen_lipo": "Abdomen Liposuction",
+        "treat.thigh_lipo": "Thighs Liposuction",
+        "treat.forearm_lipo": "Forearms Liposuction",
+        "treat.face_lipo": "Double Chin/Face Liposuction",
+        "treat.full_face_fat": "Full Face Fat Grafting",
+        "treat.area_fat": "Area-Specific Fat Grafting",
+        "treat.motiva": "Motiva Breast Augmentation",
+        "treat.mentor": "Mentor Breast Augmentation",
+        "treat.fat_breast": "Autologous Fat Breast Augmentation",
+        "treat.breast_reduction": "Breast Reduction",
+        "treat.breast_lift": "Sagging Breast Correction",
+        "treat.inverted_nipple": "Inverted Nipple Correction",
+        "treat.nipple_reduction": "Nipple Reduction",
+        "treat.gynecomastia": "Gynecomastia Treatment",
+        "treat.incisional_hair": "Incisional Hair Transplant",
+        "treat.non_incisional_hair": "Non-incisional Hair Transplant",
+        "treat.meso": "Scalp Mesotherapy",
+        "treat.hairline": "Hairline Correction",
+        "treat.underarm_ep": "Underarms Hair Removal",
+        "treat.limbs_ep": "Arms/Legs Hair Removal",
+        "treat.lip_ep": "Upper Lip Hair Removal",
+        "treat.bikini_ep": "Bikini/Brazilian Hair Removal",
+        "treat.face_ep": "Full Face Hair Removal",
+        "treat.laminate": "Laminate",
+        "treat.all_ceramic": "All-Ceramic",
+        "treat.clippy_c": "Clippy-C Orthodontics",
+        "treat.clear_align": "Clear Aligners",
+        "treat.lingual": "Lingual Orthodontics",
+        "treat.whitening": "Teeth Whitening",
+        "treat.implant": "Dental Implants",
+        "treat.herbal_diet_m": "Herbal Diet Medicine",
+        "treat.herbal_diet_c": "Herbal Diet Capsule",
+        "treat.herbal_diet_p": "Herbal Diet Pills",
+        "treat.acupuncture_thread": "Acupuncture Thread Lifting",
+        "treat.facial_acupuncture": "Facial Acupuncture",
+        "treat.diet_herbal_inj": "Diet Herbal Injection",
+        "treat.tattoo_removal": "Tattoo Removal",
+        "treat.side_effect_treat": "Petit Side-Effect Treatment",
+        "treat.post_op": "Post-op Management Program",
+
+
         "badge.dermatologist": "Board-Certified Dermatologist",
         "badge.specialist": "Specialist",
         "badge.gp": "General Practitioner",
@@ -1026,7 +1400,17 @@ const translations = {
         "rev_sim.whistleblower_msg": "Your whistleblowing report is registered! Under our whistleblower reward policy, if the clinic's manipulation attempt is validated, you will receive a 500,000 KRW platform reward. The clinic will receive a 1st warning infraction.",
         "rev_sim.submit": "Upload Authenticated Review",
         "rev_sim.success_title": "Verified Review Published!",
-        "rev_sim.success_desc": "Thank you for your honest data. Your review is permanently stored on our offshore database node and cannot be deleted by the clinic."
+        "rev_sim.success_desc": "Thank you for your honest data. Your review is permanently stored on our offshore database node and cannot be deleted by the clinic.",
+        "category.menu_title": "Please select a treatment of interest",
+        "category.pigment": "Pigmentation",
+        "category.acne": "Acne",
+        "category.hair_loss": "Hair Loss",
+        "category.diet_injection": "Diet Injection",
+        "validation.name_required": "Please fill out this field with your full name.",
+        "validation.email_required": "Please enter your email address.",
+        "validation.email_invalid": "Please enter a valid email address containing '@'.",
+        "validation.date_required": "Please choose a booking date.",
+        "validation.time_required": "Please choose a preferred time slot."
     },
 
     ko: {
@@ -1226,6 +1610,175 @@ const translations = {
         "search.placeholder": "시술명을 검색하세요 (예: 피코, 리프팅, Nd:YAG...)",
         "filter.all": "전체 시술",
 
+        "cat.skin": "피부",
+        "cat.lifting": "리프팅",
+        "cat.botox": "보톡스",
+        "cat.filler": "필러",
+        "cat.eye": "눈성형",
+        "cat.nose": "코성형",
+        "cat.contour": "안면윤곽/양악",
+        "cat.fat": "지방성형",
+        "cat.breast": "가슴성형",
+        "cat.hair": "모발이식",
+        "cat.epilation": "제모",
+        "cat.dental": "치아",
+        "cat.herbal": "한방",
+        "cat.others": "기타",
+
+        "subcat.skin_booster": "스킨부스터",
+        "subcat.peeling": "필링/각질",
+        "subcat.whitening": "미백/색소/기미",
+        "subcat.acne": "여드름/흉터",
+        "subcat.mole": "점/사마귀 제거",
+        "subcat.laser_lifting": "레이저 리프팅",
+        "subcat.thread_lifting": "실리프팅",
+        "subcat.lifting_injection": "리프팅 주사",
+        "subcat.wrinkle_botox": "주름 보톡스",
+        "subcat.area_botox": "부위별 보톡스",
+        "subcat.volume_filler": "얼굴 볼륨 필러",
+        "subcat.feature_filler": "이목구비 필러",
+        "subcat.body_filler": "바디 필러",
+        "subcat.double_eyelid": "쌍꺼풀 수술",
+        "subcat.canthoplasty": "트임 성형",
+        "subcat.ptosis_correction": "눈매 교정",
+        "subcat.eye_aging": "눈가 노화 성형",
+        "subcat.eye_revision": "눈재수술",
+        "subcat.nose_structure": "콧대/코끝 성형",
+        "subcat.functional_nose": "기능코 성형",
+        "subcat.nose_correction": "콧볼 축소/복코/매부리코 교정",
+        "subcat.nose_revision": "코재수술",
+        "subcat.facial_contour": "안면윤곽",
+        "subcat.orthognathic": "양악 수술 / 돌출입 수술",
+        "subcat.forehead_implant": "이마 성형 / 보형물 삽입",
+        "subcat.liposuction": "지방흡입",
+        "subcat.fat_graft": "지방이식",
+        "subcat.breast_aug": "가슴 확대 수술",
+        "subcat.breast_reduction": "가슴 축소 / 처진 가슴 교정",
+        "subcat.nipple_gyne": "유두 성형 / 여유증",
+        "subcat.hair_transplant": "모발이식",
+        "subcat.hair_loss_treat": "탈모 치료",
+        "subcat.laser_epilation": "레이저 제모",
+        "subcat.aesthetic_dental": "라미네이트 / 올세라믹",
+        "subcat.orthodontic_dental": "치아 교정",
+        "subcat.whitening_implant": "치아 미백 / 임플란트",
+        "subcat.herbal_diet": "한방 다이어트",
+        "subcat.herbal_proc": "한방 시술",
+        "subcat.misc_treat": "기타 치료",
+
+        "treat.rejuran": "리쥬란 힐러",
+        "treat.exosome": "엑소좀",
+        "treat.juvelook": "쥬베룩",
+        "treat.water_glow": "물광주사",
+        "treat.aqua_peel": "아쿠아필",
+        "treat.aladdin_peel": "알라딘필",
+        "treat.milk_peel": "밀크필",
+        "treat.toning": "토닝",
+        "treat.ipl": "IPL",
+        "treat.pico": "피코토닝",
+        "treat.co2": "CO2 레이저",
+        "treat.fraxel": "프락셀",
+        "treat.agnes": "아그네스",
+        "treat.pdt": "PDT",
+        "treat.mole_removal": "점/사마귀 제거",
+        "treat.ulthera": "울쎄라",
+        "treat.shurink": "슈링크",
+        "treat.inmode": "인모드",
+        "treat.thermage": "써마지",
+        "treat.oligio": "올리지오",
+        "treat.mint": "민트실",
+        "treat.silhouette": "실루엣소프트",
+        "treat.contour_inj": "윤곽주사",
+        "treat.sculpt_inj": "조각주사",
+        "treat.double_chin_inj": "이중턱 주사",
+        "treat.frown": "미간 보톡스",
+        "treat.forehead_b": "이마 보톡스",
+        "treat.crow": "눈가 보톡스",
+        "treat.lips_b": "입술 보톡스",
+        "treat.pebbled_chin": "자갈턱 보톡스",
+        "treat.jaw_b": "사각턱 보톡스",
+        "treat.salivary": "침샘 보톡스",
+        "treat.trapezius": "승모근 보톡스",
+        "treat.calves": "종아리 보톡스",
+        "treat.hyperhidrosis": "다한증 보톡스",
+        "treat.forehead_f": "이마 필러",
+        "treat.cheek_f": "앞광대 필러",
+        "treat.cheek_vol": "볼 필러",
+        "treat.nasolabial": "팔자주름 필러",
+        "treat.chin_tip": "턱끝 필러",
+        "treat.nose_f": "코 필러",
+        "treat.lips_f": "입술 필러",
+        "treat.lip_corners": "입꼬리 필러",
+        "treat.aegyo": "애교살 필러",
+        "treat.pelvis_f": "골반 필러",
+        "treat.hip_up": "힙업 필러",
+        "treat.natural_double": "매몰/자연유착 쌍꺼풀",
+        "treat.incisional_double": "절개 쌍꺼풀",
+        "treat.partial_double": "부분절개 쌍꺼풀",
+        "treat.front_cant": "앞트임",
+        "treat.top_cant": "윗트임",
+        "treat.back_cant": "뒤트임",
+        "treat.bottom_cant": "밑트임",
+        "treat.non_incisional_ptosis": "비절개 눈매교정",
+        "treat.incisional_ptosis": "절개 눈매교정",
+        "treat.undereye_fat": "눈밑지방재배치",
+        "treat.upper_bleph": "상안검 수술",
+        "treat.lower_bleph": "하안검 수술",
+        "treat.eye_revision": "눈재수술",
+        "treat.silicone_nose": "실리콘 콧대/코끝 성형",
+        "treat.cartilage_nose": "자가연골 콧대/코끝 성형",
+        "treat.functional_nose": "기능코 성형 (비염/비중격만곡증 개선)",
+        "treat.alar_reduction": "콧볼 축소",
+        "treat.bulbous_nose": "복코 교정",
+        "treat.hump_nose": "매부리코 교정",
+        "treat.nose_revision": "코재수술",
+        "treat.jaw_reduction": "사각턱 수술",
+        "treat.cheekbone_red": "광대축소술",
+        "treat.chin_surg": "턱끝 수술",
+        "treat.orthognathic": "양악 수술",
+        "treat.protruding_mouth": "돌출입 수술",
+        "treat.forehead_contour": "이마 성형",
+        "treat.implant_insert": "보형물 삽입",
+        "treat.abdomen_lipo": "복부 지방흡입",
+        "treat.thigh_lipo": "허벅지 지방흡입",
+        "treat.forearm_lipo": "팔뚝 지방흡입",
+        "treat.face_lipo": "이중턱/얼굴 지방흡입",
+        "treat.full_face_fat": "풀페이스 지방이식",
+        "treat.area_fat": "부위별 지방이식",
+        "treat.motiva": "모티바 가슴 확대",
+        "treat.mentor": "멘토 가슴 확대",
+        "treat.fat_breast": "자가지방 가슴 확대",
+        "treat.breast_reduction": "가슴 축소 수술",
+        "treat.breast_lift": "처진 가슴 교정",
+        "treat.inverted_nipple": "함몰유두 성형",
+        "treat.nipple_reduction": "유두축소 성형",
+        "treat.gynecomastia": "여성형 유방증 (여유증) 수술",
+        "treat.incisional_hair": "절개 모발이식",
+        "treat.non_incisional_hair": "비절개 모발이식",
+        "treat.meso": "두피 메조테라피",
+        "treat.hairline": "헤어라인 교정",
+        "treat.underarm_ep": "겨드랑이 제모",
+        "treat.limbs_ep": "팔/다리 제모",
+        "treat.lip_ep": "인중 제모",
+        "treat.bikini_ep": "비키니/브라질리언 제모",
+        "treat.face_ep": "얼굴 전체 제모",
+        "treat.laminate": "라미네이트",
+        "treat.all_ceramic": "올세라믹",
+        "treat.clippy_c": "클리피씨 교정",
+        "treat.clear_align": "투명교정",
+        "treat.lingual": "설측교정",
+        "treat.whitening": "치아 미백",
+        "treat.implant": "임플란트",
+        "treat.herbal_diet_m": "다이어트 한약",
+        "treat.herbal_diet_c": "다이어트 캡슐",
+        "treat.herbal_diet_p": "다이어트 환",
+        "treat.acupuncture_thread": "매선 침",
+        "treat.facial_acupuncture": "윤곽 침",
+        "treat.diet_herbal_inj": "다이어트 약침",
+        "treat.tattoo_removal": "문신제거",
+        "treat.side_effect_treat": "쁘띠 성형 부작용 치료",
+        "treat.post_op": "수술 후 관리 프로그램",
+
+
         "badge.dermatologist": "피부과 전문의",
         "badge.specialist": "전문의",
         "badge.gp": "일반의",
@@ -1302,7 +1855,17 @@ const translations = {
         "rev_sim.whistleblower_msg": "신고가 성공적으로 접수되었습니다! 리뷰 조작 시도 조사 후 병원 측의 리베이트 유도가 사실로 확인될 경우 50만 원 상당의 포상금이 지급되며, 해당 병원은 경고 조치됩니다.",
         "rev_sim.submit": "인증 리뷰 업로드",
         "rev_sim.success_title": "방문 인증 리뷰가 등록되었습니다!",
-        "rev_sim.success_desc": "정직한 데이터 구축에 동참해 주셔서 감사합니다. 등록된 후기는 해외 서버에 안전하게 보관되어 병원 측의 임의 삭제나 가공이 불가합니다."
+        "rev_sim.success_desc": "정직한 데이터 구축에 동참해 주셔서 감사합니다. 등록된 후기는 해외 서버에 안전하게 보관되어 병원 측의 임의 삭제나 가공이 불가합니다.",
+        "category.menu_title": "관심있는 시술을 선택해보세요.",
+        "category.pigment": "색소",
+        "category.acne": "여드름",
+        "category.hair_loss": "탈모",
+        "category.diet_injection": "비만주사",
+        "validation.name_required": "성함을 입력해 주세요.",
+        "validation.email_required": "이메일 주소를 입력해 주세요.",
+        "validation.email_invalid": "올바른 이메일 형식(@ 포함)을 입력해 주세요.",
+        "validation.date_required": "예약 희망 날짜를 선택해 주세요.",
+        "validation.time_required": "희망하시는 시간대를 선택해 주세요."
     }
 };
 
@@ -1513,6 +2076,67 @@ function setLanguage(lang) {
                     reviews. No sponsored ads. No hidden fees. Just honest medical expertise tailored to your specific
                     skin type.
                 </p>
+
+                <!-- Visual Category Menu (9 Icons) -->
+                <div class="visual-category-container">
+                    <h3 class="visual-category-title" data-i18n="category.menu_title">Please select a treatment of interest</h3>
+                    <div class="visual-category-menu">
+                        <button class="visual-category-item" data-target-category="epilation" data-target-treatment="Laser Hair Removal">
+                            <div class="icon-circle bg-epilation">
+                                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l6.59-6.59L18 8l-8 8z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.epilation">제모</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="lifting">
+                            <div class="icon-circle bg-lifting">
+                                <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5l-8-8z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.lifting">리프팅</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="filler">
+                            <div class="icon-circle bg-filler">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 10c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.filler">필러</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="botox">
+                            <div class="icon-circle bg-botox">
+                                <svg viewBox="0 0 24 24"><path d="M19 10.5V6h-1V4.5C18 3.67 17.33 3 16.5 3h-9C6.67 3 6 3.67 6 4.5V6H5v4.5C5 11.83 6.67 13 8.5 13H9v4h-1v2H7v2h10v-2h-1v-2h-1v-4h.5c1.83 0 3.5-1.17 3.5-2.5zM8 4.5c0-.28.22-.5.5-.5h9c.28 0 .5.22.5.5V6H8V4.5z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.botox">보톡스</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="skin" data-target-subcategory="skin_booster">
+                            <div class="icon-circle bg-skin-booster">
+                                <svg viewBox="0 0 24 24"><path d="M12 3c-1.2 0-2.4.5-3.3 1.4L4.3 8.8c-.8.8-.8 2.1 0 2.9l4.4 4.4c.9.9 2.1 1.4 3.3 1.4s2.4-.5 3.3-1.4l4.4-4.4c.8-.8.8-2.1 0-2.9l-4.4-4.4C14.4 3.5 13.2 3 12 3zm0 2c.7 0 1.4.3 1.9.8l4.4 4.4c.5.5.5 1.3 0 1.9l-4.4 4.4c-.5.5-1.2.8-1.9.8s-1.4-.3-1.9-.8l-4.4-4.4c-.5-.5-.5-1.3 0-1.9l4.4-4.4c.5-.5 1.2-.8 1.9-.8z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="subcat.skin_booster">스킨부스터</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="skin" data-target-subcategory="whitening">
+                            <div class="icon-circle bg-pigment">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.pigment">색소</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="skin" data-target-subcategory="acne">
+                            <div class="icon-circle bg-acne">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.acne">여드름</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="hair" data-target-subcategory="hair_loss_treat">
+                            <div class="icon-circle bg-hair-loss">
+                                <svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.hair_loss">탈모</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="herbal" data-target-treatment="Diet Herbal Injection">
+                            <div class="icon-circle bg-diet-injection">
+                                <svg viewBox="0 0 24 24"><path d="M6 3h12v2H6V3zm0 4h12v10c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V7zm3 3v5h2v-5H9zm4 0v5h2v-5h-2z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.diet_injection">비만주사</span>
+                        </button>
+                    </div>
+                </div>
 
                 <!-- Step-by-Step Fitzpatrick Diagnostic Quiz Card -->
                 <div class="diagnostic-container" style="display: none;">
@@ -1959,7 +2583,7 @@ function setLanguage(lang) {
         </section>
 
         <!-- Verified Partners Directory & Receipt Demonstration -->
-        <section class="section-directory">
+        <section class="section-directory" id="directory">
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="directory.tag">Boutique Directory</span>
@@ -1980,19 +2604,442 @@ function setLanguage(lang) {
                             data-i18n-placeholder="search.placeholder"
                             placeholder="Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)">
                     </div>
-                    <div class="filter-tags-wrapper" id="filterTagsWrapper">
-                        <button class="filter-tag active" data-specialty="all" data-i18n="filter.all">All
-                            Treatments</button>
-                        <button class="filter-tag" data-specialty="Nd:YAG Laser Calibrations">Nd:YAG Laser</button>
-                        <button class="filter-tag" data-specialty="Skin Barrier Reconstruction">Skin Barrier
-                            Reconstruction</button>
-                        <button class="filter-tag" data-specialty="Pico Toning">Pico Toning</button>
-                        <button class="filter-tag" data-specialty="Vascular Laser Calibration">Vascular Laser</button>
-                        <button class="filter-tag" data-specialty="Rosacea & Redness Recovery">Rosacea Recovery</button>
-                        <button class="filter-tag" data-specialty="Genuine Consumables Logged">Genuine
-                            Consumables</button>
-                        <button class="filter-tag"
-                            data-specialty="Ultherapy & Shurink custom setups">Ultherapy/Lifting</button>
+                    <!-- Treatment Category Selector Widget -->
+                    <div class="category-selector-widget">
+                        <!-- Main Category Tabs -->
+                        <div class="category-tabs-wrapper" id="categoryTabsWrapper">
+                            <button class="category-tab active" data-category="all">
+                                <span class="tab-icon">🔍</span>
+                                <span class="tab-label" data-i18n="filter.all">All</span>
+                            </button>
+                            <button class="category-tab" data-category="skin">
+                                <span class="tab-icon">✨</span>
+                                <span class="tab-label" data-i18n="cat.skin">Skin</span>
+                            </button>
+                            <button class="category-tab" data-category="lifting">
+                                <span class="tab-icon">⚡</span>
+                                <span class="tab-label" data-i18n="cat.lifting">Lifting</span>
+                            </button>
+                            <button class="category-tab" data-category="botox">
+                                <span class="tab-icon">💉</span>
+                                <span class="tab-label" data-i18n="cat.botox">Botox</span>
+                            </button>
+                            <button class="category-tab" data-category="filler">
+                                <span class="tab-icon">💧</span>
+                                <span class="tab-label" data-i18n="cat.filler">Filler</span>
+                            </button>
+                            <button class="category-tab" data-category="eye">
+                                <span class="tab-icon">👁️</span>
+                                <span class="tab-label" data-i18n="cat.eye">Eye Surgery</span>
+                            </button>
+                            <button class="category-tab" data-category="nose">
+                                <span class="tab-icon">👃</span>
+                                <span class="tab-label" data-i18n="cat.nose">Rhinoplasty</span>
+                            </button>
+                            <button class="category-tab" data-category="contour">
+                                <span class="tab-icon">📐</span>
+                                <span class="tab-label" data-i18n="cat.contour">Facial Contour</span>
+                            </button>
+                            <button class="category-tab" data-category="fat">
+                                <span class="tab-icon">⌛</span>
+                                <span class="tab-label" data-i18n="cat.fat">Fat Surgery</span>
+                            </button>
+                            <button class="category-tab" data-category="breast">
+                                <span class="tab-icon">🍒</span>
+                                <span class="tab-label" data-i18n="cat.breast">Breast Surgery</span>
+                            </button>
+                            <button class="category-tab" data-category="hair">
+                                <span class="tab-icon">💇</span>
+                                <span class="tab-label" data-i18n="cat.hair">Hair Transplant</span>
+                            </button>
+                            <button class="category-tab" data-category="epilation">
+                                <span class="tab-icon">🪒</span>
+                                <span class="tab-label" data-i18n="cat.epilation">Hair Removal</span>
+                            </button>
+                            <button class="category-tab" data-category="dental">
+                                <span class="tab-icon">🦷</span>
+                                <span class="tab-label" data-i18n="cat.dental">Dental</span>
+                            </button>
+                            <button class="category-tab" data-category="herbal">
+                                <span class="tab-icon">🌿</span>
+                                <span class="tab-label" data-i18n="cat.herbal">Oriental Medicine</span>
+                            </button>
+                            <button class="category-tab" data-category="others">
+                                <span class="tab-icon">➕</span>
+                                <span class="tab-label" data-i18n="cat.others">Others</span>
+                            </button>
+                        </div>
+
+                        <!-- Expandable Submenu Panel -->
+                        <div class="category-submenu-panel" id="categorySubmenuPanel">
+                            <!-- All Section (No submenus) -->
+                            <div class="submenu-content active" id="submenu-all">
+                                <p class="submenu-info" data-i18n="compare.subtitle">Select a category above to view specific treatments</p>
+                            </div>
+
+                            <!-- Skin Section -->
+                            <div class="submenu-content" id="submenu-skin">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.skin_booster">Skin Boosters</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Rejuran Healer" data-i18n="treat.rejuran">Rejuran Healer</button>
+                                        <button class="treat-chip" data-treatment="Exosome" data-i18n="treat.exosome">Exosome</button>
+                                        <button class="treat-chip" data-treatment="Juvelook" data-i18n="treat.juvelook">Juvelook</button>
+                                        <button class="treat-chip" data-treatment="Water Glow Injection" data-i18n="treat.water_glow">Water Glow Injection</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.peeling">Peeling/Exfoliation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Aqua Peel" data-i18n="treat.aqua_peel">Aqua Peel</button>
+                                        <button class="treat-chip" data-treatment="Aladdin Peel" data-i18n="treat.aladdin_peel">Aladdin Peel</button>
+                                        <button class="treat-chip" data-treatment="Milk Peel" data-i18n="treat.milk_peel">Milk Peel</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.whitening">Whitening/Pigmentation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Laser Toning" data-i18n="treat.toning">Laser Toning</button>
+                                        <button class="treat-chip" data-treatment="IPL" data-i18n="treat.ipl">IPL</button>
+                                        <button class="treat-chip" data-treatment="Pico Toning" data-i18n="treat.pico">Pico Toning</button>
+                                        <button class="treat-chip" data-treatment="CO2 Laser" data-i18n="treat.co2">CO2 Laser</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.acne">Acne/Scars</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Fraxel" data-i18n="treat.fraxel">Fraxel</button>
+                                        <button class="treat-chip" data-treatment="Agnes" data-i18n="treat.agnes">Agnes</button>
+                                        <button class="treat-chip" data-treatment="PDT" data-i18n="treat.pdt">PDT</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.mole">Mole/Wart</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Mole/Wart Removal" data-i18n="treat.mole_removal">Mole/Wart Removal</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lifting Section -->
+                            <div class="submenu-content" id="submenu-lifting">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.laser_lifting">Laser Lifting</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Ulthera" data-i18n="treat.ulthera">Ulthera</button>
+                                        <button class="treat-chip" data-treatment="Shurink" data-i18n="treat.shurink">Shurink</button>
+                                        <button class="treat-chip" data-treatment="Inmode" data-i18n="treat.inmode">Inmode</button>
+                                        <button class="treat-chip" data-treatment="Thermage" data-i18n="treat.thermage">Thermage</button>
+                                        <button class="treat-chip" data-treatment="Oligio" data-i18n="treat.oligio">Oligio</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.thread_lifting">Thread Lifting</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Mint Thread" data-i18n="treat.mint">Mint Thread</button>
+                                        <button class="treat-chip" data-treatment="Silhouette Soft" data-i18n="treat.silhouette">Silhouette Soft</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.lifting_injection">Lifting Injections</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Contour Injection" data-i18n="treat.contour_inj">Contour Injection</button>
+                                        <button class="treat-chip" data-treatment="Sculpting Injection" data-i18n="treat.sculpt_inj">Sculpting Injection</button>
+                                        <button class="treat-chip" data-treatment="Double Chin Injection" data-i18n="treat.double_chin_inj">Double Chin Injection</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botox Section -->
+                            <div class="submenu-content" id="submenu-botox">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.wrinkle_botox">Wrinkle Botox</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Frown Lines Botox" data-i18n="treat.frown">Frown Lines Botox</button>
+                                        <button class="treat-chip" data-treatment="Forehead Botox" data-i18n="treat.forehead_b">Forehead Botox</button>
+                                        <button class="treat-chip" data-treatment="Crow's Feet Botox" data-i18n="treat.crow">Crow's Feet Botox</button>
+                                        <button class="treat-chip" data-treatment="Lips Botox" data-i18n="treat.lips_b">Lips Botox</button>
+                                        <button class="treat-chip" data-treatment="Pebbled Chin Botox" data-i18n="treat.pebbled_chin">Pebbled Chin Botox</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.area_botox">Area-Specific Botox</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Square Jaw Botox" data-i18n="treat.jaw_b">Square Jaw Botox</button>
+                                        <button class="treat-chip" data-treatment="Salivary Glands Botox" data-i18n="treat.salivary">Salivary Glands Botox</button>
+                                        <button class="treat-chip" data-treatment="Trapezius Botox" data-i18n="treat.trapezius">Trapezius Botox</button>
+                                        <button class="treat-chip" data-treatment="Calves Botox" data-i18n="treat.calves">Calves Botox</button>
+                                        <button class="treat-chip" data-treatment="Hyperhidrosis Botox" data-i18n="treat.hyperhidrosis">Hyperhidrosis Botox</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Filler Section -->
+                            <div class="submenu-content" id="submenu-filler">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.volume_filler">Facial Volume Filler</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Forehead Filler" data-i18n="treat.forehead_f">Forehead Filler</button>
+                                        <button class="treat-chip" data-treatment="Front Cheek Filler" data-i18n="treat.cheek_f">Front Cheek Filler</button>
+                                        <button class="treat-chip" data-treatment="Cheek Filler" data-i18n="treat.cheek_vol">Cheek Filler</button>
+                                        <button class="treat-chip" data-treatment="Nasolabial Folds Filler" data-i18n="treat.nasolabial">Nasolabial Folds Filler</button>
+                                        <button class="treat-chip" data-treatment="Chin Tip Filler" data-i18n="treat.chin_tip">Chin Tip Filler</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.feature_filler">Feature Filler</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Nose Filler" data-i18n="treat.nose_f">Nose Filler</button>
+                                        <button class="treat-chip" data-treatment="Lips Filler" data-i18n="treat.lips_f">Lips Filler</button>
+                                        <button class="treat-chip" data-treatment="Lip Corners Filler" data-i18n="treat.lip_corners">Lip Corners Filler</button>
+                                        <button class="treat-chip" data-treatment="Under-Eye Aegyo Sal Filler" data-i18n="treat.aegyo">Under-Eye Aegyo Sal</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.body_filler">Body Filler</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Pelvis Filler" data-i18n="treat.pelvis_f">Pelvis Filler</button>
+                                        <button class="treat-chip" data-treatment="Hip-Up Filler" data-i18n="treat.hip_up">Hip-Up Filler</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eye Surgery Section -->
+                            <div class="submenu-content" id="submenu-eye">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.double_eyelid">Double Eyelid</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Natural Adhesion Double Eyelid" data-i18n="treat.natural_double">Natural Adhesion</button>
+                                        <button class="treat-chip" data-treatment="Incisional Double Eyelid" data-i18n="treat.incisional_double">Incisional</button>
+                                        <button class="treat-chip" data-treatment="Partial Incisional Double Eyelid" data-i18n="treat.partial_double">Partial Incisional</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.canthoplasty">Epicanthoplasty/Canthoplasty</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Front Canthoplasty" data-i18n="treat.front_cant">Front</button>
+                                        <button class="treat-chip" data-treatment="Top Canthoplasty" data-i18n="treat.top_cant">Top</button>
+                                        <button class="treat-chip" data-treatment="Back Canthoplasty" data-i18n="treat.back_cant">Back</button>
+                                        <button class="treat-chip" data-treatment="Bottom Canthoplasty" data-i18n="treat.bottom_cant">Bottom</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.ptosis_correction">Ptosis Correction</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Non-incisional Ptosis Correction" data-i18n="treat.non_incisional_ptosis">Non-incisional</button>
+                                        <button class="treat-chip" data-treatment="Incisional Ptosis Correction" data-i18n="treat.incisional_ptosis">Incisional</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.eye_aging">Eye Rejuvenation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Under-Eye Fat Relocation" data-i18n="treat.undereye_fat">Under-Eye Fat Relocation</button>
+                                        <button class="treat-chip" data-treatment="Upper Blepharoplasty" data-i18n="treat.upper_bleph">Upper Bleph</button>
+                                        <button class="treat-chip" data-treatment="Lower Blepharoplasty" data-i18n="treat.lower_bleph">Lower Bleph</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.eye_revision">Eye Revision</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Eye Revision Surgery" data-i18n="treat.eye_revision">Eye Revision Surgery</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rhinoplasty Section -->
+                            <div class="submenu-content" id="submenu-nose">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nose_structure">Bridge/Tip Surgery</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Silicone Rhinoplasty" data-i18n="treat.silicone_nose">Silicone Rhinoplasty</button>
+                                        <button class="treat-chip" data-treatment="Autologous Cartilage Rhinoplasty" data-i18n="treat.cartilage_nose">Autologous Cartilage</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.functional_nose">Functional Rhinoplasty</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Functional Rhinoplasty (Rhinitis/Septal Deviation)" data-i18n="treat.functional_nose">Functional Rhinoplasty</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nose_correction">Nose Shape Correction</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Alar Reduction" data-i18n="treat.alar_reduction">Alar Reduction</button>
+                                        <button class="treat-chip" data-treatment="Bulbous Nose Correction" data-i18n="treat.bulbous_nose">Bulbous Nose Correction</button>
+                                        <button class="treat-chip" data-treatment="Hump Nose Correction" data-i18n="treat.hump_nose">Hump Nose Correction</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nose_revision">Rhinoplasty Revision</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Rhinoplasty Revision" data-i18n="treat.nose_revision">Rhinoplasty Revision</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Facial Contour/Orthognathic Section -->
+                            <div class="submenu-content" id="submenu-contour">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.facial_contour">Facial Contouring</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Square Jaw Reduction" data-i18n="treat.jaw_reduction">Square Jaw Reduction</button>
+                                        <button class="treat-chip" data-treatment="Cheekbone Reduction" data-i18n="treat.cheekbone_red">Cheekbone Reduction</button>
+                                        <button class="treat-chip" data-treatment="Chin Surgery" data-i18n="treat.chin_surg">Chin Surgery</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.orthognathic">Orthognathic Surgery</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Orthognathic Surgery" data-i18n="treat.orthognathic">Orthognathic Surgery</button>
+                                        <button class="treat-chip" data-treatment="Protruding Mouth Surgery" data-i18n="treat.protruding_mouth">Protruding Mouth Surgery</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.forehead_implant">Forehead Contouring</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Forehead Contouring" data-i18n="treat.forehead_contour">Forehead Contouring</button>
+                                        <button class="treat-chip" data-treatment="Implant Insertion" data-i18n="treat.implant_insert">Implant Insertion</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fat Surgery Section -->
+                            <div class="submenu-content" id="submenu-fat">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.liposuction">Liposuction</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Abdomen Liposuction" data-i18n="treat.abdomen_lipo">Abdomen</button>
+                                        <button class="treat-chip" data-treatment="Thighs Liposuction" data-i18n="treat.thigh_lipo">Thighs</button>
+                                        <button class="treat-chip" data-treatment="Forearms Liposuction" data-i18n="treat.forearm_lipo">Forearms</button>
+                                        <button class="treat-chip" data-treatment="Double Chin/Face Liposuction" data-i18n="treat.face_lipo">Double Chin/Face</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.fat_graft">Fat Grafting</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Full Face Fat Grafting" data-i18n="treat.full_face_fat">Full Face Fat Grafting</button>
+                                        <button class="treat-chip" data-treatment="Area-Specific Fat Grafting" data-i18n="treat.area_fat">Area-Specific</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Breast Surgery Section -->
+                            <div class="submenu-content" id="submenu-breast">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.breast_aug">Breast Augmentation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Motiva Breast Augmentation" data-i18n="treat.motiva">Motiva</button>
+                                        <button class="treat-chip" data-treatment="Mentor Breast Augmentation" data-i18n="treat.mentor">Mentor</button>
+                                        <button class="treat-chip" data-treatment="Autologous Fat Breast Augmentation" data-i18n="treat.fat_breast">Autologous Fat</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.breast_reduction">Breast Reduction/Lift</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Breast Reduction" data-i18n="treat.breast_reduction">Breast Reduction</button>
+                                        <button class="treat-chip" data-treatment="Sagging Breast Correction" data-i18n="treat.breast_lift">Sagging Breast Correction</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nipple_gyne">Nipple/Gynecomastia</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Inverted Nipple Correction" data-i18n="treat.inverted_nipple">Inverted Nipple</button>
+                                        <button class="treat-chip" data-treatment="Nipple Reduction" data-i18n="treat.nipple_reduction">Nipple Reduction</button>
+                                        <button class="treat-chip" data-treatment="Gynecomastia Treatment" data-i18n="treat.gynecomastia">Gynecomastia</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hair Transplant Section -->
+                            <div class="submenu-content" id="submenu-hair">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.hair_transplant">Hair Transplant</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Incisional Hair Transplant" data-i18n="treat.incisional_hair">Incisional</button>
+                                        <button class="treat-chip" data-treatment="Non-incisional Hair Transplant" data-i18n="treat.non_incisional_hair">Non-incisional</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.hair_loss_treat">Hair Loss Treatment</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Scalp Mesotherapy" data-i18n="treat.meso">Scalp Mesotherapy</button>
+                                        <button class="treat-chip" data-treatment="Hairline Correction" data-i18n="treat.hairline">Hairline Correction</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hair Removal Section -->
+                            <div class="submenu-content" id="submenu-epilation">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.laser_epilation">Laser Hair Removal</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Underarms Hair Removal" data-i18n="treat.underarm_ep">Underarms</button>
+                                        <button class="treat-chip" data-treatment="Arms/Legs Hair Removal" data-i18n="treat.limbs_ep">Arms/Legs</button>
+                                        <button class="treat-chip" data-treatment="Upper Lip Hair Removal" data-i18n="treat.lip_ep">Upper Lip</button>
+                                        <button class="treat-chip" data-treatment="Bikini/Brazilian Hair Removal" data-i18n="treat.bikini_ep">Bikini/Brazilian</button>
+                                        <button class="treat-chip" data-treatment="Full Face Hair Removal" data-i18n="treat.face_ep">Full Face</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dental Section -->
+                            <div class="submenu-content" id="submenu-dental">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.aesthetic_dental">Aesthetic Dental</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Laminate" data-i18n="treat.laminate">Laminate</button>
+                                        <button class="treat-chip" data-treatment="All-Ceramic" data-i18n="treat.all_ceramic">All-Ceramic</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.orthodontic_dental">Orthodontics</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Clippy-C Orthodontics" data-i18n="treat.clippy_c">Clippy-C</button>
+                                        <button class="treat-chip" data-treatment="Clear Aligners" data-i18n="treat.clear_align">Clear Aligners</button>
+                                        <button class="treat-chip" data-treatment="Lingual Orthodontics" data-i18n="treat.lingual">Lingual</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.whitening_implant">Whitening/Implant</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Teeth Whitening" data-i18n="treat.whitening">Teeth Whitening</button>
+                                        <button class="treat-chip" data-treatment="Dental Implants" data-i18n="treat.implant">Dental Implants</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Oriental Medicine Section -->
+                            <div class="submenu-content" id="submenu-herbal">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.herbal_diet">Herbal Diet</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Herbal Diet Medicine" data-i18n="treat.herbal_diet_m">Diet Medicine</button>
+                                        <button class="treat-chip" data-treatment="Herbal Diet Capsule" data-i18n="treat.herbal_diet_c">Diet Capsule</button>
+                                        <button class="treat-chip" data-treatment="Herbal Diet Pills" data-i18n="treat.herbal_diet_p">Diet Pills</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.herbal_proc">Herbal Procedure</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Acupuncture Thread Lifting" data-i18n="treat.acupuncture_thread">Thread Lifting</button>
+                                        <button class="treat-chip" data-treatment="Facial Acupuncture" data-i18n="treat.facial_acupuncture">Facial Acupuncture</button>
+                                        <button class="treat-chip" data-treatment="Diet Herbal Injection" data-i18n="treat.diet_herbal_inj">Diet Injection</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Others Section -->
+                            <div class="submenu-content" id="submenu-others">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.misc_treat">Miscellaneous</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Tattoo Removal" data-i18n="treat.tattoo_removal">Tattoo Removal</button>
+                                        <button class="treat-chip" data-treatment="Petit Side-Effect Treatment" data-i18n="treat.side_effect_treat">Side-Effect Treatment</button>
+                                        <button class="treat-chip" data-treatment="Post-op Management Program" data-i18n="treat.post_op">Post-op Management</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2855,11 +3902,13 @@ function initApp() {
     initClinicDetailModal();
     initSearchAndFilters();
     initReviewWriter();
+    updateFormValidationMessages();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
 
 let activeClinicId = null;
+let activeClinicObj = null;
 let loadedClinicsGlobal = [];
 
 let quizData = {
@@ -3156,6 +4205,107 @@ async function loadClinics() {
     }
 }
 
+// Active category filter state variables
+let activeCategory = 'all';
+let activeTreatment = null;
+
+// Specialty translation mapping helper
+function translateSpecialty(specialtyName) {
+    if (!specialtyName) return '';
+    const nameLower = specialtyName.toLowerCase();
+    
+    const specialtyKeys = {
+        "nd:yag laser calibrations": "treat.toning",
+        "skin barrier reconstruction": "treat.water_glow",
+        "pico toning": "treat.pico",
+        "vascular laser calibration": "treat.toning",
+        "rosacea & redness recovery": "treat.toning",
+        "ultrasonic rejuvenation": "treat.water_glow",
+        "1:1 wavelength tuning": "treat.toning",
+        "dual-cooling safety protocols": "treat.toning",
+        "high-fluence pigment management": "treat.toning",
+        "genuine consumables logged": "treat.oligio",
+        "ultherapy & shurink custom setups": "treat.ulthera",
+        "epidermal thickness diagnostic": "treat.ulthera",
+        "nd:yag & pico laser certified": "treat.pico",
+        "100% physician consultation": "booking.treatment_consult",
+        "youth acne barrier healing": "treat.fraxel",
+        
+        // New specialties matching mock clinics:
+        "natural adhesion double eyelid": "treat.natural_double",
+        "non-incisional ptosis correction": "treat.non_incisional_ptosis",
+        "under-eye fat relocation": "treat.undereye_fat",
+        "silicone rhinoplasty": "treat.silicone_nose",
+        "functional rhinoplasty (rhinitis/septal deviation)": "treat.functional_nose",
+        "alar reduction": "treat.alar_reduction",
+        "motiva breast augmentation": "treat.motiva",
+        "autologous fat breast augmentation": "treat.fat_breast",
+        "laminate": "treat.laminate",
+        "clear aligners": "treat.clear_align",
+        "teeth whitening": "treat.whitening",
+        "herbal diet medicine": "treat.herbal_diet_m",
+        "acupuncture thread lifting": "treat.acupuncture_thread"
+    };
+
+    const key = specialtyKeys[nameLower];
+    if (key && typeof t === 'function') {
+        const translated = t(key);
+        if (translated !== key) return translated;
+    }
+    return specialtyName;
+}
+
+function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
+    if (!categoryId || categoryId === 'all') return true;
+
+    const specialties = (clinic.specialties || []).map(s => s.toLowerCase());
+
+    // If a specific treatment chip is selected
+    if (treatmentName) {
+        const tLower = treatmentName.toLowerCase();
+        // Check direct match, substring match, or loose semantic match
+        if (specialties.some(spec => spec.includes(tLower) || tLower.includes(spec))) {
+            return true;
+        }
+        
+        // Smart keyword fallbacks
+        if (tLower.includes("pico") && specialties.some(s => s.includes("pico"))) return true;
+        if (tLower.includes("ulthera") && specialties.some(s => s.includes("ulthera") || s.includes("shurink") || s.includes("lifting"))) return true;
+        if (tLower.includes("shurink") && specialties.some(s => s.includes("shurink") || s.includes("ulthera") || s.includes("lifting"))) return true;
+        if (tLower.includes("barrier") && specialties.some(s => s.includes("barrier"))) return true;
+        if (tLower.includes("toning") && specialties.some(s => s.includes("toning"))) return true;
+        if (tLower.includes("redness") && specialties.some(s => s.includes("redness") || s.includes("vascular"))) return true;
+        if (tLower.includes("double eyelid") && specialties.some(s => s.includes("eyelid") || s.includes("쌍꺼풀"))) return true;
+        if (tLower.includes("rhinoplasty") && specialties.some(s => s.includes("rhinoplasty") || s.includes("코성형") || s.includes("코끝"))) return true;
+        if (tLower.includes("breast") && specialties.some(s => s.includes("breast") || s.includes("가슴"))) return true;
+        if (tLower.includes("diet") && specialties.some(s => s.includes("diet") || s.includes("다이어트"))) return true;
+        if (tLower.includes("laminate") && specialties.some(s => s.includes("laminate") || s.includes("라미네이트"))) return true;
+        
+        return false;
+    }
+
+    // Category-wide keyword matching maps
+    const categoryKeywords = {
+        skin: ["yag", "barrier", "toning", "pigment", "acne", "peel", "skin", "피부", "스킨", "필링", "미백", "색소", "여드름", "점"],
+        lifting: ["lifting", "ulthera", "shurink", "inmode", "thermage", "oligio", "thread", "contour", "리프팅", "울쎄라", "슈링크", "인모드", "써마지", "올리지오", "실", "윤곽", "조각", "이중턱"],
+        botox: ["botox", "보톡스", "미간", "이마", "눈가", "입술", "자갈턱", "사각턱", "침샘", "승모근", "종아리", "다한증"],
+        filler: ["filler", "필러", "이마", "앞광대", "볼", "팔자주름", "턱끝", "코", "입술", "입꼬리", "애교살", "골반", "힙업"],
+        eye: ["eye", "double eyelid", "canthoplasty", "ptosis", "blepharoplasty", "눈", "쌍꺼풀", "트임", "눈매", "상안검", "하안검"],
+        nose: ["rhinoplasty", "nose", "코", "콧대", "코끝", "콧볼", "복코", "매부리코"],
+        contour: ["contour", "jaw", "cheekbone", "orthognathic", "양악", "윤곽", "사각턱 수술", "광대축소", "돌출입"],
+        fat: ["lipo", "fat", "지방", "지방흡입", "지방이식"],
+        breast: ["breast", "motiva", "mentor", "nipple", "gynecomastia", "가슴", "유두", "여유증"],
+        hair: ["hair", "scalp", "meso", "모발", "탈모", "두피", "헤어라인"],
+        epilation: ["epilation", "hair removal", "제모", "겨드랑이", "인중", "비키니"],
+        dental: ["dental", "teeth", "laminate", "orthodontic", "aligner", "치아", "라미네이트", "교정", "미백", "임플란트"],
+        herbal: ["herbal", "diet", "acupuncture", "한방", "한약", "매선", "침", "약침"],
+        others: ["tattoo", "문신", "쁘띠", "부작용", "관리"]
+    };
+
+    const keywords = categoryKeywords[categoryId] || [];
+    return specialties.some(spec => keywords.some(kw => spec.includes(kw)));
+}
+
 function renderClinicCards(clinics) {
     const container = document.getElementById('dynamic-partner-list');
     if (!container) return;
@@ -3167,7 +4317,7 @@ function renderClinicCards(clinics) {
     container.innerHTML = '';
     clinics.forEach(clinic => {
         const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
-        const tagsHTML = specs.map(spec => `<span class="partner-tag">${spec}</span>`).join('');
+        const tagsHTML = specs.map(spec => `<span class="partner-tag">${translateSpecialty(spec)}</span>`).join('');
         const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();
 
         let doctorTypeLabel = t(`badge.${clinic.doctor_type}`) || clinic.doctor_type;
@@ -3210,6 +4360,7 @@ function openClinicDetailModal(clinicId) {
     if (!data) return;
 
     activeClinicId = clinicId;
+    activeClinicObj = data;
     resetBookingViews();
 
     document.getElementById('clinic-detail-name').textContent = data.name;
@@ -3223,9 +4374,12 @@ function openClinicDetailModal(clinicId) {
     (data.specialties || []).forEach(spec => {
         const tag = document.createElement('span');
         tag.className = 'partner-tag';
-        tag.textContent = spec;
+        tag.textContent = translateSpecialty(spec);
         specialtiesContainer.appendChild(tag);
     });
+
+    // Dynamically populate booking treatments for this clinic
+    populateBookingTreatments(data);
 
     const safetyContainer = document.getElementById('clinic-detail-safety-grid');
     if (safetyContainer) {
@@ -3291,6 +4445,93 @@ function resetBookingViews() {
     document.getElementById('clinicBookingForm').reset();
 }
 
+function closeClinicModal() {
+    const modal = document.getElementById('clinicModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.getElementById('clinic-detail-map-iframe').src = '';
+    }
+}
+
+function populateBookingTreatments(clinic) {
+    const treatmentSelect = document.getElementById('bookingTreatment');
+    if (!treatmentSelect) return;
+
+    treatmentSelect.innerHTML = '';
+
+    // Default Consultation Option
+    const defaultOpt = document.createElement('option');
+    defaultOpt.value = 'Consultation Only';
+    defaultOpt.setAttribute('data-i18n', 'booking.treatment_consult');
+    defaultOpt.textContent = typeof t === 'function' ? t('booking.treatment_consult') : 'Consultation Only';
+    treatmentSelect.appendChild(defaultOpt);
+
+    // Specialties Options
+    const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
+    
+    // De-duplicate specialties just in case (e.g. if we have both EN and KO in the array, let's group them or translate them)
+    const processedSpecs = [];
+    specs.forEach(spec => {
+        const trans = translateSpecialty(spec);
+        if (!processedSpecs.includes(trans)) {
+            processedSpecs.push(trans);
+            const opt = document.createElement('option');
+            opt.value = spec; // Send original DB spec name to backend
+            opt.textContent = trans;
+            treatmentSelect.appendChild(opt);
+        }
+    });
+
+    // If a specific treatment chip is active, auto-select it in the dropdown (or add it if not present)
+    if (activeTreatment) {
+        let matched = false;
+        for (let i = 0; i < treatmentSelect.options.length; i++) {
+            const opt = treatmentSelect.options[i];
+            if (opt.value.toLowerCase().includes(activeTreatment.toLowerCase()) || 
+                opt.textContent.toLowerCase().includes(activeTreatment.toLowerCase())) {
+                treatmentSelect.selectedIndex = i;
+                matched = true;
+                break;
+            }
+        }
+        
+        if (!matched) {
+            // Add the selected treatment as a custom option
+            const customOpt = document.createElement('option');
+            customOpt.value = activeTreatment;
+            customOpt.textContent = activeTreatment;
+            customOpt.selected = true;
+            treatmentSelect.appendChild(customOpt);
+        }
+    }
+}
+
+function filterClinics() {
+    const searchInput = document.getElementById('directorySearchInput');
+    const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+    const filtered = loadedClinicsGlobal.filter(clinic => {
+        // Category and Treatment filter
+        if (!clinicMatchesCategoryOrTreatment(clinic, activeCategory, activeTreatment)) {
+            return false;
+        }
+
+        // Search text filter
+        if (q) {
+            const nameMatch = clinic.name.toLowerCase().includes(q);
+            const doctorMatch = clinic.doctor_name.toLowerCase().includes(q);
+            const specialtyMatch = clinic.specialties.some(s => s.toLowerCase().includes(q) || translateSpecialty(s).toLowerCase().includes(q));
+            const descMatch = clinic.description.toLowerCase().includes(q);
+            return nameMatch || doctorMatch || specialtyMatch || descMatch;
+        }
+
+        return true;
+    });
+
+    renderClinicCards(filtered);
+}
+
 function initClinicDetailModal() {
     const container = document.getElementById('dynamic-partner-list');
     const modal = document.getElementById('clinicModal');
@@ -3312,26 +4553,229 @@ function initClinicDetailModal() {
 
     document.getElementById('btnCloseClinic')?.addEventListener('click', closeClinicModal);
     if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeClinicModal(); });
-}
 
-function closeClinicModal() {
-    const modal = document.getElementById('clinicModal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        document.getElementById('clinic-detail-map-iframe').src = '';
+    // Secure booking submission flow
+    const bookingForm = document.getElementById('clinicBookingForm');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = bookingForm.querySelector('button[type="submit"]');
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="spinner">${t('quiz.securing') || 'Securing...'}</span> ⏳`;
+            
+            const payload = {
+                clinicId: activeClinicId,
+                clientName: document.getElementById('bookingName').value,
+                clientEmail: document.getElementById('bookingEmail').value,
+                bookingDate: document.getElementById('bookingDate').value,
+                bookingTime: document.getElementById('bookingTime').value,
+                treatment: document.getElementById('bookingTreatment').value
+            };
+            
+            try {
+                const response = await fetch('/api/book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || 'Server booking failed.');
+                
+                // Show booking success view
+                document.getElementById('clinic-booking-view').classList.remove('active');
+                document.getElementById('booking-success-view').style.display = 'block';
+                bookingForm.style.display = 'none';
+                
+                const successMsg = document.getElementById('booking-success-message');
+                if (successMsg) {
+                    const clinicName = activeClinicObj ? activeClinicObj.name : 'Clinic';
+                    const rawDate = document.getElementById('bookingDate').value;
+                    const formattedDate = formatDateByLocale(rawDate, getCurrentLang());
+                    const timeVal = document.getElementById('bookingTime').value;
+                    const bookingId = result.bookingId;
+                    const emailVal = document.getElementById('bookingEmail').value;
+                    
+                    let template = t('booking.success_detail');
+                    template = template.replace('{clinic}', clinicName)
+                                       .replace('{date}', formattedDate)
+                                       .replace('{time}', timeVal)
+                                       .replace('{bookingId}', bookingId)
+                                       .replace('{email}', emailVal);
+                    successMsg.innerHTML = template;
+                }
+            } catch (err) {
+                console.error("Booking API error:", err.message);
+                alert(getCurrentLang() === 'ko' ? `예약 중 오류가 발생했습니다: ${err.message}` : `Booking error: ${err.message}`);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            }
+        });
     }
 }
 
 function initSearchAndFilters() {
     const searchInput = document.getElementById('directorySearchInput');
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const q = e.target.value.toLowerCase().trim();
-            const filtered = loadedClinicsGlobal.filter(c => c.name.toLowerCase().includes(q) || c.doctor_name.toLowerCase().includes(q));
-            renderClinicCards(filtered);
+        searchInput.addEventListener('input', () => {
+            filterClinics();
         });
     }
+
+    const visualMenu = document.querySelector('.visual-category-menu');
+
+    // Bind Category Tabs
+    const tabsWrapper = document.getElementById('categoryTabsWrapper');
+    if (tabsWrapper) {
+        tabsWrapper.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Clear visual menu active states when manual tab is clicked
+                if (visualMenu) {
+                    visualMenu.querySelectorAll('.visual-category-item').forEach(i => i.classList.remove('active'));
+                }
+
+                // Toggle Tab Active State
+                tabsWrapper.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Switch Active Submenu
+                activeCategory = tab.getAttribute('data-category');
+                activeTreatment = null; // Reset selected treatment chip when switching category
+
+                const submenuPanel = document.getElementById('categorySubmenuPanel');
+                if (submenuPanel) {
+                    submenuPanel.querySelectorAll('.submenu-content').forEach(c => {
+                        c.classList.remove('active');
+                        // Reset chip selection styles inside hidden menus
+                        c.querySelectorAll('.treat-chip').forEach(chip => chip.classList.remove('active'));
+                    });
+
+                    const targetSubmenu = document.getElementById(`submenu-${activeCategory}`);
+                    if (targetSubmenu) {
+                        targetSubmenu.classList.add('active');
+                    }
+                }
+
+                // Apply Filters
+                filterClinics();
+            });
+        });
+    }
+
+    // Bind Treatment Chips (using Event Delegation on the Submenu Panel)
+    const submenuPanel = document.getElementById('categorySubmenuPanel');
+    if (submenuPanel) {
+        submenuPanel.addEventListener('click', (e) => {
+            const chip = e.target.closest('.treat-chip');
+            if (!chip) return;
+
+            const contentBlock = chip.closest('.submenu-content');
+            const alreadyActive = chip.classList.contains('active');
+
+            // Reset other chips in this submenu block
+            if (contentBlock) {
+                contentBlock.querySelectorAll('.treat-chip').forEach(c => c.classList.remove('active'));
+            }
+
+            if (alreadyActive) {
+                // Deselect chip
+                activeTreatment = null;
+            } else {
+                // Select chip
+                chip.classList.add('active');
+                activeTreatment = chip.getAttribute('data-treatment');
+            }
+
+            // Apply Filters
+            filterClinics();
+        });
+    }
+
+    // Bind 9-Icon Visual Category Menu
+    if (visualMenu) {
+        visualMenu.querySelectorAll('.visual-category-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Toggle active style on visual items
+                visualMenu.querySelectorAll('.visual-category-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                // Smooth scroll to directory widget
+                const targetSection = document.getElementById('directory');
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                const targetCat = item.getAttribute('data-target-category');
+                const targetSub = item.getAttribute('data-target-subcategory');
+                const targetTreat = item.getAttribute('data-target-treatment');
+
+                // 1. Programmatically set active main category tab
+                const mainTab = document.querySelector(`.category-tab[data-category="${targetCat}"]`);
+                if (mainTab) {
+                    tabsWrapper.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    mainTab.classList.add('active');
+                    
+                    activeCategory = targetCat;
+                    activeTreatment = null;
+
+                    const submenuPanel = document.getElementById('categorySubmenuPanel');
+                    if (submenuPanel) {
+                        submenuPanel.querySelectorAll('.submenu-content').forEach(c => {
+                            c.classList.remove('active');
+                            c.querySelectorAll('.treat-chip').forEach(chip => chip.classList.remove('active'));
+                        });
+
+                        const targetSubmenu = document.getElementById(`submenu-${activeCategory}`);
+                        if (targetSubmenu) {
+                            targetSubmenu.classList.add('active');
+                            
+                            // 2. Select subcategory / treatment chip
+                            if (targetSub) {
+                                const subTitleEl = Array.from(targetSubmenu.querySelectorAll('.submenu-title')).find(el => {
+                                    return el.getAttribute('data-i18n') === `subcat.${targetSub}`;
+                                });
+                                if (subTitleEl) {
+                                    const groupEl = subTitleEl.closest('.submenu-group');
+                                    if (groupEl) {
+                                        const firstChip = groupEl.querySelector('.treat-chip');
+                                        if (firstChip) {
+                                            firstChip.classList.add('active');
+                                            activeTreatment = firstChip.getAttribute('data-treatment');
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (targetTreat) {
+                                const chip = Array.from(targetSubmenu.querySelectorAll('.treat-chip')).find(el => {
+                                    const chipTreat = el.getAttribute('data-treatment');
+                                    return chipTreat && chipTreat.toLowerCase() === targetTreat.toLowerCase();
+                                });
+                                if (chip) {
+                                    chip.classList.add('active');
+                                    activeTreatment = chip.getAttribute('data-treatment');
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Filter clinics
+                    filterClinics();
+                }
+            });
+        });
+    }
+
+    // Live Translate dynamically rendered cards when language changes
+    window.addEventListener('languageChanged', () => {
+        filterClinics();
+        updateFormValidationMessages();
+    });
 }
 
 // 리뷰 작성 시뮬레이터 핸들러 및 원장 리스트 드롭다운 롤메뉴 리바인딩 패치 완료
@@ -3379,6 +4823,74 @@ function updateReviewDoctorDropdown() {
             opt.textContent = getCurrentLang() === 'ko' && c.id === 2 ? `김민지 원장 (명동 포레스트)` : `${c.doctor_name} (${c.name})`;
             docSelect.appendChild(opt);
         });
+    }
+}
+
+function formatDateByLocale(dateString, lang) {
+    if (!dateString) return '';
+    const parts = dateString.split('-');
+    if (parts.length !== 3) return dateString;
+    const [year, month, day] = parts;
+    if (lang === 'ko') {
+        return `${year}년 ${parseInt(month)}월 ${parseInt(day)}일`;
+    } else {
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const monthName = monthNames[parseInt(month) - 1] || month;
+        return `${monthName} ${parseInt(day)}, ${year}`;
+    }
+}
+
+function updateFormValidationMessages() {
+    const lang = getCurrentLang();
+    
+    const nameInput = document.getElementById('bookingName');
+    const emailInput = document.getElementById('bookingEmail');
+    const dateInput = document.getElementById('bookingDate');
+    const timeSelect = document.getElementById('bookingTime');
+    const quizEmailInput = document.getElementById('userEmail');
+
+    const applyValidity = (el, type) => {
+        if (!el) return;
+        el.oninvalid = function(e) {
+            e.target.setCustomValidity(t(`validation.${type}`));
+        };
+        el.oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    };
+
+    if (nameInput) applyValidity(nameInput, 'name_required');
+    
+    if (emailInput) {
+        emailInput.oninvalid = function(e) {
+            if (e.target.value === '') {
+                e.target.setCustomValidity(t('validation.email_required'));
+            } else {
+                e.target.setCustomValidity(t('validation.email_invalid'));
+            }
+        };
+        emailInput.oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+    
+    if (dateInput) applyValidity(dateInput, 'date_required');
+    if (timeSelect) applyValidity(timeSelect, 'time_required');
+
+    if (quizEmailInput) {
+        quizEmailInput.oninvalid = function(e) {
+            if (e.target.value === '') {
+                e.target.setCustomValidity(t('validation.email_required'));
+            } else {
+                e.target.setCustomValidity(t('validation.email_invalid'));
+            }
+        };
+        quizEmailInput.oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
     }
 }
 </file>
@@ -6276,6 +7788,394 @@ html[data-theme="dark"] .diff-highlight-text {
 .reader-page blockquote {
     font-family: var(--font-sans) !important;
     font-style: normal !important;
+}
+
+/* ========================================================
+   [마감 패치] 리뷰 시뮬레이터 내부 경계선 겹침 버그 진압
+   ======================================================== */
+
+/* 리뷰 모달 내부에서는 사이드바용 배경과 보더 경계선을 원천 차단 */
+#reviewWriterModal .modal-body {
+    display: block !important;
+    /* 2열 분할 강제 해제 */
+    background: transparent !important;
+    border-right: none !important;
+}
+
+/* 시뮬레이터 내부의 겹침 레이아웃 완전 청소 */
+#reviewWriterModal .writer-panel {
+    border-left: none !important;
+    padding-left: 0 !important;
+}
+
+/* 드롭다운 및 업로드 박스 간의 간격(마진) 안정화 */
+#reviewWriterModal .form-group {
+    margin-bottom: 24px !important;
+}
+
+#reviewWriterModal .dropzone-simulator {
+    margin-top: 8px !important;
+    margin-bottom: 24px !important;
+}
+
+/* ========================================================
+   [최종 마감] 리뷰 시뮬레이터 하단 버튼 짤림 방지 (스크롤 가드)
+   ======================================================== */
+
+/* 1. 리뷰 모달의 콘텐츠 영역 전체에 스크롤 기능 주입 */
+#reviewWriterModal .modal-body {
+    max-height: calc(80vh - 160px) !important;
+    /* 모달 전체 높이에서 헤더/푸터 제외 */
+    overflow-y: auto !important;
+    /* 내용이 넘치면 내부에만 스크롤바 생성 */
+    padding-bottom: 20px !important;
+}
+
+/* 2. 스크롤바 스타일을 딥테마에 맞게 미니멀하게 튜닝 */
+#reviewWriterModal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+#reviewWriterModal .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#reviewWriterModal .modal-body::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 10px;
+}
+
+#reviewWriterModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent);
+}
+
+/* 3. 하단 컨트롤 버튼 영역이 무조건 하단에 고정되도록 마감 */
+#reviewWriterModal .writer-controls {
+    margin-top: 0 !important;
+    padding-top: 16px !important;
+    border-top: 1px solid var(--border-color) !important;
+    background-color: var(--bg-secondary) !important;
+    /* 뒤쪽 콘텐츠가 비치지 않게 배경 고정 */
+}
+
+/* ========================================================
+   [치료 카테고리 & 하위메뉴 스타일링] - 프리미엄 K-뷰티 테마
+   ======================================================== */
+
+.category-selector-widget {
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 메인 카테고리 탭 (가로 스크롤 가능형) */
+.category-tabs-wrapper {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.category-tabs-wrapper::-webkit-scrollbar {
+    height: 4px;
+}
+
+.category-tabs-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.category-tabs-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+}
+
+.category-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+}
+
+.category-tab:hover {
+    border-color: var(--color-accent);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.category-tab.active {
+    background-color: var(--color-primary);
+    color: var(--text-light);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+/* 하부메뉴 펼침 패널 */
+.category-submenu-panel {
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 서브메뉴 콘텐츠 기본 상태 */
+.submenu-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* 서브메뉴 콘텐츠 활성 상태 */
+.submenu-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 서브메뉴 정보/안내 텍스트 */
+.submenu-info {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* 개별 서브카테고리 그룹 (데스크탑에서 좌우 정렬, 모바일에서 상하 분리) */
+.submenu-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 16px;
+}
+
+.submenu-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* 서브카테고리 제목 */
+.submenu-title {
+    flex: 0 0 160px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    padding-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 다크모드 대응 */
+html[data-theme="dark"] .submenu-title {
+    color: var(--color-accent);
+}
+
+/* 개별 시술 칩 리스트 */
+.submenu-items {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* 개별 시술 태그 칩 */
+.treat-chip {
+    padding: 6px 14px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.treat-chip:hover {
+    border-color: var(--color-accent);
+    color: var(--text-primary);
+    transform: scale(1.03);
+}
+
+.treat-chip.active {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    border-color: var(--color-accent);
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(197, 168, 128, 0.2);
+}
+
+/* 모바일 반응형 대응 */
+@media (max-width: 768px) {
+    .submenu-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .submenu-title {
+        flex: auto;
+        padding-top: 0;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+}
+
+/* ========================================================
+   [비주얼 카테고리 메뉴 (9개 아이콘) 스타일]
+   ======================================================== */
+.visual-category-container {
+    margin-bottom: 35px;
+    width: 100%;
+}
+
+.visual-category-title {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+.visual-category-menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+}
+
+.visual-category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    width: 75px;
+}
+
+.visual-category-item:hover {
+    transform: translateY(-4px);
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 2px solid transparent;
+}
+
+.visual-category-item:hover .icon-circle {
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.05);
+}
+
+.visual-category-item.active .icon-circle {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent);
+    transform: scale(1.05);
+}
+
+.icon-circle svg {
+    width: 26px;
+    height: 26px;
+}
+
+.visual-category-item .label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.visual-category-item:hover .label,
+.visual-category-item.active .label {
+    color: var(--text-primary);
+}
+
+/* 아이콘 개별 테마 색상 (그라데이션 매칭) */
+.bg-epilation {
+    background: linear-gradient(135deg, #10b981, #059669); /* 녹색 */
+}
+.bg-lifting {
+    background: linear-gradient(135deg, #ff6b8b, #ec4899); /* 핑크 */
+}
+.bg-filler {
+    background: linear-gradient(135deg, #2dd4bf, #0f766e); /* 민트 */
+}
+.bg-botox {
+    background: linear-gradient(135deg, #a78bfa, #7c3aed); /* 보라 */
+}
+.bg-skin-booster {
+    background: linear-gradient(135deg, #60a5fa, #2563eb); /* 파랑 */
+}
+.bg-pigment {
+    background: linear-gradient(135deg, #fbbf24, #d97706); /* 노랑 */
+}
+.bg-acne {
+    background: linear-gradient(135deg, #fb923c, #ea580c); /* 주황 */
+}
+.bg-hair-loss {
+    background: linear-gradient(135deg, #2ecc71, #1abc9c); /* 청록 */
+}
+.bg-diet-injection {
+    background: linear-gradient(135deg, #f87171, #ef4444); /* 빨강 */
+}
+
+/* 모바일 화면에서 좀 더 촘촘하게 배열 */
+@media (max-width: 480px) {
+    .visual-category-menu {
+        gap: 12px 16px;
+    }
+    .visual-category-item {
+        width: 65px;
+    }
+    .icon-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+    }
+    .icon-circle svg {
+        width: 20px;
+        height: 20px;
+    }
+    .visual-category-item .label {
+        font-size: 11px;
+    }
 }
 </file>
 

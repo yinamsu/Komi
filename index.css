@@ -2959,3 +2959,323 @@ html[data-theme="dark"] .diff-highlight-text {
     background-color: var(--bg-secondary) !important;
     /* 뒤쪽 콘텐츠가 비치지 않게 배경 고정 */
 }
+
+/* ========================================================
+   [치료 카테고리 & 하위메뉴 스타일링] - 프리미엄 K-뷰티 테마
+   ======================================================== */
+
+.category-selector-widget {
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 메인 카테고리 탭 (가로 스크롤 가능형) */
+.category-tabs-wrapper {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.category-tabs-wrapper::-webkit-scrollbar {
+    height: 4px;
+}
+
+.category-tabs-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.category-tabs-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+}
+
+.category-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+}
+
+.category-tab:hover {
+    border-color: var(--color-accent);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.category-tab.active {
+    background-color: var(--color-primary);
+    color: var(--text-light);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+/* 하부메뉴 펼침 패널 */
+.category-submenu-panel {
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 서브메뉴 콘텐츠 기본 상태 */
+.submenu-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* 서브메뉴 콘텐츠 활성 상태 */
+.submenu-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 서브메뉴 정보/안내 텍스트 */
+.submenu-info {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* 개별 서브카테고리 그룹 (데스크탑에서 좌우 정렬, 모바일에서 상하 분리) */
+.submenu-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 16px;
+}
+
+.submenu-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* 서브카테고리 제목 */
+.submenu-title {
+    flex: 0 0 160px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    padding-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 다크모드 대응 */
+html[data-theme="dark"] .submenu-title {
+    color: var(--color-accent);
+}
+
+/* 개별 시술 칩 리스트 */
+.submenu-items {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* 개별 시술 태그 칩 */
+.treat-chip {
+    padding: 6px 14px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.treat-chip:hover {
+    border-color: var(--color-accent);
+    color: var(--text-primary);
+    transform: scale(1.03);
+}
+
+.treat-chip.active {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    border-color: var(--color-accent);
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(197, 168, 128, 0.2);
+}
+
+/* 모바일 반응형 대응 */
+@media (max-width: 768px) {
+    .submenu-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .submenu-title {
+        flex: auto;
+        padding-top: 0;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+}
+
+/* ========================================================
+   [비주얼 카테고리 메뉴 (9개 아이콘) 스타일]
+   ======================================================== */
+.visual-category-container {
+    margin-bottom: 35px;
+    width: 100%;
+}
+
+.visual-category-title {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+.visual-category-menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+}
+
+.visual-category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    width: 75px;
+}
+
+.visual-category-item:hover {
+    transform: translateY(-4px);
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 2px solid transparent;
+}
+
+.visual-category-item:hover .icon-circle {
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.05);
+}
+
+.visual-category-item.active .icon-circle {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent);
+    transform: scale(1.05);
+}
+
+.icon-circle svg {
+    width: 26px;
+    height: 26px;
+}
+
+.visual-category-item .label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.visual-category-item:hover .label,
+.visual-category-item.active .label {
+    color: var(--text-primary);
+}
+
+/* 아이콘 개별 테마 색상 (그라데이션 매칭) */
+.bg-epilation {
+    background: linear-gradient(135deg, #10b981, #059669); /* 녹색 */
+}
+.bg-lifting {
+    background: linear-gradient(135deg, #ff6b8b, #ec4899); /* 핑크 */
+}
+.bg-filler {
+    background: linear-gradient(135deg, #2dd4bf, #0f766e); /* 민트 */
+}
+.bg-botox {
+    background: linear-gradient(135deg, #a78bfa, #7c3aed); /* 보라 */
+}
+.bg-skin-booster {
+    background: linear-gradient(135deg, #60a5fa, #2563eb); /* 파랑 */
+}
+.bg-pigment {
+    background: linear-gradient(135deg, #fbbf24, #d97706); /* 노랑 */
+}
+.bg-acne {
+    background: linear-gradient(135deg, #fb923c, #ea580c); /* 주황 */
+}
+.bg-hair-loss {
+    background: linear-gradient(135deg, #2ecc71, #1abc9c); /* 청록 */
+}
+.bg-diet-injection {
+    background: linear-gradient(135deg, #f87171, #ef4444); /* 빨강 */
+}
+
+/* 모바일 화면에서 좀 더 촘촘하게 배열 */
+@media (max-width: 480px) {
+    .visual-category-menu {
+        gap: 12px 16px;
+    }
+    .visual-category-item {
+        width: 65px;
+    }
+    .icon-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+    }
+    .icon-circle svg {
+        width: 20px;
+        height: 20px;
+    }
+    .visual-category-item .label {
+        font-size: 11px;
+    }
+}

@@ -33,11 +33,13 @@ function initApp() {
     initClinicDetailModal();
     initSearchAndFilters();
     initReviewWriter();
+    updateFormValidationMessages();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
 
 let activeClinicId = null;
+let activeClinicObj = null;
 let loadedClinicsGlobal = [];
 
 let quizData = {
@@ -334,6 +336,107 @@ async function loadClinics() {
     }
 }
 
+// Active category filter state variables
+let activeCategory = 'all';
+let activeTreatment = null;
+
+// Specialty translation mapping helper
+function translateSpecialty(specialtyName) {
+    if (!specialtyName) return '';
+    const nameLower = specialtyName.toLowerCase();
+    
+    const specialtyKeys = {
+        "nd:yag laser calibrations": "treat.toning",
+        "skin barrier reconstruction": "treat.water_glow",
+        "pico toning": "treat.pico",
+        "vascular laser calibration": "treat.toning",
+        "rosacea & redness recovery": "treat.toning",
+        "ultrasonic rejuvenation": "treat.water_glow",
+        "1:1 wavelength tuning": "treat.toning",
+        "dual-cooling safety protocols": "treat.toning",
+        "high-fluence pigment management": "treat.toning",
+        "genuine consumables logged": "treat.oligio",
+        "ultherapy & shurink custom setups": "treat.ulthera",
+        "epidermal thickness diagnostic": "treat.ulthera",
+        "nd:yag & pico laser certified": "treat.pico",
+        "100% physician consultation": "booking.treatment_consult",
+        "youth acne barrier healing": "treat.fraxel",
+        
+        // New specialties matching mock clinics:
+        "natural adhesion double eyelid": "treat.natural_double",
+        "non-incisional ptosis correction": "treat.non_incisional_ptosis",
+        "under-eye fat relocation": "treat.undereye_fat",
+        "silicone rhinoplasty": "treat.silicone_nose",
+        "functional rhinoplasty (rhinitis/septal deviation)": "treat.functional_nose",
+        "alar reduction": "treat.alar_reduction",
+        "motiva breast augmentation": "treat.motiva",
+        "autologous fat breast augmentation": "treat.fat_breast",
+        "laminate": "treat.laminate",
+        "clear aligners": "treat.clear_align",
+        "teeth whitening": "treat.whitening",
+        "herbal diet medicine": "treat.herbal_diet_m",
+        "acupuncture thread lifting": "treat.acupuncture_thread"
+    };
+
+    const key = specialtyKeys[nameLower];
+    if (key && typeof t === 'function') {
+        const translated = t(key);
+        if (translated !== key) return translated;
+    }
+    return specialtyName;
+}
+
+function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
+    if (!categoryId || categoryId === 'all') return true;
+
+    const specialties = (clinic.specialties || []).map(s => s.toLowerCase());
+
+    // If a specific treatment chip is selected
+    if (treatmentName) {
+        const tLower = treatmentName.toLowerCase();
+        // Check direct match, substring match, or loose semantic match
+        if (specialties.some(spec => spec.includes(tLower) || tLower.includes(spec))) {
+            return true;
+        }
+        
+        // Smart keyword fallbacks
+        if (tLower.includes("pico") && specialties.some(s => s.includes("pico"))) return true;
+        if (tLower.includes("ulthera") && specialties.some(s => s.includes("ulthera") || s.includes("shurink") || s.includes("lifting"))) return true;
+        if (tLower.includes("shurink") && specialties.some(s => s.includes("shurink") || s.includes("ulthera") || s.includes("lifting"))) return true;
+        if (tLower.includes("barrier") && specialties.some(s => s.includes("barrier"))) return true;
+        if (tLower.includes("toning") && specialties.some(s => s.includes("toning"))) return true;
+        if (tLower.includes("redness") && specialties.some(s => s.includes("redness") || s.includes("vascular"))) return true;
+        if (tLower.includes("double eyelid") && specialties.some(s => s.includes("eyelid") || s.includes("쌍꺼풀"))) return true;
+        if (tLower.includes("rhinoplasty") && specialties.some(s => s.includes("rhinoplasty") || s.includes("코성형") || s.includes("코끝"))) return true;
+        if (tLower.includes("breast") && specialties.some(s => s.includes("breast") || s.includes("가슴"))) return true;
+        if (tLower.includes("diet") && specialties.some(s => s.includes("diet") || s.includes("다이어트"))) return true;
+        if (tLower.includes("laminate") && specialties.some(s => s.includes("laminate") || s.includes("라미네이트"))) return true;
+        
+        return false;
+    }
+
+    // Category-wide keyword matching maps
+    const categoryKeywords = {
+        skin: ["yag", "barrier", "toning", "pigment", "acne", "peel", "skin", "피부", "스킨", "필링", "미백", "색소", "여드름", "점"],
+        lifting: ["lifting", "ulthera", "shurink", "inmode", "thermage", "oligio", "thread", "contour", "리프팅", "울쎄라", "슈링크", "인모드", "써마지", "올리지오", "실", "윤곽", "조각", "이중턱"],
+        botox: ["botox", "보톡스", "미간", "이마", "눈가", "입술", "자갈턱", "사각턱", "침샘", "승모근", "종아리", "다한증"],
+        filler: ["filler", "필러", "이마", "앞광대", "볼", "팔자주름", "턱끝", "코", "입술", "입꼬리", "애교살", "골반", "힙업"],
+        eye: ["eye", "double eyelid", "canthoplasty", "ptosis", "blepharoplasty", "눈", "쌍꺼풀", "트임", "눈매", "상안검", "하안검"],
+        nose: ["rhinoplasty", "nose", "코", "콧대", "코끝", "콧볼", "복코", "매부리코"],
+        contour: ["contour", "jaw", "cheekbone", "orthognathic", "양악", "윤곽", "사각턱 수술", "광대축소", "돌출입"],
+        fat: ["lipo", "fat", "지방", "지방흡입", "지방이식"],
+        breast: ["breast", "motiva", "mentor", "nipple", "gynecomastia", "가슴", "유두", "여유증"],
+        hair: ["hair", "scalp", "meso", "모발", "탈모", "두피", "헤어라인"],
+        epilation: ["epilation", "hair removal", "제모", "겨드랑이", "인중", "비키니"],
+        dental: ["dental", "teeth", "laminate", "orthodontic", "aligner", "치아", "라미네이트", "교정", "미백", "임플란트"],
+        herbal: ["herbal", "diet", "acupuncture", "한방", "한약", "매선", "침", "약침"],
+        others: ["tattoo", "문신", "쁘띠", "부작용", "관리"]
+    };
+
+    const keywords = categoryKeywords[categoryId] || [];
+    return specialties.some(spec => keywords.some(kw => spec.includes(kw)));
+}
+
 function renderClinicCards(clinics) {
     const container = document.getElementById('dynamic-partner-list');
     if (!container) return;
@@ -345,7 +448,7 @@ function renderClinicCards(clinics) {
     container.innerHTML = '';
     clinics.forEach(clinic => {
         const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
-        const tagsHTML = specs.map(spec => `<span class="partner-tag">${spec}</span>`).join('');
+        const tagsHTML = specs.map(spec => `<span class="partner-tag">${translateSpecialty(spec)}</span>`).join('');
         const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();
 
         let doctorTypeLabel = t(`badge.${clinic.doctor_type}`) || clinic.doctor_type;
@@ -388,6 +491,7 @@ function openClinicDetailModal(clinicId) {
     if (!data) return;
 
     activeClinicId = clinicId;
+    activeClinicObj = data;
     resetBookingViews();
 
     document.getElementById('clinic-detail-name').textContent = data.name;
@@ -401,9 +505,12 @@ function openClinicDetailModal(clinicId) {
     (data.specialties || []).forEach(spec => {
         const tag = document.createElement('span');
         tag.className = 'partner-tag';
-        tag.textContent = spec;
+        tag.textContent = translateSpecialty(spec);
         specialtiesContainer.appendChild(tag);
     });
+
+    // Dynamically populate booking treatments for this clinic
+    populateBookingTreatments(data);
 
     const safetyContainer = document.getElementById('clinic-detail-safety-grid');
     if (safetyContainer) {
@@ -469,6 +576,93 @@ function resetBookingViews() {
     document.getElementById('clinicBookingForm').reset();
 }
 
+function closeClinicModal() {
+    const modal = document.getElementById('clinicModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.getElementById('clinic-detail-map-iframe').src = '';
+    }
+}
+
+function populateBookingTreatments(clinic) {
+    const treatmentSelect = document.getElementById('bookingTreatment');
+    if (!treatmentSelect) return;
+
+    treatmentSelect.innerHTML = '';
+
+    // Default Consultation Option
+    const defaultOpt = document.createElement('option');
+    defaultOpt.value = 'Consultation Only';
+    defaultOpt.setAttribute('data-i18n', 'booking.treatment_consult');
+    defaultOpt.textContent = typeof t === 'function' ? t('booking.treatment_consult') : 'Consultation Only';
+    treatmentSelect.appendChild(defaultOpt);
+
+    // Specialties Options
+    const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
+    
+    // De-duplicate specialties just in case (e.g. if we have both EN and KO in the array, let's group them or translate them)
+    const processedSpecs = [];
+    specs.forEach(spec => {
+        const trans = translateSpecialty(spec);
+        if (!processedSpecs.includes(trans)) {
+            processedSpecs.push(trans);
+            const opt = document.createElement('option');
+            opt.value = spec; // Send original DB spec name to backend
+            opt.textContent = trans;
+            treatmentSelect.appendChild(opt);
+        }
+    });
+
+    // If a specific treatment chip is active, auto-select it in the dropdown (or add it if not present)
+    if (activeTreatment) {
+        let matched = false;
+        for (let i = 0; i < treatmentSelect.options.length; i++) {
+            const opt = treatmentSelect.options[i];
+            if (opt.value.toLowerCase().includes(activeTreatment.toLowerCase()) || 
+                opt.textContent.toLowerCase().includes(activeTreatment.toLowerCase())) {
+                treatmentSelect.selectedIndex = i;
+                matched = true;
+                break;
+            }
+        }
+        
+        if (!matched) {
+            // Add the selected treatment as a custom option
+            const customOpt = document.createElement('option');
+            customOpt.value = activeTreatment;
+            customOpt.textContent = activeTreatment;
+            customOpt.selected = true;
+            treatmentSelect.appendChild(customOpt);
+        }
+    }
+}
+
+function filterClinics() {
+    const searchInput = document.getElementById('directorySearchInput');
+    const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+    const filtered = loadedClinicsGlobal.filter(clinic => {
+        // Category and Treatment filter
+        if (!clinicMatchesCategoryOrTreatment(clinic, activeCategory, activeTreatment)) {
+            return false;
+        }
+
+        // Search text filter
+        if (q) {
+            const nameMatch = clinic.name.toLowerCase().includes(q);
+            const doctorMatch = clinic.doctor_name.toLowerCase().includes(q);
+            const specialtyMatch = clinic.specialties.some(s => s.toLowerCase().includes(q) || translateSpecialty(s).toLowerCase().includes(q));
+            const descMatch = clinic.description.toLowerCase().includes(q);
+            return nameMatch || doctorMatch || specialtyMatch || descMatch;
+        }
+
+        return true;
+    });
+
+    renderClinicCards(filtered);
+}
+
 function initClinicDetailModal() {
     const container = document.getElementById('dynamic-partner-list');
     const modal = document.getElementById('clinicModal');
@@ -490,26 +684,229 @@ function initClinicDetailModal() {
 
     document.getElementById('btnCloseClinic')?.addEventListener('click', closeClinicModal);
     if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeClinicModal(); });
-}
 
-function closeClinicModal() {
-    const modal = document.getElementById('clinicModal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        document.getElementById('clinic-detail-map-iframe').src = '';
+    // Secure booking submission flow
+    const bookingForm = document.getElementById('clinicBookingForm');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = bookingForm.querySelector('button[type="submit"]');
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="spinner">${t('quiz.securing') || 'Securing...'}</span> ⏳`;
+            
+            const payload = {
+                clinicId: activeClinicId,
+                clientName: document.getElementById('bookingName').value,
+                clientEmail: document.getElementById('bookingEmail').value,
+                bookingDate: document.getElementById('bookingDate').value,
+                bookingTime: document.getElementById('bookingTime').value,
+                treatment: document.getElementById('bookingTreatment').value
+            };
+            
+            try {
+                const response = await fetch('/api/book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || 'Server booking failed.');
+                
+                // Show booking success view
+                document.getElementById('clinic-booking-view').classList.remove('active');
+                document.getElementById('booking-success-view').style.display = 'block';
+                bookingForm.style.display = 'none';
+                
+                const successMsg = document.getElementById('booking-success-message');
+                if (successMsg) {
+                    const clinicName = activeClinicObj ? activeClinicObj.name : 'Clinic';
+                    const rawDate = document.getElementById('bookingDate').value;
+                    const formattedDate = formatDateByLocale(rawDate, getCurrentLang());
+                    const timeVal = document.getElementById('bookingTime').value;
+                    const bookingId = result.bookingId;
+                    const emailVal = document.getElementById('bookingEmail').value;
+                    
+                    let template = t('booking.success_detail');
+                    template = template.replace('{clinic}', clinicName)
+                                       .replace('{date}', formattedDate)
+                                       .replace('{time}', timeVal)
+                                       .replace('{bookingId}', bookingId)
+                                       .replace('{email}', emailVal);
+                    successMsg.innerHTML = template;
+                }
+            } catch (err) {
+                console.error("Booking API error:", err.message);
+                alert(getCurrentLang() === 'ko' ? `예약 중 오류가 발생했습니다: ${err.message}` : `Booking error: ${err.message}`);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            }
+        });
     }
 }
 
 function initSearchAndFilters() {
     const searchInput = document.getElementById('directorySearchInput');
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const q = e.target.value.toLowerCase().trim();
-            const filtered = loadedClinicsGlobal.filter(c => c.name.toLowerCase().includes(q) || c.doctor_name.toLowerCase().includes(q));
-            renderClinicCards(filtered);
+        searchInput.addEventListener('input', () => {
+            filterClinics();
         });
     }
+
+    const visualMenu = document.querySelector('.visual-category-menu');
+
+    // Bind Category Tabs
+    const tabsWrapper = document.getElementById('categoryTabsWrapper');
+    if (tabsWrapper) {
+        tabsWrapper.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Clear visual menu active states when manual tab is clicked
+                if (visualMenu) {
+                    visualMenu.querySelectorAll('.visual-category-item').forEach(i => i.classList.remove('active'));
+                }
+
+                // Toggle Tab Active State
+                tabsWrapper.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Switch Active Submenu
+                activeCategory = tab.getAttribute('data-category');
+                activeTreatment = null; // Reset selected treatment chip when switching category
+
+                const submenuPanel = document.getElementById('categorySubmenuPanel');
+                if (submenuPanel) {
+                    submenuPanel.querySelectorAll('.submenu-content').forEach(c => {
+                        c.classList.remove('active');
+                        // Reset chip selection styles inside hidden menus
+                        c.querySelectorAll('.treat-chip').forEach(chip => chip.classList.remove('active'));
+                    });
+
+                    const targetSubmenu = document.getElementById(`submenu-${activeCategory}`);
+                    if (targetSubmenu) {
+                        targetSubmenu.classList.add('active');
+                    }
+                }
+
+                // Apply Filters
+                filterClinics();
+            });
+        });
+    }
+
+    // Bind Treatment Chips (using Event Delegation on the Submenu Panel)
+    const submenuPanel = document.getElementById('categorySubmenuPanel');
+    if (submenuPanel) {
+        submenuPanel.addEventListener('click', (e) => {
+            const chip = e.target.closest('.treat-chip');
+            if (!chip) return;
+
+            const contentBlock = chip.closest('.submenu-content');
+            const alreadyActive = chip.classList.contains('active');
+
+            // Reset other chips in this submenu block
+            if (contentBlock) {
+                contentBlock.querySelectorAll('.treat-chip').forEach(c => c.classList.remove('active'));
+            }
+
+            if (alreadyActive) {
+                // Deselect chip
+                activeTreatment = null;
+            } else {
+                // Select chip
+                chip.classList.add('active');
+                activeTreatment = chip.getAttribute('data-treatment');
+            }
+
+            // Apply Filters
+            filterClinics();
+        });
+    }
+
+    // Bind 9-Icon Visual Category Menu
+    if (visualMenu) {
+        visualMenu.querySelectorAll('.visual-category-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Toggle active style on visual items
+                visualMenu.querySelectorAll('.visual-category-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                // Smooth scroll to directory widget
+                const targetSection = document.getElementById('directory');
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                const targetCat = item.getAttribute('data-target-category');
+                const targetSub = item.getAttribute('data-target-subcategory');
+                const targetTreat = item.getAttribute('data-target-treatment');
+
+                // 1. Programmatically set active main category tab
+                const mainTab = document.querySelector(`.category-tab[data-category="${targetCat}"]`);
+                if (mainTab) {
+                    tabsWrapper.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    mainTab.classList.add('active');
+                    
+                    activeCategory = targetCat;
+                    activeTreatment = null;
+
+                    const submenuPanel = document.getElementById('categorySubmenuPanel');
+                    if (submenuPanel) {
+                        submenuPanel.querySelectorAll('.submenu-content').forEach(c => {
+                            c.classList.remove('active');
+                            c.querySelectorAll('.treat-chip').forEach(chip => chip.classList.remove('active'));
+                        });
+
+                        const targetSubmenu = document.getElementById(`submenu-${activeCategory}`);
+                        if (targetSubmenu) {
+                            targetSubmenu.classList.add('active');
+                            
+                            // 2. Select subcategory / treatment chip
+                            if (targetSub) {
+                                const subTitleEl = Array.from(targetSubmenu.querySelectorAll('.submenu-title')).find(el => {
+                                    return el.getAttribute('data-i18n') === `subcat.${targetSub}`;
+                                });
+                                if (subTitleEl) {
+                                    const groupEl = subTitleEl.closest('.submenu-group');
+                                    if (groupEl) {
+                                        const firstChip = groupEl.querySelector('.treat-chip');
+                                        if (firstChip) {
+                                            firstChip.classList.add('active');
+                                            activeTreatment = firstChip.getAttribute('data-treatment');
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (targetTreat) {
+                                const chip = Array.from(targetSubmenu.querySelectorAll('.treat-chip')).find(el => {
+                                    const chipTreat = el.getAttribute('data-treatment');
+                                    return chipTreat && chipTreat.toLowerCase() === targetTreat.toLowerCase();
+                                });
+                                if (chip) {
+                                    chip.classList.add('active');
+                                    activeTreatment = chip.getAttribute('data-treatment');
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Filter clinics
+                    filterClinics();
+                }
+            });
+        });
+    }
+
+    // Live Translate dynamically rendered cards when language changes
+    window.addEventListener('languageChanged', () => {
+        filterClinics();
+        updateFormValidationMessages();
+    });
 }
 
 // 리뷰 작성 시뮬레이터 핸들러 및 원장 리스트 드롭다운 롤메뉴 리바인딩 패치 완료
@@ -557,5 +954,73 @@ function updateReviewDoctorDropdown() {
             opt.textContent = getCurrentLang() === 'ko' && c.id === 2 ? `김민지 원장 (명동 포레스트)` : `${c.doctor_name} (${c.name})`;
             docSelect.appendChild(opt);
         });
+    }
+}
+
+function formatDateByLocale(dateString, lang) {
+    if (!dateString) return '';
+    const parts = dateString.split('-');
+    if (parts.length !== 3) return dateString;
+    const [year, month, day] = parts;
+    if (lang === 'ko') {
+        return `${year}년 ${parseInt(month)}월 ${parseInt(day)}일`;
+    } else {
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const monthName = monthNames[parseInt(month) - 1] || month;
+        return `${monthName} ${parseInt(day)}, ${year}`;
+    }
+}
+
+function updateFormValidationMessages() {
+    const lang = getCurrentLang();
+    
+    const nameInput = document.getElementById('bookingName');
+    const emailInput = document.getElementById('bookingEmail');
+    const dateInput = document.getElementById('bookingDate');
+    const timeSelect = document.getElementById('bookingTime');
+    const quizEmailInput = document.getElementById('userEmail');
+
+    const applyValidity = (el, type) => {
+        if (!el) return;
+        el.oninvalid = function(e) {
+            e.target.setCustomValidity(t(`validation.${type}`));
+        };
+        el.oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    };
+
+    if (nameInput) applyValidity(nameInput, 'name_required');
+    
+    if (emailInput) {
+        emailInput.oninvalid = function(e) {
+            if (e.target.value === '') {
+                e.target.setCustomValidity(t('validation.email_required'));
+            } else {
+                e.target.setCustomValidity(t('validation.email_invalid'));
+            }
+        };
+        emailInput.oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+    
+    if (dateInput) applyValidity(dateInput, 'date_required');
+    if (timeSelect) applyValidity(timeSelect, 'time_required');
+
+    if (quizEmailInput) {
+        quizEmailInput.oninvalid = function(e) {
+            if (e.target.value === '') {
+                e.target.setCustomValidity(t('validation.email_required'));
+            } else {
+                e.target.setCustomValidity(t('validation.email_invalid'));
+            }
+        };
+        quizEmailInput.oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
     }
 }

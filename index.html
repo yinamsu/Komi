@@ -73,6 +73,67 @@
                     skin type.
                 </p>
 
+                <!-- Visual Category Menu (9 Icons) -->
+                <div class="visual-category-container">
+                    <h3 class="visual-category-title" data-i18n="category.menu_title">Please select a treatment of interest</h3>
+                    <div class="visual-category-menu">
+                        <button class="visual-category-item" data-target-category="epilation" data-target-treatment="Laser Hair Removal">
+                            <div class="icon-circle bg-epilation">
+                                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l6.59-6.59L18 8l-8 8z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.epilation">제모</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="lifting">
+                            <div class="icon-circle bg-lifting">
+                                <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5l-8-8z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.lifting">리프팅</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="filler">
+                            <div class="icon-circle bg-filler">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 10c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.filler">필러</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="botox">
+                            <div class="icon-circle bg-botox">
+                                <svg viewBox="0 0 24 24"><path d="M19 10.5V6h-1V4.5C18 3.67 17.33 3 16.5 3h-9C6.67 3 6 3.67 6 4.5V6H5v4.5C5 11.83 6.67 13 8.5 13H9v4h-1v2H7v2h10v-2h-1v-2h-1v-4h.5c1.83 0 3.5-1.17 3.5-2.5zM8 4.5c0-.28.22-.5.5-.5h9c.28 0 .5.22.5.5V6H8V4.5z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="cat.botox">보톡스</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="skin" data-target-subcategory="skin_booster">
+                            <div class="icon-circle bg-skin-booster">
+                                <svg viewBox="0 0 24 24"><path d="M12 3c-1.2 0-2.4.5-3.3 1.4L4.3 8.8c-.8.8-.8 2.1 0 2.9l4.4 4.4c.9.9 2.1 1.4 3.3 1.4s2.4-.5 3.3-1.4l4.4-4.4c.8-.8.8-2.1 0-2.9l-4.4-4.4C14.4 3.5 13.2 3 12 3zm0 2c.7 0 1.4.3 1.9.8l4.4 4.4c.5.5.5 1.3 0 1.9l-4.4 4.4c-.5.5-1.2.8-1.9.8s-1.4-.3-1.9-.8l-4.4-4.4c-.5-.5-.5-1.3 0-1.9l4.4-4.4c.5-.5 1.2-.8 1.9-.8z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="subcat.skin_booster">스킨부스터</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="skin" data-target-subcategory="whitening">
+                            <div class="icon-circle bg-pigment">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.pigment">색소</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="skin" data-target-subcategory="acne">
+                            <div class="icon-circle bg-acne">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.acne">여드름</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="hair" data-target-subcategory="hair_loss_treat">
+                            <div class="icon-circle bg-hair-loss">
+                                <svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.hair_loss">탈모</span>
+                        </button>
+                        <button class="visual-category-item" data-target-category="herbal" data-target-treatment="Diet Herbal Injection">
+                            <div class="icon-circle bg-diet-injection">
+                                <svg viewBox="0 0 24 24"><path d="M6 3h12v2H6V3zm0 4h12v10c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V7zm3 3v5h2v-5H9zm4 0v5h2v-5h-2z" fill="currentColor"/></svg>
+                            </div>
+                            <span class="label" data-i18n="category.diet_injection">비만주사</span>
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Step-by-Step Fitzpatrick Diagnostic Quiz Card -->
                 <div class="diagnostic-container" style="display: none;">
 
@@ -518,7 +579,7 @@
         </section>
 
         <!-- Verified Partners Directory & Receipt Demonstration -->
-        <section class="section-directory">
+        <section class="section-directory" id="directory">
             <div class="container">
                 <div class="section-title-wrapper text-center">
                     <span class="section-tag" data-i18n="directory.tag">Boutique Directory</span>
@@ -539,19 +600,442 @@
                             data-i18n-placeholder="search.placeholder"
                             placeholder="Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)">
                     </div>
-                    <div class="filter-tags-wrapper" id="filterTagsWrapper">
-                        <button class="filter-tag active" data-specialty="all" data-i18n="filter.all">All
-                            Treatments</button>
-                        <button class="filter-tag" data-specialty="Nd:YAG Laser Calibrations">Nd:YAG Laser</button>
-                        <button class="filter-tag" data-specialty="Skin Barrier Reconstruction">Skin Barrier
-                            Reconstruction</button>
-                        <button class="filter-tag" data-specialty="Pico Toning">Pico Toning</button>
-                        <button class="filter-tag" data-specialty="Vascular Laser Calibration">Vascular Laser</button>
-                        <button class="filter-tag" data-specialty="Rosacea & Redness Recovery">Rosacea Recovery</button>
-                        <button class="filter-tag" data-specialty="Genuine Consumables Logged">Genuine
-                            Consumables</button>
-                        <button class="filter-tag"
-                            data-specialty="Ultherapy & Shurink custom setups">Ultherapy/Lifting</button>
+                    <!-- Treatment Category Selector Widget -->
+                    <div class="category-selector-widget">
+                        <!-- Main Category Tabs -->
+                        <div class="category-tabs-wrapper" id="categoryTabsWrapper">
+                            <button class="category-tab active" data-category="all">
+                                <span class="tab-icon">🔍</span>
+                                <span class="tab-label" data-i18n="filter.all">All</span>
+                            </button>
+                            <button class="category-tab" data-category="skin">
+                                <span class="tab-icon">✨</span>
+                                <span class="tab-label" data-i18n="cat.skin">Skin</span>
+                            </button>
+                            <button class="category-tab" data-category="lifting">
+                                <span class="tab-icon">⚡</span>
+                                <span class="tab-label" data-i18n="cat.lifting">Lifting</span>
+                            </button>
+                            <button class="category-tab" data-category="botox">
+                                <span class="tab-icon">💉</span>
+                                <span class="tab-label" data-i18n="cat.botox">Botox</span>
+                            </button>
+                            <button class="category-tab" data-category="filler">
+                                <span class="tab-icon">💧</span>
+                                <span class="tab-label" data-i18n="cat.filler">Filler</span>
+                            </button>
+                            <button class="category-tab" data-category="eye">
+                                <span class="tab-icon">👁️</span>
+                                <span class="tab-label" data-i18n="cat.eye">Eye Surgery</span>
+                            </button>
+                            <button class="category-tab" data-category="nose">
+                                <span class="tab-icon">👃</span>
+                                <span class="tab-label" data-i18n="cat.nose">Rhinoplasty</span>
+                            </button>
+                            <button class="category-tab" data-category="contour">
+                                <span class="tab-icon">📐</span>
+                                <span class="tab-label" data-i18n="cat.contour">Facial Contour</span>
+                            </button>
+                            <button class="category-tab" data-category="fat">
+                                <span class="tab-icon">⌛</span>
+                                <span class="tab-label" data-i18n="cat.fat">Fat Surgery</span>
+                            </button>
+                            <button class="category-tab" data-category="breast">
+                                <span class="tab-icon">🍒</span>
+                                <span class="tab-label" data-i18n="cat.breast">Breast Surgery</span>
+                            </button>
+                            <button class="category-tab" data-category="hair">
+                                <span class="tab-icon">💇</span>
+                                <span class="tab-label" data-i18n="cat.hair">Hair Transplant</span>
+                            </button>
+                            <button class="category-tab" data-category="epilation">
+                                <span class="tab-icon">🪒</span>
+                                <span class="tab-label" data-i18n="cat.epilation">Hair Removal</span>
+                            </button>
+                            <button class="category-tab" data-category="dental">
+                                <span class="tab-icon">🦷</span>
+                                <span class="tab-label" data-i18n="cat.dental">Dental</span>
+                            </button>
+                            <button class="category-tab" data-category="herbal">
+                                <span class="tab-icon">🌿</span>
+                                <span class="tab-label" data-i18n="cat.herbal">Oriental Medicine</span>
+                            </button>
+                            <button class="category-tab" data-category="others">
+                                <span class="tab-icon">➕</span>
+                                <span class="tab-label" data-i18n="cat.others">Others</span>
+                            </button>
+                        </div>
+
+                        <!-- Expandable Submenu Panel -->
+                        <div class="category-submenu-panel" id="categorySubmenuPanel">
+                            <!-- All Section (No submenus) -->
+                            <div class="submenu-content active" id="submenu-all">
+                                <p class="submenu-info" data-i18n="compare.subtitle">Select a category above to view specific treatments</p>
+                            </div>
+
+                            <!-- Skin Section -->
+                            <div class="submenu-content" id="submenu-skin">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.skin_booster">Skin Boosters</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Rejuran Healer" data-i18n="treat.rejuran">Rejuran Healer</button>
+                                        <button class="treat-chip" data-treatment="Exosome" data-i18n="treat.exosome">Exosome</button>
+                                        <button class="treat-chip" data-treatment="Juvelook" data-i18n="treat.juvelook">Juvelook</button>
+                                        <button class="treat-chip" data-treatment="Water Glow Injection" data-i18n="treat.water_glow">Water Glow Injection</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.peeling">Peeling/Exfoliation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Aqua Peel" data-i18n="treat.aqua_peel">Aqua Peel</button>
+                                        <button class="treat-chip" data-treatment="Aladdin Peel" data-i18n="treat.aladdin_peel">Aladdin Peel</button>
+                                        <button class="treat-chip" data-treatment="Milk Peel" data-i18n="treat.milk_peel">Milk Peel</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.whitening">Whitening/Pigmentation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Laser Toning" data-i18n="treat.toning">Laser Toning</button>
+                                        <button class="treat-chip" data-treatment="IPL" data-i18n="treat.ipl">IPL</button>
+                                        <button class="treat-chip" data-treatment="Pico Toning" data-i18n="treat.pico">Pico Toning</button>
+                                        <button class="treat-chip" data-treatment="CO2 Laser" data-i18n="treat.co2">CO2 Laser</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.acne">Acne/Scars</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Fraxel" data-i18n="treat.fraxel">Fraxel</button>
+                                        <button class="treat-chip" data-treatment="Agnes" data-i18n="treat.agnes">Agnes</button>
+                                        <button class="treat-chip" data-treatment="PDT" data-i18n="treat.pdt">PDT</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.mole">Mole/Wart</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Mole/Wart Removal" data-i18n="treat.mole_removal">Mole/Wart Removal</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lifting Section -->
+                            <div class="submenu-content" id="submenu-lifting">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.laser_lifting">Laser Lifting</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Ulthera" data-i18n="treat.ulthera">Ulthera</button>
+                                        <button class="treat-chip" data-treatment="Shurink" data-i18n="treat.shurink">Shurink</button>
+                                        <button class="treat-chip" data-treatment="Inmode" data-i18n="treat.inmode">Inmode</button>
+                                        <button class="treat-chip" data-treatment="Thermage" data-i18n="treat.thermage">Thermage</button>
+                                        <button class="treat-chip" data-treatment="Oligio" data-i18n="treat.oligio">Oligio</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.thread_lifting">Thread Lifting</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Mint Thread" data-i18n="treat.mint">Mint Thread</button>
+                                        <button class="treat-chip" data-treatment="Silhouette Soft" data-i18n="treat.silhouette">Silhouette Soft</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.lifting_injection">Lifting Injections</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Contour Injection" data-i18n="treat.contour_inj">Contour Injection</button>
+                                        <button class="treat-chip" data-treatment="Sculpting Injection" data-i18n="treat.sculpt_inj">Sculpting Injection</button>
+                                        <button class="treat-chip" data-treatment="Double Chin Injection" data-i18n="treat.double_chin_inj">Double Chin Injection</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botox Section -->
+                            <div class="submenu-content" id="submenu-botox">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.wrinkle_botox">Wrinkle Botox</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Frown Lines Botox" data-i18n="treat.frown">Frown Lines Botox</button>
+                                        <button class="treat-chip" data-treatment="Forehead Botox" data-i18n="treat.forehead_b">Forehead Botox</button>
+                                        <button class="treat-chip" data-treatment="Crow's Feet Botox" data-i18n="treat.crow">Crow's Feet Botox</button>
+                                        <button class="treat-chip" data-treatment="Lips Botox" data-i18n="treat.lips_b">Lips Botox</button>
+                                        <button class="treat-chip" data-treatment="Pebbled Chin Botox" data-i18n="treat.pebbled_chin">Pebbled Chin Botox</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.area_botox">Area-Specific Botox</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Square Jaw Botox" data-i18n="treat.jaw_b">Square Jaw Botox</button>
+                                        <button class="treat-chip" data-treatment="Salivary Glands Botox" data-i18n="treat.salivary">Salivary Glands Botox</button>
+                                        <button class="treat-chip" data-treatment="Trapezius Botox" data-i18n="treat.trapezius">Trapezius Botox</button>
+                                        <button class="treat-chip" data-treatment="Calves Botox" data-i18n="treat.calves">Calves Botox</button>
+                                        <button class="treat-chip" data-treatment="Hyperhidrosis Botox" data-i18n="treat.hyperhidrosis">Hyperhidrosis Botox</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Filler Section -->
+                            <div class="submenu-content" id="submenu-filler">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.volume_filler">Facial Volume Filler</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Forehead Filler" data-i18n="treat.forehead_f">Forehead Filler</button>
+                                        <button class="treat-chip" data-treatment="Front Cheek Filler" data-i18n="treat.cheek_f">Front Cheek Filler</button>
+                                        <button class="treat-chip" data-treatment="Cheek Filler" data-i18n="treat.cheek_vol">Cheek Filler</button>
+                                        <button class="treat-chip" data-treatment="Nasolabial Folds Filler" data-i18n="treat.nasolabial">Nasolabial Folds Filler</button>
+                                        <button class="treat-chip" data-treatment="Chin Tip Filler" data-i18n="treat.chin_tip">Chin Tip Filler</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.feature_filler">Feature Filler</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Nose Filler" data-i18n="treat.nose_f">Nose Filler</button>
+                                        <button class="treat-chip" data-treatment="Lips Filler" data-i18n="treat.lips_f">Lips Filler</button>
+                                        <button class="treat-chip" data-treatment="Lip Corners Filler" data-i18n="treat.lip_corners">Lip Corners Filler</button>
+                                        <button class="treat-chip" data-treatment="Under-Eye Aegyo Sal Filler" data-i18n="treat.aegyo">Under-Eye Aegyo Sal</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.body_filler">Body Filler</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Pelvis Filler" data-i18n="treat.pelvis_f">Pelvis Filler</button>
+                                        <button class="treat-chip" data-treatment="Hip-Up Filler" data-i18n="treat.hip_up">Hip-Up Filler</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eye Surgery Section -->
+                            <div class="submenu-content" id="submenu-eye">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.double_eyelid">Double Eyelid</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Natural Adhesion Double Eyelid" data-i18n="treat.natural_double">Natural Adhesion</button>
+                                        <button class="treat-chip" data-treatment="Incisional Double Eyelid" data-i18n="treat.incisional_double">Incisional</button>
+                                        <button class="treat-chip" data-treatment="Partial Incisional Double Eyelid" data-i18n="treat.partial_double">Partial Incisional</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.canthoplasty">Epicanthoplasty/Canthoplasty</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Front Canthoplasty" data-i18n="treat.front_cant">Front</button>
+                                        <button class="treat-chip" data-treatment="Top Canthoplasty" data-i18n="treat.top_cant">Top</button>
+                                        <button class="treat-chip" data-treatment="Back Canthoplasty" data-i18n="treat.back_cant">Back</button>
+                                        <button class="treat-chip" data-treatment="Bottom Canthoplasty" data-i18n="treat.bottom_cant">Bottom</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.ptosis_correction">Ptosis Correction</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Non-incisional Ptosis Correction" data-i18n="treat.non_incisional_ptosis">Non-incisional</button>
+                                        <button class="treat-chip" data-treatment="Incisional Ptosis Correction" data-i18n="treat.incisional_ptosis">Incisional</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.eye_aging">Eye Rejuvenation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Under-Eye Fat Relocation" data-i18n="treat.undereye_fat">Under-Eye Fat Relocation</button>
+                                        <button class="treat-chip" data-treatment="Upper Blepharoplasty" data-i18n="treat.upper_bleph">Upper Bleph</button>
+                                        <button class="treat-chip" data-treatment="Lower Blepharoplasty" data-i18n="treat.lower_bleph">Lower Bleph</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.eye_revision">Eye Revision</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Eye Revision Surgery" data-i18n="treat.eye_revision">Eye Revision Surgery</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rhinoplasty Section -->
+                            <div class="submenu-content" id="submenu-nose">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nose_structure">Bridge/Tip Surgery</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Silicone Rhinoplasty" data-i18n="treat.silicone_nose">Silicone Rhinoplasty</button>
+                                        <button class="treat-chip" data-treatment="Autologous Cartilage Rhinoplasty" data-i18n="treat.cartilage_nose">Autologous Cartilage</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.functional_nose">Functional Rhinoplasty</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Functional Rhinoplasty (Rhinitis/Septal Deviation)" data-i18n="treat.functional_nose">Functional Rhinoplasty</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nose_correction">Nose Shape Correction</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Alar Reduction" data-i18n="treat.alar_reduction">Alar Reduction</button>
+                                        <button class="treat-chip" data-treatment="Bulbous Nose Correction" data-i18n="treat.bulbous_nose">Bulbous Nose Correction</button>
+                                        <button class="treat-chip" data-treatment="Hump Nose Correction" data-i18n="treat.hump_nose">Hump Nose Correction</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nose_revision">Rhinoplasty Revision</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Rhinoplasty Revision" data-i18n="treat.nose_revision">Rhinoplasty Revision</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Facial Contour/Orthognathic Section -->
+                            <div class="submenu-content" id="submenu-contour">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.facial_contour">Facial Contouring</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Square Jaw Reduction" data-i18n="treat.jaw_reduction">Square Jaw Reduction</button>
+                                        <button class="treat-chip" data-treatment="Cheekbone Reduction" data-i18n="treat.cheekbone_red">Cheekbone Reduction</button>
+                                        <button class="treat-chip" data-treatment="Chin Surgery" data-i18n="treat.chin_surg">Chin Surgery</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.orthognathic">Orthognathic Surgery</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Orthognathic Surgery" data-i18n="treat.orthognathic">Orthognathic Surgery</button>
+                                        <button class="treat-chip" data-treatment="Protruding Mouth Surgery" data-i18n="treat.protruding_mouth">Protruding Mouth Surgery</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.forehead_implant">Forehead Contouring</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Forehead Contouring" data-i18n="treat.forehead_contour">Forehead Contouring</button>
+                                        <button class="treat-chip" data-treatment="Implant Insertion" data-i18n="treat.implant_insert">Implant Insertion</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fat Surgery Section -->
+                            <div class="submenu-content" id="submenu-fat">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.liposuction">Liposuction</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Abdomen Liposuction" data-i18n="treat.abdomen_lipo">Abdomen</button>
+                                        <button class="treat-chip" data-treatment="Thighs Liposuction" data-i18n="treat.thigh_lipo">Thighs</button>
+                                        <button class="treat-chip" data-treatment="Forearms Liposuction" data-i18n="treat.forearm_lipo">Forearms</button>
+                                        <button class="treat-chip" data-treatment="Double Chin/Face Liposuction" data-i18n="treat.face_lipo">Double Chin/Face</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.fat_graft">Fat Grafting</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Full Face Fat Grafting" data-i18n="treat.full_face_fat">Full Face Fat Grafting</button>
+                                        <button class="treat-chip" data-treatment="Area-Specific Fat Grafting" data-i18n="treat.area_fat">Area-Specific</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Breast Surgery Section -->
+                            <div class="submenu-content" id="submenu-breast">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.breast_aug">Breast Augmentation</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Motiva Breast Augmentation" data-i18n="treat.motiva">Motiva</button>
+                                        <button class="treat-chip" data-treatment="Mentor Breast Augmentation" data-i18n="treat.mentor">Mentor</button>
+                                        <button class="treat-chip" data-treatment="Autologous Fat Breast Augmentation" data-i18n="treat.fat_breast">Autologous Fat</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.breast_reduction">Breast Reduction/Lift</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Breast Reduction" data-i18n="treat.breast_reduction">Breast Reduction</button>
+                                        <button class="treat-chip" data-treatment="Sagging Breast Correction" data-i18n="treat.breast_lift">Sagging Breast Correction</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.nipple_gyne">Nipple/Gynecomastia</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Inverted Nipple Correction" data-i18n="treat.inverted_nipple">Inverted Nipple</button>
+                                        <button class="treat-chip" data-treatment="Nipple Reduction" data-i18n="treat.nipple_reduction">Nipple Reduction</button>
+                                        <button class="treat-chip" data-treatment="Gynecomastia Treatment" data-i18n="treat.gynecomastia">Gynecomastia</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hair Transplant Section -->
+                            <div class="submenu-content" id="submenu-hair">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.hair_transplant">Hair Transplant</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Incisional Hair Transplant" data-i18n="treat.incisional_hair">Incisional</button>
+                                        <button class="treat-chip" data-treatment="Non-incisional Hair Transplant" data-i18n="treat.non_incisional_hair">Non-incisional</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.hair_loss_treat">Hair Loss Treatment</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Scalp Mesotherapy" data-i18n="treat.meso">Scalp Mesotherapy</button>
+                                        <button class="treat-chip" data-treatment="Hairline Correction" data-i18n="treat.hairline">Hairline Correction</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hair Removal Section -->
+                            <div class="submenu-content" id="submenu-epilation">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.laser_epilation">Laser Hair Removal</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Underarms Hair Removal" data-i18n="treat.underarm_ep">Underarms</button>
+                                        <button class="treat-chip" data-treatment="Arms/Legs Hair Removal" data-i18n="treat.limbs_ep">Arms/Legs</button>
+                                        <button class="treat-chip" data-treatment="Upper Lip Hair Removal" data-i18n="treat.lip_ep">Upper Lip</button>
+                                        <button class="treat-chip" data-treatment="Bikini/Brazilian Hair Removal" data-i18n="treat.bikini_ep">Bikini/Brazilian</button>
+                                        <button class="treat-chip" data-treatment="Full Face Hair Removal" data-i18n="treat.face_ep">Full Face</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dental Section -->
+                            <div class="submenu-content" id="submenu-dental">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.aesthetic_dental">Aesthetic Dental</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Laminate" data-i18n="treat.laminate">Laminate</button>
+                                        <button class="treat-chip" data-treatment="All-Ceramic" data-i18n="treat.all_ceramic">All-Ceramic</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.orthodontic_dental">Orthodontics</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Clippy-C Orthodontics" data-i18n="treat.clippy_c">Clippy-C</button>
+                                        <button class="treat-chip" data-treatment="Clear Aligners" data-i18n="treat.clear_align">Clear Aligners</button>
+                                        <button class="treat-chip" data-treatment="Lingual Orthodontics" data-i18n="treat.lingual">Lingual</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.whitening_implant">Whitening/Implant</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Teeth Whitening" data-i18n="treat.whitening">Teeth Whitening</button>
+                                        <button class="treat-chip" data-treatment="Dental Implants" data-i18n="treat.implant">Dental Implants</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Oriental Medicine Section -->
+                            <div class="submenu-content" id="submenu-herbal">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.herbal_diet">Herbal Diet</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Herbal Diet Medicine" data-i18n="treat.herbal_diet_m">Diet Medicine</button>
+                                        <button class="treat-chip" data-treatment="Herbal Diet Capsule" data-i18n="treat.herbal_diet_c">Diet Capsule</button>
+                                        <button class="treat-chip" data-treatment="Herbal Diet Pills" data-i18n="treat.herbal_diet_p">Diet Pills</button>
+                                    </div>
+                                </div>
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.herbal_proc">Herbal Procedure</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Acupuncture Thread Lifting" data-i18n="treat.acupuncture_thread">Thread Lifting</button>
+                                        <button class="treat-chip" data-treatment="Facial Acupuncture" data-i18n="treat.facial_acupuncture">Facial Acupuncture</button>
+                                        <button class="treat-chip" data-treatment="Diet Herbal Injection" data-i18n="treat.diet_herbal_inj">Diet Injection</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Others Section -->
+                            <div class="submenu-content" id="submenu-others">
+                                <div class="submenu-group">
+                                    <span class="submenu-title" data-i18n="subcat.misc_treat">Miscellaneous</span>
+                                    <div class="submenu-items">
+                                        <button class="treat-chip" data-treatment="Tattoo Removal" data-i18n="treat.tattoo_removal">Tattoo Removal</button>
+                                        <button class="treat-chip" data-treatment="Petit Side-Effect Treatment" data-i18n="treat.side_effect_treat">Side-Effect Treatment</button>
+                                        <button class="treat-chip" data-treatment="Post-op Management Program" data-i18n="treat.post_op">Post-op Management</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
