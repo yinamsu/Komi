@@ -84,8 +84,8 @@ const translations = {
 
         // ---- Directory Section ----
         "directory.tag": "Boutique Directory",
-        "directory.title": "Verified Partner Clinics ",
-        "directory.title_serif": "& Validation Engine",
+        "directory.title": "Verified Partner Clinics",
+        "directory.title_serif": " & Validation Engine",
         "directory.subtitle": "Explore our certified clinics and see how we verify review authenticity while preserving patient anonymity.",
         "directory.loading": "🔄 Loading verified boutique clinics...",
         "directory.empty": "⚠️ No verified boutique clinics available at the moment.",
@@ -116,6 +116,12 @@ const translations = {
         "reviews.r2_clinic": "Clinic: Cheongdam Barrier Lab",
         "reviews.r2_doctor": "Dr. Ji-Yeon Lee",
         "reviews.verified_badge": "✓ Receipt Verified",
+        "reviews.stat_total": "Total Reviews",
+        "reviews.stat_avg": "Avg. Rating",
+        "reviews.stat_verified": "Receipt Verified",
+        "reviews.helpful": "Helpful",
+        "reviews.show_more": "📖 Show All 32 Reviews",
+        "reviews.show_less": "📕 Show Best Reviews Only",
 
         // ---- Founder Section ----
         "founder.tag": "Founder's Mission",
@@ -419,25 +425,27 @@ const translations = {
         "rev_sim.modal_title": "Visit-Verified Review Writer Simulator",
         "rev_sim.modal_subtitle": "100% authenticated review matching to the operating physician",
         "rev_sim.step1": "1. Documents Upload",
-        "rev_sim.step2": "2. 11-Point Rating",
+        "rev_sim.step2": "2. 13-Point Rating",
         "rev_sim.step3": "3. Long-Term & Whistleblower",
         "rev_sim.passport_label": "Passport Verification (Scan Info Page)",
         "rev_sim.passport_desc": "Used strictly for country checking and duplicated review protection. Stored client-side only.",
         "rev_sim.receipt_label": "Medical Tax Refund Receipt",
         "rev_sim.receipt_desc": "Tax Refund ID and TX codes verify your actual visitation at the selected clinic.",
         "rev_sim.doctor_select_label": "Select Treating Physician",
-        "rev_sim.criteria_label": "Rate Your Experience (11 Evaluation Criteria)",
-        "rev_sim.cat_booking": "1. Reservation (Language/Speed):",
+        "rev_sim.criteria_label": "Rate Your Experience (13 Evaluation Criteria)",
+        "rev_sim.cat_booking": "1. Reservation (Language/Speed/Communication):",
         "rev_sim.cat_visit": "2. Arrival & Wait (Schedule adherence):",
-        "rev_sim.cat_doc_design": "3. Procedure Consultation (Design, Explanation):",
-        "rev_sim.cat_post_care": "4. Aftercare Warning Guide (Post-treatment explanation):",
-        "rev_sim.cat_side_effect": "5. Side Effects & Pain Intensity (Lower is better):",
+        "rev_sim.cat_procedure": "3. During treatment (Designated physician, pre-and-post explanation, result satisfaction):",
+        "rev_sim.cat_post_care": "4. Post-treatment (Follow-up care, clinic's guides/precautions):",
+        "rev_sim.cat_side_effect": "5. Post-treatment side effects, pain, satisfaction:",
         "rev_sim.cat_revisit": "6. Intention to Revisit:",
         "rev_sim.cat_good": "7. Highlights (What went well):",
         "rev_sim.cat_bad": "8. Areas for Improvement:",
-        "rev_sim.cat_kindness": "9. General Staff Kindness & Parking:",
-        "rev_sim.cat_recommend": "10. Willingness to Recommend to Friends:",
-        "rev_sim.cat_onemonth": "11. 1-Month Later Follow-up Opt-in:",
+        "rev_sim.cat_parking": "9. Parking:",
+        "rev_sim.cat_kindness": "10. Staff Friendliness:",
+        "rev_sim.cat_language_barrier": "11. Language Support Inconvenience (5 = Very convenient/no barrier):",
+        "rev_sim.cat_recommend": "12. Willingness to Recommend to Friends:",
+        "rev_sim.cat_onemonth": "13. 1-Month Later: Satisfaction & Revisit Intention:",
         "rev_sim.onemonth_opt": "I agree to submit a 1-month-later review for skincare rewards.",
         "rev_sim.revis_yes": "Yes",
         "rev_sim.revis_no": "No",
@@ -450,6 +458,7 @@ const translations = {
         "rev_sim.submit": "Upload Authenticated Review",
         "rev_sim.success_title": "Verified Review Published!",
         "rev_sim.success_desc": "Thank you for your honest data. Your review is permanently stored on our offshore database node and cannot be deleted by the clinic.",
+<<<<<<< HEAD
         "category.menu_title": "Please select a treatment of interest",
         "category.pigment": "Pigmentation",
         "category.acne": "Acne",
@@ -460,6 +469,18 @@ const translations = {
         "validation.email_invalid": "Please enter a valid email address containing '@'.",
         "validation.date_required": "Please choose a booking date.",
         "validation.time_required": "Please choose a preferred time slot."
+=======
+        "menu.title": "Select a Treatment You are Interested In",
+        "menu.filler": "Filler",
+        "menu.botox": "Botox",
+        "menu.skinbooster": "Skin Booster",
+        "menu.lifting": "Lifting",
+        "menu.pigmentation": "Pigment",
+        "menu.acne": "Acne",
+        "menu.hairloss": "Hair Loss",
+        "menu.obesityinjection": "Obesity Injection",
+        "menu.hairremoval": "Hair Removal"
+>>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
     },
 
     ko: {
@@ -541,7 +562,8 @@ const translations = {
 
         // ---- Directory Section ----
         "directory.tag": "부티크 디렉토리",
-        "directory.title": "인증 파트너 클리닉 및 검증 엔진",
+        "directory.title": "검증된 파트너 클리닉",
+        "directory.title_serif": " & 검증 엔진",
         "directory.subtitle": "인증된 클리닉을 살펴보고 환자 익명성을 보장하면서 리뷰 진위를 어떻게 검증하는지 확인하세요.",
         "directory.loading": "🔄 인증된 부티크 클리닉을 불러오는 중...",
         "directory.empty": "⚠️ 현재 이용 가능한 인증 부티크 클리닉이 없습니다.",
@@ -558,7 +580,8 @@ const translations = {
 
         // ---- Reviews Section ----
         "reviews.tag": "환자 후기",
-        "reviews.title": "100% 방문 인증 리뷰 의사 실명 연동",
+        "reviews.title": "100% 방문 인증 리뷰 ",
+        "reviews.title_serif": "의사 실명 연동",
         "reviews.subtitle": "모든 리뷰는 영수증 인증 코드를 통해 실제 시술 의사와 매칭됩니다. 삭제 불가.",
         "reviews.r1_name": "Jessica S.",
         "reviews.r1_skin": "피츠패트릭 Type I",
@@ -571,6 +594,12 @@ const translations = {
         "reviews.r2_clinic": "클리닉: 청담 배리어 랩",
         "reviews.r2_doctor": "이지연 원장",
         "reviews.verified_badge": "✓ 영수증 인증 완료",
+        "reviews.stat_total": "전체 리뷰",
+        "reviews.stat_avg": "평균 평점",
+        "reviews.stat_verified": "영수증 인증",
+        "reviews.helpful": "도움됨",
+        "reviews.show_more": "📖 전체 32개 리뷰 보기",
+        "reviews.show_less": "📕 베스트 리뷰만 보기",
 
         // ---- Founder Section ----
         "founder.tag": "창업자의 사명",
@@ -874,25 +903,27 @@ const translations = {
         "rev_sim.modal_title": "실제 방문 검증 리뷰 작성 시뮬레이터",
         "rev_sim.modal_subtitle": "시술 원장 실명제 및 100% 실제 영수증/여권 인증 기반의 정직한 리뷰 작성 프로세스",
         "rev_sim.step1": "1. 서류 인증",
-        "rev_sim.step2": "2. 11개 기준 평가",
+        "rev_sim.step2": "2. 13개 기준 평가",
         "rev_sim.step3": "3. 사후 케어 & 리베이트 신고",
         "rev_sim.passport_label": "여권 등록 (신원 확인용)",
         "rev_sim.passport_desc": "동일인 중복 작성 방지 및 외국인 국적 확인용으로만 수집되며 플랫폼에 평문 저장되지 않습니다.",
         "rev_sim.receipt_label": "면세 세금 환급 영수증 등록",
         "rev_sim.receipt_desc": "영수증의 승인 번호 및 환급 번호를 통해 실제 시술 방문 여부를 100% 검증합니다.",
         "rev_sim.doctor_select_label": "시술 원장님 선택",
-        "rev_sim.criteria_label": "시술 경험 상세 평가 (11개 평가 기준)",
-        "rev_sim.cat_booking": "1. 예약 (언어 지원, 소통, 응대 속도):",
+        "rev_sim.criteria_label": "시술 경험 상세 평가 (13개 평가 기준)",
+        "rev_sim.cat_booking": "1. 예약 (언어 지원, 소통, 응대 속도 등):",
         "rev_sim.cat_visit": "2. 방문시 (대기 시간, 예약 시간 준수):",
-        "rev_sim.cat_doc_design": "3. 시술시 (원장 직접 시술 및 전후 상담 만족도):",
-        "rev_sim.cat_post_care": "4. 시술 후 (사후 케어 및 병원 주의사항 안내):",
-        "rev_sim.cat_side_effect": "5. 부작용 및 통증 강도 (낮을수록 좋음):",
+        "rev_sim.cat_procedure": "3. 시술 시 (의사 지정원장 시술, 충분한 전후 설명과 상담, 결과 만족도):",
+        "rev_sim.cat_post_care": "4. 시술 후 (사후 케어, 병원측 주의사항 안내 등):",
+        "rev_sim.cat_side_effect": "5. 시술 후 부작용, 통증, 만족도:",
         "rev_sim.cat_revisit": "6. 재방문 의사:",
         "rev_sim.cat_good": "7. 좋았던 점:",
         "rev_sim.cat_bad": "8. 개선이 필요했던 점:",
-        "rev_sim.cat_kindness": "9. 직원 친절도, 주차 및 언어 지원 편의성:",
-        "rev_sim.cat_recommend": "10. 주위 추천 의향:",
-        "rev_sim.cat_onemonth": "11. 1개월 뒤 만족도 및 재방문 의향 추가 추적 예약:",
+        "rev_sim.cat_parking": "9. 주차:",
+        "rev_sim.cat_kindness": "10. 직원 친절도:",
+        "rev_sim.cat_language_barrier": "11. 언어 지원 불편성 (5점일수록 편리/불편 없음):",
+        "rev_sim.cat_recommend": "12. 주위 추천 의향:",
+        "rev_sim.cat_onemonth": "13. 1개월 뒤 만족도, 1개월 뒤 재방문 의향:",
         "rev_sim.onemonth_opt": "1-month-later review를 제출하고 포인트/화장품 특별 보상을 받겠습니다.",
         "rev_sim.revis_yes": "있음",
         "rev_sim.revis_no": "없음",
@@ -905,6 +936,7 @@ const translations = {
         "rev_sim.submit": "인증 리뷰 업로드",
         "rev_sim.success_title": "방문 인증 리뷰가 등록되었습니다!",
         "rev_sim.success_desc": "정직한 데이터 구축에 동참해 주셔서 감사합니다. 등록된 후기는 해외 서버에 안전하게 보관되어 병원 측의 임의 삭제나 가공이 불가합니다.",
+<<<<<<< HEAD
         "category.menu_title": "관심있는 시술을 선택해보세요.",
         "category.pigment": "색소",
         "category.acne": "여드름",
@@ -915,6 +947,18 @@ const translations = {
         "validation.email_invalid": "올바른 이메일 형식(@ 포함)을 입력해 주세요.",
         "validation.date_required": "예약 희망 날짜를 선택해 주세요.",
         "validation.time_required": "희망하시는 시간대를 선택해 주세요."
+=======
+        "menu.title": "관심있는 시술을 선택해보세요.",
+        "menu.filler": "필러",
+        "menu.botox": "보톡스",
+        "menu.skinbooster": "스킨부스터",
+        "menu.lifting": "리프팅",
+        "menu.pigmentation": "색소",
+        "menu.acne": "여드름",
+        "menu.hairloss": "탈모",
+        "menu.obesityinjection": "비만주사",
+        "menu.hairremoval": "제모"
+>>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
     }
 };
 
@@ -1003,7 +1047,10 @@ window.fitzpatrickProfiles_ko = fitzpatrickProfiles_ko;
 
 function t(key) {
     const dict = translations[currentLang] || translations['en'];
-    return dict[key] || translations['en'][key] || key;
+    if (dict && dict[key] !== undefined) {
+        return dict[key];
+    }
+    return translations['en'][key] || key;
 }
 
 function getCurrentLang() {
