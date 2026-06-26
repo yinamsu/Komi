@@ -3405,8 +3405,12 @@ html[data-theme="dark"] .submenu-title {
 }
 
 .icon-circle svg {
-    width: 26px;
-    height: 26px;
+    display: block;
+    width: 26px !important;
+    height: 26px !important;
+    max-width: 26px;
+    max-height: 26px;
+    flex: 0 0 26px;
 }
 
 .visual-category-item .label {
@@ -3424,183 +3428,6 @@ html[data-theme="dark"] .submenu-title {
 }
 
 
-/* ========================================================
-   [Treatment Menu Section Styles]
-   ======================================================== */
-.section-treatments {
-    padding: 50px 0 35px;
-    background-color: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-color);
-    position: relative;
-    z-index: 10;
-}
-
-.treatment-title-wrapper {
-    margin-bottom: 24px;
-}
-
-.treatment-section-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-    font-family: var(--font-sans);
-    letter-spacing: -0.02em;
-}
-
-.treatment-grid {
-    display: grid;
-    grid-template-columns: repeat(9, minmax(0, 1fr));
-    gap: 16px;
-    align-items: start;
-    max-width: 1080px;
-    margin: 0 auto;
-}
-
-.treatment-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 0;
-    cursor: pointer;
-    user-select: none;
-    transition: var(--transition-bounce);
-}
-
-.treatment-card:hover {
-    transform: translateY(-6px);
-}
-
-.treatment-card:hover .treatment-icon-wrapper {
-    box-shadow: var(--shadow-medium), 0 0 15px rgba(var(--color-accent-rgb), 0.25);
-}
-
-.treatment-icon-wrapper {
-    width: 64px;
-    height: 64px;
-    flex: 0 0 64px;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-    box-shadow: var(--shadow-soft);
-    color: var(--text-light);
-    border: 2px solid transparent;
-    transition: var(--transition-smooth);
-}
-
-.hairremoval-gradient {
-    background: linear-gradient(135deg, #a8ff78, #78ffd6);
-    color: #0b3c2c;
-}
-
-.lifting-gradient {
-    background: linear-gradient(135deg, #f857a6, #ff5858);
-}
-
-.filler-gradient {
-    background: linear-gradient(135deg, #11998e, #38ef7d);
-}
-
-.botox-gradient {
-    background: linear-gradient(135deg, #4776e6, #8e54e9);
-}
-
-.skinbooster-gradient {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-}
-
-.pigmentation-gradient {
-    background: linear-gradient(135deg, #fcd116, #fca311);
-    color: #0b1420;
-}
-
-.acne-gradient {
-    background: linear-gradient(135deg, #e65c00, #f9d423);
-}
-
-.hairloss-gradient {
-    background: linear-gradient(135deg, #348f50, #56b4d3);
-}
-
-.obesityinjection-gradient {
-    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-}
-
-.treatment-icon-wrapper svg {
-    display: block;
-    width: 26px;
-    height: 26px;
-    flex: 0 0 26px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
-}
-
-.treatment-label {
-    max-width: 100%;
-    margin-top: 4px;
-    color: var(--text-secondary);
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.25;
-    text-align: center;
-    word-break: keep-all;
-    transition: var(--transition-smooth);
-}
-
-.treatment-card:hover .treatment-label {
-    color: var(--text-primary);
-}
-
-.treatment-card.active .treatment-icon-wrapper {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.5);
-    transform: scale(1.05);
-}
-
-.treatment-card.active .treatment-label {
-    color: var(--color-accent);
-    font-weight: 700;
-}
-
-@media (max-width: 991px) {
-    .treatment-grid {
-        grid-template-columns: repeat(5, minmax(72px, 1fr));
-        max-width: 600px;
-    }
-}
-
-@media (max-width: 576px) {
-    .section-treatments {
-        padding: 35px 0 20px;
-    }
-
-    .treatment-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px 12px;
-        max-width: 340px;
-    }
-
-    .treatment-icon-wrapper {
-        width: 60px;
-        height: 60px;
-        flex-basis: 60px;
-        border-radius: 16px;
-    }
-
-    .treatment-icon-wrapper svg {
-        width: 24px;
-        height: 24px;
-        flex-basis: 24px;
-    }
-
-    .treatment-label {
-        font-size: 12px;
-    }
-
-    .treatment-section-title {
-        font-size: 18px;
-    }
-}
 /* 아이콘 개별 테마 색상 (그라데이션 매칭) */
 .bg-epilation {
     background: linear-gradient(135deg, #10b981, #059669); /* 녹색 */
@@ -3644,8 +3471,11 @@ html[data-theme="dark"] .submenu-title {
         border-radius: 14px;
     }
     .icon-circle svg {
-        width: 20px;
-        height: 20px;
+        width: 20px !important;
+        height: 20px !important;
+        max-width: 20px;
+        max-height: 20px;
+        flex-basis: 20px;
     }
     .visual-category-item .label {
         font-size: 11px;

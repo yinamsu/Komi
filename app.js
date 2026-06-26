@@ -32,7 +32,6 @@ function initApp() {
     loadClinics();
     initClinicDetailModal();
     initSearchAndFilters();
-    initTreatmentMenu();
     initReviewWriter();
     initExpandableReviews();
 }
@@ -1064,35 +1063,54 @@ function initSearchAndFilters() {
             });
         });
     }
+
+    const visualMenu = document.querySelector('.visual-category-menu');
+    if (visualMenu) {
+        const treatmentMap = {
+            epilation: 'Hair Removal',
+            lifting: 'Lifting',
+            filler: 'Filler',
+            botox: 'Botox',
+            skin_booster: 'Skin Booster',
+            whitening: 'Pigmentation',
+            acne: 'Acne',
+            hair_loss_treat: 'Hair Loss',
+            herbal: 'Obesity Injection'
+        };
+
+        visualMenu.querySelectorAll('.visual-category-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const explicitTreatment = item.getAttribute('data-target-treatment');
+                const subcategory = item.getAttribute('data-target-subcategory');
+                const category = item.getAttribute('data-target-category');
+                const treatment = treatmentMap[subcategory] || treatmentMap[category] || explicitTreatment || 'all';
+
+                const isAlreadyActive = item.classList.contains('active');
+                visualMenu.querySelectorAll('.visual-category-item').forEach(btn => btn.classList.remove('active'));
+                activeTreatmentFilter = isAlreadyActive ? 'all' : treatment;
+
+                if (!isAlreadyActive) {
+                    item.classList.add('active');
+                }
+
+                if (tagsWrapper) {
+                    tagsWrapper.querySelectorAll('.filter-tag').forEach(btn => btn.classList.remove('active'));
+                    const allTag = tagsWrapper.querySelector('.filter-tag[data-specialty="all"]');
+                    if (allTag) allTag.classList.add('active');
+                }
+
+                applyFilters();
+
+                const dirSection = document.querySelector('.section-directory');
+                if (dirSection) {
+                    dirSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    }
     
     window.addEventListener('languageChanged', () => {
         applyFilters();
-    });
-}
-
-function initTreatmentMenu() {
-    const menuItems = document.querySelectorAll('.treatment-card');
-    menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const treatment = item.getAttribute('data-treatment');
-            
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-                activeTreatmentFilter = 'all';
-            } else {
-                menuItems.forEach(card => card.classList.remove('active'));
-                item.classList.add('active');
-                activeTreatmentFilter = treatment;
-            }
-            
-            applyFilters();
-            
-            // Scroll to directory section
-            const dirSection = document.querySelector('.section-directory');
-            if (dirSection) {
-                dirSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
     });
 }
 
