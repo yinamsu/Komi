@@ -458,7 +458,6 @@ const translations = {
         "rev_sim.submit": "Upload Authenticated Review",
         "rev_sim.success_title": "Verified Review Published!",
         "rev_sim.success_desc": "Thank you for your honest data. Your review is permanently stored on our offshore database node and cannot be deleted by the clinic.",
-<<<<<<< HEAD
         "category.menu_title": "Please select a treatment of interest",
         "category.pigment": "Pigmentation",
         "category.acne": "Acne",
@@ -468,8 +467,7 @@ const translations = {
         "validation.email_required": "Please enter your email address.",
         "validation.email_invalid": "Please enter a valid email address containing '@'.",
         "validation.date_required": "Please choose a booking date.",
-        "validation.time_required": "Please choose a preferred time slot."
-=======
+        "validation.time_required": "Please choose a preferred time slot.",
         "menu.title": "Select a Treatment You are Interested In",
         "menu.filler": "Filler",
         "menu.botox": "Botox",
@@ -480,7 +478,6 @@ const translations = {
         "menu.hairloss": "Hair Loss",
         "menu.obesityinjection": "Obesity Injection",
         "menu.hairremoval": "Hair Removal"
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
     },
 
     ko: {
@@ -936,7 +933,6 @@ const translations = {
         "rev_sim.submit": "인증 리뷰 업로드",
         "rev_sim.success_title": "방문 인증 리뷰가 등록되었습니다!",
         "rev_sim.success_desc": "정직한 데이터 구축에 동참해 주셔서 감사합니다. 등록된 후기는 해외 서버에 안전하게 보관되어 병원 측의 임의 삭제나 가공이 불가합니다.",
-<<<<<<< HEAD
         "category.menu_title": "관심있는 시술을 선택해보세요.",
         "category.pigment": "색소",
         "category.acne": "여드름",
@@ -946,8 +942,7 @@ const translations = {
         "validation.email_required": "이메일 주소를 입력해 주세요.",
         "validation.email_invalid": "올바른 이메일 형식(@ 포함)을 입력해 주세요.",
         "validation.date_required": "예약 희망 날짜를 선택해 주세요.",
-        "validation.time_required": "희망하시는 시간대를 선택해 주세요."
-=======
+        "validation.time_required": "희망하시는 시간대를 선택해 주세요.",
         "menu.title": "관심있는 시술을 선택해보세요.",
         "menu.filler": "필러",
         "menu.botox": "보톡스",
@@ -958,7 +953,6 @@ const translations = {
         "menu.hairloss": "탈모",
         "menu.obesityinjection": "비만주사",
         "menu.hairremoval": "제모"
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
     }
 };
 
