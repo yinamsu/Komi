@@ -1285,6 +1285,75 @@ html[data-theme="dark"] .theme-btn.active {
     margin-top: 2px;
 }
 
+/* 10대 상세 평가 지표 그리드 및 가로 게이지 바 */
+.review-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 24px;
+    margin: 18px 0;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.review-metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.metric-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.metric-label {
+    color: var(--text-secondary);
+}
+
+.metric-score {
+    color: var(--color-accent);
+}
+
+.metric-bar-container {
+    width: 100%;
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.metric-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary));
+    width: 0; /* JS에서 동적 세팅 */
+    transition: width 0.8s cubic-bezier(0.1, 0.8, 0.25, 1);
+}
+
+/* 콤팩트 리뷰 코멘트 한줄평 박스 */
+.review-comment-box {
+    background-color: var(--bg-primary);
+    border-radius: var(--border-radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    font-style: italic;
+    border-left: 3px solid var(--color-accent);
+    margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+    .review-metrics-grid {
+        grid-template-columns: 1fr; /* 모바일에서는 1열 */
+        gap: 10px;
+    }
+}
+
 /* Treatment Tag */
 .review-treatment-tag {
     display: inline-block;
@@ -3169,24 +3238,10 @@ html[data-theme="dark"] .diff-highlight-text {
 /* 메인 카테고리 탭 (가로 스크롤 가능형) */
 .category-tabs-wrapper {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    overflow-x: auto;
+    justify-content: center;
     padding-bottom: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-color) transparent;
-}
-
-.category-tabs-wrapper::-webkit-scrollbar {
-    height: 4px;
-}
-
-.category-tabs-wrapper::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.category-tabs-wrapper::-webkit-scrollbar-thumb {
-    background-color: var(--border-color);
-    border-radius: 4px;
 }
 
 .category-tab {
@@ -3219,7 +3274,7 @@ html[data-theme="dark"] .diff-highlight-text {
     box-shadow: var(--shadow-glow);
 }
 
-/* 하부메뉴 펼침 패널 */
+/* 하부메침 패널 */
 .category-submenu-panel {
     background-color: var(--color-primary-light);
     border: 1px solid var(--border-color);
@@ -3257,6 +3312,45 @@ html[data-theme="dark"] .diff-highlight-text {
     font-size: 13px;
     color: var(--text-muted);
     margin: 0;
+}
+
+/* 카테고리 선택 안내 플레이스홀더 디자인 */
+.category-placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0;
+    gap: 8px;
+}
+
+.placeholder-icon {
+    font-size: 26px;
+    margin-bottom: 4px;
+    animation: placeholderPulse 2.5s infinite ease-in-out;
+}
+
+.placeholder-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    text-align: center;
+}
+
+.placeholder-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: center;
+    max-width: 480px;
+    line-height: 1.5;
+}
+
+@keyframes placeholderPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
 }
 
 /* 개별 서브카테고리 그룹 (데스크탑에서 좌우 정렬, 모바일에서 상하 분리) */
@@ -3358,10 +3452,13 @@ html[data-theme="dark"] .submenu-title {
 }
 
 .visual-category-menu {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     justify-content: center;
-    flex-wrap: wrap;
     gap: 16px 24px;
+    justify-items: center;
+    max-width: 780px;
+    margin: 0 auto;
 }
 
 .visual-category-item {
@@ -3374,7 +3471,8 @@ html[data-theme="dark"] .submenu-title {
     padding: 0;
     cursor: pointer;
     transition: transform 0.2s ease;
-    width: 75px;
+    width: 100%;
+    max-width: 90px;
 }
 
 .visual-category-item:hover {
@@ -3419,7 +3517,12 @@ html[data-theme="dark"] .submenu-title {
     color: var(--text-secondary);
     transition: color 0.2s ease;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: keep-all;
+    word-wrap: break-word;
+    line-height: 1.25;
+    display: block;
+    width: 100%;
 }
 
 .visual-category-item:hover .label,
@@ -3441,29 +3544,52 @@ html[data-theme="dark"] .submenu-title {
 .bg-botox {
     background: linear-gradient(135deg, #a78bfa, #7c3aed); /* 보라 */
 }
-.bg-skin-booster {
+.bg-skin {
     background: linear-gradient(135deg, #60a5fa, #2563eb); /* 파랑 */
 }
-.bg-pigment {
+.bg-eye {
     background: linear-gradient(135deg, #fbbf24, #d97706); /* 노랑 */
 }
-.bg-acne {
+.bg-fat {
     background: linear-gradient(135deg, #fb923c, #ea580c); /* 주황 */
 }
-.bg-hair-loss {
+.bg-hair {
     background: linear-gradient(135deg, #2ecc71, #1abc9c); /* 청록 */
 }
-.bg-diet-injection {
+.bg-herbal {
     background: linear-gradient(135deg, #f87171, #ef4444); /* 빨강 */
+}
+.bg-nose {
+    background: linear-gradient(135deg, #f472b6, #db2777); /* 장미빛 */
+}
+.bg-contour {
+    background: linear-gradient(135deg, #38bdf8, #0284c7); /* 하늘/파랑 */
+}
+.bg-breast {
+    background: linear-gradient(135deg, #fda4af, #f43f5e); /* 연분홍/진분홍 */
+}
+.bg-dental {
+    background: linear-gradient(135deg, #a5f3fc, #0891b2); /* 시안/청록 */
+}
+.bg-all {
+    background: linear-gradient(135deg, #475569, #1e293b); /* 차분한 다크 네이비 */
 }
 
 /* 모바일 화면에서 좀 더 촘촘하게 배열 */
+@media (max-width: 768px) {
+    .visual-category-menu {
+        grid-template-columns: repeat(4, 1fr); /* 태블릿에서는 4열 */
+        gap: 16px 12px;
+    }
+}
 @media (max-width: 480px) {
     .visual-category-menu {
-        gap: 12px 16px;
+        grid-template-columns: repeat(3, 1fr); /* 모바일에서는 3열 */
+        gap: 12px 10px;
     }
     .visual-category-item {
-        width: 65px;
+        width: 100%;
+        max-width: 75px;
     }
     .icon-circle {
         width: 50px;

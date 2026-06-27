@@ -442,7 +442,7 @@ async function loadClinics() {
                 location: "📍 Yeouido-dong, Yeongdeungpo-gu",
                 rating: "⭐ 4.8 (90+ verified reviews)",
                 description: "Specialized in customized obesity treatments and face fat dissolution with minimal downtime. Emphasizes patient comfort and strict dosage transparency.",
-                specialties: ["Obesity Injection", "Botox", "Filler"],
+                specialties: ["Lipo", "Fat Transfer", "Obesity Injection", "Botox", "Filler"],
                 doctor_name: "Dr. Min-Woo Cho",
                 doctor_avatar: "MC",
                 doctor_title: "Board-Certified Dermatologist | Body Contouring",
@@ -610,7 +610,7 @@ async function loadClinics() {
                 location: "📍 Jamsil-dong, Songpa-gu",
                 rating: "⭐ 4.8 (104+ verified reviews)",
                 description: "Specialized in high-tech lifting (Ulthera, Thermage) and fat dissolving body injections. Located next to Lotte World Tower.",
-                specialties: ["Lifting", "Obesity Injection"],
+                specialties: ["Lifting", "Fat Transfer", "Lipo"],
                 doctor_name: "Dr. Jae-Hee Song",
                 doctor_avatar: "JS",
                 doctor_title: "Board-Certified Dermatologist | Body Sculpting",
@@ -801,6 +801,19 @@ async function loadClinics() {
     }
 }
 
+function getLocalizedText(rawText) {
+    if (!rawText) return '';
+    const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
+    if (rawText.includes('|')) {
+        const parts = rawText.split('|').map(p => p.trim());
+        const hasKorean = (str) => /[\uac00-\ud7a3]/.test(str);
+        const koPart = parts.find(p => hasKorean(p)) || parts[1] || parts[0];
+        const enPart = parts.find(p => !hasKorean(p)) || parts[0] || parts[1];
+        return lang === 'ko' ? koPart : enPart;
+    }
+    return rawText;
+}
+
 function renderClinicCards(clinics) {
     const container = document.getElementById('dynamic-partner-list');
     if (!container) return;
@@ -823,12 +836,17 @@ function renderClinicCards(clinics) {
         let doctorTypeLabel = t(`badge.${clinic.doctor_type}`) || clinic.doctor_type;
         let anesthesiaLabel = clinic.sleep_anesthesia ? (clinic.anesthesiologist_resident ? t('badge.anesthesiologist') : t('badge.no_anesthesiologist')) : '';
 
+        const localizedName = getLocalizedText(clinic.name);
+        const localizedLoc = getLocalizedText(clinic.location);
+        const localizedDocName = getLocalizedText(clinic.doctor_name);
+        const localizedDocTitle = getLocalizedText(clinic.doctor_title);
+
         const cardHTML = `
             <div class="partner-card" data-clinic-id="${clinic.id}">
                 <div class="partner-top">
                     <div class="partner-info">
-                        <h4>${clinic.name}</h4>
-                        <span class="partner-location">${clinic.location}</span>
+                        <h4>${localizedName}</h4>
+                        <span class="partner-location">${localizedLoc}</span>
                     </div>
                     <div class="partner-rating"><span>⭐ ${ratingVal}</span></div>
                 </div>
@@ -846,7 +864,7 @@ function renderClinicCards(clinics) {
                 <div class="partner-doctors">
                     <div class="doctor-profile">
                         <div class="doctor-avatar">${clinic.doctor_avatar}</div>
-                        <div class="doctor-meta"><h5>${clinic.doctor_name}</h5><p>${clinic.doctor_title}</p></div>
+                        <div class="doctor-meta"><h5>${localizedDocName}</h5><p>${localizedDocTitle}</p></div>
                     </div>
                 </div>
             </div>`;
@@ -862,11 +880,11 @@ function openClinicDetailModal(clinicId) {
     activeClinicId = clinicId;
     resetBookingViews();
 
-    document.getElementById('clinic-detail-name').textContent = data.name;
-    document.getElementById('clinic-detail-location').textContent = data.location;
+    document.getElementById('clinic-detail-name').textContent = getLocalizedText(data.name);
+    document.getElementById('clinic-detail-location').textContent = getLocalizedText(data.location);
     document.getElementById('clinic-detail-rating').textContent = data.rating;
-    document.getElementById('clinic-detail-desc').textContent = data.description;
-    document.getElementById('clinic-detail-hours').textContent = data.hours;
+    document.getElementById('clinic-detail-desc').textContent = getLocalizedText(data.description);
+    document.getElementById('clinic-detail-hours').textContent = getLocalizedText(data.hours);
 
     const specialtiesContainer = document.getElementById('clinic-detail-specialties');
     specialtiesContainer.innerHTML = '';
@@ -949,9 +967,9 @@ function openClinicDetailModal(clinicId) {
     }
 
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
-    document.getElementById('clinic-detail-doc-name').textContent = data.doctor_name;
-    document.getElementById('clinic-detail-doc-title').textContent = data.doctor_title;
-    document.getElementById('clinic-detail-doc-bio').textContent = data.doctor_bio;
+    document.getElementById('clinic-detail-doc-name').textContent = getLocalizedText(data.doctor_name);
+    document.getElementById('clinic-detail-doc-title').textContent = getLocalizedText(data.doctor_title);
+    document.getElementById('clinic-detail-doc-bio').textContent = getLocalizedText(data.doctor_bio);
 
     const mapIframe = document.getElementById('clinic-detail-map-iframe');
     if (mapIframe) mapIframe.src = data.map_iframe;
@@ -1000,7 +1018,59 @@ function closeClinicModal() {
     }
 }
 
-let activeTreatmentFilter = 'all';
+let activeCategory = 'all';
+let activeTreatment = null;
+
+function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
+    if (!categoryId || categoryId === 'all') return true;
+
+    const specialties = (clinic.specialties || []).map(s => s.toLowerCase());
+
+    // If a specific treatment chip is selected
+    if (treatmentName) {
+        const tLower = treatmentName.toLowerCase();
+        // Check direct match, substring match, or loose semantic match
+        if (specialties.some(spec => spec.includes(tLower) || tLower.includes(spec))) {
+            return true;
+        }
+        
+        // Smart keyword fallbacks
+        if (tLower.includes("pico") && specialties.some(s => s.includes("pico"))) return true;
+        if (tLower.includes("ulthera") && specialties.some(s => s.includes("ulthera") || s.includes("shurink") || s.includes("lifting"))) return true;
+        if (tLower.includes("shurink") && specialties.some(s => s.includes("shurink") || s.includes("ulthera") || s.includes("lifting"))) return true;
+        if (tLower.includes("barrier") && specialties.some(s => s.includes("barrier"))) return true;
+        if (tLower.includes("toning") && specialties.some(s => s.includes("toning"))) return true;
+        if (tLower.includes("redness") && specialties.some(s => s.includes("redness") || s.includes("vascular"))) return true;
+        if (tLower.includes("double eyelid") && specialties.some(s => s.includes("eyelid") || s.includes("쌍꺼풀"))) return true;
+        if (tLower.includes("rhinoplasty") && specialties.some(s => s.includes("rhinoplasty") || s.includes("코성형") || s.includes("코끝"))) return true;
+        if (tLower.includes("breast") && specialties.some(s => s.includes("breast") || s.includes("가슴"))) return true;
+        if (tLower.includes("diet") && specialties.some(s => s.includes("diet") || s.includes("다이어트"))) return true;
+        if (tLower.includes("laminate") && specialties.some(s => s.includes("laminate") || s.includes("라미네이트"))) return true;
+        
+        return false;
+    }
+
+    // Category-wide keyword matching maps
+    const categoryKeywords = {
+        skin: ["yag", "barrier", "toning", "pigment", "acne", "peel", "skin", "피부", "스킨", "필링", "미백", "색소", "여드름", "점", "booster", "부스터", "exosome", "엑소좀", "juvelook", "쥬베룩", "water", "물광"],
+        lifting: ["lifting", "ulthera", "shurink", "inmode", "thermage", "oligio", "thread", "contour", "리프팅", "울쎄라", "슈링크", "인모드", "써마지", "올리지오", "실", "윤곽", "조각", "이중턱"],
+        botox: ["botox", "보톡스", "미간", "이마", "눈가", "입술", "자갈턱", "사각턱", "침샘", "승모근", "종아리", "다한증"],
+        filler: ["filler", "필러", "이마", "앞광대", "볼", "팔자주름", "턱끝", "코", "입술", "입꼬리", "애교살", "골반", "힙업"],
+        eye: ["eye", "double eyelid", "canthoplasty", "ptosis", "blepharoplasty", "눈", "쌍꺼풀", "트임", "눈매", "상안검", "하안검"],
+        nose: ["rhinoplasty", "nose", "코", "콧대", "코끝", "콧볼", "복코", "매부리코"],
+        contour: ["contour", "jaw", "cheekbone", "orthognathic", "양악", "윤곽", "사각턱 수술", "광대축소", "돌출입"],
+        fat: ["lipo", "fat", "지방", "지방흡입", "지방이식"],
+        breast: ["breast", "motiva", "mentor", "nipple", "gynecomastia", "가슴", "유두", "여유증"],
+        hair: ["hair", "scalp", "meso", "모발", "탈모", "두피", "헤어라인", "transplant", "이식"],
+        epilation: ["epilation", "hair removal", "제모", "겨드랑이", "인중", "비키니"],
+        dental: ["dental", "teeth", "laminate", "orthodontic", "aligner", "치아", "라미네이트", "교정", "미백", "임플란트"],
+        herbal: ["herbal", "diet", "acupuncture", "한방", "한약", "매선", "침", "약침"],
+        others: ["tattoo", "문신", "쁘띠", "부작용", "관리"]
+    };
+
+    const keywords = categoryKeywords[categoryId] || [];
+    return specialties.some(spec => keywords.some(kw => spec.includes(kw)));
+}
 
 function applyFilters() {
     const searchInput = document.getElementById('directorySearchInput');
@@ -1011,16 +1081,8 @@ function applyFilters() {
     
     let filtered = loadedClinicsGlobal;
     
-    // 1. Category Menu Filter
-    if (activeTreatmentFilter !== 'all') {
-        filtered = filtered.filter(c => {
-            return c.specialties.some(spec => {
-                const specLower = spec.toLowerCase().replace(/ /g, '');
-                const filterLower = activeTreatmentFilter.toLowerCase().replace(/ /g, '');
-                return specLower.includes(filterLower);
-            });
-        });
-    }
+    // 1. Category Menu & Treatment Chip Filter
+    filtered = filtered.filter(c => clinicMatchesCategoryOrTreatment(c, activeCategory, activeTreatment));
     
     // 2. Tag Filter
     if (tagFilter !== 'all') {
@@ -1065,6 +1127,76 @@ function initSearchAndFilters() {
     }
 
     const visualMenu = document.querySelector('.visual-category-menu');
+    const tabsWrapper = document.getElementById('categoryTabsWrapper');
+    const submenuPanel = document.getElementById('categorySubmenuPanel');
+
+    // 1. Bind Category Tabs
+    if (tabsWrapper) {
+        tabsWrapper.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Clear visual menu active states when manual tab is clicked
+                if (visualMenu) {
+                    visualMenu.querySelectorAll('.visual-category-item').forEach(i => i.classList.remove('active'));
+                }
+
+                // Toggle Tab Active State
+                tabsWrapper.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Switch Active Submenu
+                activeCategory = tab.getAttribute('data-category');
+                activeTreatment = null; // Reset selected treatment chip when switching category
+
+                if (submenuPanel) {
+                    submenuPanel.querySelectorAll('.submenu-content').forEach(c => {
+                        c.classList.remove('active');
+                        c.querySelectorAll('.treat-chip').forEach(chip => chip.classList.remove('active'));
+                    });
+
+                    const targetSubmenu = document.getElementById(`submenu-${activeCategory}`);
+                    if (targetSubmenu) {
+                        targetSubmenu.classList.add('active');
+                    }
+                }
+
+                // Reset search tags if needed
+                if (tagsWrapper) {
+                    tagsWrapper.querySelectorAll('.filter-tag').forEach(btn => btn.classList.remove('active'));
+                    const allTag = tagsWrapper.querySelector('.filter-tag[data-specialty="all"]');
+                    if (allTag) allTag.classList.add('active');
+                }
+
+                applyFilters();
+            });
+        });
+    }
+
+    // 2. Bind Treatment Chips (using Event Delegation on the Submenu Panel)
+    if (submenuPanel) {
+        submenuPanel.addEventListener('click', (e) => {
+            const chip = e.target.closest('.treat-chip');
+            if (!chip) return;
+
+            const contentBlock = chip.closest('.submenu-content');
+            const alreadyActive = chip.classList.contains('active');
+
+            // Reset other chips in this submenu block
+            if (contentBlock) {
+                contentBlock.querySelectorAll('.treat-chip').forEach(c => c.classList.remove('active'));
+            }
+
+            if (alreadyActive) {
+                activeTreatment = null;
+            } else {
+                chip.classList.add('active');
+                activeTreatment = chip.getAttribute('data-treatment');
+            }
+
+            applyFilters();
+        });
+    }
+
+    // 3. Bind 9-Icon Visual Category Menu (Hero area etc.)
     if (visualMenu) {
         const treatmentMap = {
             epilation: 'Hair Removal',
@@ -1074,23 +1206,78 @@ function initSearchAndFilters() {
             skin_booster: 'Skin Booster',
             whitening: 'Pigmentation',
             acne: 'Acne',
-            hair_loss_treat: 'Hair Loss',
-            herbal: 'Obesity Injection'
+            hair_loss_treat: 'Hair Transplant',
+            herbal: 'Oriental Medicine'
         };
 
         visualMenu.querySelectorAll('.visual-category-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const explicitTreatment = item.getAttribute('data-target-treatment');
-                const subcategory = item.getAttribute('data-target-subcategory');
-                const category = item.getAttribute('data-target-category');
-                const treatment = treatmentMap[subcategory] || treatmentMap[category] || explicitTreatment || 'all';
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Toggle active style on visual items
+                visualMenu.querySelectorAll('.visual-category-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
 
-                const isAlreadyActive = item.classList.contains('active');
-                visualMenu.querySelectorAll('.visual-category-item').forEach(btn => btn.classList.remove('active'));
-                activeTreatmentFilter = isAlreadyActive ? 'all' : treatment;
+                // Smooth scroll to directory widget
+                const targetSection = document.getElementById('directory');
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
 
-                if (!isAlreadyActive) {
-                    item.classList.add('active');
+                const targetCat = item.getAttribute('data-target-category');
+                const targetSub = item.getAttribute('data-target-subcategory');
+                const targetTreat = item.getAttribute('data-target-treatment');
+
+                // 3.1. Set active main category tab programmatically
+                if (tabsWrapper) {
+                    const mainTab = tabsWrapper.querySelector(`.category-tab[data-category="${targetCat}"]`);
+                    if (mainTab) {
+                        tabsWrapper.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                        mainTab.classList.add('active');
+                        
+                        activeCategory = targetCat;
+                        activeTreatment = null;
+
+                        if (submenuPanel) {
+                            submenuPanel.querySelectorAll('.submenu-content').forEach(c => {
+                                c.classList.remove('active');
+                                c.querySelectorAll('.treat-chip').forEach(chip => chip.classList.remove('active'));
+                            });
+
+                            const targetSubmenu = document.getElementById(`submenu-${activeCategory}`);
+                            if (targetSubmenu) {
+                                targetSubmenu.classList.add('active');
+                                
+                                // 3.2. Select subcategory / treatment chip inside submenu
+                                if (targetSub) {
+                                    const subTitleEl = Array.from(targetSubmenu.querySelectorAll('.submenu-title')).find(el => {
+                                        return el.getAttribute('data-i18n') === `subcat.${targetSub}`;
+                                    });
+                                    if (subTitleEl) {
+                                        const groupEl = subTitleEl.closest('.submenu-group');
+                                        if (groupEl) {
+                                            const firstChip = groupEl.querySelector('.treat-chip');
+                                            if (firstChip) {
+                                                firstChip.classList.add('active');
+                                                activeTreatment = firstChip.getAttribute('data-treatment');
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (targetTreat) {
+                                    const chip = Array.from(targetSubmenu.querySelectorAll('.treat-chip')).find(el => {
+                                        const chipTreat = el.getAttribute('data-treatment');
+                                        return chipTreat && chipTreat.toLowerCase() === targetTreat.toLowerCase();
+                                    });
+                                    if (chip) {
+                                        chip.classList.add('active');
+                                        activeTreatment = chip.getAttribute('data-treatment');
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 if (tagsWrapper) {
@@ -1100,11 +1287,6 @@ function initSearchAndFilters() {
                 }
 
                 applyFilters();
-
-                const dirSection = document.querySelector('.section-directory');
-                if (dirSection) {
-                    dirSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
             });
         });
     }
@@ -1549,14 +1731,68 @@ const DUMMY_REVIEWS = [
     { name: "Isabel C.", initials: "IC", date: "2025.10.02", stars: 5, treatment: "💉 Filler (Cheek Volume)", helpful: 15, clinicId: 3, clinic: "Hannam Aesthetic & Laser House", doctor: "Dr. Tae-Young Park", text_en: "\"Lost cheek volume after weight loss. Dr. Park restored it with Voluma – used the MD Codes technique for natural projection. My friends say I look refreshed, not 'done'. That's the highest compliment.\"", text_ko: "\"체중 감소 후 볼 볼륨이 빠졌어요. 박태영 원장님이 MD 코드 기법으로 볼루마를 사용하여 자연스러운 볼륨을 복원해주셨습니다. 친구들이 '했다'가 아니라 '상쾌해 보인다'고 해요.\"" }
 ];
 
+const BEST_REVIEWS = [
+    {
+        name: "Jessica S.",
+        initials: "JS",
+        date: "2025.11.14",
+        stars: 5,
+        treatment: "💉 Pico Laser Toning",
+        helpful: 24,
+        clinicId: 1,
+        clinic: "Myeongdong Forest",
+        doctor: "Dr. Minji Kim",
+        text_en: "\"I had a horrible experience at a factory clinic in Gangnam where they burned my skin with IPL. Dr. Minji Kim was a lifesaver. She immediately recognized my thin Type I skin barrier, manually set the laser to a safe wavelength, and focused on recovery. Highly recommend this boutique standard.\"",
+        text_ko: "\"강남의 한 공장식 병원에서 IPL 시술을 받다가 피부를 데이는 끔찍한 경험을 했습니다. 김민지 원장님은 생명의 은인이셨어요. 얇은 피부 장벽을 바로 알아보시고 파장을 직접 수동 조절해 주셨습니다. 이 부티크 병원을 강력 추천합니다.\"",
+        metrics: { friendliness: 10, consultation: 10, language: 9, no_overtreatment: 10, pricing: 9, accessibility: 8, waiting: 9, cleanliness: 10, pain: 8, aftercare: 10 }
+    },
+    {
+        name: "Amara M.",
+        initials: "AM",
+        date: "2025.10.28",
+        stars: 5,
+        treatment: "✨ Nd:YAG Laser Toning",
+        helpful: 18,
+        clinicId: 1,
+        clinic: "Cheongdam Barrier Lab",
+        doctor: "Dr. Ji-Yeon Lee",
+        text_en: "\"As someone with dark skin, I was terrified of laser toning in Korea because of hypopigmentation risks. Dr. Ji-Yeon Lee checked my Fitzpatrick type, explained why she would use the Nd:YAG laser with a long pulse duration, and calibrated the cooling device. My skin has never looked cleaner.\"",
+        text_ko: "\"피부가 어두워서 저색소증 부작용 위험 때문에 한국에서 토닝 시술을 받기가 정말 겁났습니다. 이지연 원장님은 제 피츠패트릭 타입을 꼼꼼히 체크하시고 긴 펄스의 Nd:YAG를 써야 하는 이유를 설명해 주셨어요. 피부가 정말 맑아졌습니다.\"",
+        metrics: { friendliness: 9, consultation: 10, language: 10, no_overtreatment: 9, pricing: 8, accessibility: 9, waiting: 8, cleanliness: 9, pain: 9, aftercare: 9 }
+    },
+    {
+        name: "Thomas H.",
+        initials: "TH",
+        date: "2025.12.03",
+        stars: 5,
+        treatment: "💧 Skin Booster (Rejuran)",
+        helpful: 31,
+        clinicId: 2,
+        clinic: "Apgujeong Glow Lab",
+        doctor: "Dr. Soo-Hyun Park",
+        text_en: "\"Came all the way from Berlin for Rejuran treatment. Dr. Soo-Hyun Park took 20 minutes explaining the PDRN mechanism and why my Type II skin would respond well. Zero downtime, incredible glow after 2 weeks. Factory clinics in Gangnam quoted me half the price but couldn't answer a single question about my skin type.\"",
+        text_ko: "\"리쥬란 시술을 받으러 베를린에서 멀리 날아왔습니다. 박수현 원장님은 PDRN 메커니즘과 민감한 제 피부가 왜 잘 반응하는지 20분 넘게 공들여 설명해 주셨어요. 다운타임 없이 2주 뒤 미친 광채가 납니다.\"",
+        metrics: { friendliness: 10, consultation: 10, language: 9, no_overtreatment: 10, pricing: 8, accessibility: 8, waiting: 9, cleanliness: 10, pain: 7, aftercare: 9 }
+    }
+];
+
 function initExpandableReviews() {
-    const grid = document.getElementById('allReviewsGrid');
+    const allGrid = document.getElementById('allReviewsGrid');
+    const bestGrid = document.getElementById('bestReviewsGrid');
     const wrapper = document.getElementById('reviewsExpandWrapper');
     const btn = document.getElementById('btnExpandReviews');
-    if (!grid || !wrapper || !btn) return;
+    
+    // Render best reviews
+    if (bestGrid) {
+        renderReviews(BEST_REVIEWS, bestGrid, true);
+    }
+    
+    // Render expandable reviews
+    if (allGrid) {
+        renderReviews(DUMMY_REVIEWS, allGrid, false);
+    }
 
-    // Render dummy reviews
-    renderDummyReviews(grid);
+    if (!allGrid || !wrapper || !btn) return;
 
     // Toggle expand/collapse
     let expanded = false;
@@ -1575,26 +1811,70 @@ function initExpandableReviews() {
 
     // Re-render on language change
     window.addEventListener('languageChanged', () => {
-        renderDummyReviews(grid);
+        if (bestGrid) renderReviews(BEST_REVIEWS, bestGrid, true);
+        if (allGrid) renderReviews(DUMMY_REVIEWS, allGrid, false);
     });
 }
 
-function renderDummyReviews(grid) {
+function renderReviews(reviewsData, grid, isBest = false) {
     const lang = getCurrentLang();
     grid.innerHTML = '';
 
-    DUMMY_REVIEWS.forEach((r, i) => {
-        const starStr = '⭐'.repeat(r.stars) + (r.stars < 5 ? '' : '');
+    reviewsData.forEach((r, i) => {
+        const starStr = '⭐'.repeat(r.stars);
         const text = lang === 'ko' ? r.text_ko : r.text_en;
         const verifiedText = lang === 'ko' ? '✓ 영수증 인증 완료' : '✓ Receipt Verified';
         const helpfulText = lang === 'ko' ? '도움됨' : 'Helpful';
         const clinicPrefix = lang === 'ko' ? '클리닉: ' : 'Clinic: ';
         const physicianPrefix = lang === 'ko' ? '담당의: ' : 'Physician: ';
 
+        // 10가지 지표 점수
+        const metrics = r.metrics || {
+            friendliness: 8 + (i % 3),
+            consultation: 9 - (i % 2),
+            language: 8 + (i % 2),
+            no_overtreatment: 9 + (i % 2 === 0 ? 1 : 0),
+            pricing: 8 + (i % 3),
+            accessibility: 7 + (i % 4),
+            waiting: 8 - (i % 3),
+            cleanliness: 9,
+            pain: 7 + (i % 3),
+            aftercare: 8 + (i % 2)
+        };
+
+        const metricKeys = [
+            'friendliness', 'consultation', 'language', 'no_overtreatment', 'pricing',
+            'accessibility', 'waiting', 'cleanliness', 'pain', 'aftercare'
+        ];
+        
+        const metricsHTML = `<div class="review-metrics-grid">` + 
+            metricKeys.map(key => {
+                const label = t(`metric.${key}`);
+                const score = metrics[key];
+                const pct = score * 10;
+                return `
+                    <div class="review-metric-item">
+                        <div class="metric-label-row">
+                            <span class="metric-label">${label}</span>
+                            <span class="metric-score">${score} / 10</span>
+                        </div>
+                        <div class="metric-bar-container">
+                            <div class="metric-bar-fill" style="width: ${pct}%;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('') + `</div>`;
+
+        const commentHTML = `<div class="review-comment-box">"${text}"</div>`;
+
         const card = document.createElement('div');
-        card.className = 'review-card';
+        card.className = `review-card ${isBest ? 'review-best' : ''}`;
         card.style.animationDelay = `${i * 0.05}s`;
+        
+        const bestBadgeHTML = isBest ? `<div class="review-best-badge">🏆 BEST</div>` : '';
+
         card.innerHTML = `
+            ${bestBadgeHTML}
             <div class="review-card-header">
                 <div class="reviewer-profile">
                     <div class="reviewer-avatar">${r.initials}</div>
@@ -1609,7 +1889,10 @@ function renderDummyReviews(grid) {
                 </div>
             </div>
             <div class="review-treatment-tag">${r.treatment}</div>
-            <p class="review-content">${text}</p>
+            
+            ${metricsHTML}
+            ${commentHTML}
+
             <div class="review-helpful">
                 <button class="review-helpful-btn">👍 ${helpfulText} <span class="helpful-count">${r.helpful}</span></button>
             </div>
@@ -1653,3 +1936,10 @@ function renderDummyReviews(grid) {
         });
     });
 }
+
+// Listen to language change to redraw clinic list immediately
+window.addEventListener('languageChanged', () => {
+    if (typeof loadedClinicsGlobal !== 'undefined' && loadedClinicsGlobal.length > 0) {
+        renderClinicCards(loadedClinicsGlobal);
+    }
+});

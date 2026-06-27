@@ -7,11 +7,7 @@ const fallbackClinics = [
         location: "📍 Cheongdam-dong, Gangnam",
         rating: "⭐ 4.9 (120+ verified reviews)",
         description: "Specialized in non-invasive skin barrier recovery and pigmentation lasers for sensitive skin types. Known for ultra-conservative energy calibration and genuine, certified tips.",
-<<<<<<< HEAD
-        specialties: ["Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning", "Rejuran Healer", "Laser Toning"],
-=======
-        specialties: ["Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning", "Skin Booster", "Lifting", "Pigmentation"],
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
+        specialties: ["Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning", "Rejuran Healer", "Laser Toning", "Skin Booster", "Lifting", "Pigmentation"],
         doctor_name: "Dr. Ji-Yeon Lee",
         doctor_avatar: "JY",
         doctor_title: "Board-Certified Dermatologist | Nd:YAG Specialist",
@@ -32,11 +28,7 @@ const fallbackClinics = [
         location: "📍 Myeong-dong, Jung-gu",
         rating: "⭐ 4.8 (94+ verified reviews)",
         description: "A tranquil sanctuary clinic in the heart of Myeongdong, prioritizing barrier safety over factory treatments. Enforces a strict maximum of 2 patient bookings per hour.",
-<<<<<<< HEAD
-        specialties: ["Vascular Laser Calibration", "Rosacea & Redness Recovery", "Ultrasonic Rejuvenation", "Laser Toning"],
-=======
-        specialties: ["Vascular Laser Calibration", "Rosacea & Redness Recovery", "Ultrasonic Rejuvenation", "Acne", "Pigmentation", "Hair Removal"],
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
+        specialties: ["Vascular Laser Calibration", "Rosacea & Redness Recovery", "Ultrasonic Rejuvenation", "Laser Toning", "Acne", "Pigmentation", "Hair Removal"],
         doctor_name: "Dr. Minji Kim",
         doctor_avatar: "MK",
         doctor_title: "Board-Certified Dermatologist | Barrier Recovery",
@@ -57,11 +49,7 @@ const fallbackClinics = [
         location: "📍 Hannam-dong, Yongsan",
         rating: "⭐ 4.9 (78+ verified reviews)",
         description: "Boutique clinic catering to embassies and expats in Hannam. Equipped with premium dual-cooling laser systems and offering customized wavelength diagnostics.",
-<<<<<<< HEAD
-        specialties: ["1:1 Wavelength Tuning", "Dual-Cooling Safety Protocols", "High-Fluence Pigment Management", "Nose Filler", "Square Jaw Botox"],
-=======
-        specialties: ["1:1 Wavelength Tuning", "Dual-Cooling Safety Protocols", "High-Fluence Pigment Management", "Filler", "Botox", "Lifting"],
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
+        specialties: ["1:1 Wavelength Tuning", "Dual-Cooling Safety Protocols", "High-Fluence Pigment Management", "Nose Filler", "Square Jaw Botox", "Filler", "Botox", "Lifting"],
         doctor_name: "Dr. Tae-Young Park",
         doctor_avatar: "TP",
         doctor_title: "Board-Certified Dermatologist | Custom Wavelengths",
@@ -82,11 +70,7 @@ const fallbackClinics = [
         location: "📍 Sinsa-dong, Gangnam",
         rating: "⭐ 4.7 (112+ verified reviews)",
         description: "Specializing in advanced anti-aging treatments with verified genuine consumables logging. We provide every patient with their single-use tip certificate and serial code.",
-<<<<<<< HEAD
-        specialties: ["Genuine Consumables Logged", "Ultherapy & Shurink custom setups", "Epidermal Thickness Diagnostic", "Ulthera", "Shurink"],
-=======
-        specialties: ["Genuine Consumables Logged", "Ultherapy & Shurink custom setups", "Epidermal Thickness Diagnostic", "Skin Booster", "Lifting"],
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
+        specialties: ["Genuine Consumables Logged", "Ultherapy & Shurink custom setups", "Epidermal Thickness Diagnostic", "Ulthera", "Shurink", "Skin Booster", "Lifting"],
         doctor_name: "Dr. Seo-Jun Choi",
         doctor_avatar: "SC",
         doctor_title: "Board-Certified Dermatologist | Anti-Aging Specialist",
@@ -107,11 +91,7 @@ const fallbackClinics = [
         location: "📍 Seokyo-dong, Mapo-gu",
         rating: "⭐ 4.8 (85+ verified reviews)",
         description: "A trendy but medically rigorous clinic in Hongdae. Focuses on laser toning and vascular treatments for younger global patients with absolute physician presence.",
-<<<<<<< HEAD
-        specialties: ["Nd:YAG & Pico Laser Certified", "100% Physician Consultation", "Youth Acne Barrier Healing", "Laser Hair Removal", "Fraxel", "Square Jaw Botox"],
-=======
-        specialties: ["Nd:YAG & Pico Laser Certified", "100% Physician Consultation", "Youth Acne Barrier Healing", "Acne", "Hair Removal"],
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
+        specialties: ["Nd:YAG & Pico Laser Certified", "100% Physician Consultation", "Youth Acne Barrier Healing", "Laser Hair Removal", "Fraxel", "Square Jaw Botox", "Acne", "Hair Removal"],
         doctor_name: "Dr. Eun-Ji Song",
         doctor_avatar: "ES",
         doctor_title: "Board-Certified Dermatologist | Pigmentation Expert",
@@ -128,7 +108,6 @@ const fallbackClinics = [
     },
     {
         id: 6,
-<<<<<<< HEAD
         name: "Gangnam Eye & Youth Center",
         location: "📍 Gangnam-daero, Gangnam",
         rating: "⭐ 4.9 (142+ verified reviews)",
@@ -144,30 +123,12 @@ const fallbackClinics = [
         doctor_type: "specialist",
         sleep_anesthesia: true,
         anesthesiologist_resident: true,
-=======
-        name: "Yeouido Line Skin Clinic",
-        location: "📍 Yeouido-dong, Yeongdeungpo-gu",
-        rating: "⭐ 4.8 (90+ verified reviews)",
-        description: "Specialized in customized obesity treatments and face fat dissolution with minimal downtime. Emphasizes patient comfort and strict dosage transparency.",
-        specialties: ["Obesity Injection", "Botox", "Filler"],
-        doctor_name: "Dr. Min-Woo Cho",
-        doctor_avatar: "MC",
-        doctor_title: "Board-Certified Dermatologist | Body Contouring",
-        doctor_bio: "Dr. Cho has 15 years of experience in aesthetic medicine, specializing in safe medical injections for localized fat and anti-wrinkle botox.",
-        hours: "Mon - Fri: 10:00 AM - 7:30 PM | Sat: 10:00 AM - 3:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.5702213797686!2d126.92427717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f187a59df7d%3A0xe54ebad41a5d6f1!2sYeouido-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035500000!5m2!1sen!2skr",
-        slots_tag: "Max 3 Bookings/Hr",
-        doctor_type: "dermatologist",
-        sleep_anesthesia: false,
-        anesthesiologist_resident: false,
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
         foreign_attraction_registered: true,
         foreigner_insurance: true,
         excellent_aftercare: true
     },
     {
         id: 7,
-<<<<<<< HEAD
         name: "Prestige Rhinoplasty House",
         location: "📍 Sinsa-dong, Gangnam",
         rating: "⭐ 4.8 (89+ verified reviews)",
@@ -183,30 +144,12 @@ const fallbackClinics = [
         doctor_type: "specialist",
         sleep_anesthesia: true,
         anesthesiologist_resident: true,
-=======
-        name: "Apgujeong Royal Dermatologists",
-        location: "📍 Apgujeong-dong, Gangnam",
-        rating: "⭐ 4.9 (132+ verified reviews)",
-        description: "A prestigious clinic specializing in advanced non-surgical lifting and scalp restoration. Located in the heart of Apgujeong, the luxury mecca of K-Beauty.",
-        specialties: ["Hair Loss", "Lifting", "Filler", "Botox"],
-        doctor_name: "Dr. Sang-Hyun Park",
-        doctor_avatar: "SP",
-        doctor_title: "Board-Certified Dermatologist | Anti-Aging Specialist",
-        doctor_bio: "Dr. Park completed his residency at Seoul National University Hospital. He is a prominent speaker at clinical conferences regarding facial contouring and hair-loss therapies.",
-        hours: "Mon - Fri: 10:30 AM - 8:00 PM | Sat: 10:00 AM - 4:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.082583827618!2d127.02859527646562!3d37.52869897205055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sApgujeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035600000!5m2!1sen!2skr",
-        slots_tag: "Max 2 Bookings/Hr",
-        doctor_type: "dermatologist",
-        sleep_anesthesia: true,
-        anesthesiologist_resident: false,
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
         foreign_attraction_registered: true,
         foreigner_insurance: true,
         excellent_aftercare: true
     },
     {
         id: 8,
-<<<<<<< HEAD
         name: "Cheongdam Line Breast Clinic",
         location: "📍 Cheongdam-dong, Gangnam",
         rating: "⭐ 4.9 (97+ verified reviews)",
@@ -241,21 +184,6 @@ const fallbackClinics = [
         map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.282583827618!2d127.01859527646562!3d37.518698972050546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7e00dfb39%3A0xf675dfb3c58b0e8c!2sSinsa-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035300000!5m2!1sen!2skr",
         slots_tag: "Max 3 Bookings/Hr",
         doctor_type: "specialist",
-=======
-        name: "Gangnam Clear Acne Center",
-        location: "📍 Yeoksam-dong, Gangnam",
-        rating: "⭐ 4.8 (115+ verified reviews)",
-        description: "Dedicated to solving youth and adult acne using state-of-the-art sebaceous gland destruction lasers and calming protocols.",
-        specialties: ["Acne", "Pigmentation"],
-        doctor_name: "Dr. Yoon-Seo Jang",
-        doctor_avatar: "YJ",
-        doctor_title: "Board-Certified Dermatologist | Acne Specialist",
-        doctor_bio: "Dr. Jang has dedicated her career to studying and treating acne scars. She is known for her meticulous extraction technique and gentle skin-calming programs.",
-        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 9:30 AM - 2:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.02777717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sYeoksam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035700000!5m2!1sen!2skr",
-        slots_tag: "Max 3 Bookings/Hr",
-        doctor_type: "dermatologist",
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
         sleep_anesthesia: false,
         anesthesiologist_resident: false,
         foreign_attraction_registered: true,
@@ -263,7 +191,6 @@ const fallbackClinics = [
         excellent_aftercare: true
     },
     {
-<<<<<<< HEAD
         id: 10,
         name: "Kyunghee Diet Herbal Clinic",
         location: "📍 Myeong-dong, Jung-gu",
@@ -278,71 +205,11 @@ const fallbackClinics = [
         map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.7766579299496!2d126.9805952764673!3d37.56152017203678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f42a59e9a9%3A0x6b6df7d6b8b0e8c0!2sMyeong-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035100000!5m2!1sen!2skr",
         slots_tag: "Max 4 Bookings/Hr",
         doctor_type: "specialist",
-=======
-        id: 9,
-        name: "Cheongdam Youth Hair Clinic",
-        location: "📍 Cheongdam-dong, Gangnam",
-        rating: "⭐ 4.9 (67+ verified reviews)",
-        description: "Premium hair restoration clinic offering advanced follicular unit extraction and non-surgical scalp booster injections for men and women.",
-        specialties: ["Hair Loss", "Hair Removal"],
-        doctor_name: "Dr. Ji-Hoon Kang",
-        doctor_avatar: "JK",
-        doctor_title: "Specialist | Hair Restoration Surgeon",
-        doctor_bio: "Dr. Kang has conducted over 3,000 hair transplant procedures and specializes in early-stage scalp treatments to halt alopecia progression.",
-        hours: "Mon, Tue, Thu, Fri: 10:00 AM - 6:00 PM | Sat: 10:00 AM - 2:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035800000!5m2!1sen!2skr",
-        slots_tag: "Max 2 Bookings/Hr",
-        doctor_type: "specialist",
-        sleep_anesthesia: true,
-        anesthesiologist_resident: false,
-        foreign_attraction_registered: true,
-        foreigner_insurance: true,
-        excellent_aftercare: false
-    },
-    {
-        id: 10,
-        name: "Seoul Station Gateway Dermatology",
-        location: "📍 Dongja-dong, Yongsan-gu",
-        rating: "⭐ 4.7 (88+ verified reviews)",
-        description: "Ideally located for tourists right next to Seoul Station, providing fast, safe laser hair removal and botox treatments with zero recovery time.",
-        specialties: ["Hair Removal", "Botox"],
-        doctor_name: "Dr. Jin-Soo Kim",
-        doctor_avatar: "JK",
-        doctor_title: "Board-Certified Dermatologist | Laser Science",
-        doctor_bio: "Dr. Kim has specialized in quick, precise laser procedures that fit into tight travel itineraries, focusing on maximum comfort and speed.",
-        hours: "Mon - Fri: 9:30 AM - 6:30 PM | Sat: 9:30 AM - 1:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7854653738096!2d126.97293597646618!3d37.55429397204558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3b98d24ebf5%3A0xefdf5a3c94248a0!2sDongja-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035900000!5m2!1sen!2skr",
-        slots_tag: "Max 4 Bookings/Hr",
-        doctor_type: "dermatologist",
-        sleep_anesthesia: false,
-        anesthesiologist_resident: false,
-        foreign_attraction_registered: false,
-        foreigner_insurance: true,
-        excellent_aftercare: false
-    },
-    {
-        id: 11,
-        name: "Banpo Glass Skin Lab",
-        location: "📍 Banpo-dong, Seocho-gu",
-        rating: "⭐ 4.9 (95+ verified reviews)",
-        description: "Specialized in premium moisture skin boosters (Rejuran, Chanell) and filler design. Delivers a gorgeous natural glass skin glow.",
-        specialties: ["Skin Booster", "Filler", "Pigmentation"],
-        doctor_name: "Dr. Da-Eun Yoo",
-        doctor_avatar: "DY",
-        doctor_title: "Board-Certified Dermatologist | Skin Glow Specialist",
-        doctor_bio: "Dr. Yoo is highly respected for her delicate touch in intradermal injections, ensuring minimal bruising and maximal product absorption.",
-        hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 3:00 PM",
-        map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.00277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sBanpo-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719036000000!5m2!1sen!2skr",
-        slots_tag: "Max 2 Bookings/Hr",
-        doctor_type: "dermatologist",
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
         sleep_anesthesia: false,
         anesthesiologist_resident: false,
         foreign_attraction_registered: true,
         foreigner_insurance: true,
         excellent_aftercare: true
-<<<<<<< HEAD
-=======
     },
     {
         id: 12,
@@ -574,7 +441,6 @@ const fallbackClinics = [
         foreign_attraction_registered: false,
         foreigner_insurance: true,
         excellent_aftercare: true
->>>>>>> 12086c7023fa368ec593963e89f85d1844410b13
     }
 ];
 
@@ -598,8 +464,14 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const supabaseUrl = process.env.SUPABASE_URL;
+        let supabaseUrl = process.env.SUPABASE_URL;
         const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+        if (supabaseUrl) {
+            if (supabaseUrl.endsWith('/')) supabaseUrl = supabaseUrl.slice(0, -1);
+            if (supabaseUrl.endsWith('/rest/v1')) supabaseUrl = supabaseUrl.slice(0, -8);
+            if (supabaseUrl.endsWith('/')) supabaseUrl = supabaseUrl.slice(0, -1);
+        }
 
         // Fallback simulation mode
         if (!supabaseUrl || !supabaseKey) {

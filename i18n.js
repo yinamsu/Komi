@@ -209,6 +209,8 @@ const translations = {
 
         "search.placeholder": "Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)",
         "filter.all": "All Treatments",
+        "filter.select_category": "Select a category above",
+        "filter.select_category_desc": "Explore verified procedures and clinic specialties customized for your skin type.",
 
         "cat.skin": "Skin",
         "cat.lifting": "Lifting",
@@ -216,7 +218,7 @@ const translations = {
         "cat.filler": "Filler",
         "cat.eye": "Eye Surgery",
         "cat.nose": "Rhinoplasty",
-        "cat.contour": "Facial Contour/Orthognathic",
+        "cat.contour": "Facial Contour / Orthognathic",
         "cat.fat": "Fat Surgery",
         "cat.breast": "Breast Surgery",
         "cat.hair": "Hair Transplant",
@@ -419,7 +421,16 @@ const translations = {
         "diff.row4_komi": "1-Month-later review gets skincare point rewards",
         "diff.row5_feature": "Malicious Review Policy",
         "diff.row5_legacy": "Platform deletes them immediately upon clinic request",
-        "diff.row5_komi": "Platform mediates only; clinic and client settle directly (Coupang Eats model)",
+        "metric.friendliness": "Staff Friendliness",
+        "metric.consultation": "Doctor Consultation",
+        "metric.language": "Language Support",
+        "metric.no_overtreatment": "No Overtreatment",
+        "metric.pricing": "Price Transparency",
+        "metric.accessibility": "Accessibility",
+        "metric.waiting": "Waiting Time",
+        "metric.cleanliness": "Facility Cleanliness",
+        "metric.pain": "Pain Management",
+        "metric.aftercare": "Aftercare",
 
         "rev_sim.btn": "✍_ Write a Verified Review (Simulator)",
         "rev_sim.modal_title": "Visit-Verified Review Writer Simulator",
@@ -684,6 +695,8 @@ const translations = {
 
         "search.placeholder": "시술명을 검색하세요 (예: 피코, 리프팅, Nd:YAG...)",
         "filter.all": "전체 시술",
+        "filter.select_category": "원하시는 카테고리를 선택해 보세요",
+        "filter.select_category_desc": "피부 타입에 맞춘 검증된 시술 정보와 클리닉별 세부 전문 분야를 확인할 수 있습니다.",
 
         "cat.skin": "피부",
         "cat.lifting": "리프팅",
@@ -875,7 +888,7 @@ const translations = {
         "dr_view.card3_text": "정직하게 쌓인 평판과 데이터는 브로커 수수료 지불 없이 환자가 스스로 찾아오게 만들어 병원 재정을 건전하게 만듭니다.",
 
         "diff.tag": "차별점 분석",
-        "diff.title": "기존 강남XX, XX티켓과의 차별점",
+        "diff.title": "기존 강남언니, 여신티켓과의 차별점",
         "diff.subtitle": "단순 광고 노출 및 티켓 판매 앱과 다른 코미케어만의 정직한 데이터 생태계",
         "diff.col_feature": "운영 기준",
         "diff.col_legacy": "기존 예약 플랫폼",
@@ -895,6 +908,17 @@ const translations = {
         "diff.row5_feature": "악성 리뷰 및 명예훼손 분쟁",
         "diff.row5_legacy": "병원 요청 시 플랫폼 측에서 임의 블라인드 처리",
         "diff.row5_komi": "플랫폼은 중개만 수행하며, 사실관계 확인 전 임의 삭제 불가 (직접 해결 유도)",
+
+        "metric.friendliness": "친절도",
+        "metric.consultation": "의사 상담 전문성",
+        "metric.language": "외국어 소통",
+        "metric.no_overtreatment": "과잉 진료 없음",
+        "metric.pricing": "가격 투명성",
+        "metric.accessibility": "접근성",
+        "metric.waiting": "대기 시간",
+        "metric.cleanliness": "시설 청결도",
+        "metric.pain": "통증 관리",
+        "metric.aftercare": "사후 관리 만족도",
 
         "rev_sim.btn": "✍_ 영수증·여권 인증 리뷰 작성하기 (시뮬레이터)",
         "rev_sim.modal_title": "실제 방문 검증 리뷰 작성 시뮬레이터",
