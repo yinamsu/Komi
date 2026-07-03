@@ -40,3 +40,19 @@ The system was verified via a local web server (`http://localhost:8080`) using a
 - Verified that opening the modal, reading Chapter 2, toggling checklist items, and copying the checklist works correctly.
 - Checked receipt masking simulation to ensure sensitive data is blurred on target.
 - Verified no JavaScript errors in the console log.
+
+---
+
+## Latest Updates: Interactive Filtering & 500 Clinics Expansion
+
+We have introduced a powerful, interactive filtering engine and scaled our mock data for testing performance and filter coverage:
+
+### 1. Interactive Multilingual Filters
+- **Hospital Listing Filters**: Filter by doctor type (`Board-Certified Dermatologist`, `Specialist`, `General Practitioner`), years of clinical experience (`0-5 years`, `5-10 years`, `10+ years`), and certifications (`Foreigner Attraction Registered`, `Aftercare Excellence`).
+- **12 Detailed Review Category Star Filters**: Filter by granular star ratings (All, 4.0+ ★, 4.5+ ★) across 12 specific criteria including: treatment satisfaction, value for money, booking speed, wait time, language convenience, staff kindness, doctor explanation, medical honesty (no overtreatment), location, facility, aftercare, and parking.
+- **Multilingual Support**: Fully localized translations in **Korean, English, and Japanese** for all filter options and labels, switching dynamically with the selected language.
+
+### 2. 500 Clinics Scaling Generator
+- **Automatic Scaler**: Built a programmatic PRNG generator (`expandClinicsWithGenerator`) that expands our core 22 boutique clinics into **500 unique clinics** on the fly, running both on Vercel Serverless API (`api/clinics.js`) and client-side fallback fallback arrays (`app.js`).
+- **Coverage Integrity**: Ensures that every possible permutation of filters is covered, leaving no empty results under reasonable filtering parameters.
+- **Efficiency**: Zero database weight or loading latency overhead since the generator runs in-memory with deterministic seed hashes.
