@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/clinic", "destination": "/clinic.html" }
+    { "source": "/clinic", "destination": "/clinic.html" },
+    { "source": "/whitepaper", "destination": "/whitepaper.html" }
   ]
 }

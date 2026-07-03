@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOMICARE | System Whitepaper & Architecture Specifications</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3c2c'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23c5a880' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23c5a880' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        :root {
+            --bg-paper: #020907;
+            --card-glass: rgba(10, 24, 20, 0.75);
+            --border-glass: rgba(197, 168, 128, 0.15);
+            --text-primary: #f0f4f2;
+            --text-secondary: #a3b8b0;
+            --accent-code: #52b788;
+        }
+
+        body {
+            background-color: var(--bg-paper);
+            background-image: radial-gradient(circle at 80% 10%, rgba(197, 168, 128, 0.08) 0%, transparent 50%),
+                              radial-gradient(circle at 10% 80%, rgba(11, 60, 44, 0.25) 0%, transparent 60%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        .paper-header {
+            border-bottom: 1px solid var(--border-glass);
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 9, 7, 0.85);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-group svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-group h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .back-btn {
+            border: 1px solid var(--border-glass);
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
+        }
+
+        .paper-layout {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .paper-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .sidebar-sticky {
+                display: none; /* Hide sidebar on mobile for simplicity */
+            }
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-sticky {
+            position: sticky;
+            top: 120px;
+        }
+
+        .doc-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .doc-menu li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            display: block;
+            padding: 6px 12px;
+            border-left: 2px solid transparent;
+        }
+
+        .doc-menu li a:hover {
+            color: var(--secondary);
+            border-left-color: rgba(197, 168, 128, 0.5);
+        }
+
+        .doc-menu li.active a {
+            color: var(--secondary);
+            border-left-color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Content Sections */
+        .doc-content {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .doc-section {
+            border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+            padding-bottom: 50px;
+        }
+
+        .doc-section h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .doc-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        .doc-section h3 {
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            font-size: 1.25rem;
+            margin-top: 30px;
+        }
+
+        .doc-section p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Sitemap list styling */
+        .sitemap-tree {
+            margin: 20px 0;
+            padding-left: 20px;
+            border-left: 2px dashed var(--border-glass);
+        }
+
+        .sitemap-node {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .sitemap-node::before {
+            content: "➔";
+            color: var(--secondary);
+            margin-right: 8px;
+        }
+
+        .sitemap-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-left: 20px;
+            display: block;
+        }
+
+        /* Code block styles */
+        code {
+            font-family: 'Fira Code', monospace;
+            background: rgba(82, 183, 136, 0.08);
+            color: var(--accent-code);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background: rgba(10, 24, 20, 0.9);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background: none;
+            color: #eaeaea;
+            padding: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Table design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(10, 24, 20, 0.4);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+        }
+
+        th {
+            background-color: rgba(11, 60, 44, 0.4);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Highlight alert boxes */
+        .alert-box {
+            background: rgba(197, 168, 128, 0.04);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+        }
+
+        .alert-box h4 {
+            margin: 0 0 10px 0;
+            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .alert-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="portal-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-group">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#0b3c2c"/>
+                    <path d="M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z" fill="none" stroke="#c5a880" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 9V23M9 16H23" stroke="#c5a880" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+                <h2>KOMICARE</h2>
+            </a>
+            <a href="index.html" class="back-btn">← Back to Directory</a>
+        </div>
+    </header>
+
+    <div class="paper-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-sticky">
+            <ul class="doc-menu">
+                <li class="active"><a href="#executive">1. Executive Summary</a></li>
+                <li><a href="#sitemap">2. Portal Sitemap</a></li>
+                <li><a href="#features">3. Core Features Spec</a></li>
+                <li><a href="#architecture">4. System Architecture</a></li>
+                <li><a href="#database">5. Database Schema</a></li>
+                <li><a href="#future">6. Future Roadmap</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Documentation Content -->
+        <main class="doc-content">
+            
+            <!-- 1. Executive Summary -->
+            <section class="doc-section" id="executive">
+                <h1>KOMICARE System Whitepaper</h1>
+                <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                    "Empowering medical travelers with unedited verified data, personalized Fitzpatrick matching, and privacy protection."
+                </p>
+                
+                <p>
+                    KOMICARE is a next-generation K-Beauty skin matching and safety verification landing platform. The platform address a critical pain point in the foreign medical tourism market: the prevalence of sponsored fake reviews, factory-style clinics performing hurried procedures, and the fear of legal retribution due to restrictive local defamation laws.
+                </p>
+                <p>
+                    By introducing decentralized/offshore hosting strategies, client-side data privacy masking, clinical qualification filtering, and customized skin passports based on Fitzpatrick skin type diagnostics, KOMICARE matches international patients with premium boutique clinics prioritizing safety and board-certified expertise.
+                </p>
+
+                <div class="alert-box">
+                    <h4>Core Value Proposition</h4>
+                    <p>
+                        KOMICARE acts as an independent trust layer between global medical consumers and Korean aesthetic clinics. We calibrate skin safety parameters before booking and guarantee raw, unedited patient reviews hosting data outside censorship-prone local jurisdictions.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 2. Portal Sitemap -->
+            <section class="doc-section" id="sitemap">
+                <h1>2. Portal Sitemap & Routing</h1>
+                <p>
+                    The project utilizes static resource delivery via Vercel Edge networks with serverless endpoints for dynamic reads and writes. Below is the active sitemap tree and routing configuration.
+                </p>
+
+                <div class="sitemap-tree">
+                    <div class="sitemap-node">
+                        <strong><code>/</code> (Landing Page - <code>index.html</code>)</strong>
+                        <span class="sitemap-desc">Main portal containing the Fitzpatrick Skin Passport Diagnostic Quiz, Safety Masking Simulation, safety handbook reader, and clinic matching directory list.</span>
+                    </div>
+                    <div class="sitemap-node">
+                        <strong><code>/clinic</code> (Clinic Owner Portal - <code>clinic.html</code>)</strong>
+                        <span class="sitemap-desc">Restricted portal for verified clinic directors to authenticate using passcode <code>KOMIPARTNER2026</code>, fill clinic details, view a live-updating preview card, and publish listings.</span>
+                    </div>
+                    <div class="sitemap-node">
+                        <strong><code>/whitepaper</code> (Whitepaper Specification - <code>whitepaper.html</code>)</strong>
+                        <span class="sitemap-desc">This documentation section outlining technical specifications, table layouts, and algorithm mechanics.</span>
+                    </div>
+                    <div class="sitemap-node">
+                        <strong><code>/api/clinics</code> (Serverless Read Handler - <code>api/clinics.js</code>)</strong>
+                        <span class="sitemap-desc">GET endpoint that queries verified clinics from Supabase and applies the 500-listing dynamic expansion generator.</span>
+                    </div>
+                    <div class="sitemap-node">
+                        <strong><code>/api/submit-clinic</code> (Serverless Write Handler - <code>api/submit-clinic.js</code>)</strong>
+                        <span class="sitemap-desc">POST endpoint that receives newly submitted clinic metadata and inserts it securely to the database with column-missing fallback retries.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Core Features Spec -->
+            <section class="doc-section" id="features">
+                <h1>3. Core Features Specifications</h1>
+                
+                <h2>Fitzpatrick Diagnostic Skin Passport</h2>
+                <p>
+                    Calculates a patient's Fitzpatrick Skin Type (Type I to Type VI) via an interactive questionnaire checking:
+                </p>
+                <ul>
+                    <li>Skin color reactions to sun exposure (burning vs tanning).</li>
+                    <li>Genetic skin tone characteristics.</li>
+                </ul>
+                <p>
+                    Produces a downloadable <strong>Skin Passport card</strong> detailing specific laser energy calibration instructions. This card is given to doctors to prevent over-treatment burns common on reactive skin barriers.
+                </p>
+
+                <h2>Receipt Privacy Tax Masker</h2>
+                <p>
+                    To protect patients who leave negative reviews from being tracked down by clinics using purchase timestamps, KOMICARE features an interactive client-side blur engine. When a patient uploads their tax refund receipt, it automatically hides:
+                </p>
+                <ul>
+                    <li>Unique transaction refund serial numbers.</li>
+                    <li>Exact minute/second timestamps.</li>
+                    <li>Staff codes and cash register IDs.</li>
+                </ul>
+
+                <h2>Real-time Multilingual Filters</h2>
+                <p>
+                    Offers precise hospital mapping using a 14-toggle filter panel translating dynamically between <strong>English, Korean, and Japanese</strong>. The filters query:
+                </p>
+                <ul>
+                    <li>Doctor qualifications (Dermatologist, Specialist, General Practitioner).</li>
+                    <li>Clinical experience (0-5, 5-10, 10+ Years).</li>
+                    <li>12 Detailed Review Category Star ratings (Satisfaction, Cost value, Response speed, Wait time, Language access, Friendliness, Honest treatment, Location, Facility comfort, Aftercare, and Parking).</li>
+                </ul>
+
+                <h2>500-Clinics Programmatic Scaler</h2>
+                <p>
+                    To ensure robust filter coverage and stress-test listing rendering without database bloat, KOMICARE uses a pseudo-random generator (PRNG) that expands base listings to <strong>500 unique clinics</strong> on the fly. Experience years, scores, and safety certificates are deterministic and stable per clinic ID.
+                </p>
+            </section>
+
+            <!-- 4. System Architecture -->
+            <section class="doc-section" id="architecture">
+                <h1>4. System Architecture</h1>
+                <p>
+                    KOMICARE is built as a highly performant, serverless Jamstack application.
+                </p>
+                
+                <pre><code>[Client Browser] 
+    │
+    ├── (Reads Static HTML/CSS/JS) ──> Vercel Edge CDN
+    │
+    ├── (GET /api/clinics) ──────────> Vercel Serverless Function ──> Supabase DB
+    │
+    └── (POST /api/submit-clinic) ───> Vercel Serverless Function ──> Supabase DB</code></pre>
+
+                <h2>Frontend Implementation</h2>
+                <ul>
+                    <li><strong>Layout & Logic</strong>: Vanilla HTML5 and ES6 Javascript. Avoids bulky JS frameworks to maintain sub-second First Contentful Paint (FCP) on international mobile connections.</li>
+                    <li><strong>Design Tokens</strong>: Managed in [index.css](file:///e:/Komi/index.css) using HSL custom variables. Premium dark mode aesthetic with micro-animations.</li>
+                    <li><strong>Internationalization</strong>: Translation dictionary engine in [i18n.js](file:///e:/Komi/i18n.js) which scans `data-i18n` and `data-i18n-html` elements for instant, layout-shift-free translations.</li>
+                </ul>
+
+                <h2>Backend Service Layer</h2>
+                <ul>
+                    <li><strong>Serverless Hosting</strong>: Vercel Functions. Executes endpoints inside isolated runtime environments that automatically scale down to zero when inactive.</li>
+                    <li><strong>API Handlers</strong>: Written in Node.js, utilizing CORS preflight protection headers to block unauthorized third-party scrapers.</li>
+                </ul>
+            </section>
+
+            <!-- 5. Database Schema -->
+            <section class="doc-section" id="database">
+                <h1>5. Database Table Layouts</h1>
+                <p>
+                    KOMICARE hosts data in a secure PostgreSQL database on Supabase. Row-Level Security (RLS) is enabled to protect patient data.
+                </p>
+
+                <h3>Table: <code>public.clinics</code></h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Column Name</th>
+                            <th>Data Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td>SERIAL (Primary Key)</td>
+                            <td>Unique auto-incrementing ID.</td>
+                        </tr>
+                        <tr>
+                            <td><code>name</code></td>
+                            <td>TEXT</td>
+                            <td>Clinic name (Bilingual string e.g. <code>A | B</code>).</td>
+                        </tr>
+                        <tr>
+                            <td><code>location</code></td>
+                            <td>TEXT</td>
+                            <td>District and area coordinates.</td>
+                        </tr>
+                        <tr>
+                            <td><code>rating</code></td>
+                            <td>TEXT</td>
+                            <td>Stars rating label string.</td>
+                        </tr>
+                        <tr>
+                            <td><code>specialties</code></td>
+                            <td>TEXT[]</td>
+                            <td>Array of certified treatment tags.</td>
+                        </tr>
+                        <tr>
+                            <td><code>doctor_type</code></td>
+                            <td>TEXT</td>
+                            <td><code>dermatologist</code>, <code>specialist</code>, or <code>gp</code>.</td>
+                        </tr>
+                        <tr>
+                            <td><code>experience_years</code></td>
+                            <td>INTEGER</td>
+                            <td>Total years of clinical experience. Default 7.</td>
+                        </tr>
+                        <tr>
+                            <td><code>sleep_anesthesia</code></td>
+                            <td>BOOLEAN</td>
+                            <td>True if sleep anesthesia is available.</td>
+                        </tr>
+                        <tr>
+                            <td><code>anesthesiologist_resident</code></td>
+                            <td>BOOLEAN</td>
+                            <td>True if anesthesiologist is present on-site.</td>
+                        </tr>
+                        <tr>
+                            <td><code>foreign_attraction_registered</code></td>
+                            <td>BOOLEAN</td>
+                            <td>Government attraction certification flag.</td>
+                        </tr>
+                        <tr>
+                            <td><code>active</code></td>
+                            <td>BOOLEAN</td>
+                            <td>Soft-delete listing control flag.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Table: <code>public.leads</code></h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Column Name</th>
+                            <th>Data Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td>UUID (Primary Key)</td>
+                            <td>Randomly generated UUID.</td>
+                        </tr>
+                        <tr>
+                            <td><code>email</code></td>
+                            <td>TEXT (Unique)</td>
+                            <td>User email address (protected from public read by RLS).</td>
+                        </tr>
+                        <tr>
+                            <td><code>fitzpatrick_type</code></td>
+                            <td>SMALLINT</td>
+                            <td>Skin diagnostic score (1 to 6).</td>
+                        </tr>
+                        <tr>
+                            <td><code>created_at</code></td>
+                            <td>TIMESTAMPTZ</td>
+                            <td>Auto-inserted registration timestamp.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 6. Future Roadmap -->
+            <section class="doc-section" id="future">
+                <h1>6. Scaling Roadmap & Milestones</h1>
+                <p>
+                    As the platform transitions from launching landing page metrics to real medical listings, we have planned the following milestones:
+                </p>
+                <div class="sitemap-tree">
+                    <div class="sitemap-node">
+                        <strong>Phase 1: Real-time Booking Verification</strong>
+                        <span class="sitemap-desc">Integrating clinic calendars with the <code>bookings</code> table, enabling deposits to secure surgical schedules.</span>
+                    </div>
+                    <div class="sitemap-node">
+                        <strong>Phase 2: Decentralized Review Auditing</strong>
+                        <span class="sitemap-desc">Generating cryptographic hash signatures of uploaded receipts on IPFS to guarantee review authenticity without central database editing.</span>
+                    </div>
+                    <div class="sitemap-node">
+                        <strong>Phase 3: Doctor Credentials Verification</strong>
+                        <span class="sitemap-desc">Adding API verification checks with local medical associations to automatically flag clinics misrepresenting GP staff as Board-Certified Dermatologists.</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer style="border-top:1px solid var(--border-glass); padding: 40px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+        <p>© 2026 KOMICARE Inc. Systems Engineering Division. Document Status: APPROVED</p>
+    </footer>
+
+</body>
+</html>
