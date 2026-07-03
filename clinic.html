@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOMICARE | Clinic Owner Registration Portal</title>
+    
+    <!-- KOMICARE Premium Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3c2c'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23c5a880' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23c5a880' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- Translation mappings -->
+    <script src="i18n.js"></script>
+
+    <style>
+        :root {
+            --bg-portal: #030d0a;
+            --card-glass: rgba(15, 30, 25, 0.7);
+            --border-glass: rgba(197, 168, 128, 0.15);
+        }
+
+        body {
+            background-color: var(--bg-portal);
+            background-image: radial-gradient(circle at 50% 20%, rgba(11, 60, 44, 0.4) 0%, transparent 60%);
+            color: #eaeaea;
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .portal-header {
+            border-bottom: 1px solid var(--border-glass);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(3, 13, 10, 0.8);
+        }
+
+        .portal-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-group svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-group h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .portal-main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Auth Container */
+        .auth-container {
+            max-width: 450px;
+            margin: 100px auto;
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .auth-container.shake {
+            animation: shake 0.4s ease-in-out;
+            border-color: #ff4a4a;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        .auth-container h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .auth-container p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group textarea, .input-group select {
+            background: rgba(3, 13, 10, 0.6);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+        }
+
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--secondary) 0%, #aa8c60 100%);
+            border: none;
+            color: var(--primary);
+            padding: 14px 28px;
+            font-weight: 700;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(197, 168, 128, 0.4);
+        }
+
+        /* Registry Layout Grid */
+        .portal-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-section {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            user-select: none;
+        }
+
+        .checkbox-label input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--secondary);
+        }
+
+        /* Realtime Preview Column */
+        .preview-sticky {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .preview-sticky h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        /* Success Dialog overlay */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 13, 10, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .success-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .success-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .success-overlay.active .success-card {
+            transform: scale(1);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        .success-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .success-details {
+            background: rgba(3, 13, 10, 0.5);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        .tag-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tag-checkbox-btn {
+            background: rgba(197, 168, 128, 0.05);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .tag-checkbox-btn.selected {
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
+        }
+
+        .tag-checkbox-btn input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="portal-header">
+        <div class="portal-header-container">
+            <a href="index.html" class="logo-group">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#0b3c2c"/>
+                    <path d="M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z" fill="none" stroke="#c5a880" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 9V23M9 16H23" stroke="#c5a880" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+                <h2>KOMICARE</h2>
+            </a>
+            <div style="font-size: 0.9rem; color: var(--text-muted);" id="localModeIndicator">
+                🏥 Partner Registration Desk
+            </div>
+        </div>
+    </header>
+
+    <main class="portal-main">
+        <!-- Auth Section -->
+        <div class="auth-container" id="authBox">
+            <h3>Doctor Verification</h3>
+            <p>Please enter your invitation passcode to access the registry desk.</p>
+            <div class="input-group">
+                <label for="passcodeField">Passcode</label>
+                <input type="password" id="passcodeField" placeholder="e.g. KOMIPARTNER2026">
+            </div>
+            <button class="btn-premium" onclick="validatePasscode()">Authenticate</button>
+        </div>
+
+        <!-- Portal Grid (Form + Preview) - Initially hidden -->
+        <div class="portal-grid" id="mainDashboard" style="display: none;">
+            
+            <div class="form-section">
+                <h3>🏥 Clinic Details Form</h3>
+                
+                <form id="clinicForm" onsubmit="submitForm(event)">
+                    
+                    <!-- Basic Info -->
+                    <div class="input-group">
+                        <label>Clinic Name (Format: English | Korean)</label>
+                        <input type="text" id="clinicName" placeholder="e.g. Aura Skin Clinic | 아우라 피부과" required oninput="updateLivePreview()">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Location Area (Format: English | Korean)</label>
+                        <input type="text" id="clinicLocation" placeholder="e.g. Cheongdam-dong, Gangnam | 강남구 청담동" required oninput="updateLivePreview()">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Brief Description (Format: English | Korean)</label>
+                        <textarea id="clinicDescription" rows="3" placeholder="Explain your custom treatment, safety calibration values, etc." oninput="updateLivePreview()"></textarea>
+                    </div>
+
+                    <!-- Specialties Selection -->
+                    <div class="input-group">
+                        <label>Specialties & Treatments (Select all that apply)</label>
+                        <div class="tag-pool" id="specialtiesTagPool">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Layout Grid for Doctor Bio -->
+                    <h4 style="color: var(--secondary); font-family: 'Playfair Display', serif; border-bottom: 1px solid var(--border-glass); padding-bottom: 8px; margin-top: 30px;">👨‍⚕️ Representative Doctor Information</h4>
+                    
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label>Doctor Full Name</label>
+                            <input type="text" id="docName" placeholder="e.g. Dr. Min-Seok Song" required oninput="updateLivePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label>Avatar Initials (Max 2 chars)</label>
+                            <input type="text" id="docAvatar" placeholder="e.g. MS" maxlength="2" required oninput="updateLivePreview()">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Doctor Main Title (Format: English | Korean)</label>
+                        <input type="text" id="docTitle" placeholder="e.g. Board-Certified Dermatologist | 피부과 전문의" required oninput="updateLivePreview()">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Doctor Biography / Philosophy (Format: English | Korean)</label>
+                        <textarea id="docBio" rows="3" placeholder="Describe residency, years of experience, safety philosophy..." oninput="updateLivePreview()"></textarea>
+                    </div>
+
+                    <!-- Logistics -->
+                    <h4 style="color: var(--secondary); font-family: 'Playfair Display', serif; border-bottom: 1px solid var(--border-glass); padding-bottom: 8px; margin-top: 30px;">⚙️ Logistics & Schedule</h4>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label>Hours of Operation</label>
+                            <input type="text" id="clinicHours" placeholder="e.g. Mon - Fri: 10AM - 7PM | Sat: 10AM - 3PM" oninput="updateLivePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label>Bookings Limit (slots_tag)</label>
+                            <input type="text" id="clinicSlots" placeholder="e.g. Max 3 Bookings/Hr" oninput="updateLivePreview()">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Google Maps Embed Iframe URL (Optional)</label>
+                        <input type="text" id="mapIframe" placeholder="Paste target src attribute here" oninput="updateLivePreview()">
+                    </div>
+
+                    <!-- Safety & Certifications Flags -->
+                    <h4 style="color: var(--secondary); font-family: 'Playfair Display', serif; border-bottom: 1px solid var(--border-glass); padding-bottom: 8px; margin-top: 30px;">⭐ Qualifications & Safety Checklist</h4>
+                    
+                    <div class="input-group">
+                        <label>Doctor Qualification Category</label>
+                        <select id="docType" onchange="updateLivePreview()">
+                            <option value="dermatologist">Board-Certified Dermatologist (피부과 전문의)</option>
+                            <option value="specialist">Specialist / Plastic Surgeon (전문의 / 성형외과 등)</option>
+                            <option value="gp">General Practitioner (일반의)</option>
+                        </select>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sleepAnesthesia" onchange="updateLivePreview()">
+                            Sleep Anesthesia Provided (수면마취 가능)
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="residentAnesthesiologist" onchange="updateLivePreview()">
+                            Resident Anesthesiologist Present (마취과 전문의 상주)
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="foreignRegistered" onchange="updateLivePreview()">
+                            Foreigner Attraction Registered (외국인 환자 유치기관 등록 완료)
+                        </label>
+
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="foreignerInsurance" onchange="updateLivePreview()">
+                            Foreigner Medical Insurance Support (외국인 메디컬 실비 보험 연계)
+                        </label>
+
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="excellentAftercare" onchange="updateLivePreview()">
+                            Aftercare Excellence Certified (사후 해피콜/보증 케어 우수)
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-premium" style="margin-top: 20px;">Submit Registration</button>
+                </form>
+            </div>
+
+            <!-- Realtime Preview Column -->
+            <div class="preview-sticky">
+                <h4>✨ Real-time Preview</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0 0 10px 0;">This is how your clinic card will look to international patients browsing Komicare.</p>
+                
+                <div id="previewCardContainer">
+                    <!-- Dynamic preview card template matching index.html/app.js -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Success Overlay dialog -->
+    <div class="success-overlay" id="successDialog">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h3>Registration Complete</h3>
+            <p>Your clinic has been successfully registered to KOMICARE Boutique listings.</p>
+            <div class="success-details">
+                <strong>Assigned Clinic ID:</strong> <span id="successId">-</span><br>
+                <strong>Clinic Name:</strong> <span id="successName">-</span><br>
+                <strong>Doctor Name:</strong> <span id="successDoc">-</span>
+            </div>
+            <button class="btn-premium" onclick="closeSuccessDialog()">Register Another Clinic</button>
+            <a href="index.html" class="btn-premium" style="background: transparent; border: 1px solid var(--secondary); color: var(--secondary); text-decoration: none; display: block; text-align: center; margin-top: 10px; box-sizing: border-box; padding: 14px;">Return to Main Directory</a>
+        </div>
+    </div>
+
+    <script>
+        const targetPasscode = 'KOMIPARTNER2026';
+        const rawSpecialties = [
+            "Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning", 
+            "Skin Booster", "Lifting", "Pigmentation", "Vascular Laser Calibration", 
+            "Rosacea & Redness Recovery", "Ultrasonic Rejuvenation", "Acne", 
+            "Hair Removal", "Filler", "Botox", "Genuine Consumables Logged", 
+            "Ulthera", "Shurink", "Laser Toning"
+        ];
+
+        // Populate dynamic tags
+        window.addEventListener('DOMContentLoaded', () => {
+            const pool = document.getElementById('specialtiesTagPool');
+            rawSpecialties.forEach(spec => {
+                const label = document.createElement('label');
+                label.className = 'tag-checkbox-btn';
+                label.innerHTML = `
+                    <input type="checkbox" value="${spec}" onchange="toggleTagStyle(this)">
+                    ${spec}
+                `;
+                pool.appendChild(label);
+            });
+            updateLivePreview();
+        });
+
+        function toggleTagStyle(checkbox) {
+            if (checkbox.checked) {
+                checkbox.parentElement.classList.add('selected');
+            } else {
+                checkbox.parentElement.classList.remove('selected');
+            }
+            updateLivePreview();
+        }
+
+        function validatePasscode() {
+            const input = document.getElementById('passcodeField').value.trim();
+            const authBox = document.getElementById('authBox');
+            if (input === targetPasscode) {
+                authBox.style.display = 'none';
+                document.getElementById('mainDashboard').style.display = 'grid';
+            } else {
+                authBox.classList.add('shake');
+                setTimeout(() => authBox.classList.remove('shake'), 400);
+            }
+        }
+
+        function getSelectedSpecialties() {
+            const checkboxes = document.querySelectorAll('#specialtiesTagPool input[type="checkbox"]');
+            const selected = [];
+            checkboxes.forEach(cb => {
+                if (cb.checked) selected.push(cb.value);
+            });
+            return selected;
+        }
+
+        // Live preview renderer
+        function updateLivePreview() {
+            const container = document.getElementById('previewCardContainer');
+            if (!container) return;
+
+            const name = document.getElementById('clinicName').value || 'Aura Skin Clinic | 아우라 피부과';
+            const location = document.getElementById('clinicLocation').value || '📍 Cheongdam-dong, Gangnam | 📍 강남구 청담동';
+            const specialties = getSelectedSpecialties();
+            const docNameVal = document.getElementById('docName').value || 'Dr. Min-Seok Song';
+            const avatarInitials = document.getElementById('docAvatar').value || 'MS';
+            const docTitleVal = document.getElementById('docTitle').value || 'Board-Certified Dermatologist | 피부과 전문의';
+            const slots = document.getElementById('clinicSlots').value || 'Max 3 Bookings/Hr';
+            
+            const doctorType = document.getElementById('docType').value;
+            const sleepAnesthesia = document.getElementById('sleepAnesthesia').checked;
+            const residentAnesthesiologist = document.getElementById('residentAnesthesiologist').checked;
+            const foreignRegistered = document.getElementById('foreignRegistered').checked;
+            const foreignerInsurance = document.getElementById('foreignerInsurance').checked;
+            const excellentAftercare = document.getElementById('excellentAftercare').checked;
+
+            // Split language formatting
+            const getDisplayLanguage = (text) => {
+                if (text.includes('|')) {
+                    return text.split('|')[0].trim();
+                }
+                return text;
+            };
+
+            const tagsHTML = specialties.map(s => `<span class="partner-tag">${s}</span>`).join('');
+            
+            let docTypeLabel = doctorType === 'dermatologist' ? 'Board-Certified Dermatologist' : (doctorType === 'specialist' ? 'Specialist' : 'General Practitioner');
+            let anesthesiaLabel = sleepAnesthesia ? (residentAnesthesiologist ? 'Resident Anesthesiologist' : 'Sleep Anesthesia') : '';
+
+            container.innerHTML = `
+                <div class="partner-card" style="box-shadow: 0 8px 30px rgba(0,0,0,0.4); opacity: 0.95; width:100%; box-sizing:border-box;">
+                    <div class="partner-top">
+                        <div class="partner-info">
+                            <h4>${getDisplayLanguage(name)}</h4>
+                            <span class="partner-location">${getDisplayLanguage(location)}</span>
+                        </div>
+                        <div class="partner-rating"><span>⭐ 5.0</span></div>
+                    </div>
+                    <div class="partner-tags">
+                        ${tagsHTML || '<span class="partner-tag" style="opacity: 0.5;">No Specialty Chosen</span>'}
+                        <span class="partner-tag slots">${slots}</span>
+                    </div>
+                    <div class="safety-badges-row">
+                        <span class="safety-badge badge-dermatologist">${docTypeLabel}</span>
+                        ${anesthesiaLabel ? `<span class="safety-badge badge-anesthesiologist">${anesthesiaLabel}</span>` : ''}
+                        ${foreignRegistered ? `<span class="safety-badge badge-registered">Foreigner Registered</span>` : ''}
+                        ${foreignerInsurance ? `<span class="safety-badge badge-insurance">Insurance Support</span>` : ''}
+                        ${excellentAftercare ? `<span class="safety-badge badge-aftercare">Aftercare Certified</span>` : ''}
+                    </div>
+                    <div class="partner-doctors">
+                        <div class="doctor-profile">
+                            <div class="doctor-avatar">${avatarInitials}</div>
+                            <div class="doctor-meta">
+                                <h5>${getDisplayLanguage(docNameVal)}</h5>
+                                <p>${getDisplayLanguage(docTitleVal)}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const inviteCode = document.getElementById('passcodeField').value.trim();
+            const name = document.getElementById('clinicName').value;
+            const location = document.getElementById('clinicLocation').value;
+            const description = document.getElementById('clinicDescription').value;
+            const specialties = getSelectedSpecialties();
+            const doctor_name = document.getElementById('docName').value;
+            const doctor_avatar = document.getElementById('docAvatar').value;
+            const doctor_title = document.getElementById('docTitle').value;
+            const doctor_bio = document.getElementById('docBio').value;
+            const hours = document.getElementById('clinicHours').value;
+            const slots_tag = document.getElementById('clinicSlots').value;
+            const map_iframe = document.getElementById('mapIframe').value;
+            const doctor_type = document.getElementById('docType').value;
+            const sleep_anesthesia = document.getElementById('sleepAnesthesia').checked;
+            const anesthesiologist_resident = document.getElementById('residentAnesthesiologist').checked;
+            const foreign_attraction_registered = document.getElementById('foreignRegistered').checked;
+            const foreigner_insurance = document.getElementById('foreignerInsurance').checked;
+            const excellent_aftercare = document.getElementById('excellentAftercare').checked;
+
+            const payload = {
+                inviteCode,
+                name,
+                location,
+                description,
+                specialties,
+                doctor_name,
+                doctor_avatar,
+                doctor_title,
+                doctor_bio,
+                hours,
+                slots_tag,
+                map_iframe,
+                doctor_type,
+                sleep_anesthesia,
+                anesthesiologist_resident,
+                foreign_attraction_registered,
+                foreigner_insurance,
+                excellent_aftercare
+            };
+
+            try {
+                const response = await fetch('/api/submit-clinic', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (result && result.success) {
+                    document.getElementById('successId').innerText = result.id;
+                    document.getElementById('successName').innerText = name.split('|')[0].trim();
+                    document.getElementById('successDoc').innerText = doctor_name.split('|')[0].trim();
+                    
+                    document.getElementById('successDialog').classList.add('active');
+                } else {
+                    alert('Submission failed: ' + (result.error || 'Unknown error'));
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection error occurred: ' + err.message);
+            }
+        }
+
+        function closeSuccessDialog() {
+            document.getElementById('successDialog').classList.remove('active');
+            document.getElementById('clinicForm').reset();
+            const tagBtns = document.querySelectorAll('.tag-checkbox-btn');
+            tagBtns.forEach(btn => btn.classList.remove('selected'));
+            updateLivePreview();
+        }
+    </script>
+</body>
+</html>
