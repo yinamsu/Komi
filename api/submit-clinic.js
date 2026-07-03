@@ -38,7 +38,8 @@ module.exports = async (req, res) => {
             anesthesiologist_resident,
             foreign_attraction_registered,
             foreigner_insurance,
-            excellent_aftercare
+            excellent_aftercare,
+            experience_years
         } = req.body || {};
 
         // Validate passcode
@@ -91,7 +92,8 @@ module.exports = async (req, res) => {
                     anesthesiologist_resident: !!anesthesiologist_resident,
                     foreign_attraction_registered: !!foreign_attraction_registered,
                     foreigner_insurance: !!foreigner_insurance,
-                    excellent_aftercare: !!excellent_aftercare
+                    excellent_aftercare: !!excellent_aftercare,
+                    experience_years: experience_years ? parseInt(experience_years) : 7
                 }
             });
         }
@@ -117,15 +119,34 @@ module.exports = async (req, res) => {
             foreign_attraction_registered: !!foreign_attraction_registered,
             foreigner_insurance: !!foreigner_insurance,
             excellent_aftercare: !!excellent_aftercare,
+            experience_years: experience_years ? parseInt(experience_years) : 7,
             active: true
         };
 
-        const { data, error } = await supabase
+        let { data, error } = await supabase
             .from('clinics')
             .insert([newClinic])
             .select();
 
         if (error) {
+            // Handle missing column gracefully by removing experience_years and retrying
+            if (error.code === '42703' || (error.message && error.message.includes('experience_years'))) {
+                delete newClinic.experience_years;
+                const retry = await supabase
+                    .from('clinics')
+                    .insert([newClinic])
+                    .select();
+
+                if (retry.error) {
+                    throw retry.error;
+                }
+                return res.status(200).json({
+                    success: true,
+                    message: "Clinic registered successfully (Note: database table does not support experience_years, fell back to default)",
+                    id: retry.data[0].id,
+                    clinic: retry.data[0]
+                });
+            }
             throw error;
         }
 

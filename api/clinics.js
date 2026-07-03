@@ -616,7 +616,8 @@ module.exports = async (req, res) => {
             anesthesiologist_resident: item.anesthesiologist_resident,
             foreign_attraction_registered: item.foreign_attraction_registered,
             foreigner_insurance: item.foreigner_insurance,
-            excellent_aftercare: item.excellent_aftercare
+            excellent_aftercare: item.excellent_aftercare,
+            experience_years: item.experience_years
         }));
 
         const finalClinics = expandClinicsWithGenerator(mappedClinics);

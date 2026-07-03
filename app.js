@@ -1187,6 +1187,9 @@ function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
 }
 
 function getClinicExperienceYears(clinic) {
+    if (clinic.experience_years !== undefined && clinic.experience_years !== null) {
+        return parseInt(clinic.experience_years);
+    }
     const id = parseInt(clinic.id);
     if (id === 1) return 12;
     if (id === 2) return 8;

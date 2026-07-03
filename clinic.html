@@ -417,6 +417,21 @@
                         </div>
                     </div>
 
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label>Years of Clinical Experience (시술 경력)</label>
+                            <input type="number" id="experienceYears" placeholder="e.g. 12" min="0" max="60" required oninput="updateLivePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label>Doctor Qualification Category</label>
+                            <select id="docType" onchange="updateLivePreview()">
+                                <option value="dermatologist">Board-Certified Dermatologist (피부과 전문의)</option>
+                                <option value="specialist">Specialist / Plastic Surgeon (전문의 / 성형외과 등)</option>
+                                <option value="gp">General Practitioner (일반의)</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="input-group">
                         <label>Doctor Main Title (Format: English | Korean)</label>
                         <input type="text" id="docTitle" placeholder="e.g. Board-Certified Dermatologist | 피부과 전문의" required oninput="updateLivePreview()">
@@ -448,15 +463,6 @@
 
                     <!-- Safety & Certifications Flags -->
                     <h4 style="color: var(--secondary); font-family: 'Playfair Display', serif; border-bottom: 1px solid var(--border-glass); padding-bottom: 8px; margin-top: 30px;">⭐ Qualifications & Safety Checklist</h4>
-                    
-                    <div class="input-group">
-                        <label>Doctor Qualification Category</label>
-                        <select id="docType" onchange="updateLivePreview()">
-                            <option value="dermatologist">Board-Certified Dermatologist (피부과 전문의)</option>
-                            <option value="specialist">Specialist / Plastic Surgeon (전문의 / 성형외과 등)</option>
-                            <option value="gp">General Practitioner (일반의)</option>
-                        </select>
-                    </div>
 
                     <div class="checkbox-group">
                         <label class="checkbox-label">
@@ -655,6 +661,7 @@
             const slots_tag = document.getElementById('clinicSlots').value;
             const map_iframe = document.getElementById('mapIframe').value;
             const doctor_type = document.getElementById('docType').value;
+            const experience_years = document.getElementById('experienceYears').value;
             const sleep_anesthesia = document.getElementById('sleepAnesthesia').checked;
             const anesthesiologist_resident = document.getElementById('residentAnesthesiologist').checked;
             const foreign_attraction_registered = document.getElementById('foreignRegistered').checked;
@@ -675,6 +682,7 @@
                 slots_tag,
                 map_iframe,
                 doctor_type,
+                experience_years,
                 sleep_anesthesia,
                 anesthesiologist_resident,
                 foreign_attraction_registered,
