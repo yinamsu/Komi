@@ -826,9 +826,19 @@ function renderClinicCards(clinics) {
     clinics.forEach(clinic => {
         const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
         const tagsHTML = specs.map(spec => {
-            const key = 'menu.' + spec.toLowerCase().replace(/ /g, '');
-            const translated = t(key);
-            const displayTag = (translated && translated !== key) ? translated : spec;
+            const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
+            let displayTag = spec;
+
+            const cleanKey = spec.trim().toLowerCase();
+            const dict = (window.specialtyTranslations && window.specialtyTranslations[lang]) || {};
+
+            if (dict[cleanKey]) {
+                displayTag = dict[cleanKey];
+            } else {
+                const key = 'menu.' + spec.toLowerCase().replace(/ /g, '');
+                const translated = t(key);
+                displayTag = (translated && translated !== key) ? translated : spec;
+            }
             return `<span class="partner-tag">${displayTag}</span>`;
         }).join('');
         const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();

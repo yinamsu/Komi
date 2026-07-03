@@ -1233,7 +1233,7 @@ const translations = {
         "badge.dermatologist": "皮膚科専門医",
         "badge.plasticsurgeon": "整形外科専門医",
         "badge.generalphysician": "一般医",
-        "badge.anesthesiologist": "마취과 전문의 상주",
+        "badge.anesthesiologist": "麻酔科専門医常駐",
         "badge.no_anesthesiologist": "睡眠麻酔（医師直接管理）",
         "badge.foreign_attraction": "外国人患者誘致医療機関",
         "badge.foreigner_insurance": "外国人賠償責任保険加入",
@@ -1513,3 +1513,64 @@ function setLanguage(lang) {
 
     window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
 }
+
+const specialtyTranslations = {
+    en: {
+        "실리콘 코성형": "Silicone Rhinoplasty",
+        "silicone rhinoplasty": "Silicone Rhinoplasty",
+        "기능코 성형 (비염/비중격만곡증 개선)": "Functional Rhinoplasty (Septal Deviation)",
+        "functional rhinoplasty (rhinitis/septal deviation)": "Functional Rhinoplasty (Septal Deviation)",
+        "기능코 성형": "Functional Rhinoplasty",
+        "functional rhinoplasty": "Functional Rhinoplasty",
+        "콧볼 축소": "Alar Reduction",
+        "alar reduction": "Alar Reduction",
+        "수면마취": "Sleep Anesthesia",
+        "sleep anesthesia": "Sleep Anesthesia",
+        "nd:yag laser calibrations": "Nd:YAG Laser Calibrations",
+        "skin barrier reconstruction": "Skin Barrier Reconstruction",
+        "pico toning": "Pico Toning",
+        "rejuran healer": "Rejuran Healer",
+        "laser toning": "Laser Toning",
+        "lipo": "Liposuction",
+        "fat transfer": "Fat Transfer"
+    },
+    ko: {
+        "silicone rhinoplasty": "실리콘 코성형",
+        "실리콘 코성형": "실리콘 코성형",
+        "functional rhinoplasty (rhinitis/septal deviation)": "기능코 성형 (비염/비중격만곡증 개선)",
+        "functional rhinoplasty": "기능코 성형",
+        "기능코 성형": "기능코 성형",
+        "alar reduction": "콧볼 축소",
+        "콧볼 축소": "콧볼 축소",
+        "sleep anesthesia": "수면마취",
+        "sleep anesthesia": "수면마취",
+        "nd:yag laser calibrations": "Nd:YAG 레이저 맞춤",
+        "skin barrier reconstruction": "피부 장벽 재건",
+        "pico toning": "피코 토닝",
+        "rejuran healer": "리쥬란 힐러",
+        "laser toning": "레이저 토닝",
+        "lipo": "지방흡입",
+        "fat transfer": "지방이식"
+    },
+    ja: {
+        "silicone rhinoplasty": "シリコン鼻整形",
+        "실리콘 코성형": "シリコン鼻整形",
+        "functional rhinoplasty (rhinitis/septal deviation)": "機能鼻整形（鼻炎・鼻中隔弯曲症改善）",
+        "functional rhinoplasty": "機能鼻整形",
+        "기능코 성형": "機能鼻整形",
+        "기능코 성형 (비염/비중격만곡증 개선)": "機能鼻整形（鼻炎・鼻中隔弯曲症改善）",
+        "alar reduction": "小鼻縮小",
+        "콧볼 축소": "小鼻縮小",
+        "sleep anesthesia": "睡眠麻酔",
+        "sleep anesthesia": "睡眠麻酔",
+        "nd:yag laser calibrations": "Nd:YAGレーザー調整",
+        "skin barrier reconstruction": "肌バリア再建",
+        "pico toning": "ピコトーニング",
+        "rejuran healer": "リジュランヒーラー",
+        "laser toning": "レーザートーニング",
+        "lipo": "脂肪吸引",
+        "fat transfer": "脂肪移植"
+    }
+};
+
+window.specialtyTranslations = specialtyTranslations;
