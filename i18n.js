@@ -1084,6 +1084,38 @@ const translations = {
         "compare.boutique_risk_desc": "フィッツパトリック肌タイプに合わせて照射時間や冷却レベルを調整し、安全を最大化します。",
         "compare.boutique_care_desc": "日本に帰国した後も、専用の回復チェックリストと遠隔アフターケアを提供します。",
 
+        "dr_view.tag": "医師の視点",
+        "dr_view.title": "実力と価値で認められる良循環の構造",
+        "dr_view.subtitle": "過度な価格競争やブローカー手数料の支払いから解放され、治療結果と実力のみで海外の患者を誘致しましょう。",
+        "dr_view.card1_title": "1. 実力中心のマーケティング",
+        "dr_view.card1_text": "優れた手技と治療結果を持つ医師が価格競争をせずに生き残るための唯一の方法です。透明性の高い無修正のレビューを通じて、シグニチャー施術の知名度を上げましょう。",
+        "dr_view.card2_title": "2. 価格防衛と専門性",
+        "dr_view.card2_text": "施術の失敗を恐れる海外の患者にとって、医師が100%責任を持つデザイン施術は、適正価格を設定するための強力な武器になります。",
+        "dr_view.card3_title": "3. ブローカー手数料からの解放",
+        "dr_view.card3_text": "誠実に積み上げられた評判とデータは、ブローカーを介さずに患者自身が訪れる状態を作り出し、クリニックの経営を安定させます。",
+
+        "diff.tag": "差別点の分析",
+        "diff.title": "既存の美容予約アプリとの差別点",
+        "diff.subtitle": "単なる広告掲載やチケット販売アプリとは異なる、Komicareだけの誠実なデータエコシステム",
+        "diff.col_feature": "運営基準",
+        "diff.col_legacy": "既存の予約アプリ",
+        "diff.col_komi": "Komicare基準",
+        "diff.row1_feature": "口コミやコメントの操作",
+        "diff.row1_legacy": "広告費の支払いに応じて悪評レビューの削除や非公開を容認",
+        "diff.row1_komi": "操作が発覚した時点で厳重警告、累積時はプラットフォームから永久退場",
+        "diff.row2_feature": "クリニック側による見返り提供",
+        "diff.row2_legacy": "口コミ投稿を誘導するための割引やキャッシュバック等の見返り提供の放置",
+        "diff.row2_komi": "見返り提供の告発時に褒賞金を支給する通報制度의 운영",
+        "diff.row3_feature": "外国人の身元および決済認証",
+        "diff.row3_legacy": "簡単なアカウント登録だけで偽のレビューが投稿可能（サクラの横行）",
+        "diff.row3_komi": "レビュー登録時のパスポートスキャンおよび免税還付レシートの認証を義務化",
+        "diff.row4_feature": "1ヶ月後の経過観察レビュー",
+        "diff.row4_legacy": "施術直後に投稿させて終了し、経過に対する追跡が不十分",
+        "diff.row4_komi": "1ヶ月後に追加レビューを登録したユーザーに特別な化粧品やポイント支給",
+        "diff.row5_feature": "悪質レビューおよび名誉毀損紛争",
+        "diff.row5_legacy": "クリニックから削除要請があった場合、事実確認をせず即時非表示化",
+        "diff.row5_komi": "プラットフォームは仲介に留まり、事実確認前のクリニック単独要請による削除は不可",
+
         // ---- Header ----
         "header.badge": "100%検証済みブティッククリニックのみ",
 
@@ -1290,12 +1322,25 @@ const translations = {
         "rev_sim.cat_onemonth": "13. 1ヶ月後経過観察:",
         "rev_sim.submit_btn": "✓ 認証レビューを安全に送信する",
 
+        "founder.tag": "創業者の使命",
+        "founder.badge": "専門医認定",
+        "founder.quote": "\"工場型チェーンで皮膚バリアが完全に崩壊した観光客たちを治療することにうんざりし、このプラットフォームを作りました。\"",
+        "founder.text": "\"ソウルで皮膚科を運営しながら、予防可能なレーザー合併症で苦しむ非常に多くの外国人患者を見ました。数万円の費用と貴重な時間を投資するだけに、絶対的な安全性、正規品のチップ、そこで医師主導の治療を受ける権利があります。Komicareは臨床パラメータに基づいてすべての口コミとクリニックを検証し、韓国皮膚科に対する信頼を回復します。\"",
+        "founder.name": "キム・ミンジ院長",
+        "founder.title": "創業者 & 皮膚科専門医",
+
+        "footer.about": "Komicareは、医療観光客のための初の安全検証済みブティック皮膚マッチングプラットフォームです。事実適示名誉毀損による検閲法から患者のレビューを保護するため、データベースを海外の管轄区域サーバーでホストしています。",
+        "footer.links_title": "信頼リソース",
+        "footer.link_handbook": "安全ハンドブック",
+        "footer.link_privacy": "プライバシーアーキテクチャ",
+        "footer.link_partner": "提携クリニック申請",
+        "footer.server": "海外管轄サーバーノード | データ暗号化 & 匿名化",
+
         // ---- Footer ----
         "footer.copyright": "© 2026 Komicare. All rights reserved. 医療法第56条を遵守し、患者の正当な表現の自由を保護します。"
     }
 };
 
-// ---- Fitzpatrick Profiles (Dynamic Integration) ----
 const fitzpatrickProfiles_en = {
     1: {
         name: "Fitzpatrick Type I (Pale White / Fair)",
