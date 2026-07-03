@@ -56,3 +56,19 @@ We have introduced a powerful, interactive filtering engine and scaled our mock 
 - **Automatic Scaler**: Built a programmatic PRNG generator (`expandClinicsWithGenerator`) that expands our core 22 boutique clinics into **500 unique clinics** on the fly, running both on Vercel Serverless API (`api/clinics.js`) and client-side fallback fallback arrays (`app.js`).
 - **Coverage Integrity**: Ensures that every possible permutation of filters is covered, leaving no empty results under reasonable filtering parameters.
 - **Efficiency**: Zero database weight or loading latency overhead since the generator runs in-memory with deterministic seed hashes.
+
+---
+
+## Latest Updates: Clinic Owner Data Entry Portal (`/clinic`)
+
+We have built a dedicated registry portal designed for doctors and clinic directors to input and preview their clinic metadata:
+
+### 1. Invitation Passcode Protection
+- Access is gatekept behind an authentication dialog prompting for the invitation passcode (`KOMIPARTNER2026`).
+
+### 2. Full Metadata Form & Live Preview
+- The entry form matches all required attributes for the search directory (Clinic name, location, specialties checklist, doctor profile with avatar/bio, operating hours, booking slots limit, Google Maps embed URL, and qualification toggles).
+- Renders an **interactive, real-time live preview card** styled identically to the main directory's clinic card.
+
+### 3. Database Insertion Endpoint
+- The form POSTs to `/api/submit-clinic` to insert the new entry directly into the Supabase database. If Supabase is offline/unconfigured, it switches automatically to a simulated output sandbox mode showing a success message and previews of the generated metadata.
