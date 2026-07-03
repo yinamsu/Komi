@@ -1082,6 +1082,54 @@ function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
     return specialties.some(spec => keywords.some(kw => spec.includes(kw)));
 }
 
+function getClinicExperienceYears(clinic) {
+    const id = parseInt(clinic.id);
+    if (id === 1) return 12;
+    if (id === 2) return 8;
+    if (id === 3) return 6;
+    if (id === 4) return 11;
+    if (id === 5) return 3;
+    if (id === 6) return 15;
+    if (id === 7) return 7;
+    if (id === 8) return 14;
+    if (id === 9) return 9;
+    if (id === 10) return 11;
+    if (id === 12) return 8;
+    if (id === 13) return 4;
+    if (id === 14) return 12;
+    if (id === 15) return 5;
+    if (id === 16) return 11;
+    if (id === 17) return 7;
+    if (id === 18) return 13;
+    if (id === 19) return 10;
+    if (id === 20) return 12;
+    if (id === 21) return 6;
+    if (id === 22) return 4;
+    return 7; // default
+}
+
+function getDetailedReviewRating(clinicId, category) {
+    const id = parseInt(clinicId);
+    
+    // Use dynamic score if possible
+    if (category === 'satisfaction') return parseFloat(getClinicCategoryScore(id, 'procedure'));
+    if (category === 'contact_speed') return parseFloat(getClinicCategoryScore(id, 'booking'));
+    if (category === 'waiting_speed') return parseFloat(getClinicCategoryScore(id, 'visit'));
+    if (category === 'language') {
+        const barrier = parseFloat(getClinicCategoryScore(id, 'language_barrier'));
+        return parseFloat((5.0 - barrier + 3.8).toFixed(1)); // invert barrier to represent convenience
+    }
+    if (category === 'staff_kindness') return parseFloat(getClinicCategoryScore(id, 'kindness'));
+    if (category === 'aftercare') return parseFloat(getClinicCategoryScore(id, 'post_care'));
+    if (category === 'parking') return parseFloat(getClinicCategoryScore(id, 'parking'));
+    
+    // For other categories, generate deterministically so each clinic has consistent ratings
+    const charSum = category.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+    const hash = (id * 23 + charSum) % 11;
+    const score = 3.9 + (hash * 0.1);
+    return parseFloat(score.toFixed(1));
+}
+
 function applyFilters() {
     const searchInput = document.getElementById('directorySearchInput');
     const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
@@ -1113,11 +1161,102 @@ function applyFilters() {
             return nameMatch || docMatch || specMatch;
         });
     }
+
+    // 4. Custom Hospital Filters
+    // 4.1 의사 자격 필터 (피부과 전문의 / 전문의 / 일반의)
+    const isDerm = document.getElementById('filter-doc-dermatologist')?.checked;
+    const isSpec = document.getElementById('filter-doc-specialist')?.checked;
+    const isGp = document.getElementById('filter-doc-gp')?.checked;
+    if (isDerm || isSpec || isGp) {
+        filtered = filtered.filter(c => {
+            if (isDerm && c.doctor_type === 'dermatologist') return true;
+            if (isSpec && c.doctor_type === 'specialist') return true;
+            if (isGp && c.doctor_type === 'gp') return true;
+            return false;
+        });
+    }
+
+    // 4.2 시술 경력 필터 (0-5년 / 5-10년 / 10년 이상)
+    const isExp05 = document.getElementById('filter-exp-0-5')?.checked;
+    const isExp510 = document.getElementById('filter-exp-5-10')?.checked;
+    const isExp10p = document.getElementById('filter-exp-10plus')?.checked;
+    if (isExp05 || isExp510 || isExp10p) {
+        filtered = filtered.filter(c => {
+            const years = getClinicExperienceYears(c);
+            if (isExp05 && years >= 0 && years <= 5) return true;
+            if (isExp510 && years > 5 && years <= 10) return true;
+            if (isExp10p && years > 10) return true;
+            return false;
+        });
+    }
+
+    // 4.3 외국인 진료 및 혜택
+    const isReg = document.getElementById('filter-auth-registered')?.checked;
+    const isExc = document.getElementById('filter-auth-excellent')?.checked;
+    if (isReg) {
+        filtered = filtered.filter(c => c.foreign_attraction_registered === true);
+    }
+    if (isExc) {
+        filtered = filtered.filter(c => c.excellent_aftercare === true);
+    }
+
+    // 5. Custom Review Categories Star Rating Filters
+    const reviewCats = [
+        { id: 'r-filter-satisfaction', key: 'satisfaction' },
+        { id: 'r-filter-cost', key: 'cost' },
+        { id: 'r-filter-contact_speed', key: 'contact_speed' },
+        { id: 'r-filter-waiting_speed', key: 'waiting_speed' },
+        { id: 'r-filter-language', key: 'language' },
+        { id: 'r-filter-staff_kindness', key: 'staff_kindness' },
+        { id: 'r-filter-doctor_explanation', key: 'doctor_explanation' },
+        { id: 'r-filter-honesty', key: 'honesty' },
+        { id: 'r-filter-location', key: 'location' },
+        { id: 'r-filter-facility', key: 'facility' },
+        { id: 'r-filter-aftercare', key: 'aftercare' },
+        { id: 'r-filter-parking', key: 'parking' }
+    ];
+
+    reviewCats.forEach(cat => {
+        const el = document.getElementById(cat.id);
+        const minVal = el ? parseFloat(el.value) : 0;
+        if (minVal > 0) {
+            filtered = filtered.filter(c => getDetailedReviewRating(c.id, cat.key) >= minVal);
+        }
+    });
     
     renderClinicCards(filtered);
 }
 
 function initSearchAndFilters() {
+    // Custom Hospital & Review Filters Bindings
+    const customFilterSelectors = [
+        '#filter-doc-dermatologist', '#filter-doc-specialist', '#filter-doc-gp',
+        '#filter-exp-0-5', '#filter-exp-5-10', '#filter-exp-10plus',
+        '#filter-auth-registered', '#filter-auth-excellent',
+        '#r-filter-satisfaction', '#r-filter-cost', '#r-filter-contact_speed',
+        '#r-filter-waiting_speed', '#r-filter-language', '#r-filter-staff_kindness',
+        '#r-filter-doctor_explanation', '#r-filter-honesty', '#r-filter-location',
+        '#r-filter-facility', '#r-filter-aftercare', '#r-filter-parking'
+    ];
+    
+    customFilterSelectors.forEach(selector => {
+        const el = document.querySelector(selector);
+        if (el) {
+            el.addEventListener('change', () => {
+                applyFilters();
+            });
+        }
+    });
+
+    const toggleBtn = document.getElementById('reviewFilterToggle');
+    const toggleContent = document.getElementById('reviewFilterContent');
+    if (toggleBtn && toggleContent) {
+        toggleBtn.addEventListener('click', () => {
+            toggleBtn.classList.toggle('active');
+            toggleContent.classList.toggle('active');
+        });
+    }
+
     const searchInput = document.getElementById('directorySearchInput');
     if (searchInput) {
         searchInput.addEventListener('input', () => {

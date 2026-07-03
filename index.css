@@ -3607,3 +3607,183 @@ html[data-theme="dark"] .submenu-title {
         font-size: 11px;
     }
 }
+
+/* ==========================================
+   Custom Filter Panel Styles (Added for Hospital & Review Filters)
+   ========================================== */
+.filter-panel-wrapper {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-soft);
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section:last-child {
+    margin-bottom: 0;
+}
+
+.filter-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+@media(min-width: 768px) {
+    .filter-row {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+}
+
+.filter-row-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 120px;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Custom Checkbox/Button Style for Filters */
+.filter-btn-check {
+    display: none !important;
+}
+
+.filter-btn-label {
+    padding: 6px 14px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+}
+
+.filter-btn-label:hover {
+    border-color: var(--color-accent);
+    color: var(--text-primary);
+}
+
+.filter-btn-check:checked + .filter-btn-label {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+/* Review Filter Toggle & Grid */
+.review-filter-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 0 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 16px;
+    user-select: none;
+}
+
+.review-filter-toggle .arrow {
+    font-size: 12px;
+    transition: transform var(--transition-smooth);
+}
+
+.review-filter-toggle.active .arrow {
+    transform: rotate(180deg);
+}
+
+.review-filter-content {
+    display: none;
+    margin-top: 16px;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 16px;
+}
+
+.review-filter-content.active {
+    display: block;
+}
+
+.review-filter-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media(min-width: 576px) {
+    .review-filter-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(min-width: 992px) {
+    .review-filter-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.review-filter-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.review-filter-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.review-filter-select {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    cursor: pointer;
+    outline: none;
+}
+
+.review-filter-select:hover {
+    border-color: var(--color-accent);
+}

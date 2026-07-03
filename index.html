@@ -65,10 +65,10 @@
 
                 <h1 class="hero-headline">
                     <span data-i18n-html="hero.headline">Tired of Fake Reviews and K-Beauty <br></span>
-                    <span class="gradient-text" data-i18n="hero.headline_gradient">"Factory" Clinics?</span>
+                    <span class="gradient-text" data-i18n-html="hero.headline_gradient">"Factory" Clinics?</span>
                 </h1>
 
-                <p class="hero-subheadline" data-i18n="hero.subheadline">
+                <p class="hero-subheadline" data-i18n-html="hero.subheadline">
                     Access Seoul's top Board-Certified Dermatologists through 100% visit-verified, unedited patient
                     reviews. No sponsored ads. No hidden fees. Just honest medical expertise tailored to your specific
                     skin type.
@@ -384,9 +384,7 @@
         <section class="section-compare">
             <div class="container">
                 <div class="section-title-wrapper text-center">
-                    <span class="section-tag" data-i18n="compare.title">Boutique Standard vs. Factory Clinic</span>
-                    <h2 class="section-title"><span data-i18n="compare.title">Boutique Standard vs. Factory
-                            Clinic</span></h2>
+                    <h2 class="section-title"><span data-i18n="compare.title">Boutique Standard vs. Factory Clinic</span></h2>
                     <p class="section-subtitle" data-i18n="compare.subtitle">
                         Choose between cheap assembly-line laser settings or chief-physician customized design skin
                         procedures.
@@ -1230,11 +1228,180 @@
                 </div>
 
                 <div class="directory-layout">
+                    <div class="directory-main-col">
+                        <!-- Custom filter panel -->
+                        <div class="filter-panel-wrapper">
+                            <div class="filter-section">
+                                <div class="filter-section-title">
+                                    <span data-i18n="filter.main_title">🏥 병원 노출 필터 메인 카테고리</span>
+                                </div>
+                                <div class="filter-group-wrapper">
+                                    <!-- 의사 유형 -->
+                                    <div class="filter-row">
+                                        <div class="filter-row-label" data-i18n="filter.doc_qualification">의사 자격</div>
+                                        <div class="filter-group">
+                                            <input type="checkbox" id="filter-doc-dermatologist" class="filter-btn-check">
+                                            <label for="filter-doc-dermatologist" class="filter-btn-label" data-i18n="filter.doc_dermatologist">피부과 전문의</label>
 
-                    <div class="partner-list" id="dynamic-partner-list">
-                        <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;"
-                            data-i18n="directory.loading">
-                            🔄 Loading verified boutique clinics...
+                                            <input type="checkbox" id="filter-doc-specialist" class="filter-btn-check">
+                                            <label for="filter-doc-specialist" class="filter-btn-label" data-i18n="filter.doc_specialist">전문의</label>
+
+                                            <input type="checkbox" id="filter-doc-gp" class="filter-btn-check">
+                                            <label for="filter-doc-gp" class="filter-btn-label" data-i18n="filter.doc_gp">일반의</label>
+                                        </div>
+                                    </div>
+                                    <!-- 시술 경력 -->
+                                    <div class="filter-row">
+                                        <div class="filter-row-label" data-i18n="filter.experience">시술 경력</div>
+                                        <div class="filter-group">
+                                            <input type="checkbox" id="filter-exp-0-5" class="filter-btn-check">
+                                            <label for="filter-exp-0-5" class="filter-btn-label" data-i18n="filter.exp_05">0-5년</label>
+
+                                            <input type="checkbox" id="filter-exp-5-10" class="filter-btn-check">
+                                            <label for="filter-exp-5-10" class="filter-btn-label" data-i18n="filter.exp_510">5-10년</label>
+
+                                            <input type="checkbox" id="filter-exp-10plus" class="filter-btn-check">
+                                            <label for="filter-exp-10plus" class="filter-btn-label" data-i18n="filter.exp_10p">10년 이상</label>
+                                        </div>
+                                    </div>
+                                    <!-- 외국인 진료 -->
+                                    <div class="filter-row">
+                                        <div class="filter-row-label" data-i18n="filter.auth_benefits">인증 및 혜택</div>
+                                        <div class="filter-group">
+                                            <input type="checkbox" id="filter-auth-registered" class="filter-btn-check">
+                                            <label for="filter-auth-registered" class="filter-btn-label" data-i18n="filter.auth_registered">외국인 진료 인증기관</label>
+
+                                            <input type="checkbox" id="filter-auth-excellent" class="filter-btn-check">
+                                            <label for="filter-auth-excellent" class="filter-btn-label" data-i18n="filter.auth_excellent">외국인 진료 우수기관</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 리뷰 평점 세부 필터 (토글식) -->
+                            <div class="review-filter-toggle" id="reviewFilterToggle">
+                                <span data-i18n="filter.review_title">⭐ 리뷰 카테고리 필터 (별점 0-5점 사이)</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div class="review-filter-content" id="reviewFilterContent">
+                                <div class="review-filter-grid">
+                                    <!-- 1. 시술 만족도 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_satisfaction">시술 만족도</span>
+                                        <select id="r-filter-satisfaction" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 2. 가성비 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_cost">가성비</span>
+                                        <select id="r-filter-cost" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 3. 연락 신속성 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_contact_speed">연락 신속성</span>
+                                        <select id="r-filter-contact_speed" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 4. 방문 시 대기시간 신속성 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_waiting_speed">시술 대기 신속성</span>
+                                        <select id="r-filter-waiting_speed" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 5. 소통 편리성- 언어 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_language">소통 편리성(언어)</span>
+                                        <select id="r-filter-language" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 6. 직원의 친절 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_staff_kindness">직원의 친절</span>
+                                        <select id="r-filter-staff_kindness" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 7. 의사의 상세한 설명 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_doctor_explanation">의사의 상세설명</span>
+                                        <select id="r-filter-doctor_explanation" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 8. 정직한 진료 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_honesty">정직한 진료</span>
+                                        <select id="r-filter-honesty" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 9. 위치 편리함 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_location">위치 편리함</span>
+                                        <select id="r-filter-location" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 10. 시설 쾌적함 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_facility">시설 쾌적함</span>
+                                        <select id="r-filter-facility" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 11. 시술 후 애프터케어 만족도 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_aftercare">애프터케어 만족도</span>
+                                        <select id="r-filter-aftercare" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                    <!-- 12. 주차 편리성 -->
+                                    <div class="review-filter-item">
+                                        <span class="review-filter-name" data-i18n="filter.r_parking">주차 편리성</span>
+                                        <select id="r-filter-parking" class="review-filter-select">
+                                            <option value="0" data-i18n="filter.option_all">전체</option>
+                                            <option value="4.0">4.0+ ★</option>
+                                            <option value="4.5">4.5+ ★</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="partner-list" id="dynamic-partner-list">
+                            <div class="text-center" style="padding: 40px; color: var(--text-muted); width: 100%;"
+                                data-i18n="directory.loading">
+                                🔄 Loading verified boutique clinics...
+                            </div>
                         </div>
                     </div>
 
