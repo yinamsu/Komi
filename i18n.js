@@ -977,6 +977,216 @@ const translations = {
         "menu.hairloss": "탈모",
         "menu.obesityinjection": "비만주사",
         "menu.hairremoval": "제모"
+    },
+    ja: {
+        // ---- Header ----
+        "header.badge": "100%検証済みブティッククリニックのみ",
+
+        // ---- Hero Section ----
+        "hero.social_proof": "今月540名以上の外国人旅行者が",
+        "hero.social_proof_suffix": "先行アクセス権を獲得しました。",
+        "hero.headline": "サクラの口コミや韓国美容の <br>",
+        "hero.headline_gradient": "「工場型」クリニックにうんざり？",
+        "hero.subheadline": "100%来院認証済みの無修正の患者レビューを通じて、ソウルのトップ専門医にアクセスできます。広告料金不要、隠れた費用なし。あなたの肌タイプに合わせた誠実な医療知識を提供します。",
+
+        // ---- Quiz ----
+        "quiz.step_title": "ステップ 1: 肌の反応を確認する",
+        "quiz.title": "フィッツパトリック肌タイプ診断",
+        "quiz.q1": "Q1. 日焼けしていない状態の肌の色は？",
+        "quiz.q1_a1": "非常に白い / 透明感がある",
+        "quiz.q1_a2": "白い / 色白",
+        "quiz.q1_a3": "オリーブ / ゴールデンベージュ",
+        "quiz.q1_a4": "薄い茶色",
+        "quiz.q1_a5": "濃い茶色",
+        "quiz.q1_a6": "極めて濃い茶色 / 黒色",
+        "quiz.q2": "Q2. 日焼け止めなしで日光を浴びた時の反応は？",
+        "quiz.q2_a1": "常に赤くなり、水ぶくれや皮むけが生じる",
+        "quiz.q2_a2": "大体赤くなり、ひどく皮がむける",
+        "quiz.q2_a3": "適度に赤くなり、徐々に小麦色になる",
+        "quiz.q2_a4": "めったに赤くならず、簡単に小麦色になる",
+        "quiz.q2_a5": "極めて赤くなりにくく、濃い小麦色になる",
+        "quiz.q2_a6": "絶対に赤くならず、深く色素沈着する",
+        "quiz.q3": "Q3. 数日間にわたって日光を浴びた時の反応は？",
+        "quiz.q3_a1": "絶対に小麦色にならず、すぐに皮がむける",
+        "quiz.q3_a2": "わずかに小麦色になり、そばかすができやすい",
+        "quiz.q3_a3": "適度に小麦色になり、たまに赤くなる",
+        "quiz.q3_a4": "深く小麦色になり、めったに赤くならない",
+        "quiz.q3_a5": "極めて深く小麦色になり、絶対に赤くならない",
+        "quiz.email_label": "ステップ 2: 診断結果と安全ガイドの送信先は？",
+        "quiz.email_placeholder": "メールアドレスを入力してください",
+        "quiz.submit_btn": "安全ガイドとアクセスパスポートを受け取る",
+        "quiz.disclaimer": "🔒 スパム防止: 私たちはサクラのレビューやスパムを嫌います。100%機密保持。",
+        "quiz.progress": "ステップ {current} / 3",
+        "quiz.securing": "接続を保護中...",
+
+        // ---- Results ----
+        "results.step_title": "肌診断パスポート",
+        "results.type_title": "フィッツパトリックタイプ",
+        "results.verified": "認証済み分析",
+        "results.active": "有効",
+        "results.behavior_label": "日光への反応:",
+        "results.lasers_label": "推奨レーザープロトコル:",
+        "results.warning_title": "フィッツパトリック安全警告:",
+        "results.open_handbook": "📖 今すぐ安全ハンドブックを開く",
+        "results.retake": "🔄 肌診断をやり直す",
+        "results.safety_advisory": "🛡️ フィッツパトリック {type} 安全勧告:",
+
+        // ---- Reality Section ----
+        "reality.tag": "現実",
+        "reality.title": "工場型格安チケットが ",
+        "reality.title_serif": "肌のバリアを破壊する理由",
+        "reality.subtitle": "一般の大規模クリニックは、実際の医療安全や施術設定よりも、患者の回転率と販売マージンを優先しています。",
+        "reality.card1_title": "フィッツパトリック肌タイプの盲点",
+        "reality.card1_text": "ほとんどの工場型クリニックは、東アジア人の肌タイプ向けに固定されたレーザー設定を使用しています。カスタムパルス調整を行わない場合、Type I-IIやV-VI ofの患者は深刻な色素沈着(PIH)やレーザー火傷を負うことになります。",
+        "reality.card2_title": "「シャドードクター」の流れ作業",
+        "reality.card2_text": "販売コーディネーターとのカウンセリングで高額なパッケージを強引に勧められ、肝心の施術は一度も会ったことのない医師が肌のバリア分析もせずに2分間でレーザーを照射するだけです。",
+        "reality.card3_title": "広告費主導의 플랫폼 순위",
+        "reality.card3_text": "大手韓国美容予約アプリは、クリニックの広告費に応じてレビューをフィルタリングしています。クリニック側で都合の悪いレビューを簡単に削除したり、無料パックを配ってサクラレビューを書いてもらったりしています。",
+
+        // ---- Promise Section ----
+        "promise.tag": "私たちの約束",
+        "promise.title": "安全かつブティックな ",
+        "promise.title_serif": "検証基準",
+        "promise.subtitle": "私たちは医師主導의 엄격한 기준으로 클리닉을 정밀 검사합니다. 체인점 없음, 유령 의사 없음, 스폰서 순위 없음.",
+        "promise.card1_title": "工場型チェーンの排除",
+        "promise.card1_text": "1時間あたりの予約数を厳格に制限している独立型ブティッククリニックのみと提携し、医師があなたとしっかり向き合ってカウンセリングや治療を行う時間を確保します。",
+        "promise.card2_title": "100%来院検証済み＆修正なし",
+        "promise.card2_text": "すべてのレビューには公式の免税（Medical Tax Refund）レシート確認コードが必要です。クリニックからの「事実適示による名誉毀損」削除請求を法的に回避するため、データベースは海外サーバーで管理しています。",
+        "promise.card3_title": "フィッツパトリックスケール調整",
+        "promise.card3_text": "当提携クリニックは、様々なグローバル肌タイプに合わせて調整された検証済みのハードウェア（Nd:YAGレーザー、デュアル冷却ヘッド）と豊富な治療実績を保有しています。",
+
+        // ---- Directory Section ----
+        "directory.tag": "ブティック名簿",
+        "directory.title": "認証済み提携クリニック",
+        "directory.title_serif": " ＆ 検証エンジン",
+        "directory.subtitle": "認証されたクリニックを探索し、患者の匿名性を守りながらレビューの真正性を検証する仕組みをご覧ください。",
+        "directory.loading": "🔄 認証済みブティッククリニックを読み込み中...",
+        "directory.empty": "⚠️ 現在、利用可能な認証済みブティッククリニックはありません。",
+
+        // ---- Receipt Masker ----
+        "receipt.title": "レシート個人情報マスキング",
+        "receipt.desc": "レビューアップロード前に、機密性の高い決済ログをクライアント側でぼかします。クリニックが悪いレビューからあなたのパスポートやクレジットカード情報を特定することは不可能です。",
+        "receipt.header_txt": "外国人患者医療サービス付加価値税還付確認書",
+        "receipt.header_sub": "(환급용 확인서)",
+        "receipt.mask_btn": "🛡️ 免税レシートのマスキングをシミュレート",
+        "receipt.unmask_btn": "🔒 マスク解除",
+        "receipt.status_unmasked": "⚠️ マスクされていない平文データが存在します",
+        "receipt.status_masked": "🛡️  기밀 정보가 클라이언트 측에서 완벽히 보호되었습니다",
+        "receipt.btn_verify": "✓ 真正性確認コード生成",
+        "receipt.verify_code": "検証コード: KMC-987X-L21Q",
+        "receipt.hash": "ハッシュ署명: sha256.8f9a2c...",
+
+        // ---- Categories ----
+        "menu.all": "すべての施術",
+        "menu.skinbarrier": "肌バリア再建",
+        "menu.ndyag": "Nd:YAGレーザー",
+        "menu.picotoning": "ピコトーニング",
+        "menu.rejuran": "リジュラン",
+        "menu.laser": "レーザートーニング",
+        "menu.contour": "輪郭注射 / 骨切り",
+        "menu.fat": "脂肪移植 / 吸引",
+        "menu.botox": "ボトックス",
+        "menu.filler": "フィラー / ヒアルロン酸",
+        "menu.antiaging": "リフティング / アン치에이징",
+        "menu.acne": "ニキビ跡治療",
+        "menu.hairloss": "脱毛症治療",
+        "menu.weight": "肥満治療",
+
+        // ---- Badges ----
+        "badge.dermatologist": "皮膚科専門医",
+        "badge.plasticsurgeon": "整形外科専門医",
+        "badge.generalphysician": "一般医",
+        "badge.anesthesiologist": "마취과 전문의 상주",
+        "badge.no_anesthesiologist": "睡眠麻酔（医師直接管理）",
+        "badge.foreign_attraction": "外国人患者誘致医療機関",
+        "badge.foreigner_insurance": "外国人賠償責任保険加入",
+        "badge.aftercare_excellence": "アフターケア優秀",
+
+        // ---- Handbook Modal ----
+        "handbook.btn": "📖 医療観光安全ガイドブックを開く",
+        "handbook.modal_title": "韓国美容安全ハンドブック (2026)",
+        "handbook.toc": "目次",
+        "handbook.chapter": "第 {num} 章",
+        "handbook.ch1_title": "1. 工場型とブティッククリニックの比較",
+        "handbook.ch1_text1": "「工場型」チェーン店は、1時間あたり数十人の患者を詰め込み、安価な海外製レーザー機器を使用し、自動設定のまま照射を行います。一方、ブティック型クリニックは、医師が直接診断してパラメーターを手動調整するため、火傷や色素沈着のリスクが極めて低くなります。",
+        "handbook.ch1_text2": "特に外国人旅行者の場合、帰国後のトラブル対応が難しいため、価格よりも安全な治療実績を持つ独立系クリニックを選ぶことが不可欠です。",
+        "handbook.ch2_title": "2. 医師面談における5つの重要質問",
+        "handbook.ch2_text1": "カウンセリング時には、コーディネーターだけでなく、施術を行う医師に以下のチェックリストを直接確認する必要があります:",
+        "handbook.ch2_q1": "✓ 1. 私のフィッツパトリック肌タイプは何ですか？それに適した波長は？",
+        "handbook.ch2_q2": "✓ 2. レーザー機器のエネルギー設定を手動でキャリブレーションしてくれますか？",
+        "handbook.ch2_q3": "✓ 3. 今回の施術で使用するチップは正規ルートの純正品ですか？",
+        "handbook.ch2_q4": "✓ 4. トラブル時のアフターケアと緊急時の英語サポート体制は？",
+        "handbook.ch2_q5": "✓ 5. 本日使用する睡眠麻酔の管理は医師が直接行いますか？",
+        "handbook.ch3_title": "3. 偽造純正チップとEMRログ検証",
+        "handbook.ch3_text1": "一部の悪質なクリニックでは、非純正の再生チップを使用しているケースがあります。純正チップであることを証明する証明書と、自身の照射パラメーター（EMRログ）が電子カルテに記録されているかを確認することが安全の第一歩です。",
+        "handbook.ch4_title": "4. リベイトと名誉毀損防止ガイド",
+        "handbook.ch4_text1": "韓国の「事実適示による名誉毀損」などの法的制限を悪用し、クリニックがネガティブな真実のレビューをブロックするケースがあります。レシート情報のマスキングなどのプライバシー保護対策を行い、法律に配慮した検証プラットフォームを利用しましょう。",
+        "handbook.close": "閉じる",
+        "handbook.copy_btn": "📋 5つの質問リストをコピーする",
+        "handbook.copied": "コピー完了！",
+
+        // ---- Review Slider ----
+        "reviews.tag": "患者の声",
+        "reviews.title": "100%来院認証レビュー ",
+        "reviews.title_serif": "医師実名連動",
+        "reviews.subtitle": "すべてのレビューは、免税還付レシート検証コードを通じて、施術を行った医師と完全に連動しています。クリニック側による削除は不可能です。",
+        "reviews.stat_total": "総レビュー数",
+        "reviews.stat_avg": "平均評価",
+        "reviews.stat_verified": "レシート検証率",
+        "reviews.r1_name": "Jessica S.",
+        "reviews.r2_name": "Amara M.",
+        "reviews.helpful": "役に立った",
+        "reviews.r1_clinic": "クリニック: 明洞フォレスト",
+        "reviews.r1_doctor": "キム・민지 원장",
+        "reviews.r2_clinic": "クリニック: 清潭バリアラボ",
+        "reviews.r2_doctor": "이-지연 원장",
+
+        // ---- Detailed Metrics ----
+        "metric.friendliness": "親切度",
+        "metric.consultation": "医師相談の専門性",
+        "metric.language": "外国語対応",
+        "metric.no_overtreatment": "過剰診療なし",
+        "metric.pricing": "価格の透明性",
+        "metric.accessibility": "アクセス",
+        "metric.waiting": "待ち時間",
+        "metric.cleanliness": "施設の清潔さ",
+        "metric.pain": "痛み管理",
+        "metric.aftercare": "アフターケア満足度",
+
+        // ---- Review Writer Simulator ----
+        "rev_sim.btn": "✍_ 領収書・パスポート認証レビュー投稿 (シミュレータ)",
+        "rev_sim.modal_title": "来院認証レビュー投稿シミュレータ",
+        "rev_sim.modal_subtitle": "施術医師実名制および100%レシート/パスポート認証に基づく透明な口コミシステム",
+        "rev_sim.step1": "1. 書類認証",
+        "rev_sim.step2": "2. 13の指標評価",
+        "rev_sim.step3": "3. アフターケア ＆ リベイト申告",
+        "rev_sim.passport_label": "パスポートの登録 (本人確認用)",
+        "rev_sim.passport_desc": "重複投稿防止および外国人国籍確認用にのみ収集され、プラットフォームに暗号化なしで保存されることはありません。",
+        "rev_sim.passport_placeholder": "PASSPORT.PDF または画像を選択してください",
+        "rev_sim.receipt_label": "免税レシートの登録 (来院認証用)",
+        "rev_sim.receipt_desc": "韓国の税関で発行された公式の還付レシートをアップロードしてください。真正性コードが自動抽出されます。",
+        "rev_sim.receipt_placeholder": "REFUND_RECEIPT.JPG を選択してください",
+        "rev_sim.good_desc": "施術の良かった点を具体的に書いてください",
+        "rev_sim.good_placeholder": "（例：院長先生がレーザー設定を細かく調整してくれました）",
+        "rev_sim.bad_desc": "改善が必要な点や不満だった点を書いてください",
+        "rev_sim.bad_placeholder": "（例：カウンセリングまでの待ち時間が少し長かったです）",
+        "rev_sim.cat_booking": "1. 予約の便利さ:",
+        "rev_sim.cat_visit": "2. 来院 ＆ 待ち時間:",
+        "rev_sim.cat_procedure": "3. 施術プロセス:",
+        "rev_sim.cat_post_care": "4. アフターケアサポート:",
+        "rev_sim.cat_side_effect": "5. 副作用 ＆ 痛み管理:",
+        "rev_sim.cat_revisit": "6. 再来院の意思:",
+        "rev_sim.cat_good": "7. ハイライト",
+        "rev_sim.cat_bad": "8. 改善が必要な点",
+        "rev_sim.cat_parking": "9. 駐車および立地便:",
+        "rev_sim.cat_kindness": "10. スタッフの親切度:",
+        "rev_sim.cat_language_barrier": "11. 外国語サポートの利便性:",
+        "rev_sim.cat_recommend": "12. 他者への推薦意向:",
+        "rev_sim.cat_onemonth": "13. 1ヶ月後経過観察:",
+        "rev_sim.submit_btn": "✓ 認証レビューを安全に送信する",
+
+        // ---- Footer ----
+        "footer.copyright": "© 2026 Komicare. All rights reserved. 医療法第56条を遵守し、患者の正当な表現の自由を保護します。"
     }
 };
 
@@ -1059,9 +1269,49 @@ const fitzpatrickProfiles_ko = {
     }
 };
 
+const fitzpatrickProfiles_ja = {
+    1: {
+        name: "フィッツパトリック Type I (非常に白い / 敏感肌)",
+        behavior: "常に赤くなり、決して小麦色にならない。そばかすが多い。",
+        lasers: "マイルドなカスタムエネルギー設定のみ可能。標準的なフラクショナルレーザーは火傷リスク極めて高いため非推奨。",
+        warning: "深刻な火傷＆赤みリスク。工場型チェーンの標準設定は東アジア人（Type III-IV）向けに調整されています。これをType Iの肌に照射すると、肌バリアが損傷し、慢性的な赤みや水ぶくれ、傷跡を誘発します。必ず低出力かつ長い照射時間を要求してください。"
+    },
+    2: {
+        name: "フィッツパトリック Type II (白い肌 / 明るい髪)",
+        behavior: "簡単に赤くなり、ほとんど小麦色にならない。非常に敏感。",
+        lasers: "カスタム照射時間が必要。低設定で専門の血管/色素レーザーを使用すれば安全。",
+        warning: "高い火傷＆バリア損傷リスク。一般的な「ソウル工場型」のプリセット設定は、Type IIの肌に深刻な赤みや微細な傷跡を引き起こす可能性が高いです。手動でのエネルギー出力調整が必要で、医師による直接の診察が必須です。"
+    },
+    3: {
+        name: "フィッツパトリック Type III (ベージュ / 標準的な肌トーン)",
+        behavior: "適度に赤くなり、徐々に薄い茶色に日焼けする。",
+        lasers: "色素リバウンドの綿密な調整が必要。炎症後色素沈着（PIH）のリスク中程度。",
+        warning: "色素リバウンドのリスク。Type IIIの肌は比較的耐性がありますが、15分サイクルの工場型クリニックは設定を急ぎます。これは色素沈着（PIH）を誘発しやすいため、純正チップの使用と電子カルテでの施術ログの追跡を確認してください。"
+    },
+    4: {
+        name: "フィッツパトリック Type IV (薄い茶色 / オリーブ肌)",
+        behavior: "赤くなりにくく、簡単に小麦色になる。",
+        lasers: "色素反応リスク中程度。Nd:YAGレーザーまたは出力を抑えたフラクショナル機器が必要。",
+        warning: "炎症後色素沈着（PIH）のリスク。明るい肌用の標準設定をType IVに適用すると、過剰なメラニン反応を引き起こし、数ヶ月消えない暗い斑点を残すことがあります。医師が日焼け状態を確認し、適切な冷却パラメーターを設定する必要があります。"
+    },
+    5: {
+        name: "フィッツパトリック Type V (濃い茶色)",
+        behavior: "ほぼ赤くならず、簡単に濃い日焼け肌になる。",
+        lasers: "脱毛/トーニングにはNd:YAGレーザーのみ使用可能。標準IPLやアレキサンドライトレーザーは厳密に禁忌。",
+        warning: "深刻な色素沈着＆火傷リスク。Type Vの肌はメラニン活性が非常に高いです。標準のアレキサンドライトやIPLを使用する工場型クリニックでは、レーザーが周囲の皮膚を識別できずに表皮を火傷させます。安全な施術にはNd:YAGレーザーが不可欠です。"
+    },
+    6: {
+        name: "フィッツパトリック Type VI (極めて濃い茶色 / 黒色)",
+        behavior: "絶対に赤くならず、深く色素沈着する。",
+        lasers: "長いパルス幅 of Nd:YAGレーザーのみ使用可能。冷却機能を最大設定にする必要あり。",
+        warning: "重大なメラニン反応の警告。工場型クリニックはType VIの肌に非常に危険です。標準的な設定では、永久的な脱色素斑（白斑）や深刻な化学火傷を引き起こします。特定のNd:YAGハードウェアと治療実績を持つクリニックを選んでください。"
+    }
+};
+
 // Extracted globally for data tracking
 window.fitzpatrickProfiles_en = fitzpatrickProfiles_en;
 window.fitzpatrickProfiles_ko = fitzpatrickProfiles_ko;
+window.fitzpatrickProfiles_ja = fitzpatrickProfiles_ja;
 
 function t(key) {
     const dict = translations[currentLang] || translations['en'];
