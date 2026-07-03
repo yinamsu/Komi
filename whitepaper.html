@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOMICARE | System Whitepaper & Architecture Specifications</title>
+    <title>KOMICARE | Partner Doctor Whitepaper & System Architecture</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml"
@@ -35,12 +35,12 @@
             font-family: 'Outfit', 'Noto Sans KR', sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
         .paper-header {
             border-bottom: 1px solid var(--border-glass);
-            padding: 24px;
+            padding: 20px 24px;
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
@@ -54,6 +54,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
 
         .logo-group {
@@ -76,13 +77,45 @@
             letter-spacing: 1px;
         }
 
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Premium Language Switcher */
+        .lang-toggle-container {
+            display: flex;
+            background: rgba(10, 24, 20, 0.6);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 3px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
         .back-btn {
             border: 1px solid var(--border-glass);
             padding: 8px 18px;
             border-radius: 20px;
             color: var(--secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.25s ease;
             font-weight: 500;
         }
@@ -108,11 +141,10 @@
                 gap: 40px;
             }
             .sidebar-sticky {
-                display: none; /* Hide sidebar on mobile for simplicity */
+                display: none;
             }
         }
 
-        /* Sidebar Navigation */
         .sidebar-sticky {
             position: sticky;
             top: 120px;
@@ -148,7 +180,6 @@
             font-weight: 600;
         }
 
-        /* Content Sections */
         .doc-content {
             display: flex;
             flex-direction: column;
@@ -188,7 +219,6 @@
             margin-bottom: 20px;
         }
 
-        /* Sitemap list styling */
         .sitemap-tree {
             margin: 20px 0;
             padding-left: 20px;
@@ -208,12 +238,12 @@
 
         .sitemap-desc {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-left: 20px;
             display: block;
+            opacity: 0.8;
         }
 
-        /* Code block styles */
         code {
             font-family: 'Fira Code', monospace;
             background: rgba(82, 183, 136, 0.08);
@@ -238,7 +268,6 @@
             font-size: 0.85rem;
         }
 
-        /* Table design */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -266,7 +295,6 @@
             font-size: 0.95rem;
         }
 
-        /* Highlight alert boxes */
         .alert-box {
             background: rgba(197, 168, 128, 0.04);
             border-left: 4px solid var(--secondary);
@@ -285,9 +313,26 @@
             margin: 0;
             font-size: 0.95rem;
         }
+
+        /* Dynamic Translation blocks toggle style */
+        .trans-block {
+            display: none;
+        }
+
+        body[data-lang="en"] .trans-block.lang-en {
+            display: block;
+        }
+
+        body[data-lang="ko"] .trans-block.lang-ko {
+            display: block;
+        }
+
+        body[data-lang="ja"] .trans-block.lang-ja {
+            display: block;
+        }
     </style>
 </head>
-<body>
+<body data-lang="ko"> <!-- Default Lang Korean -->
 
     <header class="portal-header">
         <div class="header-inner">
@@ -299,7 +344,16 @@
                 </svg>
                 <h2>KOMICARE</h2>
             </a>
-            <a href="index.html" class="back-btn">← Back to Directory</a>
+            
+            <div class="header-controls">
+                <!-- Premium Language Toggles -->
+                <div class="lang-toggle-container">
+                    <button class="lang-btn" data-lang-val="en" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn active" data-lang-val="ko" onclick="setLanguage('ko')">KO</button>
+                    <button class="lang-btn" data-lang-val="ja" onclick="setLanguage('ja')">JA</button>
+                </div>
+                <a href="index.html" class="back-btn">← Back to Directory</a>
+            </div>
         </div>
     </header>
 
@@ -307,269 +361,488 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar-sticky">
             <ul class="doc-menu">
-                <li class="active"><a href="#executive">1. Executive Summary</a></li>
-                <li><a href="#sitemap">2. Portal Sitemap</a></li>
-                <li><a href="#features">3. Core Features Spec</a></li>
-                <li><a href="#architecture">4. System Architecture</a></li>
-                <li><a href="#database">5. Database Schema</a></li>
-                <li><a href="#future">6. Future Roadmap</a></li>
+                <li class="active" data-sec="executive"><a href="#executive">1. Executive Summary</a></li>
+                <li data-sec="sitemap"><a href="#sitemap">2. Portal Sitemap</a></li>
+                <li data-sec="features"><a href="#features">3. Core Features Spec</a></li>
+                <li data-sec="architecture"><a href="#architecture">4. System Architecture</a></li>
+                <li data-sec="database"><a href="#database">5. Database Schema</a></li>
+                <li data-sec="future"><a href="#future">6. Partnership Roadmap</a></li>
             </ul>
         </aside>
 
         <!-- Main Documentation Content -->
         <main class="doc-content">
             
-            <!-- 1. Executive Summary -->
+            <!-- ==================== SECTION 1: EXECUTIVE SUMMARY ==================== -->
             <section class="doc-section" id="executive">
-                <h1>KOMICARE System Whitepaper</h1>
-                <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
-                    "Empowering medical travelers with unedited verified data, personalized Fitzpatrick matching, and privacy protection."
-                </p>
-                
-                <p>
-                    KOMICARE is a next-generation K-Beauty skin matching and safety verification landing platform. The platform address a critical pain point in the foreign medical tourism market: the prevalence of sponsored fake reviews, factory-style clinics performing hurried procedures, and the fear of legal retribution due to restrictive local defamation laws.
-                </p>
-                <p>
-                    By introducing decentralized/offshore hosting strategies, client-side data privacy masking, clinical qualification filtering, and customized skin passports based on Fitzpatrick skin type diagnostics, KOMICARE matches international patients with premium boutique clinics prioritizing safety and board-certified expertise.
-                </p>
-
-                <div class="alert-box">
-                    <h4>Core Value Proposition</h4>
+                <!-- ENGLISH -->
+                <div class="trans-block lang-en">
+                    <h1>Partner Doctor Whitepaper</h1>
+                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                        "Reclaiming the value of medical expertise: Escape price-competition and securely connect with premium global patients."
+                    </p>
                     <p>
-                        KOMICARE acts as an independent trust layer between global medical consumers and Korean aesthetic clinics. We calibrate skin safety parameters before booking and guarantee raw, unedited patient reviews hosting data outside censorship-prone local jurisdictions.
+                        KOMICARE is a skin matching and safety verification landing platform designed in collaboration with board-certified physicians. In the current global K-Beauty market, outstanding clinical experts are frequently overshadowed by aggressive marketing tactics, broker agency commissions, and "factory-style" clinics that burn through hundreds of patients an hour with generic laser calibrations.
+                    </p>
+                    <p>
+                        Our mission is to establish a transparent ecosystem that protects the integrity of medical practices. By offering secure offshore hosting, patient privacy protection masking, and targeted Fitzpatrick skin passports, we allow boutique clinics to command premium values based on safety and individualized skin calibrations.
+                    </p>
+                    <div class="alert-box">
+                        <h4>Why Partner with KOMICARE?</h4>
+                        <p>
+                            We reject brokering models that demand high sales commissions. Instead, we match high-Fitzpatrick type global VIPs who actively seek safe, customized medical care and are willing to pay standard premium fees for board-certified expertise.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- KOREAN -->
+                <div class="trans-block lang-ko">
+                    <h1>협력 의료진을 위한 시스템 백서</h1>
+                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                        "의료 전문성의 가치 회복: 저가 출혈 경쟁에서 벗어나 프리미엄 외국인 환자를 안전하게 매칭합니다."
+                    </p>
+                    <p>
+                        코미케어(KOMICARE)는 올바른 신념을 가진 피부과 전문의 및 파트너 의료진과 공동으로 설계된 프리미엄 피부 매칭 및 안전 검증 시스템입니다. 현재의 외국인 K-Beauty 시장은 브로커 에이전시의 과도한 수수료, 무차별적인 마케팅, 그리고 공장형 일괄 시술로 인한 의료 품질 저하와 부작용 리스크가 극에 달해 있습니다.
+                    </p>
+                    <p>
+                        우리는 의료진의 전문적 진료 가치를 보호하는 생태계를 구축하고자 합니다. 안전한 해외 관할권 데이터 운영 정책, 환자 개인정보 마스킹, 그리고 Fitzpatrick 피부 진단 패스포트 시스템을 도입하여 의료진이 오직 환자 개인별 정밀 안전 시술에만 집중하고 그에 걸맞은 합당한 비급여 가치를 인정받을 수 있도록 돕습니다.
+                    </p>
+                    <div class="alert-box">
+                        <h4>의료진 파트너십의 가치</h4>
+                        <p>
+                            단순 티켓 판매 유도나 수수료 갈취형 앱과 달리, 코미케어는 안전을 최우선으로 생각하고 합당한 비용을 지불할 준비가 된 고부가가치 외국인 VIP 환자를 매칭합니다. 또한, Fitzpatrick 스킨 패스포트를 미리 발급함으로써 진료실에서의 부작용 소송 리스크를 사전 차단합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- JAPANESE -->
+                <div class="trans-block lang-ja">
+                    <h1>提携医師向けシステム白書</h1>
+                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                        "医療専門性の価値の回復：低価格競争から脱却し、プレミアムな外国人患者と安全にマッチングします。"
+                    </p>
+                    <p>
+                        KOMICAREは、正しい医療倫理を持つ皮膚科専門医および提携医師と共同で設計された、プレミアムスキンマッチングおよび安全検証システムです。現在のインバウンドK-Beauty市場は、ブローカーによる過度な手数料、誇大広告、そして「工場型」の一括施術による医療の質低下や副作用リスクが深刻な問題となっています。
+                    </p>
+                    <p>
+                        私たちは、医師の専門的な治療価値を保護するエコシステムを構築することを目指しています。安全な海外管轄サーバーでのデータ運営、患者のプライバシーマスキング、そしてFitzpatrick皮膚診断パスポートを導入し、医師が患者一人ひとりの精密な施術に集中し、その専門性に見合った正当な対価を受け取れるよう支援します。
+                    </p>
+                    <div class="alert-box">
+                        <h4>医師パートナーシップの価値</h4>
+                        <p>
+                            単純な割引チケット販売アプリとは異なり、KOMICAREは安全性を最優先し、正当な対価を支払う意志のあるインバウンドVIP患者をマッチングします。また、Fitzpatrickスキンパスポートを事前に発行することで、レーザー照射等による肌トラブルトラブルや訴訟リスクを未然に防ぎます。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECTION 2: PORTAL SITEMAP ==================== -->
+            <section class="doc-section" id="sitemap">
+                <!-- ENGLISH -->
+                <div class="trans-block lang-en">
+                    <h1>2. Portal Sitemap & Routing</h1>
+                    <p>
+                        KOMICARE operates on Vercel Edge networks with static asset caching and dynamic serverless endpoints. Here is the operational routing layout.
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong><code>/</code> (Landing Directory - <code>index.html</code>)</strong>
+                            <span class="sitemap-desc">Public portal featuring skin passports, privacy masking demo, verified clinic list, and interactive safety handbook.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/clinic</code> (Owner Registration - <code>clinic.html</code>)</strong>
+                            <span class="sitemap-desc">Portal for partner doctors to input their credentials, qualification type, clinical experience years, and preview their live card before publishing.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/whitepaper</code> (Whitepaper Reference - <code>whitepaper.html</code>)</strong>
+                            <span class="sitemap-desc">Current document detailing systems metrics, data flows, and partner schemas.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOREAN -->
+                <div class="trans-block lang-ko">
+                    <h1>2. 포탈 사이트맵 및 라우팅 구조</h1>
+                    <p>
+                        코미케어 시스템은 Vercel Edge 네트워크 기반의 초고속 정적 리소스 로딩과 Supabase 데이터 연동을 위한 서버리스 백엔드로 구성됩니다. 전체 사이트맵 및 라우팅 구성은 다음과 같습니다.
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong><code>/</code> (메인 페이지 - <code>index.html</code>)</strong>
+                            <span class="sitemap-desc">글로벌 환자가 최초 접속하는 화면. 피부 패스포트 자가 진단 퀴즈, 세금 환급 마스킹 데모, 안전 핸드북 모달 및 다국어 필터 병원 디렉토리가 위치합니다.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/clinic</code> (의료진 등록 페이지 - <code>clinic.html</code>)</strong>
+                            <span class="sitemap-desc">초대 코드(<code>KOMIPARTNER2026</code>)를 보유한 협력 병원 원장이 병원 정보, 전문의 자격증 여부, 시술 경력, 실시간 카드 미리보기 등을 처리하고 등록하는 비공개 어드민입니다.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/whitepaper</code> (시스템 백서 - <code>whitepaper.html</code>)</strong>
+                            <span class="sitemap-desc">파트너 의료진과 개발진을 위한 아키텍처 사양, 데이터 매핑 기준 및 로드맵을 수록한 기술 문서 섹션입니다.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JAPANESE -->
+                <div class="trans-block lang-ja">
+                    <h1>2. ポータルサイトマップとルーティング構造</h1>
+                    <p>
+                        KOMICAREは、Vercel Edgeネットワークによる超高速静的リソースの配信と、Supabaseによる動的なデータ管理で構成されています。全体のサイトマップおよびルーティング構造は以下の通りです。
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong><code>/</code> (メインページ - <code>index.html</code>)</strong>
+                            <span class="sitemap-desc">グローバル患者が最初にアクセスする画面。スキンパスポート自己診断クイズ、タックスリファンドマスキングデモ、安全ハンドブック、多言語対応の病院一覧を掲載しています。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/clinic</code> (医療陣登録ページ - <code>clinic.html</code>)</strong>
+                            <span class="sitemap-desc">招待コード(<code>KOMIPARTNER2026</code>)を持つ提携クリニックの院長が、経歴や専門医資格を登録し、カードの仕上がりをリアルタイムで確認できる非公開管理画面です。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/whitepaper</code> (システム白書 - <code>whitepaper.html</code>)</strong>
+                            <span class="sitemap-desc">提携医師および開発者向けのシステム仕様、データマッピング基準、ロードマップを掲載した技術文書セクションです。</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECTION 3: CORE FEATURES SPEC ==================== -->
+            <section class="doc-section" id="features">
+                <!-- ENGLISH -->
+                <div class="trans-block lang-en">
+                    <h1>3. Core Features Spec for Doctors</h1>
+                    
+                    <h2>1) Fitzpatrick Skin Passport & Energy Calibrations</h2>
+                    <p>
+                        Many international patients have skin of color (Fitzpatrick Types IV-VI) but local generic clinics apply high settings designed for light skin types, resulting in severe burns. KOMICARE's diagnostic quiz outputs a <strong>Skin Passport</strong> telling the patient to request custom low-pulse energy calibrations, shifting liability away from you by encouraging cooperative clinical consultations.
+                    </p>
+
+                    <h2>2) Receipt Privacy Tax Masker</h2>
+                    <p>
+                        Boutique clinics fear review platforms because competitors or aggressive patients leave fake reviews or extort refunds. To safeguard our partner network, KOMICARE's review validation is encrypted. The client-side masking system blurs tax refund barcodes, minute timestamps, and receipt serials, preventing clinics from identifying the reviewer while guaranteeing the authenticity of the checkout review.
+                    </p>
+
+                    <h2>3) Dynamic Star Rating Filters</h2>
+                    <p>
+                        We map reviews across 12 medical-centric categories. For example, instead of a simple 5-star rating, doctors are evaluated on <code>Honest Treatment</code> (no sales push/overtreatment) and <code>Doctor Explanation</code>. This highlights the premium nature of boutique clinics compared to assembly-line competitors.
+                    </p>
+                </div>
+
+                <!-- KOREAN -->
+                <div class="trans-block lang-ko">
+                    <h1>3. 의료진 관점의 핵심 기능 사양</h1>
+                    
+                    <h2>1) Fitzpatrick 피부진단 패스포트 & 시술 파라미터 유도</h2>
+                    <p>
+                        외국인 환자는 Fitzpatrick 피부 유형(피부톤이 어두운 IV-VI형 등)이 다양함에도 불구하고, 일부 공장형 의원에서는 동양인 기준의 강한 에너지를 일괄 조사하여 색소 침착(PIH)이나 화상 사고를 초래합니다. 코미케어의 진단 퀴즈는 원장님께 전달할 **스킨 패스포트**를 발급해 환자가 시술 전 의료진과 적절한 펄스폭 조정을 사전에 상담하도록 유도하여 부작용 합의금 분쟁을 예방합니다.
+                    </p>
+
+                    <h2>2) 영수증 개인정보 마스킹 블러 엔진</h2>
+                    <p>
+                        악성 블랙컨슈머가 영수증 시각, 승인번호 등을 무기로 병원을 협박하거나 경쟁 의원에서 평판 깎아내리기를 유도하는 것을 방지하기 위해, 코미케어는 결제 영수증의 유니크한 환급 바코드와 시각 단위를 웹 브라우저 단에서 마스킹(블러 처리)하여 업로드하도록 안내합니다. 환자의 병원 내 특정은 원천 방지하면서 실제 내원 이력은 철저하게 검증합니다.
+                    </p>
+
+                    <h2>3) 12개 메디컬 중심 리뷰 세부 카테고리</h2>
+                    <p>
+                        코미케어의 평점 필터는 단순 별점이 아닙니다. `의사의 상세한 설명`, `정직한 진료 (과잉진료 유도 안함)`, `시술 후 애프터케어 만족도` 등 **실제 의학적 전문성과 의료 윤리를 점수화**합니다. 상담 실장의 실적 강요나 공장식 회전율이 아닌, 원장님의 정직한 진료 철학이 필터 점수를 통해 환자에게 직접 도드라지게 설계되어 있습니다.
+                    </p>
+                </div>
+
+                <!-- JAPANESE -->
+                <div class="trans-block lang-ja">
+                    <h1>3. 医師の観点から見た核心機能仕様</h1>
+                    
+                    <h2>1) Fitzpatrick皮膚診断パスポート＆施術パラメータ調整の誘導</h2>
+                    <p>
+                        海外患者はFitzpatrick皮膚タイプ（肌トーンが暗いIV-VI型など）が多様であるにもかかわらず、一部の工場型クリニックでは均一な強いエネルギーで照射し、色素沈着（PIH）や火傷を引き起こすケースがあります。KOMICAREの自己診断は**スキンパスポート**を発行し、患者が施術前に医師とパルス幅や出力の調整について事前に相談するよう促し、副作用トラブルを未然に防ぎます。
+                    </p>
+
+                    <h2>2) 領収書個人情報マスキングエンジン</h2>
+                    <p>
+                        悪質なレビューや競合他院による誹謗中傷からクリニックを守るため、KOMICAREは決済領収書のユニークなタックスリファンドバーコードや時間情報をブラウザ上で自動的にマスキング（ぼかし処理）してアップロードさせます。これにより、患者の個人特定を防ぎつつ、実際の来院履歴のみを厳格に検証します。
+                    </p>
+
+                    <h2>3) 12のメディカル重視レビューカテゴリ</h2>
+                    <p>
+                        KOMICAREの評価システムは単なる星評価ではありません。「医師の丁寧な説明」「正直な診療（過剰診療なし）」「アフターケア満足度」など、**実際の医学的専門性と医療倫理を数値化**します。カウンセラーによるアップセルや流れ作業のカウンセリングではなく、院長の誠実な診療姿勢が際立つ設計になっています。
                     </p>
                 </div>
             </section>
 
-            <!-- 2. Portal Sitemap -->
-            <section class="doc-section" id="sitemap">
-                <h1>2. Portal Sitemap & Routing</h1>
-                <p>
-                    The project utilizes static resource delivery via Vercel Edge networks with serverless endpoints for dynamic reads and writes. Below is the active sitemap tree and routing configuration.
-                </p>
-
-                <div class="sitemap-tree">
-                    <div class="sitemap-node">
-                        <strong><code>/</code> (Landing Page - <code>index.html</code>)</strong>
-                        <span class="sitemap-desc">Main portal containing the Fitzpatrick Skin Passport Diagnostic Quiz, Safety Masking Simulation, safety handbook reader, and clinic matching directory list.</span>
-                    </div>
-                    <div class="sitemap-node">
-                        <strong><code>/clinic</code> (Clinic Owner Portal - <code>clinic.html</code>)</strong>
-                        <span class="sitemap-desc">Restricted portal for verified clinic directors to authenticate using passcode <code>KOMIPARTNER2026</code>, fill clinic details, view a live-updating preview card, and publish listings.</span>
-                    </div>
-                    <div class="sitemap-node">
-                        <strong><code>/whitepaper</code> (Whitepaper Specification - <code>whitepaper.html</code>)</strong>
-                        <span class="sitemap-desc">This documentation section outlining technical specifications, table layouts, and algorithm mechanics.</span>
-                    </div>
-                    <div class="sitemap-node">
-                        <strong><code>/api/clinics</code> (Serverless Read Handler - <code>api/clinics.js</code>)</strong>
-                        <span class="sitemap-desc">GET endpoint that queries verified clinics from Supabase and applies the 500-listing dynamic expansion generator.</span>
-                    </div>
-                    <div class="sitemap-node">
-                        <strong><code>/api/submit-clinic</code> (Serverless Write Handler - <code>api/submit-clinic.js</code>)</strong>
-                        <span class="sitemap-desc">POST endpoint that receives newly submitted clinic metadata and inserts it securely to the database with column-missing fallback retries.</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 3. Core Features Spec -->
-            <section class="doc-section" id="features">
-                <h1>3. Core Features Specifications</h1>
-                
-                <h2>Fitzpatrick Diagnostic Skin Passport</h2>
-                <p>
-                    Calculates a patient's Fitzpatrick Skin Type (Type I to Type VI) via an interactive questionnaire checking:
-                </p>
-                <ul>
-                    <li>Skin color reactions to sun exposure (burning vs tanning).</li>
-                    <li>Genetic skin tone characteristics.</li>
-                </ul>
-                <p>
-                    Produces a downloadable <strong>Skin Passport card</strong> detailing specific laser energy calibration instructions. This card is given to doctors to prevent over-treatment burns common on reactive skin barriers.
-                </p>
-
-                <h2>Receipt Privacy Tax Masker</h2>
-                <p>
-                    To protect patients who leave negative reviews from being tracked down by clinics using purchase timestamps, KOMICARE features an interactive client-side blur engine. When a patient uploads their tax refund receipt, it automatically hides:
-                </p>
-                <ul>
-                    <li>Unique transaction refund serial numbers.</li>
-                    <li>Exact minute/second timestamps.</li>
-                    <li>Staff codes and cash register IDs.</li>
-                </ul>
-
-                <h2>Real-time Multilingual Filters</h2>
-                <p>
-                    Offers precise hospital mapping using a 14-toggle filter panel translating dynamically between <strong>English, Korean, and Japanese</strong>. The filters query:
-                </p>
-                <ul>
-                    <li>Doctor qualifications (Dermatologist, Specialist, General Practitioner).</li>
-                    <li>Clinical experience (0-5, 5-10, 10+ Years).</li>
-                    <li>12 Detailed Review Category Star ratings (Satisfaction, Cost value, Response speed, Wait time, Language access, Friendliness, Honest treatment, Location, Facility comfort, Aftercare, and Parking).</li>
-                </ul>
-
-                <h2>500-Clinics Programmatic Scaler</h2>
-                <p>
-                    To ensure robust filter coverage and stress-test listing rendering without database bloat, KOMICARE uses a pseudo-random generator (PRNG) that expands base listings to <strong>500 unique clinics</strong> on the fly. Experience years, scores, and safety certificates are deterministic and stable per clinic ID.
-                </p>
-            </section>
-
-            <!-- 4. System Architecture -->
+            <!-- ==================== SECTION 4: SYSTEM ARCHITECTURE ==================== -->
             <section class="doc-section" id="architecture">
-                <h1>4. System Architecture</h1>
-                <p>
-                    KOMICARE is built as a highly performant, serverless Jamstack application.
-                </p>
-                
-                <pre><code>[Client Browser] 
+                <!-- ENGLISH -->
+                <div class="trans-block lang-en">
+                    <h1>4. System Architecture & High Performance</h1>
+                    <p>
+                        KOMICARE is built as a highly performant Jamstack application leveraging Vercel Edge Cache networks.
+                    </p>
+                    <pre><code>[Client Browser] 
     │
     ├── (Reads Static HTML/CSS/JS) ──> Vercel Edge CDN
     │
     ├── (GET /api/clinics) ──────────> Vercel Serverless Function ──> Supabase DB
     │
     └── (POST /api/submit-clinic) ───> Vercel Serverless Function ──> Supabase DB</code></pre>
+                    <p>
+                        <strong>Serverless API Layer</strong>: Implemented in Node.js, routing database transactions securely to prevent direct client access to administrative tables.
+                    </p>
+                </div>
 
-                <h2>Frontend Implementation</h2>
-                <ul>
-                    <li><strong>Layout & Logic</strong>: Vanilla HTML5 and ES6 Javascript. Avoids bulky JS frameworks to maintain sub-second First Contentful Paint (FCP) on international mobile connections.</li>
-                    <li><strong>Design Tokens</strong>: Managed in [index.css](file:///e:/Komi/index.css) using HSL custom variables. Premium dark mode aesthetic with micro-animations.</li>
-                    <li><strong>Internationalization</strong>: Translation dictionary engine in [i18n.js](file:///e:/Komi/i18n.js) which scans `data-i18n` and `data-i18n-html` elements for instant, layout-shift-free translations.</li>
-                </ul>
+                <!-- KOREAN -->
+                <div class="trans-block lang-ko">
+                    <h1>4. 시스템 아키텍처 및 보안</h1>
+                    <p>
+                        코미케어는 글로벌 환자들의 접속 환경을 고려하여 지연 시간(Latency)을 최소화하도록 Vercel Edge CDN 인프라 위에 빌드되었습니다.
+                    </p>
+                    <pre><code>[글로벌 환자 / 원장 브라우저] 
+    │
+    ├── (정적 리소스 로드) ──────────> Vercel Edge CDN (캐싱)
+    │
+    ├── (GET /api/clinics) ──────────> Vercel Serverless ──> Supabase DB
+    │
+    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB</code></pre>
+                    <p>
+                        <strong>서버리스 API 보안</strong>: Node.js 기반의 API 라우터는 프론트엔드에서 수파베이스 DB 비공개 키(service_role) 노출을 철저히 격리하며, 도메인 검증 및 CORS 헤더를 통해 무단 타사 크롤러와 데이터 유출을 강력 차단합니다.
+                    </p>
+                </div>
 
-                <h2>Backend Service Layer</h2>
-                <ul>
-                    <li><strong>Serverless Hosting</strong>: Vercel Functions. Executes endpoints inside isolated runtime environments that automatically scale down to zero when inactive.</li>
-                    <li><strong>API Handlers</strong>: Written in Node.js, utilizing CORS preflight protection headers to block unauthorized third-party scrapers.</li>
-                </ul>
+                <!-- JAPANESE -->
+                <div class="trans-block lang-ja">
+                    <h1>4. システムアーキテクチャとセキュリティ</h1>
+                    <p>
+                        KOMICAREは、インバウンド患者の通信環境を考慮し、レイテンシ（遅延）を最小限に抑えるため、Vercel Edge CDNインフラ上に構築されています。
+                    </p>
+                    <pre><code>[インバウンド患者 / 院長ブラウザ] 
+    │
+    ├── (静的リソースの読み込み) ────> Vercel Edge CDN (キャッシュ)
+    │
+    ├── (GET /api/clinics) ──────────> Vercel Serverless ──> Supabase DB
+    │
+    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB</code></pre>
+                    <p>
+                        <strong>サーバーレスAPIセキュリティ</strong>: Node.jsベースのAPIルーターは、フロントエンドでのSupabase秘密キー(service_role)の露出を防ぎ、ドメイン検証およびCORSヘッダーを通じて無断クロールやデータ流出を防止します。
+                    </p>
+                </div>
             </section>
 
-            <!-- 5. Database Schema -->
+            <!-- ==================== SECTION 5: DATABASE SCHEMA ==================== -->
             <section class="doc-section" id="database">
-                <h1>5. Database Table Layouts</h1>
-                <p>
-                    KOMICARE hosts data in a secure PostgreSQL database on Supabase. Row-Level Security (RLS) is enabled to protect patient data.
-                </p>
+                <!-- ENGLISH -->
+                <div class="trans-block lang-en">
+                    <h1>5. Database Relational Schema</h1>
+                    <p>
+                        The backend uses a standard PostgreSQL database schema. Key relational column schemas are detailed below.
+                    </p>
+                    <h3>Table: <code>public.clinics</code> (Primary Partner Data)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>SERIAL (PK)</td>
+                                <td>Auto-incrementing unique registration key.</td>
+                            </tr>
+                            <tr>
+                                <td><code>name</code></td>
+                                <td>TEXT</td>
+                                <td>Clinic name string.</td>
+                            </tr>
+                            <tr>
+                                <td><code>doctor_type</code></td>
+                                <td>TEXT</td>
+                                <td><code>dermatologist</code>, <code>specialist</code>, or <code>gp</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>experience_years</code></td>
+                                <td>INTEGER</td>
+                                <td>Clinical experience in years. Default is 7.</td>
+                            </tr>
+                            <tr>
+                                <td><code>sleep_anesthesia</code></td>
+                                <td>BOOLEAN</td>
+                                <td>Indicates sleep anesthesia capabilities.</td>
+                            </tr>
+                            <tr>
+                                <td><code>foreign_attraction_registered</code></td>
+                                <td>BOOLEAN</td>
+                                <td>Official registration certificate for global patients.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                <h3>Table: <code>public.clinics</code></h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Column Name</th>
-                            <th>Data Type</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>id</code></td>
-                            <td>SERIAL (Primary Key)</td>
-                            <td>Unique auto-incrementing ID.</td>
-                        </tr>
-                        <tr>
-                            <td><code>name</code></td>
-                            <td>TEXT</td>
-                            <td>Clinic name (Bilingual string e.g. <code>A | B</code>).</td>
-                        </tr>
-                        <tr>
-                            <td><code>location</code></td>
-                            <td>TEXT</td>
-                            <td>District and area coordinates.</td>
-                        </tr>
-                        <tr>
-                            <td><code>rating</code></td>
-                            <td>TEXT</td>
-                            <td>Stars rating label string.</td>
-                        </tr>
-                        <tr>
-                            <td><code>specialties</code></td>
-                            <td>TEXT[]</td>
-                            <td>Array of certified treatment tags.</td>
-                        </tr>
-                        <tr>
-                            <td><code>doctor_type</code></td>
-                            <td>TEXT</td>
-                            <td><code>dermatologist</code>, <code>specialist</code>, or <code>gp</code>.</td>
-                        </tr>
-                        <tr>
-                            <td><code>experience_years</code></td>
-                            <td>INTEGER</td>
-                            <td>Total years of clinical experience. Default 7.</td>
-                        </tr>
-                        <tr>
-                            <td><code>sleep_anesthesia</code></td>
-                            <td>BOOLEAN</td>
-                            <td>True if sleep anesthesia is available.</td>
-                        </tr>
-                        <tr>
-                            <td><code>anesthesiologist_resident</code></td>
-                            <td>BOOLEAN</td>
-                            <td>True if anesthesiologist is present on-site.</td>
-                        </tr>
-                        <tr>
-                            <td><code>foreign_attraction_registered</code></td>
-                            <td>BOOLEAN</td>
-                            <td>Government attraction certification flag.</td>
-                        </tr>
-                        <tr>
-                            <td><code>active</code></td>
-                            <td>BOOLEAN</td>
-                            <td>Soft-delete listing control flag.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- KOREAN -->
+                <div class="trans-block lang-ko">
+                    <h1>5. 데이터베이스 릴레이션 스펙</h1>
+                    <p>
+                        백엔드 저장소는 PostgreSQL 기반의 관계형 스키마를 사용하여 데이터 무결성을 보장합니다.
+                    </p>
+                    <h3>테이블 명세: <code>public.clinics</code> (협력 의원 기본 정보)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>필드명</th>
+                                <th>데이터 타입</th>
+                                <th>의학적 역할 및 설명</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>SERIAL (PK)</td>
+                                <td>고유 인덱스 키 번호</td>
+                            </tr>
+                            <tr>
+                                <td><code>name</code></td>
+                                <td>TEXT</td>
+                                <td>의원 이름 (국문/영문 통합 필드)</td>
+                            </tr>
+                            <tr>
+                                <td><code>doctor_type</code></td>
+                                <td>TEXT</td>
+                                <td>의료진 자격 유형 (피부과전문의, 전문의, 일반의)</td>
+                            </tr>
+                            <tr>
+                                <td><code>experience_years</code></td>
+                                <td>INTEGER</td>
+                                <td>원장의 실제 임상 경력 연수 (기본값 7)</td>
+                            </tr>
+                            <tr>
+                                <td><code>sleep_anesthesia</code></td>
+                                <td>BOOLEAN</td>
+                                <td>수면 마취 및 환자 모니터링 시스템 탑재 여부</td>
+                            </tr>
+                            <tr>
+                                <td><code>foreign_attraction_registered</code></td>
+                                <td>BOOLEAN</td>
+                                <td>보건복지부 지정 외국인 환자 유치기관 승인 여부</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                <h3>Table: <code>public.leads</code></h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Column Name</th>
-                            <th>Data Type</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>id</code></td>
-                            <td>UUID (Primary Key)</td>
-                            <td>Randomly generated UUID.</td>
-                        </tr>
-                        <tr>
-                            <td><code>email</code></td>
-                            <td>TEXT (Unique)</td>
-                            <td>User email address (protected from public read by RLS).</td>
-                        </tr>
-                        <tr>
-                            <td><code>fitzpatrick_type</code></td>
-                            <td>SMALLINT</td>
-                            <td>Skin diagnostic score (1 to 6).</td>
-                        </tr>
-                        <tr>
-                            <td><code>created_at</code></td>
-                            <td>TIMESTAMPTZ</td>
-                            <td>Auto-inserted registration timestamp.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- JAPANESE -->
+                <div class="trans-block lang-ja">
+                    <h1>5. データベースリレーション仕様</h1>
+                    <p>
+                        バックエンドストレージは、データ整合性を保証するため、PostgreSQLベースのリレーションシップスキーマを使用しています。
+                    </p>
+                    <h3>テーブル仕様: <code>public.clinics</code> (提携クリニック基本情報)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>フィールド名</th>
+                                <th>データ型</th>
+                                <th>役割および説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>SERIAL (PK)</td>
+                                <td>固有インデックスキー番号</td>
+                            </tr>
+                            <tr>
+                                <td><code>name</code></td>
+                                <td>TEXT</td>
+                                <td>クリニック名 (日英/韓 統合フィールド)</td>
+                            </tr>
+                            <tr>
+                                <td><code>doctor_type</code></td>
+                                <td>TEXT</td>
+                                <td>医師資格タイプ (皮膚科専門医、専門医、一般医)</td>
+                            </tr>
+                            <tr>
+                                <td><code>experience_years</code></td>
+                                <td>INTEGER</td>
+                                <td>医師の実際の臨床経験年数 (デフォルト 7)</td>
+                            </tr>
+                            <tr>
+                                <td><code>sleep_anesthesia</code></td>
+                                <td>BOOLEAN</td>
+                                <td>睡眠麻酔および患者モニタリング装置の有無</td>
+                            </tr>
+                            <tr>
+                                <td><code>foreign_attraction_registered</code></td>
+                                <td>BOOLEAN</td>
+                                <td>保健福祉部指定 外国人患者誘致機関登録の有無</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
-            <!-- 6. Future Roadmap -->
+            <!-- ==================== SECTION 6: FUTURE PARTNERSHIP ROADMAP ==================== -->
             <section class="doc-section" id="future">
-                <h1>6. Scaling Roadmap & Milestones</h1>
-                <p>
-                    As the platform transitions from launching landing page metrics to real medical listings, we have planned the following milestones:
-                </p>
-                <div class="sitemap-tree">
-                    <div class="sitemap-node">
-                        <strong>Phase 1: Real-time Booking Verification</strong>
-                        <span class="sitemap-desc">Integrating clinic calendars with the <code>bookings</code> table, enabling deposits to secure surgical schedules.</span>
+                <!-- ENGLISH -->
+                <div class="trans-block lang-en">
+                    <h1>6. Partnership & Verification Roadmap</h1>
+                    <p>
+                        KOMICARE scales organically by validating trust metrics. We have outlined key upcoming milestones for partner physicians:
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong>1. Zero-Commission Matchmaking</strong>
+                            <span class="sitemap-desc">We bypass broker commissions. Future iterations will route direct encrypted inquiries straight to your WhatsApp/WeChat business lines without middlemen.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>2. Proof of Laser Tip Authenticity</strong>
+                            <span class="sitemap-desc">Clinics uploading certified serial code logbooks for Ultherapy/Thermage tips will receive the "100% Genuine Consumable Badge," filtering out grey-market clinics.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>3. Legal Mutual Defense</strong>
+                            <span class="sitemap-desc">Cooperative legal structures to defend partner clinics from malicious refund-blackmail reviews by validating receipt logs and patient records.</span>
+                        </div>
                     </div>
-                    <div class="sitemap-node">
-                        <strong>Phase 2: Decentralized Review Auditing</strong>
-                        <span class="sitemap-desc">Generating cryptographic hash signatures of uploaded receipts on IPFS to guarantee review authenticity without central database editing.</span>
+                </div>
+
+                <!-- KOREAN -->
+                <div class="trans-block lang-ko">
+                    <h1>6. 공동 의료진 협력 및 검증 로드맵</h1>
+                    <p>
+                        코미케어는 진정한 실력을 가진 협력 의원을 보증하며, 환자에게 신뢰받는 네트워크를 확장하기 위해 다음과 같은 로드맵을 지향합니다:
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong>1. 제로-수수료 다이렉트 매칭</strong>
+                            <span class="sitemap-desc">중간 브로커의 알선 수수료를 철저히 배제하고, 환자가 예약 완료 시 병원의 메신저(WhatsApp, LINE 등)로 수수료 없이 직접 예약 및 상담을 이관받도록 고도화합니다.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>2. 정품 팁 인증 로깅 시스템</strong>
+                            <span class="sitemap-desc">울쎄라, 써마지 등 정품 소모품 팁의 시리얼 코드 로그 기록을 등록하는 병원에 한해 상단에 '정품 팁 보증 배지'를 자동 부착하여, 불법 재생 팁을 사용하는 덤핑 공장형 병원과의 격차를 벌립니다.</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>3. 의료진 공동 법률 방어망</strong>
+                            <span class="sitemap-desc">환급을 목적으로 고의적 악성 리뷰 테러를 감행하는 악성 블랙컨슈머 데이터베이스를 협력 병원 간 익명으로 공유하고 법적 대응을 공동 지원합니다.</span>
+                        </div>
                     </div>
-                    <div class="sitemap-node">
-                        <strong>Phase 3: Doctor Credentials Verification</strong>
-                        <span class="sitemap-desc">Adding API verification checks with local medical associations to automatically flag clinics misrepresenting GP staff as Board-Certified Dermatologists.</span>
+                </div>
+
+                <!-- JAPANESE -->
+                <div class="trans-block lang-ja">
+                    <h1>6. 共同医師協力および検証ロードマップ</h1>
+                    <p>
+                        KOMICAREは、本物の実力を持つ提携クリニックを保証し、患者から信頼されるネットワークを拡大するために、以下のロードマップを目指しています。
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong>1. 手数料ゼロのダイレクトマッチング</strong>
+                            <span class="sitemap-desc">中間ブローカーの紹介手数料を排除し、患者が予約時にクリニックの公式メッセンジャー（LINE、WhatsApp等）に直接つながる仕組みを構築します。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>2. 正規品チップ認証ログシステム</strong>
+                            <span class="sitemap-desc">ウルセラやサーマクールなどの正規品チップのシリアルコードログを記録・登録するクリニックに「正規品保証バッジ」を付与し、非正規チップを使用する低価格工場型との差別化を図ります。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>3. 医師向け共同法的防御ネットワーク</strong>
+                            <span class="sitemap-desc">返金を目的とした悪質なレビュー攻撃を行うブラックリスト情報を提携クリニック間で共有し、共同で法的サポートを行います。</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -578,8 +851,49 @@
     </div>
 
     <footer style="border-top:1px solid var(--border-glass); padding: 40px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-        <p>© 2026 KOMICARE Inc. Systems Engineering Division. Document Status: APPROVED</p>
+        <p>© 2026 KOMICARE Inc. Medical Advisory Division. Document Status: ACTIVE / PARTNER REFERRAL</p>
     </footer>
 
+    <script>
+        function setLanguage(lang) {
+            document.body.setAttribute('data-lang', lang);
+            
+            // Toggle active state in select buttons
+            const btns = document.querySelectorAll('.lang-btn');
+            btns.forEach(btn => {
+                if (btn.getAttribute('data-lang-val') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update sidebar links highlighting
+            updateActiveMenu();
+        }
+
+        // Active sidebar logic
+        function updateActiveMenu() {
+            const sections = document.querySelectorAll('.doc-section');
+            const menuItems = document.querySelectorAll('.doc-menu li');
+            
+            let current = 'executive';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            menuItems.forEach(li => {
+                li.classList.remove('active');
+                if (li.getAttribute('data-sec') === current) {
+                    li.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveMenu);
+    </script>
 </body>
 </html>
