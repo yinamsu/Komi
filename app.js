@@ -921,6 +921,12 @@ function getLocalizedText(rawText) {
 function renderClinicCards(clinics) {
     const container = document.getElementById('dynamic-partner-list');
     if (!container) return;
+
+    const countEl = document.getElementById('filter-result-count');
+    if (countEl) {
+        countEl.textContent = clinics ? clinics.length : 0;
+    }
+
     if (!clinics || clinics.length === 0) {
         container.innerHTML = `<div class="text-center" style="padding:40px; color:var(--text-muted); width:100%;">${t('directory.empty')}</div>`;
         return;
@@ -1353,6 +1359,17 @@ function initSearchAndFilters() {
             });
         }
     });
+
+    const resetBtn = document.getElementById('reset-filters-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn-check').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.review-filter-select').forEach(sel => sel.value = "0");
+            const searchInput = document.getElementById('directorySearchInput');
+            if (searchInput) searchInput.value = '';
+            applyFilters();
+        });
+    }
 
     const toggleBtn = document.getElementById('reviewFilterToggle');
     const toggleContent = document.getElementById('reviewFilterContent');

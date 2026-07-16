@@ -1232,8 +1232,9 @@
                         <!-- Custom filter panel -->
                         <div class="filter-panel-wrapper">
                             <div class="filter-section">
-                                <div class="filter-section-title">
+                                <div class="filter-section-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                                     <span data-i18n="filter.main_title">🏥 병원 노출 필터 메인 카테고리</span>
+                                    <button id="reset-filters-btn" class="reset-filters-btn" style="background: rgba(197, 168, 128, 0.08); border: 1px solid var(--border-glass); color: var(--secondary); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" data-i18n="filter.reset_btn">초기화</button>
                                 </div>
                                 <div class="filter-group-wrapper">
                                     <!-- 의사 유형 -->
@@ -1395,6 +1396,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="filter-results-status" style="margin: 20px 0 10px 0; font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                            <span data-i18n="directory.result_count_prefix">검색된 병원:</span>
+                            <strong id="filter-result-count" style="color: var(--secondary); font-weight: 800; font-size: 1.1rem;">0</strong>
+                            <span data-i18n="directory.result_count_suffix">개</span>
                         </div>
 
                         <div class="partner-list" id="dynamic-partner-list">

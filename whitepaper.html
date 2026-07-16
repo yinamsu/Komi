@@ -872,6 +872,9 @@
     <script>
         function setLanguage(lang) {
             document.body.setAttribute('data-lang', lang);
+            try {
+                localStorage.setItem('komicare-lang', lang);
+            } catch (e) {}
             
             // Toggle active state in select buttons
             const btns = document.querySelectorAll('.lang-btn');
@@ -886,6 +889,14 @@
             // Update sidebar links highlighting
             updateActiveMenu();
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedLang = 'ko';
+            try {
+                savedLang = localStorage.getItem('komicare-lang') || 'ko';
+            } catch (e) {}
+            setLanguage(savedLang);
+        });
 
         // Active sidebar logic
         function updateActiveMenu() {

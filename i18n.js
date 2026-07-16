@@ -89,6 +89,8 @@ const translations = {
         "directory.subtitle": "Explore our certified clinics and see how we verify review authenticity while preserving patient anonymity.",
         "directory.loading": "🔄 Loading verified boutique clinics...",
         "directory.empty": "⚠️ No verified boutique clinics available at the moment.",
+        "directory.result_count_prefix": "Showing",
+        "directory.result_count_suffix": "verified clinics",
 
         // ---- Receipt Masker ----
         "receipt.title": "Receipt Privacy Masker",
@@ -193,6 +195,7 @@ const translations = {
         // ---- New Platform Restructured Keys ----
         // ---- Filter Panel Translation Keys ----
         "filter.main_title": "🏥 Clinic Listing Filter Main Categories",
+        "filter.reset_btn": "Reset",
         "filter.doc_qualification": "Doctor Qualification",
         "filter.doc_dermatologist": "Dermatologist",
         "filter.doc_specialist": "Specialist",
@@ -612,6 +615,8 @@ const translations = {
         "directory.subtitle": "인증된 클리닉을 살펴보고 환자 익명성을 보장하면서 리뷰 진위를 어떻게 검증하는지 확인하세요.",
         "directory.loading": "🔄 인증된 부티크 클리닉을 불러오는 중...",
         "directory.empty": "⚠️ 현재 이용 가능한 인증 부티크 클리닉이 없습니다.",
+        "directory.result_count_prefix": "검색된 병원:",
+        "directory.result_count_suffix": "개",
 
         // ---- Receipt Masker ----
         "receipt.title": "영수증 프라이버시 마스커",
@@ -716,6 +721,7 @@ const translations = {
         // ---- New Platform Restructured Keys ----
         // ---- Filter Panel Translation Keys ----
         "filter.main_title": "🏥 병원 노출 필터 메인 카테고리",
+        "filter.reset_btn": "초기화",
         "filter.doc_qualification": "의사 자격",
         "filter.doc_dermatologist": "피부과 전문의",
         "filter.doc_specialist": "전문의",
@@ -1060,6 +1066,12 @@ const translations = {
         "filter.select_category": "上のカテゴリーを選択してください",
         "filter.select_category_desc": "肌タイプに合った検証済みの施術や提携クリニックの専門分野を探索します。",
 
+        "directory.loading": "🔄 認証済みブティッククリニックを読み込み中...",
+        "directory.empty": "⚠️ 現在、利用可能な認証済みブティッククリニックはありません。",
+        "directory.result_count_prefix": "検索されたクリニック:",
+        "directory.result_count_suffix": "件",
+        "directory.reset_btn": "フィルターをリセット",
+
         "cat.skin": "皮膚科",
         "cat.lifting": "リフティング",
         "cat.botox": "ボトックス",
@@ -1117,6 +1129,7 @@ const translations = {
 
         // ---- Filter Panel Translation Keys ----
         "filter.main_title": "🏥 病院露出フィルター メインカテゴリー",
+        "filter.reset_btn": "リセット",
         "filter.doc_qualification": "医師資格",
         "filter.doc_dermatologist": "皮膚科専門医",
         "filter.doc_specialist": "専門医",
