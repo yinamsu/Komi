@@ -34,7 +34,7 @@ We migrated from simple inline HTML code with CDN scripts to a clean, modular st
 ---
 
 ## Verification & Testing
-The system was verified via a local web server (`http://localhost:8080`) using automated browser actions:
+The system was verified via a local web server (`http://localhost:3000`) using automated browser actions:
 - Checked logo, pill status indicators, and initial layout alignments.
 - Clicked through the quiz options, inputted a test email, verified correct calculation of Fitzpatrick Type I, and read the specific warning details.
 - Verified that opening the modal, reading Chapter 2, toggling checklist items, and copying the checklist works correctly.
@@ -43,32 +43,18 @@ The system was verified via a local web server (`http://localhost:8080`) using a
 
 ---
 
-## Latest Updates: Interactive Filtering & 500 Clinics Expansion
+## Latest Updates: Modern Luxury Aesthetics & Tone & Manner Overhaul
 
-We have introduced a powerful, interactive filtering engine and scaled our mock data for testing performance and filter coverage:
+We have completely elevated the visual aesthetic and tone & manner of KOMICARE to state-of-the-art luxury K-Beauty standards:
 
-### 1. Interactive Multilingual Filters
-- **Hospital Listing Filters**: Filter by doctor type (`Board-Certified Dermatologist`, `Specialist`, `General Practitioner`), years of clinical experience (`0-5 years`, `5-10 years`, `10+ years`), and certifications (`Foreigner Attraction Registered`, `Aftercare Excellence`).
-- **12 Detailed Review Category Star Filters**: Filter by granular star ratings (All, 4.0+ ★, 4.5+ ★) across 12 specific criteria including: treatment satisfaction, value for money, booking speed, wait time, language convenience, staff kindness, doctor explanation, medical honesty (no overtreatment), location, facility, aftercare, and parking.
-- **Multilingual Support**: Fully localized translations in **Korean, English, and Japanese** for all filter options and labels, switching dynamically with the selected language.
+### 1. Luminous Obsidian Emerald & Champagne Gold Palette
+- **Deep Obsidian Emerald Background (`#05110d`)**: Replaced dark cold slate tones with a deep obsidian emerald base enriched by multi-stop radial ambient glows (`rgba(216, 184, 141, 0.18)` & `rgba(18, 78, 60, 0.25)`).
+- **Champagne Gold & Soft Jade Accents (`#d8b88d` & `#4eb897`)**: Used metallic gold highlights for ratings, pill badges, and active filter states.
 
-### 2. 500 Clinics Scaling Generator
-- **Automatic Scaler**: Built a programmatic PRNG generator (`expandClinicsWithGenerator`) that expands our core 22 boutique clinics into **500 unique clinics** on the fly, running both on Vercel Serverless API (`api/clinics.js`) and client-side fallback fallback arrays (`app.js`).
-- **Coverage Integrity**: Ensures that every possible permutation of filters is covered, leaving no empty results under reasonable filtering parameters.
-- **Efficiency**: Zero database weight or loading latency overhead since the generator runs in-memory with deterministic seed hashes.
+### 2. Floating Glass Deck & Luxury Filter Pills
+- **Refined Glassmorphism (`backdrop-filter: blur(24px)`)**: Replaced rigid boxy filter borders with an elevated floating glass deck featuring rounded corners (`24px`) and inner ambient rim highlights.
+- **Champagne Gold Pill Chips**: Converted raw checkboxes into interactive pill buttons (`.filter-btn-label`) that glow in champagne gold with soft drop shadows when checked.
 
----
-
-## Latest Updates: Clinic Owner Data Entry Portal (`/clinic`)
-
-We have built a dedicated registry portal designed for doctors and clinic directors to input and preview their clinic metadata:
-
-### 1. Invitation Passcode Protection
-- Access is gatekept behind an authentication dialog prompting for the invitation passcode (`KOMIPARTNER2026`).
-
-### 2. Full Metadata Form & Live Preview
-- The entry form matches all required attributes for the search directory (Clinic name, location, specialties checklist, doctor profile with avatar/bio, operating hours, booking slots limit, Google Maps embed URL, and qualification toggles).
-- Renders an **interactive, real-time live preview card** styled identically to the main directory's clinic card.
-
-### 3. Database Insertion Endpoint
-- The form POSTs to `/api/submit-clinic` to insert the new entry directly into the Supabase database. If Supabase is offline/unconfigured, it switches automatically to a simulated output sandbox mode showing a success message and previews of the generated metadata.
+### 3. Clinic Cards & Doctor Ring Avatars
+- **3D Hover Lift (`transform: translateY(-5px)`)**: Updated `.partner-card` with rounded corners (`20px`), smooth hover lifts, and glowing gold borders.
+- **Metallic Avatar Rings**: Enclosed doctor initials in a champagne gold metallic ring gradient (`linear-gradient(135deg, #d8b88d 0%, #aa8c60 100%)`) with drop shadow highlights.
