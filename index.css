@@ -56,36 +56,134 @@
 
 /* EXPLICIT THEME OVERRIDES (Enforced via JS) */
 html[data-theme="light"] {
-    --color-primary: #0b3c2c;
-    --color-primary-rgb: 11, 60, 44;
-    --color-primary-light: #f2f7f4;
-    --color-secondary: #0b1420;
-    --color-secondary-rgb: 11, 20, 32;
-    --color-accent: #c5a880;
-    --color-accent-rgb: 197, 168, 128;
-    --color-accent-light: #fbf9f6;
+    --color-primary: #0e4534;
+    --color-primary-rgb: 14, 69, 52;
+    --color-primary-light: #f0f7f4;
+    --color-secondary: #0c1a15;
+    --color-secondary-rgb: 12, 26, 21;
+    --color-accent: #b89058;
+    --color-accent-rgb: 184, 144, 88;
+    --color-accent-light: rgba(184, 144, 88, 0.08);
 
-    --bg-primary: #faf9f6;
-    --bg-primary-rgb: 250, 249, 246;
+    --bg-primary: #fbf9f5;
+    --bg-primary-rgb: 251, 249, 245;
     --bg-secondary: #ffffff;
-    --bg-dark: #0b1420;
+    --bg-dark: #0e1f18;
 
-    --text-primary: #1c2321;
-    --text-secondary: #5a6561;
+    --text-primary: #0a1d17;
+    --text-secondary: #4a5c55;
     --text-light: #ffffff;
-    --text-muted: #8e9a96;
+    --text-muted: #7e8f88;
 
-    --border-color: #e5eae6;
-    --border-glow: rgba(197, 168, 128, 0.3);
+    --border-color: #e8e3d8;
+    --border-glow: rgba(184, 144, 88, 0.4);
 
-    --shadow-soft: 0 4px 20px rgba(11, 20, 32, 0.04);
-    --shadow-medium: 0 12px 30px rgba(11, 20, 32, 0.08);
+    --shadow-soft: 0 8px 30px rgba(14, 69, 52, 0.05);
+    --shadow-medium: 0 16px 40px rgba(14, 69, 52, 0.1);
+    --shadow-glow: 0 0 25px rgba(184, 144, 88, 0.2);
 
-    --color-footer-bg: #0b1420;
-    --color-btn-bg: #0b1420;
+    --color-footer-bg: #0b1e17;
+    --color-btn-bg: #0e4534;
     --color-btn-text: #ffffff;
-    --color-badge-bg: #0b1420;
-    --color-badge-text: #ffffff;
+    --color-badge-bg: rgba(184, 144, 88, 0.1);
+    --color-badge-text: #8c6a38;
+}
+
+/* EXPLICIT LIGHT MODE COMPONENT OVERRIDES */
+html[data-theme="light"] .hero-glow {
+    background: radial-gradient(circle, rgba(184, 144, 88, 0.15) 0%, rgba(14, 69, 52, 0.08) 50%, transparent 80%);
+}
+
+html[data-theme="light"] .social-proof-badge {
+    background: rgba(184, 144, 88, 0.08);
+    border: 1px solid rgba(184, 144, 88, 0.3);
+    color: #8c6a38;
+}
+
+html[data-theme="light"] .social-proof-badge span {
+    color: #0e4534;
+}
+
+html[data-theme="light"] .hero-headline span.gradient-text {
+    background: linear-gradient(135deg, #0e4534 0%, #a88147 60%, #08261d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+html[data-theme="light"] .filter-panel-wrapper {
+    background: #ffffff;
+    border: 1px solid #e8e3d8;
+    box-shadow: 0 12px 36px rgba(14, 69, 52, 0.06);
+}
+
+html[data-theme="light"] .filter-btn-label {
+    background: #f5f2eb;
+    border: 1px solid #e2ded5;
+    color: #3b4d45;
+}
+
+html[data-theme="light"] .filter-btn-label:hover {
+    background: #eae4d8;
+    border-color: #b89058;
+    color: #0e4534;
+}
+
+html[data-theme="light"] .filter-btn-check:checked + .filter-btn-label {
+    background: linear-gradient(135deg, #0e4534 0%, #185e49 100%);
+    border-color: #0e4534;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(14, 69, 52, 0.25);
+}
+
+html[data-theme="light"] .review-filter-item {
+    background: #f7f4ee;
+    border: 1px solid #e8e3d8;
+}
+
+html[data-theme="light"] .review-filter-item:hover {
+    background: #f0ebe0;
+    border-color: #b89058;
+}
+
+html[data-theme="light"] .review-filter-select {
+    background: #ffffff;
+    color: #0e4534;
+    border: 1px solid #dcd4c5;
+}
+
+html[data-theme="light"] .partner-card {
+    background: #ffffff;
+    border: 1px solid #e8e3d8;
+    box-shadow: 0 10px 30px rgba(14, 69, 52, 0.05);
+}
+
+html[data-theme="light"] .partner-card:hover {
+    border-color: #b89058;
+    box-shadow: 0 16px 40px rgba(14, 69, 52, 0.12), 0 0 20px rgba(184, 144, 88, 0.15);
+}
+
+html[data-theme="light"] .partner-rating {
+    background: rgba(184, 144, 88, 0.12);
+    color: #8c6a38;
+    border: 1px solid rgba(184, 144, 88, 0.3);
+}
+
+html[data-theme="light"] .partner-tag {
+    background: #f4efea;
+    color: #0e4534;
+    border: 1px solid #e2dacb;
+}
+
+html[data-theme="light"] .partner-tag:hover {
+    background: #e9e2d6;
+    border-color: #b89058;
+}
+
+html[data-theme="light"] .doctor-avatar {
+    background: linear-gradient(135deg, #0e4534 0%, #185e49 100%);
+    color: #ffffff;
+    border: 2px solid #b89058;
+    box-shadow: 0 4px 15px rgba(14, 69, 52, 0.2);
 }
 
 html[data-theme="dark"] {
