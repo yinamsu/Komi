@@ -157,13 +157,21 @@ function showResults() {
         resultsArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         const lang = getCurrentLang();
-        const profile = lang === 'ko' ? window.fitzpatrickProfiles_ko[quizData.fitzpatrickType] : window.fitzpatrickProfiles_en[quizData.fitzpatrickType];
+        const profilesMap = {
+            ko: window.fitzpatrickProfiles_ko,
+            ja: window.fitzpatrickProfiles_ja,
+            zh: window.fitzpatrickProfiles_zh,
+            en: window.fitzpatrickProfiles_en
+        };
+        const profileDict = profilesMap[lang] || profilesMap.en;
+        const profile = profileDict ? profileDict[quizData.fitzpatrickType] : window.fitzpatrickProfiles_en[quizData.fitzpatrickType];
 
         document.getElementById('res-type-title').textContent = profile.name;
         document.getElementById('res-behavior').textContent = profile.behavior;
         document.getElementById('res-lasers').textContent = profile.lasers;
 
-        const advText = lang === 'ko' ? `🛡️ 피츠패트릭 ${quizData.fitzpatrickType}형 안전 권고:` : `🛡️ Fitzpatrick ${quizData.fitzpatrickType} Safety Advisory:`;
+        const advTemplate = t('results.safety_advisory') || `🛡️ Fitzpatrick ${quizData.fitzpatrickType} Safety Advisory:`;
+        const advText = advTemplate.replace('{type}', quizData.fitzpatrickType);
         document.getElementById('res-warning').innerHTML = `<strong>${advText}</strong><p>${profile.warning}</p>`;
 
         document.querySelectorAll('.scale-segment').forEach(seg => seg.classList.remove('active'));

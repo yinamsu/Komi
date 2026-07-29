@@ -1435,6 +1435,165 @@ const translations = {
 
         // ---- Footer ----
         "footer.copyright": "© 2026 Komicare. All rights reserved. 医療法第56条を遵守し、患者の正当な表現の自由を保護します。"
+    },
+    zh: {
+        // ---- Header ----
+        "header.badge": "100% 认证精品医美",
+
+        // ---- Hero Section ----
+        "hero.social_proof": "已有 540+ 名赴韩求美者",
+        "hero.social_proof_suffix": "本月获得优先预约资格。",
+        "hero.headline": "前往首尔体验 K-Beauty？ <br>",
+        "hero.headline_gradient": "厌倦了虚假点评与流水线“工厂”诊所？",
+        "hero.subheadline": "1) 100% 到店验证真实评价<br>2) 外国求美者真实体验与客观反馈<br>3) 零广告赞助与虚假推广<br>4) 透明准确的诊疗价格<br>5) 严格筛选审美出众的专业医生<br>6) 术后回国全流程追踪护理",
+
+        // ---- Quiz ----
+        "quiz.step_title": "第 1 步：检测您的皮肤类型",
+        "quiz.title": "Fitzpatrick 皮肤类型测试",
+        "quiz.q1": "Q1. 未经过日光照射的原始肤色是？",
+        "quiz.q1_a1": "极白 / 半透明肤色",
+        "quiz.q1_a2": "偏白 / 浅色",
+        "quiz.q1_a3": "橄榄色 / 自然米色",
+        "quiz.q1_a4": "浅棕色",
+        "quiz.q1_a5": "深棕色",
+        "quiz.q1_a6": "浓褐色 / 黑色",
+        "quiz.q2": "Q2. 在未涂防晒霜的情况下曝晒会发生什么？",
+        "quiz.q2_a1": "极易晒伤、起水泡并脱皮",
+        "quiz.q2_a2": "经常晒伤，大面积脱皮",
+        "quiz.q2_a3": "轻微晒伤，逐渐晒黑",
+        "quiz.q2_a4": "极少晒伤，容易晒黑",
+        "quiz.q2_a5": "罕见晒伤，深度晒黑",
+        "quiz.q2_a6": "从不晒伤，色素沉着加深",
+        "quiz.q3": "Q3. 连续数日户外阳光照射后皮肤反应？",
+        "quiz.q3_a1": "绝不晒黑，立即脱皮",
+        "quiz.q3_a2": "轻微晒黑，易生雀斑",
+        "quiz.q3_a3": "适度晒黑，偶尔晒伤",
+        "quiz.q3_a4": "深度晒黑，极少晒伤",
+        "quiz.q3_a5": "极度黑化，从不晒伤",
+        "quiz.email_label": "第 2 步：我们将报告发送至您的邮箱：",
+        "quiz.email_placeholder": "请输入您的常用电子邮箱",
+        "quiz.submit_btn": "获取安全指南与专属通行证",
+        "quiz.disclaimer": "🔒 保护隐私：严禁垃圾邮件与虚假评价。100% 严格保密。",
+        "quiz.progress": "第 {current} 步（共 3 步）",
+        "quiz.securing": "正在加密连接...",
+
+        // ---- Results ----
+        "results.step_title": "皮肤诊断通行证",
+        "results.type_title": "Fitzpatrick 分型",
+        "results.verified": "验证分析完成",
+        "results.active": "生效中",
+        "results.behavior_label": "日光反应特征：",
+        "results.lasers_label": "推荐激光方案：",
+        "results.warning_title": "Fitzpatrick 安全预警：",
+        "results.open_handbook": "📖 立即阅读安全手册",
+        "results.retake": "🔄 重新测试肤质",
+        "results.safety_advisory": "🛡️ Fitzpatrick {type} 型安全建议：",
+
+        // ---- Founder Message ----
+        "founder.tag": "医疗安全声明",
+        "founder.title": "为什么激光参数定制至关重要",
+        "founder.subtitle": "由 KOMICARE 医疗咨询顾问 金敏智博士 (Dr. Minji Kim) 撰写",
+        "founder.quote": "“许多赴韩美白或抗衰的外国求美者，因诊所采用适合亚洲浅肤色的统一高能量参数，导致皮肤屏障受损或产生反黑（PIH）。在 KOMICARE，我们强制要求院长根据 Fitzpatrick 肤质定制波长与能量。”",
+        "founder.point1": "光子与激光波长精准调校（针对深色肤色）",
+        "founder.point2": "双重表皮冷却系统，防止热损伤",
+        "founder.point3": "拒绝流失性流水线模式，保障 1:1 医生问诊",
+
+        // ---- Handbook Reader Modal ----
+        "modal.badge": "K-Beauty 官方安全指南",
+        "modal.title": "赴韩医美核心安全手册",
+        "modal.subtitle": "回国后避免副作用与虚假宣传的权威防护指南",
+        "modal.ch1_title": "第 1 章：认清流水线“工厂”诊所",
+        "modal.ch1_desc": "识别低价诱饵与非专业医师操作的四大特征。",
+        "modal.ch2_title": "第 2 章：Fitzpatrick 肤质参数设置",
+        "modal.ch2_desc": "了解不同肤色光电项目的安全能量范围与波长选择。",
+        "modal.ch3_title": "第 3 章：退税单与匿名评价保护",
+        "modal.ch3_desc": "如何去标识化展示退税单，防止因差评遭受名誉权纠纷。",
+        "modal.ch4_title": "第 4 章：面诊必备 5 大提问清单",
+        "modal.ch4_desc": "在首尔面诊时必须向主治医生确认的核查事项。",
+
+        // ---- Directory & Filters ----
+        "directory.tag": "精品诊所名录",
+        "directory.title": "验证合作诊所",
+        "directory.title_serif": "与真实性验证引擎",
+        "directory.subtitle": "探索经过认证的精品诊所，了解我们在保护求美者隐私的同时如何验证评价真实性。",
+        "directory.loading": "🔄 正在加载认证精品诊所...",
+        "directory.empty": "⚠️ 暂无符合条件的认证诊所。",
+        "directory.result_count_prefix": "共搜索到诊所：",
+        "directory.result_count_suffix": "家",
+
+        // ---- Filter Panel ----
+        "filter.all": "全部项目",
+        "filter.main_title": "🏥 诊所筛选核心分类",
+        "filter.reset_btn": "重置筛选",
+        "filter.doc_qualification": "医生资质",
+        "filter.doc_dermatologist": "皮肤科专科医生",
+        "filter.doc_specialist": "专科医生",
+        "filter.doc_gp": "普通医师",
+        "filter.experience": "从业年限",
+        "filter.exp_05": "0-5 年",
+        "filter.exp_510": "5-10 年",
+        "filter.exp_10p": "10 年以上",
+        "filter.auth_benefits": "资质与特色",
+        "filter.auth_registered": "指定吸引外国患者医疗机构",
+        "filter.auth_excellent": "优良术后追踪护理认证",
+
+        // ---- Review Star Filters ----
+        "filter.review_title": "⭐ 12 项细分评价维度筛选",
+        "filter.r_satisfaction": "项目满意度",
+        "filter.r_cost": "性价比",
+        "filter.r_contact_speed": "联系回复速度",
+        "filter.r_waiting_speed": "到店等待时间",
+        "filter.r_language": "语言沟通便利度",
+        "filter.r_staff_kindness": "职员亲切度",
+        "filter.r_doctor_explanation": "医生讲解详细度",
+        "filter.r_honesty": "诚信诊疗（无过度推销）",
+        "filter.r_location": "位置便利性",
+        "filter.r_facility": "环境设施舒适度",
+        "filter.r_aftercare": "术后护理（关怀电话）",
+        "filter.r_parking": "停车便利性",
+        "filter.option_all": "全部",
+
+        // ---- Category Menu ----
+        "category.menu_title": "请选择您感兴趣的医美项目",
+        "cat.skin": "皮肤科",
+        "cat.lifting": "提升紧致",
+        "cat.botox": "肉毒素",
+        "cat.filler": "玻尿酸",
+        "cat.contour": "轮廓塑形",
+        "cat.body": "美体塑形",
+        "cat.antiaging": "抗衰老",
+        "cat.eye": "眼部整形",
+        "cat.nose": "鼻部整形",
+        "cat.breast": "胸部整形",
+        "cat.dental": "牙科美学",
+        "cat.herbal": "韩方医美",
+        "cat.hair": "毛发移植",
+
+        // ---- Badges ----
+        "badge.dermatologist": "皮肤科专科医生",
+        "badge.specialist": "专科医生",
+        "badge.gp": "普通医师",
+        "badge.anesthesiologist": "麻醉科专科医生驻店",
+        "badge.no_anesthesiologist": "提供睡眠麻醉",
+        "badge.foreign_attraction": "指定吸引外国患者机构",
+        "badge.foreigner_insurance": "支持商业医疗保险申报",
+        "badge.aftercare_excellence": "术后关怀服务认证",
+
+        // ---- Receipt Masker ----
+        "receipt.title": "退税单隐私遮蔽器",
+        "receipt.subtitle": "体验如何在不泄露交易时间或发票编号的情况下验证评价真实性。",
+        "receipt.mask_btn": "🛡️ 遮蔽敏感隐私数据",
+        "receipt.reset_btn": "🔄 恢复原单据",
+        "receipt.status_masked": "✅ 隐私已遮蔽：已隐藏时间和序列号。",
+        "receipt.status_unmasked": "ℹ️ 原始单据：敏感时间与编号仍可见。",
+
+        // ---- Footer ----
+        "footer.links_title": "信任资源",
+        "footer.link_handbook": "安全手册",
+        "footer.link_privacy": "隐私架构",
+        "footer.link_partner": "诊所入驻申请",
+        "footer.server": "海外管辖服务器节点 | 数据已加密与去标识化",
+        "footer.copyright": "© 2026 KOMICARE Inc. 保留所有权利。"
     }
 };
 
@@ -1555,10 +1714,50 @@ const fitzpatrickProfiles_ja = {
     }
 };
 
+const fitzpatrickProfiles_zh = {
+    1: {
+        name: "Fitzpatrick Type I（极白 / 极其敏感）",
+        behavior: "极易晒伤，绝不晒黑。雀斑较多。",
+        lasers: "仅适用温和定制能量设置。使用标准点阵激光存在极高晒伤风险。",
+        warning: "极高严重晒伤与屏障损伤风险。大型“工厂型”诊所的默认参数通常针对亚洲浅黄肤色（Type III-IV）。若直接用于 Type I 皮肤，强能量将瞬间灼伤角质层，导致慢性红斑、水泡或疤痕。必须要求降低能量密度并延长脉宽。"
+    },
+    2: {
+        name: "Fitzpatrick Type II（偏白 / 浅发）",
+        behavior: "容易晒伤，极少晒黑。高度敏感。",
+        lasers: "需定制脉冲宽度。在低能量设置下使用专业血管/色素激光较为安全。",
+        warning: "高晒伤与屏障损伤风险。常规“首尔工厂”预设参数极易导致 Type II 皮肤产生严重激光红斑或微细疤痕。严禁护士或操作员使用自动预设，必须由主治医生亲自手动调校能量输出。"
+    },
+    3: {
+        name: "Fitzpatrick Type III（自然米色 / 橄榄肤色）",
+        behavior: "中度晒伤，逐渐晒黑为浅棕色。",
+        lasers: "需精细校准以防色素反弹。炎症后色素沉着 (PIH) 风险中等。",
+        warning: "中度色素反弹风险。虽然 Type III 皮肤耐受力较好，但 15 分钟流水线快餐诊所往往仓促操作，极易引发反弹黄褐斑或 PIH。请确保诊所使用正品探头并在电子病历中记录参数。"
+    },
+    4: {
+        name: "Fitzpatrick Type IV（浅棕色 / 橄榄色）",
+        behavior: "极少晒伤，容易晒黑为中度棕色。",
+        lasers: "色素反应中高风险。需使用 Nd:YAG 或保守参数的点阵设备。",
+        warning: "反黑 (PIH) 高风险。若将浅肤色的标准参数用于 Type IV 皮肤，会引发剧烈黑色素应激反应，留下数月难消的深色斑块。医生必须评估您当前的晒黑状态并调整冷却保护。"
+    },
+    5: {
+        name: "Fitzpatrick Type V（深棕色）",
+        behavior: "罕见晒伤，极易晒黑为深棕色。",
+        lasers: "脱毛/净肤仅限使用 Nd:YAG 激光。严禁使用标准 IPL 或翠绿宝石 (Alex) 激光。",
+        warning: "严重色素沉着与灼伤预警。Type V 皮肤黑色素极度活跃。流水线诊所若使用标准翠绿宝石或 IPL 波长，激光无法区分毛发/色素与周围皮肤，会导致表皮严重灼伤。安全治疗必须配备长脉宽 Nd:YAG 激光。"
+    },
+    6: {
+        name: "Fitzpatrick Type VI（深褐色 / 黑色）",
+        behavior: "从不晒伤，深层色素沉着。",
+        lasers: "仅限使用长脉宽 Nd:YAG 激光。表皮冷却机制必须开至最大。",
+        warning: "黑色素极度应激警告。工厂型诊所对 Type VI 皮肤具有极高危险性。标准激光参数会导致永久性色素脱失（白斑）或严重化学灼伤。必须选择拥有专有 Nd:YAG 硬件及长脉宽调校经验的精品诊所。"
+    }
+};
+
 // Extracted globally for data tracking
 window.fitzpatrickProfiles_en = fitzpatrickProfiles_en;
 window.fitzpatrickProfiles_ko = fitzpatrickProfiles_ko;
 window.fitzpatrickProfiles_ja = fitzpatrickProfiles_ja;
+window.fitzpatrickProfiles_zh = fitzpatrickProfiles_zh;
 
 function t(key) {
     const dict = translations[currentLang] || translations['en'];
@@ -1842,6 +2041,37 @@ const specialtyTranslations = {
         "rosacea & redness care": "赤ら顔・赤みケア",
         "natural double eyelid": "ナチュラル二重",
         "실리콘 코성형": "シリコン鼻整形"
+    },
+    zh: {
+        "nd:yag laser calibrations": "Nd:YAG 激光校准",
+        "skin barrier reconstruction": "皮肤屏障修复",
+        "pico toning": "皮秒净肤",
+        "rejuran healer": "丽珠兰三合一",
+        "laser toning": "激光净肤",
+        "vascular laser calibration": "血管激光校准",
+        "rosacea & redness recovery": "酒糟鼻/红血丝修复",
+        "ultrasonic rejuvenation": "超声抗衰嫩肤",
+        "1:1 wavelength tuning": "1:1 波长精准调校",
+        "dual-cooling safety protocols": "双重冷却安全方案",
+        "high-fluence pigment management": "高能量色素沉着管理",
+        "nose filler": "玻尿酸隆鼻",
+        "square jaw botox": "瘦脸针",
+        "genuine consumables logged": "正品探头实名记录",
+        "ultherapy & shurink custom setups": "美式超声刀 & 黄金超声炮定制",
+        "epidermal thickness diagnostic": "表皮厚度诊断",
+        "ulthera": "美版超声刀",
+        "shurink": "韩版超声炮",
+        "nd:yag & pico laser certified": "Nd:YAG & 皮秒激光认证",
+        "100% physician consultation": "100% 医生亲自面诊",
+        "youth acne barrier healing": "青春痘/痘坑屏障修护",
+        "laser hair removal": "冰点激光脱毛",
+        "fraxel": "飞嘉/点阵激光",
+        "skin booster": "水光针",
+        "lifting": "提升紧致",
+        "pigmentation": "祛斑美白",
+        "acne": "祛痘修护",
+        "filler": "玻尿酸注射",
+        "botox": "肉毒素祛皱"
     }
 };
 

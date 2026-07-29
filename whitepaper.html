@@ -331,6 +331,10 @@
             display: block;
         }
 
+        body[data-lang="zh"] .trans-block.lang-zh {
+            display: block;
+        }
+
         /* Font Overrides for CJK Modern Sans-Serif heading rendering */
         body[data-lang="ko"] .doc-section h1,
         body[data-lang="ko"] .doc-section h2,
@@ -343,6 +347,13 @@
         body[data-lang="ja"] .doc-section h2,
         body[data-lang="ja"] .alert-box h4 {
             font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+        }
+
+        body[data-lang="zh"] .doc-section h1,
+        body[data-lang="zh"] .doc-section h2,
+        body[data-lang="zh"] .alert-box h4 {
+            font-family: 'Outfit', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
             font-weight: 700;
         }
     </style>
@@ -366,6 +377,7 @@
                     <button class="lang-btn" data-lang-val="en" onclick="setLanguage('en')">EN</button>
                     <button class="lang-btn active" data-lang-val="ko" onclick="setLanguage('ko')">한국어</button>
                     <button class="lang-btn" data-lang-val="ja" onclick="setLanguage('ja')">日本語</button>
+                    <button class="lang-btn" data-lang-val="zh" onclick="setLanguage('zh')">中文</button>
                 </div>
                 <a href="index.html" class="back-btn">← Back to Directory</a>
             </div>
@@ -449,6 +461,26 @@
                         </p>
                     </div>
                 </div>
+
+                <!-- CHINESE -->
+                <div class="trans-block lang-zh">
+                    <h1>合作医生系统白书</h1>
+                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                        “重塑医疗专业价值：摆脱低价恶性竞争，安全精准匹配全球高端求美者。”
+                    </p>
+                    <p>
+                        KOMICARE 是与皮肤科专科医生及合作医疗团队共同设计的尊享美肤匹配与安全验证系统。在当前的赴韩医美市场中，中介机构的高额抽成、夸大推销以及“流水线工厂”诊所的统一高能量操作，导致医疗质量下滑与副作用纠纷屡见不鲜。
+                    </p>
+                    <p>
+                        我们的使命是构建一个保护医生专业诊疗价值的生态系统。通过海外合规数据运营、求美者隐私去标识化遮蔽以及 Fitzpatrick 皮肤诊断通行证系统，帮助医生专注于每位患者的精细化安全诊疗，获得与其专业相匹配的合理诊疗价值。
+                    </p>
+                    <div class="alert-box">
+                        <h4>医师合作核心价值</h4>
+                        <p>
+                            与单纯诱导低价折扣的平台不同，KOMICARE 优先匹配注重安全且愿意为专业付费的高价值海外 VIP 求美者。同时，通过提前颁发 Fitzpatrick 皮肤通行证，从源头规避诊室内的副作用纠纷与反黑风险。
+                        </p>
+                    </div>
+                </div>
             </section>
 
             <!-- ==================== SECTION 2: PORTAL SITEMAP ==================== -->
@@ -518,6 +550,28 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- CHINESE -->
+                <div class="trans-block lang-zh">
+                    <h1>2. 门户网站地图与路由架构</h1>
+                    <p>
+                        KOMICARE 系统基于 Vercel Edge 边缘网络提供极速静态资源加载，并结合 Supabase 数据库实现无服务器后端架构。整体路由与网站地图如下：
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong><code>/</code> (主页 - <code>index.html</code>)</strong>
+                            <span class="sitemap-desc">海外求美者访问的核心入口。包含皮肤通行证测试、退税单隐私遮蔽演示、安全手册弹窗及多语种诊所名录。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/clinic</code> (医师入驻登记 - <code>clinic.html</code>)</strong>
+                            <span class="sitemap-desc">持有邀请码 (<code>KOMIPARTNER2026</code>) 的合作诊所院长录入医生资质、从业年限并实时预览展示卡片的服务后台。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong><code>/whitepaper</code> (系统白书 - <code>whitepaper.html</code>)</strong>
+                            <span class="sitemap-desc">面向合作医生与开发团队的架构规范、数据映射标准及合作路线图文档。</span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- ==================== SECTION 3: CORE FEATURES SPEC ==================== -->
@@ -581,6 +635,26 @@
                         KOMICAREの評価システムは単なる星評価ではありません。「医師の丁寧な説明」「正直な診療（過剰診療なし）」「アフターケア満足度」など、**実際の医学的専門性と医療倫理を数値化**します。カウンセラーによるアップセルや流れ作業のカウンセリングではなく、院長の誠実な診療姿勢が際立つ設計になっています。
                     </p>
                 </div>
+
+                <!-- CHINESE -->
+                <div class="trans-block lang-zh">
+                    <h1>3. 医师视角核心功能规范</h1>
+                    
+                    <h2>1) Fitzpatrick 皮肤诊断通行证与能量参数引导</h2>
+                    <p>
+                        海外求美者拥有多样化的 Fitzpatrick 肤质类型（如深色肤质 IV-VI 型）。部分流水线诊所若直接施加亚洲浅肤色的强激光能量，极易引发色素沉着 (PIH) 或灼伤。KOMICARE 测试颁发的**皮肤通行证**引导患者在术前与院长沟通调整脉宽与冷却参数，有效化解医疗纠纷。
+                    </p>
+
+                    <h2>2) 退税单隐私遮蔽保护引擎</h2>
+                    <p>
+                        为防止恶意差评勒索或同行恶意诋毁，KOMICARE 在前端自动遮蔽退税单上的时间戳、核准编号与条形码。在严密保护求美者与诊所隐私的同时，确保每一条评价均来自真实的到店消费。
+                    </p>
+
+                    <h2>3) 12 项医疗细分评价维度</h2>
+                    <p>
+                        KOMICARE 拒绝单一的 5 星评分，而是对 `医生讲解详细度`、`诚信诊疗（无过度推销）`、`术后追踪护理` 等**医疗专业性与职业道德进行量化评估**，让注重品质与口碑的精品诊所脱颖而出。
+                    </p>
+                </div>
             </section>
 
             <!-- ==================== SECTION 4: SYSTEM ARCHITECTURE ==================== -->
@@ -636,6 +710,24 @@
     └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB</code></pre>
                     <p>
                         <strong>サーバーレスAPIセキュリティ</strong>: Node.jsベースのAPIルーターは、フロントエンドでのSupabase秘密キー(service_role)の露出を防ぎ、ドメイン検証およびCORSヘッダーを通じて無断クロールやデータ流出を防止します。
+                    </p>
+                </div>
+
+                <!-- CHINESE -->
+                <div class="trans-block lang-zh">
+                    <h1>4. 系统架构与安全防护</h1>
+                    <p>
+                        KOMICARE 部署于 Vercel Edge CDN 基础设施之上，确保全球求美者访问时具备极低的网络延迟。
+                    </p>
+                    <pre><code>[海外求美者 / 院长浏览器] 
+    │
+    ├── (静态资源加载) ──────────> Vercel Edge CDN (高速缓存)
+    │
+    ├── (GET /api/clinics) ──────────> Vercel Serverless ──> Supabase DB
+    │
+    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB</code></pre>
+                    <p>
+                        <strong>无服务器 API 安全</strong>: 基于 Node.js 的 API 路由彻底隔离 Supabase 密钥，并通过 CORS 请求头保护数据库不受非法爬虫窃取。
                     </p>
                 </div>
             </section>
@@ -791,6 +883,56 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- CHINESE -->
+                <div class="trans-block lang-zh">
+                    <h1>5. 数据库关系型规范</h1>
+                    <p>
+                        后端采用 PostgreSQL 关系型数据库，确保数据完整性与高并发读取。
+                    </p>
+                    <h3>数据表规范: <code>public.clinics</code> (合作诊所基本信息)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>字段名</th>
+                                <th>数据类型</th>
+                                <th>医疗角色与说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>SERIAL (PK)</td>
+                                <td>诊所唯一索引编号</td>
+                            </tr>
+                            <tr>
+                                <td><code>name</code></td>
+                                <td>TEXT</td>
+                                <td>诊所名称 (中/英/韩 整合字段)</td>
+                            </tr>
+                            <tr>
+                                <td><code>doctor_type</code></td>
+                                <td>TEXT</td>
+                                <td>医生资质类型 (皮肤科专科医生、专科医生、普通医师)</td>
+                            </tr>
+                            <tr>
+                                <td><code>experience_years</code></td>
+                                <td>INTEGER</td>
+                                <td>院长实际临床从业年限 (默认 7)</td>
+                            </tr>
+                            <tr>
+                                <td><code>sleep_anesthesia</code></td>
+                                <td>BOOLEAN</td>
+                                <td>是否配备睡眠麻醉与监护设备</td>
+                            </tr>
+                            <tr>
+                                <td><code>foreign_attraction_registered</code></td>
+                                <td>BOOLEAN</td>
+                                <td>保健福祉部指定吸引外国患者医疗机构认证</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
             <!-- ==================== SECTION 6: FUTURE PARTNERSHIP ROADMAP ==================== -->
@@ -857,6 +999,28 @@
                         <div class="sitemap-node">
                             <strong>3. 医師向け共同法的防御ネットワーク</strong>
                             <span class="sitemap-desc">返金を目的とした悪質なレビュー攻撃を行うブラックリスト情報を提携クリニック間で共有し、共同で法的サポートを行います。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHINESE -->
+                <div class="trans-block lang-zh">
+                    <h1>6. 医疗团队合作与验证路线图</h1>
+                    <p>
+                        KOMICARE 致力于为真正具备精湛医术的合作诊所背书，并打造受求美者信赖的医疗网络：
+                    </p>
+                    <div class="sitemap-tree">
+                        <div class="sitemap-node">
+                            <strong>1. 零佣金直连匹配</strong>
+                            <span class="sitemap-desc">拒绝中介机构的高额抽成。求美者完成预约后，将直接对接诊所官方客服（微信、LINE、WhatsApp 等），无中间商差价。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>2. 正品探头日志验真</strong>
+                            <span class="sitemap-desc">为录入美版超声刀、热玛吉等正品耗材序列号日志的诊所颁发“正品探头认证勋章”，与使用回收假探头低价倾销的工厂诊所划清界限。</span>
+                        </div>
+                        <div class="sitemap-node">
+                            <strong>3. 医师联合法律防护网</strong>
+                            <span class="sitemap-desc">建立匿名黑名单数据库，协助合作诊所共同抵制以索赔为目的的恶意差评攻击，并提供法律援助。</span>
                         </div>
                     </div>
                 </div>
