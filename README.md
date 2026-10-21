@@ -52,6 +52,7 @@ git push -u origin main
 3. **Environment Variables (환경 변수)** 탭을 펼친 후 아래 두 가지 항목을 추가합니다:
    * **Key**: `SUPABASE_URL` / **Value**: *복사해둔 Supabase Project URL*
    * **Key**: `SUPABASE_SERVICE_ROLE_KEY` / **Value**: *복사해둔 Supabase service_role Key*
+   * **Key**: `PARTNER_INVITE_CODE` / **Value**: *병원 파트너 등록 포털(`/clinic`) 초대 코드* — 서버에서만 검증되며, 설정하지 않으면 파트너 등록이 비활성화됩니다.
 4. **Deploy** 버튼을 눌러 배포를 완료합니다.
 
 ---

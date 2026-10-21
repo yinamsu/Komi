@@ -1,20 +1,7 @@
 const { createClient } = require('@supabase/supabase-js');
+const { isValidInviteCode, isSafeMapEmbedUrl } = require('./_lib/security');
 
 module.exports = async (req, res) => {
-    // Enable CORS
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
-
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
-
     if (req.method !== 'POST') {
         return res.status(405).json({ success: false, error: 'Method Not Allowed' });
     }
@@ -39,17 +26,28 @@ module.exports = async (req, res) => {
             foreign_attraction_registered,
             foreigner_insurance,
             excellent_aftercare,
-            experience_years
+            experience_years,
+            verifyOnly
         } = req.body || {};
 
-        // Validate passcode
-        if (inviteCode !== 'KOMIPARTNER2026') {
+        // Validate passcode against the server-side secret
+        if (!process.env.PARTNER_INVITE_CODE) {
+            console.error("PARTNER_INVITE_CODE is not configured. Partner registration is disabled.");
+            return res.status(503).json({ success: false, error: 'Partner registration is not available right now' });
+        }
+        if (!isValidInviteCode(inviteCode)) {
             return res.status(401).json({ success: false, error: 'Invalid invitation code' });
+        }
+        if (verifyOnly) {
+            return res.status(200).json({ success: true });
         }
 
         // Validate basic inputs
         if (!name || !location || !doctor_name) {
             return res.status(400).json({ success: false, error: 'Missing required fields (name, location, doctor_name)' });
+        }
+        if (!isSafeMapEmbedUrl(map_iframe)) {
+            return res.status(400).json({ success: false, error: 'Map URL must be a Google Maps embed link (https://www.google.com/maps/embed?...)' });
         }
 
         // Default rating for newly registered clinic
@@ -159,6 +157,6 @@ module.exports = async (req, res) => {
 
     } catch (err) {
         console.error("API Error registering clinic:", err);
-        return res.status(500).json({ success: false, error: err.message });
+        return res.status(500).json({ success: false, error: 'Internal Server Error. Failed to register clinic.' });
     }
 };

@@ -366,7 +366,7 @@
             <p>Please enter your invitation passcode to access the registry desk.</p>
             <div class="input-group">
                 <label for="passcodeField">Passcode</label>
-                <input type="password" id="passcodeField" placeholder="e.g. KOMIPARTNER2026">
+                <input type="password" id="passcodeField" placeholder="Enter your invitation code">
             </div>
             <button class="btn-premium" onclick="validatePasscode()">Authenticate</button>
         </div>
@@ -525,7 +525,6 @@
     </div>
 
     <script>
-        const targetPasscode = 'KOMIPARTNER2026';
         const rawSpecialties = [
             "Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning", 
             "Skin Booster", "Lifting", "Pigmentation", "Vascular Laser Calibration", 
@@ -558,10 +557,24 @@
             updateLivePreview();
         }
 
-        function validatePasscode() {
+        // The invite code is verified server-side only; the final submit re-checks it
+        async function validatePasscode() {
             const input = document.getElementById('passcodeField').value.trim();
             const authBox = document.getElementById('authBox');
-            if (input === targetPasscode) {
+            let verified = false;
+            try {
+                const response = await fetch('/api/submit-clinic', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ inviteCode: input, verifyOnly: true })
+                });
+                const result = await response.json();
+                verified = !!(result && result.success);
+                if (!verified && response.status === 503) alert(result.error);
+            } catch (err) {
+                console.error(err);
+            }
+            if (verified) {
                 authBox.style.display = 'none';
                 document.getElementById('mainDashboard').style.display = 'grid';
             } else {
@@ -599,15 +612,19 @@
             const foreignerInsurance = document.getElementById('foreignerInsurance').checked;
             const excellentAftercare = document.getElementById('excellentAftercare').checked;
 
+            const escapeHTML = (value) => String(value ?? '')
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
             // Split language formatting
             const getDisplayLanguage = (text) => {
                 if (text.includes('|')) {
-                    return text.split('|')[0].trim();
+                    return escapeHTML(text.split('|')[0].trim());
                 }
-                return text;
+                return escapeHTML(text);
             };
 
-            const tagsHTML = specialties.map(s => `<span class="partner-tag">${s}</span>`).join('');
+            const tagsHTML = specialties.map(s => `<span class="partner-tag">${escapeHTML(s)}</span>`).join('');
             
             let docTypeLabel = doctorType === 'dermatologist' ? 'Board-Certified Dermatologist' : (doctorType === 'specialist' ? 'Specialist' : 'General Practitioner');
             let anesthesiaLabel = sleepAnesthesia ? (residentAnesthesiologist ? 'Resident Anesthesiologist' : 'Sleep Anesthesia') : '';
@@ -623,7 +640,7 @@
                     </div>
                     <div class="partner-tags">
                         ${tagsHTML || '<span class="partner-tag" style="opacity: 0.5;">No Specialty Chosen</span>'}
-                        <span class="partner-tag slots">${slots}</span>
+                        <span class="partner-tag slots">${escapeHTML(slots)}</span>
                     </div>
                     <div class="safety-badges-row">
                         <span class="safety-badge badge-dermatologist">${docTypeLabel}</span>
@@ -634,7 +651,7 @@
                     </div>
                     <div class="partner-doctors">
                         <div class="doctor-profile">
-                            <div class="doctor-avatar">${avatarInitials}</div>
+                            <div class="doctor-avatar">${escapeHTML(avatarInitials)}</div>
                             <div class="doctor-meta">
                                 <h5>${getDisplayLanguage(docNameVal)}</h5>
                                 <p>${getDisplayLanguage(docTitleVal)}</p>

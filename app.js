@@ -913,6 +913,26 @@ async function loadClinics() {
     }
 }
 
+// Escape untrusted strings (DB clinic data, user-typed reviews) before interpolating into HTML
+function escapeHTML(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+// Mirror of the server-side check: only Google Maps embed URLs may become an iframe src
+function isSafeMapEmbedUrl(value) {
+    try {
+        const url = new URL(value);
+        return url.protocol === 'https:' && url.hostname === 'www.google.com' && url.pathname.startsWith('/maps/embed');
+    } catch (e) {
+        return false;
+    }
+}
+
 function getLocalizedText(rawText) {
     if (!rawText) return '';
     const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
@@ -957,33 +977,33 @@ function renderClinicCards(clinics) {
                 const translated = t(key);
                 displayTag = (translated && translated !== key) ? translated : spec;
             }
-            return `<span class="partner-tag">${displayTag}</span>`;
+            return `<span class="partner-tag">${escapeHTML(displayTag)}</span>`;
         }).join('');
         const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();
 
         let doctorTypeLabel = t(`badge.${clinic.doctor_type}`) || clinic.doctor_type;
         let anesthesiaLabel = clinic.sleep_anesthesia ? (clinic.anesthesiologist_resident ? t('badge.anesthesiologist') : t('badge.no_anesthesiologist')) : '';
 
-        const localizedName = getLocalizedText(clinic.name);
-        const localizedLoc = getLocalizedText(clinic.location);
-        const localizedDocName = getLocalizedText(clinic.doctor_name);
-        const localizedDocTitle = getLocalizedText(clinic.doctor_title);
+        const localizedName = escapeHTML(getLocalizedText(clinic.name));
+        const localizedLoc = escapeHTML(getLocalizedText(clinic.location));
+        const localizedDocName = escapeHTML(getLocalizedText(clinic.doctor_name));
+        const localizedDocTitle = escapeHTML(getLocalizedText(clinic.doctor_title));
 
         const cardHTML = `
-            <div class="partner-card" data-clinic-id="${clinic.id}">
+            <div class="partner-card" data-clinic-id="${escapeHTML(clinic.id)}">
                 <div class="partner-top">
                     <div class="partner-info">
                         <h4>${localizedName}</h4>
                         <span class="partner-location">${localizedLoc}</span>
                     </div>
-                    <div class="partner-rating"><span>⭐ ${ratingVal}</span></div>
+                    <div class="partner-rating"><span>⭐ ${escapeHTML(ratingVal)}</span></div>
                 </div>
                 <div class="partner-tags">
                     ${tagsHTML}
-                    <span class="partner-tag slots">${clinic.slots_tag}</span>
+                    <span class="partner-tag slots">${escapeHTML(clinic.slots_tag)}</span>
                 </div>
                 <div class="safety-badges-row">
-                    <span class="safety-badge badge-dermatologist">${doctorTypeLabel}</span>
+                    <span class="safety-badge badge-dermatologist">${escapeHTML(doctorTypeLabel)}</span>
                     ${anesthesiaLabel ? `<span class="safety-badge badge-anesthesiologist">${anesthesiaLabel}</span>` : ''}
                     ${clinic.foreign_attraction_registered ? `<span class="safety-badge badge-registered">${t('badge.foreign_attraction')}</span>` : ''}
                     ${clinic.foreigner_insurance ? `<span class="safety-badge badge-insurance">${t('badge.foreigner_insurance')}</span>` : ''}
@@ -991,7 +1011,7 @@ function renderClinicCards(clinics) {
                 </div>
                 <div class="partner-doctors">
                     <div class="doctor-profile">
-                        <div class="doctor-avatar">${clinic.doctor_avatar}</div>
+                        <div class="doctor-avatar">${escapeHTML(clinic.doctor_avatar)}</div>
                         <div class="doctor-meta"><h5>${localizedDocName}</h5><p>${localizedDocTitle}</p></div>
                     </div>
                 </div>
@@ -1068,7 +1088,7 @@ function openClinicDetailModal(clinicId) {
         
         let goodText = lang === 'ko' ? '"원장님이 피부 두께를 직접 자로 재가며 파장을 수동 조절해 주신 점이 대만족이었습니다."' : '"Loved how the doctor manually adjusted the wavelength based on my exact skin profile."';
         if (reviewsForClinic.length > 0 && reviewsForClinic[reviewsForClinic.length - 1].good) {
-            goodText = `"${reviewsForClinic[reviewsForClinic.length - 1].good}"`;
+            goodText = `"${escapeHTML(reviewsForClinic[reviewsForClinic.length - 1].good)}"`;
         }
         
         highlightBox.innerHTML = `
@@ -1080,7 +1100,7 @@ function openClinicDetailModal(clinicId) {
         // Areas for Improvement
         let badText = "";
         if (reviewsForClinic.length > 0 && reviewsForClinic[reviewsForClinic.length - 1].bad) {
-            badText = `"${reviewsForClinic[reviewsForClinic.length - 1].bad}"`;
+            badText = `"${escapeHTML(reviewsForClinic[reviewsForClinic.length - 1].bad)}"`;
         }
         
         if (badText) {
@@ -1100,7 +1120,7 @@ function openClinicDetailModal(clinicId) {
     document.getElementById('clinic-detail-doc-bio').textContent = getLocalizedText(data.doctor_bio);
 
     const mapIframe = document.getElementById('clinic-detail-map-iframe');
-    if (mapIframe) mapIframe.src = data.map_iframe;
+    if (mapIframe) mapIframe.src = isSafeMapEmbedUrl(data.map_iframe) ? data.map_iframe : 'about:blank';
 
     const modal = document.getElementById('clinicModal');
     if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
@@ -1906,8 +1926,8 @@ function appendReviewToGrid(review) {
     if (!triggerBtn) return;
     
     const clinic = loadedClinicsGlobal.find(c => c.id === review.clinicId);
-    const clinicName = clinic ? clinic.name : 'Selected Boutique Clinic';
-    const doctorName = clinic ? clinic.doctor_name : 'Chief Physician';
+    const clinicName = escapeHTML(clinic ? clinic.name : 'Selected Boutique Clinic');
+    const doctorName = escapeHTML(clinic ? clinic.doctor_name : 'Chief Physician');
     
     const fitzType = quizData.fitzpatrickType || 3;
     const skinLabel = getCurrentLang() === 'ko' ? `피츠패트릭 Type ${fitzType}` : `Fitzpatrick Type ${fitzType}`;
@@ -1933,7 +1953,7 @@ function appendReviewToGrid(review) {
                 </div>
             </div>
             <p class="review-content">
-                "${review.good}"
+                "${escapeHTML(review.good)}"
             </p>
             <div class="review-doctor-link">
                 <span>Clinic: ${clinicName}</span>
@@ -2182,8 +2202,8 @@ function renderReviews(reviewsData, grid, isBest = false) {
                 <button class="review-helpful-btn">👍 ${helpfulText} <span class="helpful-count">${r.helpful}</span></button>
             </div>
             <div class="review-doctor-link">
-                <span class="review-clinic-link" data-clinic-id="${r.clinicId}">${clinicPrefix}<strong>${r.clinic}</strong></span>
-                <span>${physicianPrefix}<strong>${r.doctor}</strong></span>
+                <span class="review-clinic-link" data-clinic-id="${escapeHTML(r.clinicId)}">${clinicPrefix}<strong>${escapeHTML(r.clinic)}</strong></span>
+                <span>${physicianPrefix}<strong>${escapeHTML(r.doctor)}</strong></span>
             </div>
         `;
         grid.appendChild(card);

@@ -1,4 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
+const { isSafeMapEmbedUrl } = require('./_lib/security');
 
 const fallbackClinics = [
     {
@@ -550,22 +551,8 @@ function expandClinicsWithGenerator(baseList) {
 const expandedFallbackClinics = expandClinicsWithGenerator(fallbackClinics);
 
 module.exports = async (req, res) => {
-    // Enable CORS
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
-
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
-
     if (req.method !== 'GET') {
-        return res.status(455).json({ error: 'Method Not Allowed' });
+        return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
     try {
@@ -609,7 +596,7 @@ module.exports = async (req, res) => {
             doctor_title: item.doctor_title,
             doctor_bio: item.doctor_bio,
             hours: item.hours,
-            map_iframe: item.map_iframe,
+            map_iframe: isSafeMapEmbedUrl(item.map_iframe) ? item.map_iframe : '',
             slots_tag: item.slots_tag,
             doctor_type: item.doctor_type,
             sleep_anesthesia: item.sleep_anesthesia,
@@ -628,7 +615,6 @@ module.exports = async (req, res) => {
         return res.status(200).json({ 
             success: true, 
             clinics: expandedFallbackClinics, 
-            errorMsg: err.message,
             isSimulationFallback: true 
         });
     }
