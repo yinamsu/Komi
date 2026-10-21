@@ -3952,3 +3952,121 @@ html[data-theme="dark"] .submenu-title {
     border-color: var(--color-accent);
     box-shadow: 0 0 10px rgba(216, 184, 141, 0.2);
 }
+/* ========================================================
+   Design polish: contrast-safe accents, hero checklist, unified category tiles
+   ======================================================== */
+
+/* Section title accent: emerald disappears on the dark background, use champagne gold instead */
+html[data-theme="dark"] .section-title-serif {
+    color: var(--color-accent) !important;
+}
+
+/* Hero value props as a two-column checklist instead of a numbered text block */
+.hero-points {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 28px;
+    max-width: 680px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+.hero-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--text-secondary);
+}
+
+.hero-point::before {
+    content: "";
+    flex: 0 0 20px;
+    height: 20px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: rgba(var(--color-accent-rgb), 0.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c5a880' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.35);
+}
+
+@media (max-width: 576px) {
+    .hero-points {
+        grid-template-columns: 1fr;
+        font-size: 15px;
+    }
+}
+
+/* Category tiles: one brand-consistent treatment instead of 13 unrelated gradients */
+.visual-category-menu .icon-circle {
+    background: linear-gradient(160deg, rgba(var(--color-accent-rgb), 0.12), rgba(var(--color-accent-rgb), 0.03));
+    border: 1px solid rgba(var(--color-accent-rgb), 0.28);
+    color: var(--color-accent);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.visual-category-item:hover .icon-circle {
+    border-color: rgba(var(--color-accent-rgb), 0.6);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 24px rgba(var(--color-accent-rgb), 0.16);
+}
+
+.visual-category-menu .visual-category-item.active .icon-circle {
+    background: linear-gradient(160deg, var(--color-accent), #a8865a);
+    border-color: var(--color-accent);
+    color: #0b1420;
+    box-shadow: 0 8px 22px rgba(var(--color-accent-rgb), 0.35);
+}
+
+html[data-theme="light"] .visual-category-menu .icon-circle {
+    background: #ffffff;
+    border-color: var(--border-color);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-soft);
+}
+
+html[data-theme="light"] .visual-category-item:hover .icon-circle {
+    border-color: var(--color-accent);
+}
+
+html[data-theme="light"] .visual-category-menu .visual-category-item.active .icon-circle {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+}
+
+/* Mobile: keep the header inside the viewport and the hero headline readable */
+.hero {
+    overflow-x: clip;
+}
+
+.hero-headline {
+    word-break: keep-all;
+}
+
+@media (max-width: 576px) {
+    .header-container {
+        gap: 10px;
+    }
+
+    .header-container > div {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 6px !important;
+    }
+
+    .lang-btn {
+        padding: 5px 7px;
+        font-size: 11px;
+    }
+
+    .hero-headline {
+        font-size: clamp(28px, 8vw, 40px);
+        line-height: 1.22;
+    }
+
+    /* Let the social proof line flow as one sentence instead of two squeezed columns */
+    .social-proof-badge {
+        display: inline-block;
+        text-align: center;
+        line-height: 1.5;
+    }
+}

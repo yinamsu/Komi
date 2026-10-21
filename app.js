@@ -129,11 +129,8 @@ function advanceStep(nextStep) {
         const pct = (nextStep / 3) * 100;
         progressFill.style.width = `${pct}%`;
 
-        if (typeof t === 'function' && t('quiz.progress') !== 'quiz.progress') {
-            progressText.textContent = t('quiz.progress').replace('{current}', nextStep);
-        } else {
-            progressText.textContent = `Step ${nextStep} of 3`;
-        }
+        progressText.dataset.step = nextStep;
+        progressText.textContent = t('quiz.progress').replace('{current}', nextStep);
     }
 }
 
@@ -2244,6 +2241,10 @@ function renderReviews(reviewsData, grid, isBest = false) {
 
 // Listen to language change to redraw clinic list immediately
 window.addEventListener('languageChanged', () => {
+    const progressText = document.querySelector('.quiz-progress-text');
+    if (progressText) {
+        progressText.textContent = t('quiz.progress').replace('{current}', progressText.dataset.step || 1);
+    }
     if (typeof loadedClinicsGlobal !== 'undefined' && loadedClinicsGlobal.length > 0) {
         renderClinicCards(loadedClinicsGlobal);
     }

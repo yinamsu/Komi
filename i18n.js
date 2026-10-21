@@ -14,7 +14,7 @@ const translations = {
         "hero.social_proof_suffix": "securing early access this month.",
         "hero.headline": "Visiting Seoul for K-Beauty? <br>",
         "hero.headline_gradient": "Tired of fake reviews & \"factory\" clinics?",
-        "hero.subheadline": "1) 100% visit-verified authentic reviews<br>2) Real experiences and honest feedback from foreign patients<br>3) Zero sponsorship or sponsored ads<br>4) Accurate and transparent treatment pricing<br>5) Hand-pick doctors with high aesthetic standards<br>6) Post-treatment care even after returning home",
+        "hero.subheadline": "<span class='hero-point'>100% visit-verified authentic reviews</span><span class='hero-point'>Real experiences and honest feedback from foreign patients</span><span class='hero-point'>Zero sponsorship or sponsored ads</span><span class='hero-point'>Accurate and transparent treatment pricing</span><span class='hero-point'>Hand-pick doctors with high aesthetic standards</span><span class='hero-point'>Post-treatment care even after returning home</span>",
 
         // ---- Quiz ----
         "quiz.step_title": "Step 1: Check Your Skin Behavior",
@@ -461,6 +461,7 @@ const translations = {
         "diff.row4_komi": "1-Month-later review gets skincare point rewards",
         "diff.row5_feature": "Malicious Review Policy",
         "diff.row5_legacy": "Platform deletes them immediately upon clinic request",
+        "diff.row5_komi": "Platform mediates only; clinic and client settle directly (Coupang Eats model)",
         "metric.friendliness": "Staff Friendliness",
         "metric.consultation": "Doctor Consultation",
         "metric.language": "Language Support",
@@ -540,7 +541,7 @@ const translations = {
         "hero.social_proof_suffix": "이번 달 얼리 액세스를 확보하고 있습니다.",
         "hero.headline": "K-Beauty를 찾아온 외국 친구들! <br>",
         "hero.headline_gradient": "'광고성 허위리뷰', '공장형 진료'에 지치셨나요?",
-        "hero.subheadline": "1) 100% 실제 고객 방문 인증 절차<br>2) 외국인 환자의 직접 경험담, 솔직한 후기<br>3) 협찬 혹은 광고 없음<br>4) 시술 비용 정확한 안내<br>5) 미감 좋은 의사를 직접 고를 수 있음<br>6) 출국 후에도 후 케어 서비스를 제공합니다",
+        "hero.subheadline": "<span class='hero-point'>100% 실제 고객 방문 인증 절차</span><span class='hero-point'>외국인 환자의 직접 경험담, 솔직한 후기</span><span class='hero-point'>협찬 혹은 광고 없음</span><span class='hero-point'>시술 비용 정확한 안내</span><span class='hero-point'>미감 좋은 의사를 직접 고를 수 있음</span><span class='hero-point'>출국 후에도 후 케어 서비스를 제공합니다</span>",
 
         // ---- Quiz ----
         "quiz.step_title": "1단계: 피부 반응 확인",
@@ -1221,7 +1222,7 @@ const translations = {
         "hero.social_proof_suffix": "先行アクセス権を獲得しました。",
         "hero.headline": "K-Beautyで渡韓予定？ <br>",
         "hero.headline_gradient": "サクラや「工場型」クリニックにうんざり？",
-        "hero.subheadline": "1) 100%来院認証済みのリアルな口コミ<br>2) 外国人患者の直接の体験談と正直なレビュー<br>3) 広告やスポンサー提携の一切排除<br>4) 正確で透明な施術費用の案内<br>5) 優れた審美眼を持つ医師を直接指名可能<br>6) 帰国後も安心のポストケア（アフターケア）提供",
+        "hero.subheadline": "<span class='hero-point'>100%来院認証済みのリアルな口コミ</span><span class='hero-point'>外国人患者の直接の体験談と正直なレビュー</span><span class='hero-point'>広告やスポンサー提携の一切排除</span><span class='hero-point'>正確で透明な施術費用の案内</span><span class='hero-point'>優れた審美眼を持つ医師を直接指名可能</span><span class='hero-point'>帰国後も安心のポストケア（アフターケア）提供</span>",
 
         // ---- Quiz ----
         "quiz.step_title": "ステップ 1: 肌の反応を確認する",
@@ -1445,7 +1446,7 @@ const translations = {
         "hero.social_proof_suffix": "本月获得优先预约资格。",
         "hero.headline": "前往首尔体验 K-Beauty？ <br>",
         "hero.headline_gradient": "厌倦了虚假点评与流水线“工厂”诊所？",
-        "hero.subheadline": "1) 100% 到店验证真实评价<br>2) 外国求美者真实体验与客观反馈<br>3) 零广告赞助与虚假推广<br>4) 透明准确的诊疗价格<br>5) 严格筛选审美出众的专业医生<br>6) 术后回国全流程追踪护理",
+        "hero.subheadline": "<span class='hero-point'>100% 到店验证真实评价</span><span class='hero-point'>外国求美者真实体验与客观反馈</span><span class='hero-point'>零广告赞助与虚假推广</span><span class='hero-point'>透明准确的诊疗价格</span><span class='hero-point'>严格筛选审美出众的专业医生</span><span class='hero-point'>术后回国全流程追踪护理</span>",
 
         // ---- Quiz ----
         "quiz.step_title": "第 1 步：检测您的皮肤类型",
