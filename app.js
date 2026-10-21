@@ -1083,7 +1083,7 @@ function openClinicDetailModal(clinicId) {
         const highlightBox = document.createElement('div');
         highlightBox.style.cssText = 'margin-top: 16px; background: var(--bg-primary); padding: 12px; border-radius: 8px; font-size: 12px; border-left: 4px solid var(--color-success);';
         
-        let goodText = lang === 'ko' ? '"원장님이 피부 두께를 직접 자로 재가며 파장을 수동 조절해 주신 점이 대만족이었습니다."' : '"Loved how the doctor manually adjusted the wavelength based on my exact skin profile."';
+        let goodText = `"${t('clinic.default_highlight')}"`;
         if (reviewsForClinic.length > 0 && reviewsForClinic[reviewsForClinic.length - 1].good) {
             goodText = `"${escapeHTML(reviewsForClinic[reviewsForClinic.length - 1].good)}"`;
         }
@@ -1782,12 +1782,12 @@ function initWizard() {
             // Validate doctor selection
             const docSelect = document.getElementById('reviewDoctorSelect');
             if (!docSelect || !docSelect.value) {
-                alert(getCurrentLang() === 'ko' ? '시술 원장님을 선택해주세요.' : 'Please select the treating physician.');
+                alert(t('rev_sim.alert_select_doctor'));
                 return;
             }
             // Validate uploads
             if (!passportUploaded || !receiptUploaded) {
-                alert(getCurrentLang() === 'ko' ? '여권 및 영수증 인증 서류를 클릭하여 등록해주세요.' : 'Please click on passport and receipt dropzones to upload verification documents.');
+                alert(t('rev_sim.alert_upload_docs'));
                 return;
             }
             
@@ -1797,7 +1797,7 @@ function initWizard() {
             // Validate highlights (good review)
             const textGood = document.getElementById('text-good');
             if (!textGood || !textGood.value.trim()) {
-                alert(getCurrentLang() === 'ko' ? '좋았던 점(Highlights)을 작성해주세요.' : 'Please write your highlights.');
+                alert(t('rev_sim.alert_highlights'));
                 return;
             }
             
@@ -1858,10 +1858,10 @@ function updateWizardUI() {
     if (btnPrev && btnNext) {
         if (currentWriterStep === 1) {
             btnPrev.disabled = true;
-            btnNext.innerHTML = getCurrentLang() === 'ko' ? '다음 &rarr;' : 'Next &rarr;';
+            btnNext.innerHTML = t('rev_sim.next_btn');
         } else if (currentWriterStep === 2) {
             btnPrev.disabled = false;
-            btnNext.innerHTML = getCurrentLang() === 'ko' ? '다음 &rarr;' : 'Next &rarr;';
+            btnNext.innerHTML = t('rev_sim.next_btn');
         } else if (currentWriterStep === 3) {
             btnPrev.disabled = false;
             btnNext.innerHTML = t('rev_sim.submit') || 'Upload Authenticated Review';
@@ -1927,9 +1927,9 @@ function appendReviewToGrid(review) {
     const doctorName = escapeHTML(clinic ? clinic.doctor_name : 'Chief Physician');
     
     const fitzType = quizData.fitzpatrickType || 3;
-    const skinLabel = getCurrentLang() === 'ko' ? `피츠패트릭 Type ${fitzType}` : `Fitzpatrick Type ${fitzType}`;
+    const skinLabel = t('reviews.skin_type').replace('{type}', fitzType);
     const initials = 'UR';
-    const reviewerName = getCurrentLang() === 'ko' ? '방문 인증 회원' : 'Verified Patient';
+    const reviewerName = t('reviews.verified_member');
     
     const procedureScore = review.procedure;
     const stars = '⭐'.repeat(procedureScore);
@@ -1970,7 +1970,7 @@ function updateReviewDoctorDropdown() {
  
     const defaultOpt = document.createElement('option');
     defaultOpt.value = '';
-    defaultOpt.textContent = getCurrentLang() === 'ko' ? '-- 시술 원장님을 선택하세요 --' : '-- Select Treating Physician --';
+    defaultOpt.textContent = t('rev_sim.select_doctor_placeholder');
     docSelect.appendChild(defaultOpt);
  
     if (loadedClinicsGlobal && loadedClinicsGlobal.length > 0) {
@@ -1991,7 +1991,7 @@ function updateReviewDoctorDropdown() {
         backupClinics.forEach(c => {
             const opt = document.createElement('option');
             opt.value = c.id;
-            opt.textContent = getCurrentLang() === 'ko' && c.id === 2 ? `김민지 원장 (명동 포레스트)` : `${c.doctor_name} (${c.name})`;
+            opt.textContent = `${getLocalizedText(c.doctor_name)} (${getLocalizedText(c.name)})`;
             docSelect.appendChild(opt);
         });
     }
@@ -2124,11 +2124,12 @@ function renderReviews(reviewsData, grid, isBest = false) {
 
     reviewsData.forEach((r, i) => {
         const starStr = '⭐'.repeat(r.stars);
-        const text = lang === 'ko' ? r.text_ko : r.text_en;
-        const verifiedText = lang === 'ko' ? '✓ 영수증 인증 완료' : '✓ Receipt Verified';
-        const helpfulText = lang === 'ko' ? '도움됨' : 'Helpful';
-        const clinicPrefix = lang === 'ko' ? '클리닉: ' : 'Clinic: ';
-        const physicianPrefix = lang === 'ko' ? '담당의: ' : 'Physician: ';
+        // Review bodies stay in the patient's original language when no translation exists
+        const text = r[`text_${lang}`] || r.text_en;
+        const verifiedText = t('reviews.verified_badge');
+        const helpfulText = t('reviews.helpful');
+        const clinicPrefix = t('reviews.clinic_prefix');
+        const physicianPrefix = t('reviews.physician_prefix');
 
         // 10가지 지표 점수
         const metrics = r.metrics || {
