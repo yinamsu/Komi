@@ -540,7 +540,8 @@ const translations = {
         "reviews.skin_type": "Fitzpatrick Type {type}",
         "reviews.verified_member": "Verified Patient",
         "reviews.clinic_prefix": "Clinic: ",
-        "reviews.physician_prefix": "Physician: "
+        "reviews.physician_prefix": "Physician: ",
+        "clinic.verified_reviews": "{count}+ verified reviews"
     },
 
     ko: {
@@ -1079,7 +1080,8 @@ const translations = {
         "reviews.skin_type": "피츠패트릭 Type {type}",
         "reviews.verified_member": "방문 인증 회원",
         "reviews.clinic_prefix": "클리닉: ",
-        "reviews.physician_prefix": "담당의: "
+        "reviews.physician_prefix": "담당의: ",
+        "clinic.verified_reviews": "인증 리뷰 {count}+건"
     },
     ja: {
         // ---- Categories & Filters ----
@@ -1665,7 +1667,8 @@ const translations = {
         "reviews.skin_type": "フィッツパトリック タイプ{type}",
         "reviews.verified_member": "来院認証済み会員",
         "reviews.clinic_prefix": "クリニック: ",
-        "reviews.physician_prefix": "担当医: "
+        "reviews.physician_prefix": "担当医: ",
+        "clinic.verified_reviews": "認証済みレビュー{count}件以上"
     },
     zh: {
         // ---- Header ----
@@ -2208,7 +2211,8 @@ const translations = {
         "reviews.skin_type": "菲茨帕特里克 {type} 型",
         "reviews.verified_member": "到店验证会员",
         "reviews.clinic_prefix": "诊所：",
-        "reviews.physician_prefix": "主治医生："
+        "reviews.physician_prefix": "主治医生：",
+        "clinic.verified_reviews": "{count}+ 条验证评价"
     }
 };
 
@@ -2792,3 +2796,134 @@ const reviewTreatmentTranslations = {
     }
 };
 window.reviewTreatmentTranslations = reviewTreatmentTranslations;
+
+// Clinic names, doctor names and locations are stored in English (generated and fallback data
+// alike), so they are localized by composing known parts: [ko, ja, zh]
+const entityParts = {
+    places: {
+        "Apgujeong": ["압구정", "狎鴎亭", "狎鸥亭"], "Banpo": ["반포", "盤浦", "盘浦"],
+        "Bundang": ["분당", "盆唐", "盆唐"], "Cheongdam": ["청담", "清潭", "清潭"],
+        "Dongdaemun": ["동대문", "東大門", "东大门"], "Dongja": ["동자", "東子", "东子"],
+        "Euljiro": ["을지로", "乙支路", "乙支路"], "Gangbuk": ["강북", "江北", "江北"],
+        "Gangnam": ["강남", "江南", "江南"], "Hannam": ["한남", "漢南", "汉南"],
+        "Hongdae": ["홍대", "弘大", "弘大"], "Insa": ["인사", "仁寺", "仁寺"],
+        "Insadong": ["인사동", "仁寺洞", "仁寺洞"], "Itaewon": ["이태원", "梨泰院", "梨泰院"],
+        "Jamsil": ["잠실", "蚕室", "蚕室"], "Jeongja": ["정자", "亭子", "亭子"],
+        "Jongno": ["종로", "鍾路", "钟路"], "Jung": ["중", "中", "中"],
+        "Kyunghee": ["경희", "慶熙", "庆熙"], "Mapo": ["마포", "麻浦", "麻浦"],
+        "Mok": ["목", "木", "木"], "Mokdong": ["목동", "木洞", "木洞"],
+        "Myeong": ["명", "明", "明"], "Myeongdong": ["명동", "明洞", "明洞"],
+        "Nonhyeon": ["논현", "論峴", "论岘"], "Seocho": ["서초", "瑞草", "瑞草"],
+        "Seokyo": ["서교", "西橋", "西桥"], "Seongnam": ["성남", "城南", "城南"],
+        "Seoul": ["서울", "ソウル", "首尔"], "Sinsa": ["신사", "新沙", "新沙"],
+        "Songpa": ["송파", "松坡", "松坡"], "Suyu": ["수유", "水踰", "水逾"],
+        "Yangcheon": ["양천", "陽川", "阳川"], "Yeongdeungpo": ["영등포", "永登浦", "永登浦"],
+        "Yeoksam": ["역삼", "駅三", "驿三"], "Yeouido": ["여의도", "汝矣島", "汝矣岛"],
+        "Yongsan": ["용산", "龍山", "龙山"]
+    },
+    placeSuffixes: {
+        "dong": ["동", "洞", "洞"], "gu": ["구", "区", "区"],
+        "daero": ["대로", "大路", "大路"], "ro": ["로", "路", "路"]
+    },
+    words: {
+        "Seoul Station": ["서울역", "ソウル駅", "首尔站"], "Anti-Aging": ["안티에이징", "アンチエイジング", "抗衰老"],
+        "&": ["&", "&", "与"], "Acne": ["여드름", "アクネ", "痘痘"], "Aesthetic": ["에스테틱", "エステティック", "美学"],
+        "Aura": ["아우라", "オーラ", "光环"], "Balance": ["밸런스", "バランス", "平衡"], "Barrier": ["배리어", "バリア", "屏障"],
+        "Beauty": ["뷰티", "ビューティー", "美容"], "Bloom": ["블룸", "ブルーム", "绽放"], "Breast": ["가슴", "バスト", "乳房"],
+        "Calm": ["캄", "カーム", "静心"], "Center": ["센터", "センター", "中心"], "Clear": ["클리어", "クリア", "净肤"],
+        "Clinic": ["클리닉", "クリニック", "诊所"], "Dental": ["치과", "歯科", "牙科"], "Dermatologists": ["피부과", "皮膚科", "皮肤科"],
+        "Dermatology": ["피부과", "皮膚科", "皮肤科"], "Diet": ["다이어트", "ダイエット", "减重"], "Dr.": ["닥터", "ドクター", "博士"],
+        "Ever": ["에버", "エバー", "恒美"], "Eye": ["아이", "アイ", "眼部"], "Fine": ["파인", "ファイン", "精致"],
+        "Forest": ["포레스트", "フォレスト", "森林"], "Gateway": ["게이트웨이", "ゲートウェイ", "之门"], "Glass": ["글라스", "グラス", "玻璃"],
+        "Global": ["글로벌", "グローバル", "环球"], "Glow": ["글로우", "グロウ", "光采"], "Grace": ["그레이스", "グレース", "优雅"],
+        "Hair": ["헤어", "ヘア", "毛发"], "Healing": ["힐링", "ヒーリング", "疗愈"], "Herbal": ["한방", "漢方", "韩方"],
+        "House": ["하우스", "ハウス", "之家"], "Lab": ["랩", "ラボ", "实验室"], "Laser": ["레이저", "レーザー", "激光"],
+        "Line": ["라인", "ライン", "线条"], "Lumi": ["루미", "ルミ", "璐米"], "Nature": ["네이처", "ネイチャー", "自然"],
+        "Premium": ["프리미엄", "プレミアム", "高端"], "Prestige": ["프레스티지", "プレステージ", "尊享"], "Pure": ["퓨어", "ピュア", "纯净"],
+        "Relief": ["릴리프", "リリーフ", "舒缓"], "Rhinoplasty": ["코성형", "鼻整形", "鼻整形"], "Royal": ["로열", "ロイヤル", "皇家"],
+        "Science": ["사이언스", "サイエンス", "科学"], "Skin": ["스킨", "スキン", "皮肤"], "Studio": ["스튜디오", "スタジオ", "工作室"],
+        "Top": ["탑", "トップ", "顶级"], "True": ["트루", "トゥルー", "真"], "V-line": ["브이라인", "Vライン", "V脸"],
+        "Vivid": ["비비드", "ビビッド", "焕彩"], "Wellness": ["웰니스", "ウェルネス", "健康"], "White": ["화이트", "ホワイト", "白皙"],
+        "Youth": ["유스", "ユース", "青春"]
+    },
+    surnames: {
+        "Cho": ["조", "チョ", "赵"], "Choi": ["최", "チェ", "崔"], "Han": ["한", "ハン", "韩"], "Hwang": ["황", "ファン", "黄"],
+        "Jang": ["장", "チャン", "张"], "Jeong": ["정", "チョン", "郑"], "Jung": ["정", "チョン", "郑"], "Kang": ["강", "カン", "姜"],
+        "Kim": ["김", "キム", "金"], "Koh": ["고", "コ", "高"], "Lee": ["이", "イ", "李"], "Lim": ["임", "イム", "林"],
+        "Nam": ["남", "ナム", "南"], "Park": ["박", "パク", "朴"], "Ryu": ["류", "リュ", "柳"], "Shin": ["신", "シン", "申"],
+        "Song": ["송", "ソン", "宋"], "Yoo": ["유", "ユ", "俞"], "Yoon": ["윤", "ユン", "尹"]
+    },
+    westernSurnames: { "Miller": ["밀러", "ミラー", "米勒"] },
+    givenNames: {
+        "Bo-Min": ["보민", "ボミン", "宝敏"], "Da-Eun": ["다은", "ダウン", "多恩"], "Dong-Hyun": ["동현", "ドンヒョン", "东贤"],
+        "Eun-Cheol": ["은철", "ウンチョル", "恩哲"], "Eun-Ji": ["은지", "ウンジ", "恩智"], "Hye-Jin": ["혜진", "ヘジン", "慧珍"],
+        "Jae-Hee": ["재희", "ジェヒ", "在熙"], "Ji-Hoon": ["지훈", "ジフン", "智勋"], "Ji-Yeon": ["지연", "ジヨン", "智妍"],
+        "Jin-Soo": ["진수", "ジンス", "镇秀"], "Jin-Woo": ["진우", "ジヌ", "镇宇"], "Kyu-Hyun": ["규현", "ギュヒョン", "圭贤"],
+        "Min-Ki": ["민기", "ミンギ", "敏基"], "Min-Seok": ["민석", "ミンソク", "敏锡"], "Min-Woo": ["민우", "ミヌ", "敏宇"],
+        "Minji": ["민지", "ミンジ", "敏智"], "Nam-gyu": ["남규", "ナムギュ", "南圭"], "Sang-Hyun": ["상현", "サンヒョン", "尚贤"],
+        "Sang-Woo": ["상우", "サンウ", "相宇"], "Sarah": ["사라", "サラ", "莎拉"], "Seo-Jun": ["서준", "ソジュン", "叙俊"],
+        "Seo-Yeon": ["서연", "ソヨン", "叙妍"], "So-Young": ["소영", "ソヨン", "素英"], "Soo-Hyun": ["수현", "スヒョン", "秀贤"],
+        "Sung-Min": ["성민", "ソンミン", "成民"], "Tae-Jin": ["태진", "テジン", "泰镇"], "Tae-Young": ["태영", "テヨン", "泰荣"],
+        "Yoon-Seo": ["윤서", "ユンソ", "允叙"], "Young-Ho": ["영호", "ヨンホ", "英浩"]
+    }
+};
+
+const ENTITY_LANG_INDEX = { ko: 0, ja: 1, zh: 2 };
+
+function joinEntityTokens(tokens, lang) {
+    // Korean keeps spaces between words; Japanese and Chinese only separate untranslated Latin words
+    if (lang === 'ko') return tokens.join(' ');
+    return tokens.reduce((out, tok) => {
+        const needsSpace = out && /[A-Za-z0-9.]$/.test(out) && /^[A-Za-z0-9]/.test(tok);
+        return out + (needsSpace ? ' ' : '') + tok;
+    }, '');
+}
+
+function localizeClinicName(text, idx, lang) {
+    const words = text.split(/\s+/);
+    const out = [];
+    for (let i = 0; i < words.length; i++) {
+        const pair = words[i] + ' ' + (words[i + 1] || '');
+        const hit = entityParts.words[pair] || entityParts.words[words[i]] || entityParts.places[words[i]];
+        if (entityParts.words[pair]) i++;
+        out.push(hit ? hit[idx] : words[i]);
+    }
+    return joinEntityTokens(out, lang);
+}
+
+function localizeDoctorName(text, idx, lang) {
+    const m = text.match(/^Dr\.\s+(\S+)\s+(\S+)$/);
+    if (!m) return text;
+    const [, given, family] = m;
+    const g = entityParts.givenNames[given];
+    if (entityParts.westernSurnames[family] && g) {
+        const f = entityParts.westernSurnames[family][idx];
+        return [`${g[0]} ${f} 원장`, `${g[1]}・${f}先生`, `${g[2]}·${f} 医生`][idx];
+    }
+    const f = entityParts.surnames[family];
+    if (!f || !g) return text;
+    return [`${f[0]}${g[0]} 원장`, `${f[1]}・${g[1]}先生`, `${f[2]}${g[2]} 医生`][idx];
+}
+
+function localizeLocation(text, idx) {
+    const pin = text.match(/^[^A-Za-z]*/)[0];
+    const parts = text.slice(pin.length).split(/\s*,\s*/).map(part => {
+        if (entityParts.places[part]) return entityParts.places[part][idx];
+        const m = part.match(/^(.+?)-(dong|gu|daero|ro)$/i);
+        if (m && entityParts.places[m[1]]) return entityParts.places[m[1]][idx] + entityParts.placeSuffixes[m[2].toLowerCase()][idx];
+        return part;
+    });
+    // Korean-style addresses read from the larger district to the neighborhood
+    return pin + parts.reverse().join(' ');
+}
+
+// kind: 'clinic' | 'doctor' | 'location'. Returns the input unchanged for English or unknown values.
+function localizeEntity(text, kind, lang) {
+    const idx = ENTITY_LANG_INDEX[lang];
+    if (idx === undefined || !text || /[가-힣぀-ヿ一-鿿]/.test(text)) return text;
+    if (kind === 'doctor') return localizeDoctorName(text.trim(), idx, lang);
+    if (kind === 'location') return localizeLocation(text.trim(), idx);
+    if (kind === 'clinic') return localizeClinicName(text.trim(), idx, lang);
+    return text;
+}
+window.localizeEntity = localizeEntity;

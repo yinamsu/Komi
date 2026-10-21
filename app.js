@@ -930,17 +930,39 @@ function isSafeMapEmbedUrl(value) {
     }
 }
 
-function getLocalizedText(rawText) {
+function localizeSpecialty(spec) {
+    const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
+    const dict = (window.specialtyTranslations && window.specialtyTranslations[lang]) || {};
+    const cleanKey = spec.trim().toLowerCase();
+    if (dict[cleanKey]) return dict[cleanKey];
+    const key = 'menu.' + cleanKey.replace(/ /g, '');
+    const translated = t(key);
+    return (translated && translated !== key) ? translated : spec;
+}
+
+// Stored ratings look like "⭐ 4.9 (120+ verified reviews)"; rebuild the review count label per language
+function localizeRating(rating) {
+    const m = String(rating || '').match(/([\d.]+)\s*\((\d+)\+/);
+    if (!m) return rating;
+    return `⭐ ${m[1]} (${t('clinic.verified_reviews').replace('{count}', m[2])})`;
+}
+
+// kind ('clinic' | 'doctor' | 'location') lets English-only names be composed into ko/ja/zh
+function getLocalizedText(rawText, kind) {
     if (!rawText) return '';
     const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
+    let text = rawText;
     if (rawText.includes('|')) {
         const parts = rawText.split('|').map(p => p.trim());
         const hasKorean = (str) => /[\uac00-\ud7a3]/.test(str);
         const koPart = parts.find(p => hasKorean(p)) || parts[1] || parts[0];
         const enPart = parts.find(p => !hasKorean(p)) || parts[0] || parts[1];
-        return lang === 'ko' ? koPart : enPart;
+        text = lang === 'ko' ? koPart : enPart;
     }
-    return rawText;
+    if (kind && typeof localizeEntity === 'function') {
+        text = localizeEntity(text, kind, lang);
+    }
+    return text;
 }
 
 function renderClinicCards(clinics) {
@@ -961,29 +983,16 @@ function renderClinicCards(clinics) {
     clinics.forEach(clinic => {
         const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
         const tagsHTML = specs.map(spec => {
-            const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
-            let displayTag = spec;
-
-            const cleanKey = spec.trim().toLowerCase();
-            const dict = (window.specialtyTranslations && window.specialtyTranslations[lang]) || {};
-
-            if (dict[cleanKey]) {
-                displayTag = dict[cleanKey];
-            } else {
-                const key = 'menu.' + spec.toLowerCase().replace(/ /g, '');
-                const translated = t(key);
-                displayTag = (translated && translated !== key) ? translated : spec;
-            }
-            return `<span class="partner-tag">${escapeHTML(displayTag)}</span>`;
+            return `<span class="partner-tag">${escapeHTML(localizeSpecialty(spec))}</span>`;
         }).join('');
         const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();
 
         let doctorTypeLabel = t(`badge.${clinic.doctor_type}`) || clinic.doctor_type;
         let anesthesiaLabel = clinic.sleep_anesthesia ? (clinic.anesthesiologist_resident ? t('badge.anesthesiologist') : t('badge.no_anesthesiologist')) : '';
 
-        const localizedName = escapeHTML(getLocalizedText(clinic.name));
-        const localizedLoc = escapeHTML(getLocalizedText(clinic.location));
-        const localizedDocName = escapeHTML(getLocalizedText(clinic.doctor_name));
+        const localizedName = escapeHTML(getLocalizedText(clinic.name, 'clinic'));
+        const localizedLoc = escapeHTML(getLocalizedText(clinic.location, 'location'));
+        const localizedDocName = escapeHTML(getLocalizedText(clinic.doctor_name, 'doctor'));
         const localizedDocTitle = escapeHTML(getLocalizedText(clinic.doctor_title));
 
         const cardHTML = `
@@ -1025,9 +1034,9 @@ function openClinicDetailModal(clinicId) {
     activeClinicId = clinicId;
     resetBookingViews();
 
-    document.getElementById('clinic-detail-name').textContent = getLocalizedText(data.name);
-    document.getElementById('clinic-detail-location').textContent = getLocalizedText(data.location);
-    document.getElementById('clinic-detail-rating').textContent = data.rating;
+    document.getElementById('clinic-detail-name').textContent = getLocalizedText(data.name, 'clinic');
+    document.getElementById('clinic-detail-location').textContent = getLocalizedText(data.location, 'location');
+    document.getElementById('clinic-detail-rating').textContent = localizeRating(data.rating);
     document.getElementById('clinic-detail-desc').textContent = getLocalizedText(data.description);
     document.getElementById('clinic-detail-hours').textContent = getLocalizedText(data.hours);
 
@@ -1036,7 +1045,7 @@ function openClinicDetailModal(clinicId) {
     (data.specialties || []).forEach(spec => {
         const tag = document.createElement('span');
         tag.className = 'partner-tag';
-        tag.textContent = spec;
+        tag.textContent = localizeSpecialty(spec);
         specialtiesContainer.appendChild(tag);
     });
 
@@ -1112,7 +1121,7 @@ function openClinicDetailModal(clinicId) {
     }
 
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
-    document.getElementById('clinic-detail-doc-name').textContent = getLocalizedText(data.doctor_name);
+    document.getElementById('clinic-detail-doc-name').textContent = getLocalizedText(data.doctor_name, 'doctor');
     document.getElementById('clinic-detail-doc-title').textContent = getLocalizedText(data.doctor_title);
     document.getElementById('clinic-detail-doc-bio').textContent = getLocalizedText(data.doctor_bio);
 
@@ -1287,8 +1296,8 @@ function applyFilters() {
     // 3. Search Input Query
     if (q) {
         filtered = filtered.filter(c => {
-            const nameMatch = c.name.toLowerCase().includes(q);
-            const docMatch = c.doctor_name.toLowerCase().includes(q);
+            const nameMatch = c.name.toLowerCase().includes(q) || getLocalizedText(c.name, 'clinic').toLowerCase().includes(q);
+            const docMatch = c.doctor_name.toLowerCase().includes(q) || getLocalizedText(c.doctor_name, 'doctor').toLowerCase().includes(q);
             const specMatch = c.specialties.some(spec => {
                 const specLower = spec.toLowerCase();
                 const key = 'menu.' + specLower.replace(/ /g, '');
@@ -1923,8 +1932,8 @@ function appendReviewToGrid(review) {
     if (!triggerBtn) return;
     
     const clinic = loadedClinicsGlobal.find(c => c.id === review.clinicId);
-    const clinicName = escapeHTML(clinic ? clinic.name : 'Selected Boutique Clinic');
-    const doctorName = escapeHTML(clinic ? clinic.doctor_name : 'Chief Physician');
+    const clinicName = escapeHTML(clinic ? getLocalizedText(clinic.name, 'clinic') : 'Selected Boutique Clinic');
+    const doctorName = escapeHTML(clinic ? getLocalizedText(clinic.doctor_name, 'doctor') : 'Chief Physician');
     
     const fitzType = quizData.fitzpatrickType || 3;
     const skinLabel = t('reviews.skin_type').replace('{type}', fitzType);
@@ -1953,8 +1962,8 @@ function appendReviewToGrid(review) {
                 "${escapeHTML(review.good)}"
             </p>
             <div class="review-doctor-link">
-                <span>Clinic: ${clinicName}</span>
-                <span>Physician: <strong>${doctorName}</strong></span>
+                <span>${t('reviews.clinic_prefix')}${clinicName}</span>
+                <span>${t('reviews.physician_prefix')}<strong>${doctorName}</strong></span>
             </div>
         </div>
     `;
@@ -1977,7 +1986,7 @@ function updateReviewDoctorDropdown() {
         loadedClinicsGlobal.forEach(c => {
             const opt = document.createElement('option');
             opt.value = c.id;
-            opt.textContent = `${c.doctor_name} (${c.name})`;
+            opt.textContent = `${getLocalizedText(c.doctor_name, 'doctor')} (${getLocalizedText(c.name, 'clinic')})`;
             docSelect.appendChild(opt);
         });
     } else {
@@ -1991,7 +2000,7 @@ function updateReviewDoctorDropdown() {
         backupClinics.forEach(c => {
             const opt = document.createElement('option');
             opt.value = c.id;
-            opt.textContent = `${getLocalizedText(c.doctor_name)} (${getLocalizedText(c.name)})`;
+            opt.textContent = `${getLocalizedText(c.doctor_name, 'doctor')} (${getLocalizedText(c.name, 'clinic')})`;
             docSelect.appendChild(opt);
         });
     }
@@ -2208,8 +2217,8 @@ function renderReviews(reviewsData, grid, isBest = false) {
                 <button class="review-helpful-btn">👍 ${helpfulText} <span class="helpful-count">${r.helpful}</span></button>
             </div>
             <div class="review-doctor-link">
-                <span class="review-clinic-link" data-clinic-id="${escapeHTML(r.clinicId)}">${clinicPrefix}<strong>${escapeHTML(r.clinic)}</strong></span>
-                <span>${physicianPrefix}<strong>${escapeHTML(r.doctor)}</strong></span>
+                <span class="review-clinic-link" data-clinic-id="${escapeHTML(r.clinicId)}">${clinicPrefix}<strong>${escapeHTML(getLocalizedText(r.clinic, 'clinic'))}</strong></span>
+                <span>${physicianPrefix}<strong>${escapeHTML(getLocalizedText(r.doctor, 'doctor'))}</strong></span>
             </div>
         `;
         grid.appendChild(card);
