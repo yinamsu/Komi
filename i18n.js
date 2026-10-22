@@ -88,7 +88,7 @@ const translations = {
         "directory.title_serif": " & Validation Engine",
         "directory.subtitle": "Explore our certified clinics and see how we verify review authenticity while preserving patient anonymity.",
         "directory.loading": "🔄 Loading verified boutique clinics...",
-        "directory.empty": "⚠️ No verified boutique clinics available at the moment.",
+        "directory.empty": "No clinics match these filters. Try removing a filter.",
         "directory.result_count_prefix": "Showing",
         "directory.result_count_suffix": "verified clinics",
 
@@ -555,6 +555,7 @@ const translations = {
         "dept.dermatology": "Dermatology",
         "dept.plastic_surgery": "Plastic Surgery",
         "directory.load_more": "Show more ({shown} / {total})",
+        "directory.coming_soon": "Clinic listings are being prepared. Please check back soon.",
         "directory.load_error": "Couldn't load the clinic list. Try again in a moment."
     },
 
@@ -641,7 +642,7 @@ const translations = {
         "directory.title_serif": " & 검증 엔진",
         "directory.subtitle": "인증된 클리닉을 살펴보고 환자 익명성을 보장하면서 리뷰 진위를 어떻게 검증하는지 확인하세요.",
         "directory.loading": "🔄 인증된 부티크 클리닉을 불러오는 중...",
-        "directory.empty": "⚠️ 현재 이용 가능한 인증 부티크 클리닉이 없습니다.",
+        "directory.empty": "조건에 맞는 병원이 없습니다. 필터를 줄여 보세요.",
         "directory.result_count_prefix": "검색된 병원:",
         "directory.result_count_suffix": "개",
 
@@ -1109,6 +1110,7 @@ const translations = {
         "dept.dermatology": "피부과",
         "dept.plastic_surgery": "성형외과",
         "directory.load_more": "더 보기 ({shown} / {total})",
+        "directory.coming_soon": "병원 정보를 준비하고 있습니다. 곧 만나보실 수 있어요.",
         "directory.load_error": "병원 목록을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요."
     },
     ja: {
@@ -1120,7 +1122,7 @@ const translations = {
         "filter.select_category_desc": "肌タイプに合った検証済みの施術や提携クリニックの専門分野を探索します。",
 
         "directory.loading": "🔄 認証済みブティッククリニックを読み込み中...",
-        "directory.empty": "⚠️ 現在、利用可能な認証済みブティッククリニックはありません。",
+        "directory.empty": "条件に合うクリニックがありません。フィルターを減らしてみてください。",
         "directory.result_count_prefix": "検索されたクリニック:",
         "directory.result_count_suffix": "件",
         "directory.reset_btn": "フィルターをリセット",
@@ -1348,7 +1350,7 @@ const translations = {
         "directory.title_serif": " ＆ 検証エンジン",
         "directory.subtitle": "認証されたクリニックを探索し、患者の匿名性を守りながらレビューの真正性を検証する仕組みをご覧ください。",
         "directory.loading": "🔄 認証済みブティッククリニックを読み込み中...",
-        "directory.empty": "⚠️ 現在、利用可能な認証済みブティッククリニックはありません。",
+        "directory.empty": "条件に合うクリニックがありません。フィルターを減らしてみてください。",
 
         // ---- Receipt Masker ----
         "receipt.title": "レシート個人情報マスキング",
@@ -1710,6 +1712,7 @@ const translations = {
         "dept.dermatology": "皮膚科",
         "dept.plastic_surgery": "形成外科",
         "directory.load_more": "もっと見る（{shown} / {total}）",
+        "directory.coming_soon": "クリニック情報を準備中です。もうしばらくお待ちください。",
         "directory.load_error": "クリニック一覧を読み込めませんでした。しばらくしてからもう一度お試しください。"
     },
     zh: {
@@ -1793,7 +1796,7 @@ const translations = {
         "directory.title_serif": "与真实性验证引擎",
         "directory.subtitle": "探索经过认证的精品诊所，了解我们在保护求美者隐私的同时如何验证评价真实性。",
         "directory.loading": "🔄 正在加载认证精品诊所...",
-        "directory.empty": "⚠️ 暂无符合条件的认证诊所。",
+        "directory.empty": "没有符合条件的诊所，请减少筛选条件。",
         "directory.result_count_prefix": "共搜索到诊所：",
         "directory.result_count_suffix": "家",
 
@@ -2268,6 +2271,7 @@ const translations = {
         "dept.dermatology": "皮肤科",
         "dept.plastic_surgery": "整形外科",
         "directory.load_more": "查看更多（{shown} / {total}）",
+        "directory.coming_soon": "诊所信息正在准备中，敬请期待。",
         "directory.load_error": "无法加载诊所列表，请稍后再试。"
     }
 };
