@@ -107,22 +107,12 @@ const translations = {
         "reviews.title": "100% Visit-Verified Reviews ",
         "reviews.title_serif": "Linked to Doctors",
         "reviews.subtitle": "Every single review is matched to the exact operating physician through receipt check codes. Un-deletable.",
-        "reviews.r1_name": "Jessica S.",
-        "reviews.r1_skin": "Fitzpatrick Type I",
-        "reviews.r1_text": "\"I had a horrible experience at a factory clinic in Gangnam where they burned my skin with IPL. Dr. Minji Kim was a lifesaver. She immediately recognized my thin Type I skin barrier, manually set the laser to a safe wavelength, and focused on recovery. Highly recommend this boutique standard.\"",
-        "reviews.r1_clinic": "Clinic: Myeongdong Forest",
-        "reviews.r1_doctor": "Dr. Minji Kim",
-        "reviews.r2_name": "Amara M.",
-        "reviews.r2_skin": "Fitzpatrick Type V",
-        "reviews.r2_text": "\"As someone with dark skin, I was terrified of laser toning in Korea because of hypopigmentation risks. Dr. Ji-Yeon Lee checked my Fitzpatrick type, explained why she would use the Nd:YAG laser with a long pulse duration, and calibrated the cooling device. My skin has never looked cleaner.\"",
-        "reviews.r2_clinic": "Clinic: Cheongdam Barrier Lab",
-        "reviews.r2_doctor": "Dr. Ji-Yeon Lee",
         "reviews.verified_badge": "✓ Receipt Verified",
         "reviews.stat_total": "Total Reviews",
         "reviews.stat_avg": "Avg. Rating",
         "reviews.stat_verified": "Receipt Verified",
         "reviews.helpful": "Helpful",
-        "reviews.show_more": "📖 Show All 32 Reviews",
+        "reviews.show_more": "📖 Show All Reviews",
         "reviews.show_less": "📕 Show Best Reviews Only",
 
         // ---- Founder Section ----
@@ -531,7 +521,6 @@ const translations = {
         "menu.obesityinjection": "Obesity Injection",
         "menu.hairremoval": "Hair Removal",
         // ---- Strings moved out of hardcoded language branches in app.js ----
-        "clinic.default_highlight": "Loved how the doctor manually adjusted the wavelength based on my exact skin profile.",
         "rev_sim.alert_select_doctor": "Please select the treating physician.",
         "rev_sim.alert_upload_docs": "Please click on passport and receipt dropzones to upload verification documents.",
         "rev_sim.alert_highlights": "Please write your highlights.",
@@ -556,6 +545,9 @@ const translations = {
         "dept.plastic_surgery": "Plastic Surgery",
         "directory.load_more": "Show more ({shown} / {total})",
         "directory.coming_soon": "Clinic listings are being prepared. Please check back soon.",
+        "reviews.empty": "No reviews yet. Verified reviews will appear here once patients visit partner clinics.",
+        "clinic.no_reviews_yet": "No reviews yet",
+        "clinic.new_badge": "New",
         "directory.load_error": "Couldn't load the clinic list. Try again in a moment."
     },
 
@@ -661,22 +653,12 @@ const translations = {
         "reviews.title": "100% 방문 인증 리뷰 ",
         "reviews.title_serif": "의사 실명 연동",
         "reviews.subtitle": "모든 리뷰는 영수증 인증 코드를 통해 실제 시술 의사와 매칭됩니다. 삭제 불가.",
-        "reviews.r1_name": "Jessica S.",
-        "reviews.r1_skin": "피츠패트릭 Type I",
-        "reviews.r1_text": "\"강남의 한 공장식 클리닉에서 IPL로 피부에 화상을 입은 적이 있습니다. 김민지 원장님은 구세주였어요. 제 얇은 Type I 피부 장벽을 즉시 파악하고, 레이저를 안전한 파장으로 수동 조절하여 회복에 집중해 주셨습니다. 이 부티크 수준을 강력히 추천합니다.\"",
-        "reviews.r1_clinic": "클리닉: 명동 포레스트",
-        "reviews.r1_doctor": "김민지 원장",
-        "reviews.r2_name": "Amara M.",
-        "reviews.r2_skin": "피츠패트릭 Type V",
-        "reviews.r2_text": "\"어두운 피부를 가진 저는 저색소증 위험 때문에 한국에서 레이저 토닝이 두려웠어요. 이지연 원장님이 제 피츠패트릭 타입을 확인하고, 긴 펄스 지속 시간의 Nd:YAG 레이저를 사용하는 이유를 설명하며, 쿨링 장치를 정밀하게 보정해 주셨습니다. 피부가 이렇게 깨끗했던 적이 없어요.\"",
-        "reviews.r2_clinic": "클리닉: 청담 배리어 랩",
-        "reviews.r2_doctor": "이지연 원장",
         "reviews.verified_badge": "✓ 영수증 인증 완료",
         "reviews.stat_total": "전체 리뷰",
         "reviews.stat_avg": "평균 평점",
         "reviews.stat_verified": "영수증 인증",
         "reviews.helpful": "도움됨",
-        "reviews.show_more": "📖 전체 32개 리뷰 보기",
+        "reviews.show_more": "📖 전체 리뷰 보기",
         "reviews.show_less": "📕 베스트 리뷰만 보기",
 
         // ---- Founder Section ----
@@ -1086,7 +1068,6 @@ const translations = {
         "menu.obesityinjection": "비만주사",
         "menu.hairremoval": "제모",
         // ---- Strings moved out of hardcoded language branches in app.js ----
-        "clinic.default_highlight": "원장님이 피부 두께를 직접 자로 재가며 파장을 수동 조절해 주신 점이 대만족이었습니다.",
         "rev_sim.alert_select_doctor": "시술 원장님을 선택해주세요.",
         "rev_sim.alert_upload_docs": "여권 및 영수증 인증 서류를 클릭하여 등록해주세요.",
         "rev_sim.alert_highlights": "좋았던 점(Highlights)을 작성해주세요.",
@@ -1111,6 +1092,9 @@ const translations = {
         "dept.plastic_surgery": "성형외과",
         "directory.load_more": "더 보기 ({shown} / {total})",
         "directory.coming_soon": "병원 정보를 준비하고 있습니다. 곧 만나보실 수 있어요.",
+        "reviews.empty": "아직 등록된 리뷰가 없습니다. 파트너 병원 방문 후 인증된 리뷰가 이곳에 표시됩니다.",
+        "clinic.no_reviews_yet": "아직 리뷰가 없습니다",
+        "clinic.new_badge": "신규",
         "directory.load_error": "병원 목록을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요."
     },
     ja: {
@@ -1422,13 +1406,7 @@ const translations = {
         "reviews.stat_total": "総レビュー数",
         "reviews.stat_avg": "平均評価",
         "reviews.stat_verified": "レシート検証率",
-        "reviews.r1_name": "Jessica S.",
-        "reviews.r2_name": "Amara M.",
         "reviews.helpful": "役に立った",
-        "reviews.r1_clinic": "クリニック: 明洞フォレスト",
-        "reviews.r1_doctor": "キム・민지 원장",
-        "reviews.r2_clinic": "クリニック: 清潭バリアラボ",
-        "reviews.r2_doctor": "이-지연 원장",
 
         // ---- Detailed Metrics ----
         "metric.friendliness": "親切度",
@@ -1492,12 +1470,8 @@ const translations = {
         "footer.copyright": "© 2026 Komicare. All rights reserved. 医療法第56条を遵守し、患者の正当な表現の自由を保護します。",
 
         // ---- Filled translations (previously falling back to English) ----
-        "reviews.r1_skin": "フィッツパトリック タイプI",
-        "reviews.r1_text": "\"江南の工場型クリニックでIPLを受けて肌をやけどし、最悪の経験をしました。キム・ミンジ先生は命の恩人です。私の薄いタイプIの皮膚バリアをすぐに見抜き、レーザーを安全な波長に手動で設定して、回復を最優先にしてくれました。このブティック基準を心からおすすめします。\"",
-        "reviews.r2_skin": "フィッツパトリック タイプV",
-        "reviews.r2_text": "\"肌の色が濃い私は、白斑のリスクがあるため韓国でのレーザートーニングがとても怖かったです。イ・ジヨン先生は私のフィッツパトリックタイプを確認し、ロングパルスのNd:YAGレーザーを使う理由を説明したうえで、冷却装置も調整してくれました。肌がこれほどきれいになったのは初めてです。\"",
         "reviews.verified_badge": "✓ 領収書認証済み",
-        "reviews.show_more": "📖 レビュー32件をすべて見る",
+        "reviews.show_more": "📖 レビューをすべて見る",
         "reviews.show_less": "📕 ベストレビューのみ表示",
         "clinic.rating_label": "クリニック評価",
         "clinic.about_label": "クリニック紹介",
@@ -1688,7 +1662,6 @@ const translations = {
         "menu.obesityinjection": "肥満注射",
         "menu.hairremoval": "脱毛",
         // ---- Strings moved out of hardcoded language branches in app.js ----
-        "clinic.default_highlight": "先生が肌の厚さを実際に測りながら、波長を手動で調整してくれたことに大満足です。",
         "rev_sim.alert_select_doctor": "担当医を選択してください。",
         "rev_sim.alert_upload_docs": "パスポートと領収書のアップロード欄をクリックして、認証書類を登録してください。",
         "rev_sim.alert_highlights": "良かった点を入力してください。",
@@ -1713,6 +1686,9 @@ const translations = {
         "dept.plastic_surgery": "形成外科",
         "directory.load_more": "もっと見る（{shown} / {total}）",
         "directory.coming_soon": "クリニック情報を準備中です。もうしばらくお待ちください。",
+        "reviews.empty": "まだ口コミはありません。パートナークリニックへの来院後、認証済みの口コミがここに表示されます。",
+        "clinic.no_reviews_yet": "まだ口コミがありません",
+        "clinic.new_badge": "新規",
         "directory.load_error": "クリニック一覧を読み込めませんでした。しばらくしてからもう一度お試しください。"
     },
     zh: {
@@ -1903,22 +1879,12 @@ const translations = {
         "reviews.title": "100% 到店验证评价，",
         "reviews.title_serif": "直接关联主治医生",
         "reviews.subtitle": "每一条评价都通过收据验证码与实际操作的主治医生精确匹配，且无法删除。",
-        "reviews.r1_name": "Jessica S.",
-        "reviews.r1_skin": "菲茨帕特里克 I 型",
-        "reviews.r1_text": "“我在江南一家工厂式诊所做 IPL 时皮肤被烧伤，经历非常糟糕。金敏智医生救了我。她立刻看出我是皮肤屏障很薄的 I 型肤质，手动把激光调到安全波长，并以修复为重点进行治疗。强烈推荐这种精品标准。”",
-        "reviews.r1_clinic": "诊所：明洞森林皮肤科",
-        "reviews.r1_doctor": "金敏智 医生",
-        "reviews.r2_name": "Amara M.",
-        "reviews.r2_skin": "菲茨帕特里克 V 型",
-        "reviews.r2_text": "“作为深肤色的人，我因为担心色素脱失，一直很害怕在韩国做激光美白。李智妍医生确认了我的菲茨帕特里克分型，解释了为什么要使用长脉冲的 Nd:YAG 激光，还调整了冷却设备。我的皮肤从来没有这么干净过。”",
-        "reviews.r2_clinic": "诊所：清潭屏障实验室",
-        "reviews.r2_doctor": "李智妍 医生",
         "reviews.verified_badge": "✓ 收据已验证",
         "reviews.stat_total": "评价总数",
         "reviews.stat_avg": "平均评分",
         "reviews.stat_verified": "收据已验证",
         "reviews.helpful": "有帮助",
-        "reviews.show_more": "📖 查看全部 32 条评价",
+        "reviews.show_more": "📖 查看全部评价",
         "reviews.show_less": "📕 仅显示精选评价",
         "founder.badge": "认证专科医生",
         "founder.text": "“作为一名在首尔执业的皮肤科医生，我见过太多国际患者遭受本可避免的激光并发症。你投入了数千美元和宝贵的时间，理应获得绝对的安全、真实的信息和由医生主导的护理。Komicare 以临床标准验证每一条评价和每一家诊所，重建人们对韩国皮肤科的信任。”",
@@ -2247,7 +2213,6 @@ const translations = {
         "menu.obesityinjection": "减肥针",
         "menu.hairremoval": "脱毛",
         // ---- Strings moved out of hardcoded language branches in app.js ----
-        "clinic.default_highlight": "医生亲自测量了我的皮肤厚度并手动调整波长，非常满意。",
         "rev_sim.alert_select_doctor": "请选择主治医生。",
         "rev_sim.alert_upload_docs": "请点击护照和收据上传区域，上传验证文件。",
         "rev_sim.alert_highlights": "请填写满意之处。",
@@ -2272,6 +2237,9 @@ const translations = {
         "dept.plastic_surgery": "整形外科",
         "directory.load_more": "查看更多（{shown} / {total}）",
         "directory.coming_soon": "诊所信息正在准备中，敬请期待。",
+        "reviews.empty": "暂无评价。患者到访合作诊所后，经过验证的评价将显示在这里。",
+        "clinic.no_reviews_yet": "暂无评价",
+        "clinic.new_badge": "新入驻",
         "directory.load_error": "无法加载诊所列表，请稍后再试。"
     }
 };
@@ -3121,65 +3089,10 @@ function localizeHours(text, lang) {
     }).join(' | ');
 }
 
-// Free-text clinic descriptions and doctor bios, keyed by the stored English text: [ko, ja, zh]
-const clinicTextTranslations = {
-    "Specialized in non-invasive skin barrier recovery and pigmentation lasers for sensitive skin types. Known for ultra-conservative energy calibration and genuine, certified tips.": ["민감성 피부를 위한 비침습 피부 장벽 회복과 색소 레이저를 전문으로 합니다. 매우 보수적인 에너지 설정과 정품 인증 팁 사용으로 잘 알려져 있습니다.", "敏感肌のための非侵襲的な皮膚バリア回復と色素レーザーを専門としています。非常に慎重なエネルギー設定と、正規認証チップの使用で知られています。", "专注于敏感肌的无创皮肤屏障修复与色素激光治疗。以极其保守的能量校准和使用正品认证治疗头而闻名。"],
-    "A tranquil sanctuary clinic in the heart of Myeongdong, prioritizing barrier safety over factory treatments. Enforces a strict maximum of 2 patient bookings per hour.": ["명동 한가운데 자리한 조용한 안식처 같은 클리닉으로, 공장식 시술보다 피부 장벽의 안전을 우선합니다. 시간당 최대 2명의 예약만 엄격하게 받습니다.", "明洞の中心にある静かな癒やしのクリニックで、工場型の施術よりも皮膚バリアの安全を優先しています。1時間あたり最大2名までの予約制を厳守しています。", "位于明洞中心的宁静诊所，把皮肤屏障安全放在工厂式治疗之前。严格执行每小时最多 2 位患者的预约上限。"],
-    "Boutique clinic catering to embassies and expats in Hannam. Equipped with premium dual-cooling laser systems and offering customized wavelength diagnostics.": ["한남동의 대사관 관계자와 외국인 거주자를 위한 부티크 클리닉입니다. 프리미엄 이중 냉각 레이저 시스템을 갖추고 맞춤형 파장 진단을 제공합니다.", "漢南洞の大使館関係者や外国人居住者に向けたブティッククリニックです。プレミアムなデュアル冷却レーザーシステムを備え、オーダーメイドの波長診断を提供しています。", "面向汉南洞使馆人员与外籍居民的精品诊所。配备高端双重冷却激光系统，提供个性化波长诊断。"],
-    "Specializing in advanced anti-aging treatments with verified genuine consumables logging. We provide every patient with their single-use tip certificate and serial code.": ["정품 소모품 사용 기록이 검증된 첨단 안티에이징 시술을 전문으로 합니다. 모든 환자에게 일회용 팁 인증서와 시리얼 코드를 제공합니다.", "正規消耗品の使用記録が検証された、先進的なアンチエイジング施術を専門としています。すべての患者様に使い捨てチップの証明書とシリアルコードをお渡しします。", "专注于经过正品耗材记录验证的先进抗衰老治疗。我们为每位患者提供一次性治疗头证书和序列号。"],
-    "A trendy but medically rigorous clinic in Hongdae. Focuses on laser toning and vascular treatments for younger global patients with absolute physician presence.": ["트렌디하지만 의학적으로는 엄격한 홍대의 클리닉입니다. 젊은 외국인 환자를 위한 레이저 토닝과 혈관 치료에 집중하며, 반드시 원장이 직접 시술합니다.", "トレンディでありながら医学的には厳格な弘大のクリニックです。若い外国人患者向けのレーザートーニングと血管治療に力を入れ、必ず医師本人が施術します。", "位于弘大、时尚却严谨的诊所。专注于为年轻国际患者提供激光美白与血管治疗，全程由医生亲自操作。"],
-    "A premier eye-focused surgery center in Gangnam, specializing in natural double eyelids, non-incisional ptosis corrections, and delicate under-eye fat relocations.": ["강남의 대표적인 눈 성형 전문 센터로, 자연스러운 쌍꺼풀, 비절개 눈매 교정, 섬세한 눈밑 지방 재배치를 전문으로 합니다.", "江南を代表する目元専門の手術センターで、自然な二重、切らない眼瞼下垂矯正、繊細な目の下の脂肪再配置を専門としています。", "江南一流的眼部整形中心，专注于自然双眼皮、非切开上睑下垂矫正，以及精细的眼下脂肪重置。"],
-    "Specialized in structural rhinoplasty and functional nose surgeries. Resolves nasal breathing issues while simultaneously optimizing nasal aesthetic contours.": ["구조적 코성형과 기능 코수술을 전문으로 합니다. 코 호흡 문제를 해결하면서 동시에 코의 미적 윤곽을 최적화합니다.", "構造的な鼻整形と機能的な鼻の手術を専門としています。鼻呼吸の問題を解決しながら、同時に鼻の美しい輪郭を整えます。", "专注于结构性鼻整形与功能性鼻部手术。在解决鼻腔呼吸问题的同时，优化鼻部的美学轮廓。"],
-    "An internationally recognized boutique clinic for premium breast augmentations and lifts, focusing on natural breast kinetics and verified safe implant tip logs.": ["프리미엄 가슴 확대와 리프팅으로 국제적으로 인정받는 부티크 클리닉입니다. 자연스러운 가슴의 움직임과 검증된 안전한 보형물 기록을 중시합니다.", "プレミアムな豊胸とバストリフトで国際的に評価されているブティッククリニックです。自然なバストの動きと、検証済みの安全なインプラント記録を重視しています。", "以高端隆胸与乳房提升享誉国际的精品诊所。注重自然的乳房动态，并保留经过验证的安全假体记录。"],
-    "Specializing in aesthetic dentistry, minimum-prep laminates, and clear orthodontics. We design natural-looking smiles based on computer-guided tooth thickness models.": ["심미 치과, 최소 삭제 라미네이트, 투명 교정을 전문으로 합니다. 컴퓨터 기반 치아 두께 모델을 바탕으로 자연스러운 미소를 디자인합니다.", "審美歯科、最小限の削合で行うラミネートベニア、マウスピース矯正を専門としています。コンピューターによる歯の厚みモデルに基づいて、自然な笑顔をデザインします。", "专注于美学牙科、微创瓷贴面和隐形矫正。我们根据电脑引导的牙齿厚度模型，设计自然的笑容。"],
-    "Provides medical herbal weight management programs and facial cosmetic acupuncture designed by certified Korean Traditional Medicine Doctors.": ["공인 한의사가 설계한 한방 체중 관리 프로그램과 얼굴 미용 침 시술을 제공합니다.", "認定韓医師が設計した漢方による体重管理プログラムと、美容鍼を提供しています。", "提供由认证韩医师设计的中药体重管理方案和面部美容针灸。"],
-    "Focuses on clearing pigmentation, freckles, and sun spots for diverse nationalities with custom laser settings.": ["맞춤 레이저 설정으로 다양한 국적의 환자에게 색소, 주근깨, 햇빛 잡티 치료를 제공합니다.", "オーダーメイドのレーザー設定で、さまざまな国籍の患者様の色素沈着、そばかす、日焼けによるシミを治療します。", "以个性化激光参数，为不同国籍的患者淡化色素沉着、雀斑和晒斑。"],
-    "A friendly community-oriented specialist dermatology office focused on acne healing and premium laser hair removal.": ["여드름 치료와 프리미엄 레이저 제모에 집중하는 친근한 동네 피부과 전문의 의원입니다.", "ニキビ治療とプレミアムなレーザー脱毛に力を入れている、地域に根ざした親しみやすい皮膚科専門クリニックです。", "一家亲切的社区皮肤科专科诊所，专注于痘痘治疗和高端激光脱毛。"],
-    "Specialized in high-tech lifting (Ulthera, Thermage) and fat dissolving body injections. Located next to Lotte World Tower.": ["울쎄라, 써마지 같은 첨단 리프팅과 바디 지방분해 주사를 전문으로 합니다. 롯데월드타워 바로 옆에 있습니다.", "ウルセラ、サーマージュなどの先進リフティングと、ボディの脂肪溶解注射を専門としています。ロッテワールドタワーのすぐ隣にあります。", "专注于超声刀、热玛吉等高科技提升项目和身体溶脂注射。紧邻乐天世界塔。"],
-    "Focused on natural skin barrier recovery and herbal-infused calming booster therapies for exhausted travelers.": ["지친 여행객을 위한 자연스러운 피부 장벽 회복과 허브 성분 진정 부스터 치료에 집중합니다.", "旅の疲れが出た肌のための自然な皮膚バリア回復と、ハーブ成分を配合した鎮静ブースター治療に力を入れています。", "专注于为疲惫的旅行者提供自然的皮肤屏障修复和草本舒缓助推疗程。"],
-    "Customized aesthetic clinics that specialize in face balancing fillers, botox, and fat dissolving line treatments.": ["얼굴 밸런스 필러, 보톡스, 지방분해 라인 시술을 전문으로 하는 맞춤형 미용 클리닉입니다.", "顔のバランスを整えるフィラー、ボトックス、脂肪溶解によるライン施術を専門とするオーダーメイドの美容クリニックです。", "专注于面部平衡填充、肉毒素和溶脂塑形的定制美容诊所。"],
-    "With a fully English-speaking medical staff, this clinic is designed for international visitors seeking skin treatments, pigment laser, and hair loss solutions.": ["의료진 전원이 영어를 구사하며, 피부 치료, 색소 레이저, 탈모 솔루션을 찾는 외국인 방문객을 위해 만들어진 클리닉입니다.", "医療スタッフ全員が英語を話し、肌治療、色素レーザー、薄毛対策を求める海外からの来院者のために作られたクリニックです。", "全体医护人员均可说英语，专为寻求皮肤治疗、色素激光和脱发解决方案的国际访客打造。"],
-    "Specialized in hair-loss diagnostics, offering premium growth factor infusions and professional laser hair removal packages.": ["탈모 진단을 전문으로 하며, 프리미엄 성장인자 주입과 전문 레이저 제모 패키지를 제공합니다.", "薄毛の診断を専門とし、プレミアムな成長因子注入とプロのレーザー脱毛パッケージを提供しています。", "专注于脱发诊断，提供高端生长因子注射和专业激光脱毛套餐。"],
-    "Equipped with advanced dual-wavelength pigment toning lasers, focusing on skin tone equalization and laser hair removal.": ["첨단 이중 파장 색소 토닝 레이저를 갖추고 피부톤 균일화와 레이저 제모에 집중합니다.", "先進的なデュアル波長の色素トーニングレーザーを備え、肌のトーンを均一にする治療とレーザー脱毛に力を入れています。", "配备先进的双波长色素美白激光，专注于均匀肤色和激光脱毛。"],
-    "Specialized in advanced facial lifting and fat dissolution to create the perfect V-line, using combination lifting therapies.": ["복합 리프팅 요법으로 완벽한 V라인을 만드는 첨단 얼굴 리프팅과 지방분해를 전문으로 합니다.", "複数のリフティング療法を組み合わせ、理想的なVラインをつくる先進的なフェイスリフトと脂肪溶解を専門としています。", "专注于先进的面部提升与溶脂，以组合提升疗法打造完美 V 脸。"],
-    "Premium aesthetic clinic focusing on custom skin boosters and facial lifting, catering to residents in southern Seoul areas.": ["맞춤 스킨부스터와 얼굴 리프팅에 집중하는 프리미엄 미용 클리닉으로, 서울 남부 지역 주민들을 위한 곳입니다.", "オーダーメイドのスキンブースターとフェイスリフトに力を入れるプレミアム美容クリニックで、ソウル南部にお住まいの方々に向けたクリニックです。", "专注于定制水光/皮肤助推剂和面部提升的高端美容诊所，服务首尔南部地区的居民。"],
-    "Focused on acne scars, vascular clearing, and painless laser hair removal, providing comfortable clinical environments.": ["여드름 흉터, 혈관 치료, 통증 없는 레이저 제모에 집중하며 편안한 진료 환경을 제공합니다.", "ニキビ跡、血管治療、痛みの少ないレーザー脱毛に力を入れ、快適な診療環境を提供しています。", "专注于痘疤、血管治疗和无痛激光脱毛，提供舒适的诊疗环境。"],
-    "Specialized in customized obesity treatments and face fat dissolution with minimal downtime. Emphasizes patient comfort and strict dosage transparency.": ["다운타임이 적은 맞춤형 비만 치료와 얼굴 지방분해를 전문으로 합니다. 환자의 편안함과 투명한 용량 공개를 중시합니다.", "ダウンタイムの少ないオーダーメイドの肥満治療と、顔の脂肪溶解を専門としています。患者様の快適さと、投与量の徹底した透明性を重視しています。", "专注于恢复期短的个性化肥胖治疗和面部溶脂。注重患者舒适度，并严格公开用药剂量。"],
-    "A prestigious clinic specializing in advanced non-surgical lifting and scalp restoration. Located in the heart of Apgujeong, the luxury mecca of K-Beauty.": ["첨단 비수술 리프팅과 두피 재생을 전문으로 하는 명망 높은 클리닉입니다. K-뷰티 럭셔리의 중심지인 압구정 한복판에 있습니다.", "先進的な切らないリフティングと頭皮再生を専門とする名門クリニックです。K-ビューティーのラグジュアリーの中心地、狎鴎亭の真ん中にあります。", "一家专注于先进非手术提升与头皮修复的知名诊所。位于 K-Beauty 奢华圣地狎鸥亭的中心。"],
-    "Dedicated to solving youth and adult acne using state-of-the-art sebaceous gland destruction lasers and calming protocols.": ["최첨단 피지선 파괴 레이저와 진정 프로토콜로 청소년 및 성인 여드름 해결에 전념합니다.", "最先端の皮脂腺破壊レーザーと鎮静プロトコルで、思春期ニキビと大人ニキビの解決に取り組んでいます。", "致力于利用最先进的皮脂腺破坏激光和舒缓方案，解决青春期与成人痘痘问题。"],
-    "Premium hair restoration clinic offering advanced follicular unit extraction and non-surgical scalp booster injections for men and women.": ["남녀 모두를 위한 첨단 모낭 단위 채취술과 비수술 두피 부스터 주사를 제공하는 프리미엄 모발 재건 클리닉입니다.", "男女ともに対応する、先進的な毛包単位採取法（FUE）と切らない頭皮ブースター注射を提供するプレミアム毛髪再建クリニックです。", "为男女提供先进的毛囊单位提取术和非手术头皮助推注射的高端毛发修复诊所。"],
-    "Ideally located for tourists right next to Seoul Station, providing fast, safe laser hair removal and botox treatments with zero recovery time.": ["서울역 바로 옆이라 관광객이 찾기 좋은 위치에 있으며, 회복 기간 없이 빠르고 안전한 레이저 제모와 보톡스 시술을 제공합니다.", "ソウル駅のすぐ隣で観光客にとって便利な立地にあり、回復期間なしで受けられる速くて安全なレーザー脱毛とボトックスを提供しています。", "紧邻首尔站，地理位置非常适合游客，提供无需恢复期、快速安全的激光脱毛和肉毒素治疗。"],
-    "Specialized in premium moisture skin boosters (Rejuran, Chanell) and filler design. Delivers a gorgeous natural glass skin glow.": ["리쥬란, 샤넬 주사 같은 프리미엄 수분 스킨부스터와 필러 디자인을 전문으로 합니다. 자연스럽고 아름다운 물광 피부를 만들어 드립니다.", "リジュラン、シャネル注射などのプレミアムな保湿スキンブースターとフィラーデザインを専門としています。自然で美しいガラス肌のツヤを叶えます。", "专注于丽珠兰、香奈儿水光针等高端补水助推剂和填充设计。打造自然动人的玻璃肌光泽。"],
-    "Dr. Lee has over 12 years of clinical dermatology experience, specializing in lasers for thin and reactive skin barriers. She is a recognized speaker on Nd:YAG customization.": ["이 원장은 12년 이상의 임상 피부과 경력을 갖추고 얇고 예민한 피부 장벽을 위한 레이저를 전문으로 합니다. Nd:YAG 맞춤 설정 분야의 인정받는 연자입니다.", "イ先生は12年以上の皮膚科臨床経験を持ち、薄く敏感な皮膚バリアのためのレーザーを専門としています。Nd:YAGのカスタマイズに関する講演者としても知られています。", "李医生拥有 12 年以上的临床皮肤科经验，专攻针对薄弱敏感皮肤屏障的激光治疗。她是 Nd:YAG 个性化设定领域公认的讲者。"],
-    "Dr. Kim founded Myeongdong Forest to offer custom medical treatments for international travelers who frequently experience barrier breakdown due to travel and climate changes.": ["김 원장은 여행과 기후 변화로 피부 장벽이 자주 무너지는 외국인 여행객에게 맞춤 의료 시술을 제공하기 위해 명동 포레스트를 설립했습니다.", "キム先生は、旅行や気候の変化で皮膚バリアが崩れやすい海外からの旅行者にオーダーメイドの医療を提供するため、明洞フォレストを設立しました。", "金医生创立了明洞森林，为因旅行和气候变化而经常出现屏障受损的国际旅行者提供定制化医疗服务。"],
-    "Dr. Park completed his fellowship at Seoul National University Hospital. He speaks fluent English and is dedicated to making laser treatments safe for diverse Fitzpatrick skin types.": ["박 원장은 서울대학교병원에서 전임의 과정을 마쳤습니다. 영어에 능통하며, 다양한 피츠패트릭 피부 타입에 안전한 레이저 시술을 제공하는 데 힘쓰고 있습니다.", "パク先生はソウル大学病院でフェローシップを修了しました。英語が堪能で、さまざまなフィッツパトリック肌タイプに安全なレーザー治療を提供することに尽力しています。", "朴医生在首尔大学医院完成了专科培训。他英语流利，致力于让激光治疗对各种菲茨帕特里克肤质都安全。"],
-    "Dr. Choi is an expert in non-surgical lifting. He developed Sinsa Glow's 'Barrier First' lifting protocol to prevent post-treatment nerve complications and excessive swelling.": ["최 원장은 비수술 리프팅 전문가입니다. 시술 후 신경 합병증과 과도한 붓기를 막기 위해 신사 글로우의 '장벽 우선' 리프팅 프로토콜을 개발했습니다.", "チェ先生は切らないリフティングの専門家です。施術後の神経合併症や過度な腫れを防ぐため、新沙グロウの「バリアファースト」リフティングプロトコルを開発しました。", "崔医生是非手术提升专家。他开发了新沙光采的“屏障优先”提升方案，以防止术后神经并发症和过度肿胀。"],
-    "Dr. Song is highly recognized for her gentle, layered laser approach. She rejects rapid 'one-size-fits-all' laser protocols, allocating 30+ minutes per patient treatment.": ["송 원장은 부드럽게 여러 층으로 나누어 시술하는 레이저 방식으로 높이 평가받습니다. 빠른 획일적 레이저 프로토콜을 거부하고 환자 한 명당 30분 이상을 할애합니다.", "ソン先生は、やさしく何層にも分けて照射するレーザー手法で高く評価されています。画一的でスピード重視のレーザープロトコルを拒み、患者様一人ひとりに30分以上をかけています。", "宋医生以温和的分层激光手法备受认可。她拒绝快速的“一刀切”激光方案，为每位患者的治疗投入 30 分钟以上。"],
-    "Dr. Song is a leading eye rejuvenation specialist with 15+ years of experience, renowned for natural double eyelid and delicate fat redistribution.": ["송 원장은 15년 이상의 경력을 가진 눈 성형 분야의 선도적인 전문가로, 자연스러운 쌍꺼풀과 섬세한 지방 재배치로 유명합니다.", "ソン先生は15年以上の経験を持つ目元の若返り治療の第一人者で、自然な二重と繊細な脂肪の再配置で有名です。", "宋医生是拥有 15 年以上经验的眼部年轻化领军专家，以自然双眼皮和精细的脂肪重置而闻名。"],
-    "Dr. Park completed his residency at Yonsei Severance Hospital, specializing in functional rhinoplasty that cures breathing issues while enhancing nasal aesthetics.": ["박 원장은 연세 세브란스병원에서 전공의 과정을 마쳤으며, 코의 미적 개선과 함께 호흡 문제를 치료하는 기능 코성형을 전문으로 합니다.", "パク先生は延世セブランス病院で研修医課程を修了し、鼻の見た目を整えながら呼吸の問題も治す機能的鼻整形を専門としています。", "朴医生在延世大学 Severance 医院完成住院医师培训，专攻在改善鼻部美观的同时治疗呼吸问题的功能性鼻整形。"],
-    "Dr. Nam is an internationally recognized speaker on Motiva Ergonomix implants, prioritizing tissue safety and natural kinetics.": ["남 원장은 모티바 에르고노믹스 보형물 분야에서 국제적으로 인정받는 연자로, 조직 안전성과 자연스러운 움직임을 최우선으로 합니다.", "ナム先生はモティバ・エルゴノミクス・インプラントに関して国際的に評価されている講演者で、組織の安全性と自然な動きを最優先にしています。", "南医生是 Motiva Ergonomix 假体领域享誉国际的讲者，始终把组织安全和自然动态放在首位。"],
-    "Dr. Kim focuses on ultra-thin laminate veneers and digital clear aligner planning with minimal tooth prep.": ["김 원장은 치아 삭제를 최소화한 초박형 라미네이트와 디지털 투명 교정 계획에 집중합니다.", "キム先生は、歯を削る量を最小限に抑えた極薄のラミネートベニアと、デジタルによるマウスピース矯正の計画に力を入れています。", "金医生专注于微创备牙的超薄瓷贴面和数字化隐形矫正方案设计。"],
-    "Dr. Lee graduated from Kyunghee University Korean Medicine College and developed custom herbal diet formulas with high compliance and low rebound rate.": ["이 원장은 경희대학교 한의과대학을 졸업했으며, 복용 순응도가 높고 요요가 적은 맞춤 한방 다이어트 처방을 개발했습니다.", "イ先生は慶熙大学韓医科大学を卒業し、続けやすくリバウンドの少ないオーダーメイドの漢方ダイエット処方を開発しました。", "李医生毕业于庆熙大学韩医学院，研发了依从性高、反弹率低的个性化中药减肥配方。"],
-    "Dr. Park completed his medical degree at Yonsei University. He has extensive experience adjusting laser wavelengths for Western and South Asian skin profiles.": ["박 원장은 연세대학교에서 의학 학위를 받았습니다. 서양인과 남아시아인 피부에 맞춰 레이저 파장을 조절한 풍부한 경험이 있습니다.", "パク先生は延世大学で医学の学位を取得しました。欧米人や南アジア人の肌に合わせてレーザーの波長を調整してきた豊富な経験があります。", "朴医生在延世大学获得医学学位。他在针对西方人和南亚人肤质调整激光波长方面经验丰富。"],
-    "Dr. Choi focuses on safe medical treatments with zero exaggeration, dedicating ample time to explain diagnostic results.": ["최 원장은 과장 없는 안전한 의료 시술에 집중하며, 진단 결과를 충분한 시간을 들여 설명합니다.", "チェ先生は誇張のない安全な医療に力を入れ、診断結果を時間をかけて丁寧に説明しています。", "崔医生专注于不夸大其词的安全医疗，会花充足的时间解释诊断结果。"],
-    "Dr. Song is an expert in non-invasive skin tightening and body line design, with certified safety credentials.": ["송 원장은 비침습 피부 탄력 개선과 바디 라인 디자인의 전문가로, 공인된 안전 자격을 갖추고 있습니다.", "ソン先生は切らない肌の引き締めとボディラインデザインの専門家で、認定された安全資格を持っています。", "宋医生是无创紧肤和身体线条设计专家，拥有认证的安全资质。"],
-    "Dr. Jung blends classic dermatological laser care with soothing, skin barrier-friendly moisture boosters for immediate traveler recovery.": ["정 원장은 정통 피부과 레이저 치료에 진정 효과가 있는 피부 장벽 친화적 수분 부스터를 결합해 여행객의 빠른 회복을 돕습니다.", "チョン先生は、王道の皮膚科レーザー治療に、鎮静効果のある皮膚バリアにやさしい保湿ブースターを組み合わせ、旅行者の素早い回復をサポートしています。", "郑医生将经典皮肤科激光护理与舒缓、亲屏障的补水助推剂相结合，帮助旅行者快速恢复。"],
-    "Dr. Shin provides careful and proportion-accurate injections to enhance features while ensuring safety first.": ["신 원장은 안전을 최우선으로 하면서 이목구비를 돋보이게 하는 세심하고 비율이 정확한 주사 시술을 제공합니다.", "シン先生は安全を最優先にしながら、顔立ちを引き立てる丁寧で比率の正確な注入治療を提供しています。", "申医生在确保安全第一的前提下，提供细致且比例精准的注射治疗来突出五官。"],
-    "Dr. Miller finished her medical education in the US and Korea, focusing on pigmentary responses in skin of color (Types IV-VI).": ["밀러 원장은 미국과 한국에서 의학 교육을 마쳤으며, 유색 피부(타입 IV-VI)의 색소 반응에 집중합니다.", "ミラー先生はアメリカと韓国で医学教育を修了し、有色肌（タイプIV〜VI）の色素反応を専門としています。", "米勒医生在美国和韩国完成医学教育，专注于有色肌肤（IV-VI 型）的色素反应。"],
-    "Dr. Ryu has written several papers on micro-needle therapy systems for alopecia and is a board member of the Hair Restoration Society.": ["류 원장은 탈모를 위한 마이크로니들 치료 시스템에 관한 여러 논문을 썼으며 모발재건학회 이사로 활동하고 있습니다.", "リュ先生は脱毛症に対するマイクロニードル治療システムに関する論文を複数執筆しており、毛髪再建学会の理事を務めています。", "柳医生撰写了多篇关于微针治疗脱发系统的论文，并担任毛发修复学会理事。"],
-    "Dr. Yoon has over 10 years of laser clinical experience, calibrating settings based on individual pigment thickness.": ["윤 원장은 10년 이상의 레이저 임상 경험을 바탕으로 개인의 색소 두께에 맞춰 설정을 조절합니다.", "ユン先生は10年以上のレーザー臨床経験を持ち、一人ひとりの色素の厚さに合わせて設定を調整しています。", "尹医生拥有 10 年以上的激光临床经验，会根据个人的色素厚度调整参数。"],
-    "Dr. Koh is an expert in non-invasive lifting. He designed a proprietary protocol that guarantees maximum lift with minimal swelling.": ["고 원장은 비침습 리프팅 전문가입니다. 붓기는 최소화하면서 리프팅 효과는 극대화하는 독자적인 프로토콜을 설계했습니다.", "コ先生は切らないリフティングの専門家です。腫れを最小限に抑えながら最大限のリフト効果を実現する独自のプロトコルを考案しました。", "高医生是无创提升专家。他设计了一套独家方案，保证在肿胀最小的情况下实现最大的提升效果。"],
-    "Dr. Lim is famous for her detailed consultation. She customizes combination therapies of boosters and non-invasive lasers.": ["임 원장은 꼼꼼한 상담으로 유명합니다. 부스터와 비침습 레이저를 결합한 복합 치료를 환자에 맞게 설계합니다.", "イム先生は丁寧なカウンセリングで有名です。ブースターと切らないレーザーを組み合わせた複合治療を、患者様に合わせてカスタマイズしています。", "林医生以细致的面诊闻名。她会为患者定制助推剂与无创激光相结合的组合疗法。"],
-    "Dr. Hwang completed his residency at Severance Hospital. He emphasizes restoring skin barriers and using safe, certified consumables.": ["황 원장은 세브란스병원에서 전공의 과정을 마쳤습니다. 피부 장벽 회복과 안전한 인증 소모품 사용을 강조합니다.", "ファン先生はセブランス病院で研修医課程を修了しました。皮膚バリアの回復と、安全な認証済み消耗品の使用を重視しています。", "黄医生在 Severance 医院完成住院医师培训。他重视修复皮肤屏障，并使用安全的认证耗材。"],
-    "Dr. Cho has 15 years of experience in aesthetic medicine, specializing in safe medical injections for localized fat and anti-wrinkle botox.": ["조 원장은 15년의 미용 의학 경력을 갖추고 국소 지방을 위한 안전한 의료 주사와 주름 개선 보톡스를 전문으로 합니다.", "チョ先生は美容医療で15年の経験を持ち、部分的な脂肪に対する安全な医療注射とシワ改善のボトックスを専門としています。", "赵医生拥有 15 年美容医学经验，专攻针对局部脂肪的安全医疗注射和除皱肉毒素。"],
-    "Dr. Park completed his residency at Seoul National University Hospital. He is a prominent speaker at clinical conferences regarding facial contouring and hair-loss therapies.": ["박 원장은 서울대학교병원에서 전공의 과정을 마쳤습니다. 얼굴 윤곽과 탈모 치료에 관한 학술 대회의 주요 연자입니다.", "パク先生はソウル大学病院で研修医課程を修了しました。顔の輪郭形成と薄毛治療に関する学会で活躍する著名な講演者です。", "朴医生在首尔大学医院完成住院医师培训。他是面部轮廓与脱发治疗相关临床会议上的知名讲者。"],
-    "Dr. Jang has dedicated her career to studying and treating acne scars. She is known for her meticulous extraction technique and gentle skin-calming programs.": ["장 원장은 여드름 흉터 연구와 치료에 경력을 바쳐 왔습니다. 꼼꼼한 압출 기술과 부드러운 피부 진정 프로그램으로 잘 알려져 있습니다.", "チャン先生はキャリアをニキビ跡の研究と治療に捧げてきました。丁寧な面ぽう圧出の技術と、やさしい肌の鎮静プログラムで知られています。", "张医生把职业生涯奉献给了痘疤的研究与治疗。她以细致的粉刺清理技术和温和的皮肤舒缓方案而闻名。"],
-    "Dr. Kang has conducted over 3,000 hair transplant procedures and specializes in early-stage scalp treatments to halt alopecia progression.": ["강 원장은 3,000건 이상의 모발 이식 수술을 시행했으며, 탈모 진행을 막는 초기 두피 치료를 전문으로 합니다.", "カン先生は3,000件以上の植毛手術を行っており、薄毛の進行を食い止める初期段階の頭皮治療を専門としています。", "姜医生已完成 3,000 多例植发手术，专攻在早期阶段遏制脱发进展的头皮治疗。"],
-    "Dr. Kim has specialized in quick, precise laser procedures that fit into tight travel itineraries, focusing on maximum comfort and speed.": ["김 원장은 빠듯한 여행 일정에 맞춘 빠르고 정밀한 레이저 시술을 전문으로 하며, 최대한의 편안함과 속도에 집중합니다.", "キム先生は、タイトな旅行日程に合わせた素早く精密なレーザー施術を専門とし、快適さとスピードを最大限に追求しています。", "金医生专攻适合紧凑行程的快速精准激光治疗，注重最大程度的舒适与效率。"],
-    "Dr. Yoo is highly respected for her delicate touch in intradermal injections, ensuring minimal bruising and maximal product absorption.": ["유 원장은 진피 내 주사의 섬세한 손길로 높이 평가받으며, 멍은 최소화하고 제품 흡수는 극대화합니다.", "ユ先生は皮内注射の繊細な技術で高く評価されており、内出血を最小限に抑えながら製剤の吸収を最大限に高めます。", "俞医生以精细的皮内注射手法备受推崇，能将淤青降到最低，同时让产品吸收最大化。"],
-    "A state-of-the-art clinic dedicated to patient-centric customization and safety protocols.": ["환자 개개인의 안전을 최우선으로 생각하는 프리미엄 커스텀 피부과입니다.", "患者様一人ひとりに合わせたカスタマイズと安全プロトコルを徹底した最先端のクリニックです。", "一家以患者为中心、致力于个性化定制和安全规范的先进诊所。"],
-    "Dedicated clinician with years of verified success in customized laser and barrier restoration protocols.": ["수년간 검증된 풍부한 시술 경력을 보유한 전문 의료진이 정성을 다해 진료합니다.", "オーダーメイドのレーザー治療とバリア回復プロトコルで、長年にわたり確かな実績を積んできた医師です。", "在个性化激光与屏障修复方案方面拥有多年验证成功经验的专注医生。"]
-};
+// Free-text clinic descriptions and doctor bios
+// Keyed by the stored English text: [ko, ja, zh]. Empty for now: the sample clinics it covered were
+// removed, and partner clinics provide their own translations through the portal.
+const clinicTextTranslations = {};
 
 function localizeClinicText(text, lang) {
     const idx = ENTITY_LANG_INDEX[lang];

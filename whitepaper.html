@@ -680,9 +680,11 @@
     │
     ├── (GET /api/clinics) ──────────> Vercel Serverless Function ──> Supabase DB
     │
-    └── (POST /api/submit-clinic) ───> Vercel Serverless Function ──> Supabase DB</code></pre>
+    └── (POST /api/submit-clinic) ───> Vercel Serverless Function ──> Supabase DB
+
+[Operator] node scripts/import-hira.js ──> HIRA open data API ──> Supabase DB (source = 'hira')</code></pre>
                     <p>
-                        <strong>Serverless API Layer</strong>: Implemented in Node.js, routing database transactions securely to prevent direct client access to administrative tables.
+                        <strong>Serverless API Layer</strong>: Implemented in Node.js, routing database transactions securely to prevent direct client access to administrative tables. The Supabase service key and the partner invite code exist only on the server; clinic and review text is escaped before rendering, and map embeds are limited to Google Maps URLs.
                     </p>
                 </div>
 
@@ -698,9 +700,11 @@
     │
     ├── (GET /api/clinics) ──────────> Vercel Serverless ──> Supabase DB
     │
-    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB</code></pre>
+    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB
+
+[운영자] node scripts/import-hira.js ──> 심평원 공공데이터 API ──> Supabase DB (source = 'hira')</code></pre>
                     <p>
-                        <strong>서버리스 API 보안</strong>: Node.js 기반의 API 라우터는 프론트엔드에서 수파베이스 DB 비공개 키(service_role) 노출을 철저히 격리하며, 도메인 검증 및 CORS 헤더를 통해 무단 타사 크롤러와 데이터 유출을 강력 차단합니다.
+                        <strong>서버리스 API 보안</strong>: Node.js 기반의 API 라우터만 Supabase 비공개 키(service_role)를 사용하며, 프론트엔드에는 키가 노출되지 않습니다. 파트너 초대 코드는 서버에서만 검증하고, 병원·리뷰 텍스트는 화면에 넣기 전에 이스케이프하며, 지도는 Google 지도 주소만 허용합니다.
                     </p>
                 </div>
 
@@ -716,9 +720,11 @@
     │
     ├── (GET /api/clinics) ──────────> Vercel Serverless ──> Supabase DB
     │
-    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB</code></pre>
+    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB
+
+[運営者] node scripts/import-hira.js ──> 健康保険審査評価院 公共データAPI ──> Supabase DB (source = 'hira')</code></pre>
                     <p>
-                        <strong>サーバーレスAPIセキュリティ</strong>: Node.jsベースのAPIルーターは、フロントエンドでのSupabase秘密キー(service_role)の露出を防ぎ、ドメイン検証およびCORSヘッダーを通じて無断クロールやデータ流出を防止します。
+                        <strong>サーバーレスAPIセキュリティ</strong>: Supabase秘密キー(service_role)はNode.jsのAPIルーターだけが使用し、フロントエンドには公開されません。パートナー招待コードはサーバー側でのみ検証し、クリニック・口コミのテキストは表示前にエスケープ、地図はGoogleマップのURLのみ許可しています。
                     </p>
                 </div>
 
@@ -734,9 +740,11 @@
     │
     ├── (GET /api/clinics) ──────────> Vercel Serverless ──> Supabase DB
     │
-    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB</code></pre>
+    └── (POST /api/submit-clinic) ───> Vercel Serverless ──> Supabase DB
+
+[运营方] node scripts/import-hira.js ──> 韩国健康保险审查评估院 公共数据 API ──> Supabase DB (source = 'hira')</code></pre>
                     <p>
-                        <strong>无服务器 API 安全</strong>: 基于 Node.js 的 API 路由彻底隔离 Supabase 密钥，并通过 CORS 请求头保护数据库不受非法爬虫窃取。
+                        <strong>无服务器 API 安全</strong>: 只有基于 Node.js 的 API 路由使用 Supabase 密钥 (service_role)，前端不会暴露密钥。合作伙伴邀请码仅在服务器端验证，诊所与评价文本在显示前会被转义，地图仅允许 Google 地图地址。
                     </p>
                 </div>
             </section>
@@ -770,6 +778,16 @@
                                 <td>Clinic name string.</td>
                             </tr>
                             <tr>
+                                <td><code>source</code></td>
+                                <td>TEXT</td>
+                                <td><code>partner</code> (registered through the portal) or <code>hira</code> (unverified public data entry).</td>
+                            </tr>
+                            <tr>
+                                <td><code>translations</code></td>
+                                <td>JSONB</td>
+                                <td>Owner-entered ko/ja/zh display text from the partner portal.</td>
+                            </tr>
+                            <tr>
                                 <td><code>doctor_type</code></td>
                                 <td>TEXT</td>
                                 <td><code>dermatologist</code>, <code>specialist</code>, or <code>gp</code>.</td>
@@ -777,7 +795,7 @@
                             <tr>
                                 <td><code>experience_years</code></td>
                                 <td>INTEGER</td>
-                                <td>Clinical experience in years. Default is 7.</td>
+                                <td>Clinical experience in years, entered by the clinic. Empty if not provided.</td>
                             </tr>
                             <tr>
                                 <td><code>sleep_anesthesia</code></td>
@@ -820,6 +838,16 @@
                                 <td>의원 이름 (국문/영문 통합 필드)</td>
                             </tr>
                             <tr>
+                                <td><code>source</code></td>
+                                <td>TEXT</td>
+                                <td><code>partner</code>(포털 등록 파트너) 또는 <code>hira</code>(미인증 공공데이터 병원)</td>
+                            </tr>
+                            <tr>
+                                <td><code>translations</code></td>
+                                <td>JSONB</td>
+                                <td>파트너 포털에서 원장이 입력한 한국어·일본어·중국어 표기</td>
+                            </tr>
+                            <tr>
                                 <td><code>doctor_type</code></td>
                                 <td>TEXT</td>
                                 <td>의료진 자격 유형 (피부과전문의, 전문의, 일반의)</td>
@@ -827,7 +855,7 @@
                             <tr>
                                 <td><code>experience_years</code></td>
                                 <td>INTEGER</td>
-                                <td>원장의 실제 임상 경력 연수 (기본값 7)</td>
+                                <td>원장이 입력한 임상 경력 연수 (입력하지 않으면 비어 있음)</td>
                             </tr>
                             <tr>
                                 <td><code>sleep_anesthesia</code></td>
@@ -870,6 +898,16 @@
                                 <td>クリニック名 (日英/韓 統合フィールド)</td>
                             </tr>
                             <tr>
+                                <td><code>source</code></td>
+                                <td>TEXT</td>
+                                <td><code>partner</code>（ポータル登録パートナー）または <code>hira</code>（未認証の公共データ）</td>
+                            </tr>
+                            <tr>
+                                <td><code>translations</code></td>
+                                <td>JSONB</td>
+                                <td>パートナーポータルで院長が入力した韓国語・日本語・中国語の表記</td>
+                            </tr>
+                            <tr>
                                 <td><code>doctor_type</code></td>
                                 <td>TEXT</td>
                                 <td>医師資格タイプ (皮膚科専門医、専門医、一般医)</td>
@@ -877,7 +915,7 @@
                             <tr>
                                 <td><code>experience_years</code></td>
                                 <td>INTEGER</td>
-                                <td>医師の実際の臨床経験年数 (デフォルト 7)</td>
+                                <td>院長が入力した臨床経験年数（未入力の場合は空欄）</td>
                             </tr>
                             <tr>
                                 <td><code>sleep_anesthesia</code></td>
@@ -920,6 +958,16 @@
                                 <td>诊所名称 (中/英/韩 整合字段)</td>
                             </tr>
                             <tr>
+                                <td><code>source</code></td>
+                                <td>TEXT</td>
+                                <td><code>partner</code>（通过门户注册的合作诊所）或 <code>hira</code>（未认证的公共数据）</td>
+                            </tr>
+                            <tr>
+                                <td><code>translations</code></td>
+                                <td>JSONB</td>
+                                <td>院长在合作伙伴门户填写的韩语、日语、中文显示文本</td>
+                            </tr>
+                            <tr>
                                 <td><code>doctor_type</code></td>
                                 <td>TEXT</td>
                                 <td>医生资质类型 (皮肤科专科医生、专科医生、普通医师)</td>
@@ -927,7 +975,7 @@
                             <tr>
                                 <td><code>experience_years</code></td>
                                 <td>INTEGER</td>
-                                <td>院长实际临床从业年限 (默认 7)</td>
+                                <td>院长填写的临床从业年限（未填写则为空）</td>
                             </tr>
                             <tr>
                                 <td><code>sleep_anesthesia</code></td>

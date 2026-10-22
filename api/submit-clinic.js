@@ -52,8 +52,8 @@ module.exports = async (req, res) => {
             return res.status(400).json({ success: false, error: 'Map URL must be a Google Maps embed link (https://www.google.com/maps/embed?...)' });
         }
 
-        // Default rating for newly registered clinic
-        const rating = "⭐ 5.0 (New registration)";
+        // New clinics have no reviews yet, so no rating is shown until real reviews come in
+        const rating = null;
 
         // Set up Supabase
         let supabaseUrl = process.env.SUPABASE_URL;
@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
                     foreign_attraction_registered: !!foreign_attraction_registered,
                     foreigner_insurance: !!foreigner_insurance,
                     excellent_aftercare: !!excellent_aftercare,
-                    experience_years: experience_years ? parseInt(experience_years) : 7,
+                    experience_years: experience_years ? parseInt(experience_years) : null,
                     translations: cleanTranslations
                 }
             });
@@ -120,7 +120,7 @@ module.exports = async (req, res) => {
             foreign_attraction_registered: !!foreign_attraction_registered,
             foreigner_insurance: !!foreigner_insurance,
             excellent_aftercare: !!excellent_aftercare,
-            experience_years: experience_years ? parseInt(experience_years) : 7,
+            experience_years: experience_years ? parseInt(experience_years) : null,
             translations: cleanTranslations,
             active: true
         };

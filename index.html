@@ -1427,7 +1427,7 @@
                             <div class="receipt-divider"></div>
                             <div class="receipt-line">
                                 <span>CLINIC NAME:</span>
-                                <span>CHEONGDAM BARRIER LAB</span>
+                                <span>SAMPLE CLINIC (예시)</span>
                             </div>
                             <div class="receipt-line">
                                 <span>TREATMENT:</span>
@@ -1485,16 +1485,16 @@
                 <!-- Review Stats Bar -->
                 <div class="review-stats-bar">
                     <div class="review-stat-item">
-                        <span class="review-stat-number" id="reviewTotalCount">32</span>
+                        <span class="review-stat-number" id="reviewTotalCount">0</span>
                         <span class="review-stat-label" data-i18n="reviews.stat_total">Total Reviews</span>
                     </div>
                     <div class="review-stat-divider"></div>
                     <div class="review-stat-item">
-                        <span class="review-stat-number">4.87</span>
+                        <span class="review-stat-number" id="reviewAvgRating">–</span>
                         <span class="review-stat-label" data-i18n="reviews.stat_avg">Avg. Rating</span>
                     </div>
                     <div class="review-stat-item">
-                        <span class="review-stat-number">100%</span>
+                        <span class="review-stat-number" id="reviewVerifiedShare">–</span>
                         <span class="review-stat-label" data-i18n="reviews.stat_verified">Receipt Verified</span>
                     </div>
                 </div>
@@ -1784,8 +1784,8 @@
 
             <div class="modal-header">
                 <div class="modal-title">
-                    <h3 id="clinic-detail-name">Cheongdam Barrier Lab</h3>
-                    <p id="clinic-detail-location">📍 Cheongdam-dong, Gangnam</p>
+                    <h3 id="clinic-detail-name"></h3>
+                    <p id="clinic-detail-location"></p>
                 </div>
                 <button class="btn-close" id="btnCloseClinic">&times;</button>
             </div>
@@ -1804,7 +1804,7 @@
                     <div class="info-block partner-only">
                         <span class="info-label" data-i18n="rev_sim.modal_title">Verified Review Statistics</span>
                         <h4 id="clinic-detail-rating"
-                            style="color: var(--color-accent); font-size: 24px; margin-top: 4px;">⭐ 4.9</h4>
+                            style="color: var(--color-accent); font-size: 24px; margin-top: 4px;"></h4>
                     </div>
                     <div class="info-block partner-only">
                         <span class="info-label" data-i18n="clinic.about_label">About the Clinic</span>
@@ -1828,10 +1828,10 @@
                     <div class="info-block doctor-block partner-only">
                         <span class="info-label" data-i18n="clinic.doctor_label">Operating Physician</span>
                         <div class="doctor-profile" style="margin-top: 8px;">
-                            <div class="doctor-avatar" id="clinic-detail-doc-avatar">JY</div>
+                            <div class="doctor-avatar" id="clinic-detail-doc-avatar"></div>
                             <div class="doctor-meta">
-                                <h5 id="clinic-detail-doc-name">Dr. Ji-Yeon Lee</h5>
-                                <p id="clinic-detail-doc-title">Board-Certified Dermatologist | Nd:YAG Specialist</p>
+                                <h5 id="clinic-detail-doc-name"></h5>
+                                <p id="clinic-detail-doc-title"></p>
                             </div>
                         </div>
                         <p id="clinic-detail-doc-bio"

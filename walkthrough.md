@@ -1,60 +1,63 @@
-# KOMICARE V2 Landing Page Walkthrough
+# KOMICARE 구조와 변경 내역
 
-We have successfully upgraded the KOMICARE web application to a premium, boutique skin match landing page. The application meets all aspects of the approved implementation plan and the PRD guidelines.
+설정과 사용법은 [README.md](README.md)에 있습니다. 이 문서는 코드가 어떻게 짜여 있는지와 지금까지 무엇이 바뀌었는지를 정리합니다.
 
-Below is a carousel showcasing screenshots of the interactive features:
+## 현재 상태 (MVP, 2026-10-22)
 
-````carousel
-![1. Initial Page Load (Landing Header & Quiz Initial Step)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/initial_page_load_1782101039149.png)
-<!-- slide -->
-![2. Skin Passport Analysis Card (Results computed from Quiz responses)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/quiz_results_1782101081632.png)
-<!-- slide -->
-![3. Interactive Safety Handbook Modal (Toggling Checklist inside Chapter 2)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/modal_checklist_1782101143325.png)
-<!-- slide -->
-![4. Receipt Privacy Masking Demo (Blurred sensitive information client-side)](/C:/Users/yinam/.gemini/antigravity-ide/brain/0cb0e8ac-53f3-4824-a048-b7bafc288bf2/receipt_after_masking_1782101167085.png)
-````
+- **병원 데이터**: 실제 파트너 병원은 아직 없습니다. 예전에 넣어 둔 샘플 병원 120곳과 코드 속 샘플 목록, 500곳 자동 생성 코드는 모두 삭제했습니다. 디렉토리에는 포털로 등록한 파트너와 공공데이터(건강보험심사평가원) 병원만 나타납니다.
+- **공공데이터**: 가져오기 스크립트는 준비되어 있지만, 서비스 키(`HIRA_SERVICE_KEY`)와 DB 마이그레이션 5-1·5-2를 적용한 뒤 실행해야 실제 병원이 들어옵니다.
+- **리뷰**: 샘플 리뷰 32개는 삭제했습니다. 실제 리뷰가 없을 때는 빈 안내와 `0 / – / –` 통계가 보이고, 점수를 만들어 내지 않습니다.
 
----
+## 파일 구성
 
-## What was Accomplished
+| 파일 | 역할 |
+|---|---|
+| `index.html` | 메인 페이지 마크업 (히어로, 진단 퀴즈, 비교, 디렉토리, 영수증 마스킹 데모, 리뷰, 의사 섹션, 모달) |
+| `index.css` | 스타일. 색은 `:root`, `html[data-theme="light"]`, `html[data-theme="dark"]` 세 블록의 변수로만 지정 |
+| `app.js` | 화면 동작: 퀴즈, 디렉토리 렌더링·필터·검색, 병원 모달, 예약, 리뷰 작성 시뮬레이터, 테마 |
+| `i18n.js` | 4개 언어 문구(`translations`), 병원명·의사명·위치·직함·진료시간 번역 사전(`entityParts`, `titleSegments`, `localizeEntity`) |
+| `clinic.html` | 파트너 등록 포털 (초대 코드 확인, 다국어 입력 탭, 빈 번역 경고, 실시간 미리보기) |
+| `whitepaper.html` | 파트너 의료진용 백서 (4개 언어) |
+| `api/clinics.js` | `GET` 병원 목록. 1,000행씩 페이지로 읽고 파트너 → 공공데이터 순으로 반환. DB 오류 시 500 |
+| `api/submit-clinic.js` | `POST` 파트너 등록. 초대 코드 검증, 지도 URL 검증, 번역 정리, 오래된 DB면 없는 컬럼을 빼고 저장 |
+| `api/book.js`, `api/subscribe.js` | 예약, 대기자 명단 |
+| `api/_lib/security.js` | 초대 코드 비교(타이밍 안전), 지도 URL 허용 목록, 번역 입력 정리 |
+| `scripts/import-hira.js` | 심평원 병원정보서비스 → `clinics` (source = `hira`) |
+| `supabase_schema.sql` | 테이블·RLS·마이그레이션. 샘플 데이터 INSERT는 없음 |
 
-### 1. Code Architecture
-We migrated from simple inline HTML code with CDN scripts to a clean, modular structure in `e:\Komi`:
-- **[index.html](file:///e:/Komi/index.html)**: Contains semantic HTML5 tags structuring the site blocks: Hero Section, Pain Points Grid, Value Propositions, Directory, and Reviews.
-- **[index.css](file:///e:/Komi/index.css)**: Implements custom HSL design tokens, responsive breakpoints, luxury font pairings (*Outfit* and *Playfair Display*), custom scale indicators, and dialog overlay transitions.
-- **[app.js](file:///e:/Komi/app.js)**: Runs client-side state machine scripts for the quiz, receipt logs masking, modal control, checklist check-offs, and clipboard actions.
+## 병원 데이터 흐름
 
-### 2. Implemented Features
-- **Fitzpatrick Diagnostic Engine**: Step-by-step diagnostic questionnaire checking skin tone, sun sensitivity, and tanning behavior to compute Fitzpatrick Types (I to VI) and present customized advisory summaries.
-- **Privacy Tax Masker**: Interactive demonstration showing tax refund receipt processing. Blurs transaction IDs, codes, and timestamps client-side to prevent clinics tracking down patients who leave negative reviews.
-- **Dr. Minji Kim Message**: Dedicated trust section for the founder highlighting the medical necessity of individualized laser parameters.
-- **Verified Clinic Previews**: Previews partner boutique clinics showcasing their medical certifications and maximum hourly slot constraints.
-- **Handbook Reader Modal**: Renders the complete "Essential K-Beauty Safety Handbook" (Chapters 1 to 4) dynamically with previous/next pagination, active sidebar button highlights, and a copyable "5 Questions checklist".
+```
+파트너 원장  ──(/clinic 포털)──> POST /api/submit-clinic ──> clinics (source = 'partner')
+운영자       ──(node scripts/import-hira.js)──> 심평원 API ──> clinics (source = 'hira')
+방문자 화면  <──────────────── GET /api/clinics <──────────── clinics (active = true)
+```
 
----
+- **파트너 병원**: 평점·리뷰 점수는 실제 리뷰가 쌓인 뒤에만 표시합니다. 리뷰가 없으면 카드에 "신규", 모달에 "아직 리뷰가 없습니다"가 나옵니다.
+- **공공데이터 병원**: "미인증 · 공공데이터" 배지와 사실 정보(주소, 전화, 진료과목, 의료진 수)와 출처만 표시합니다. 평점·리뷰·의사 프로필·예약은 없습니다.
 
-## Verification & Testing
-The system was verified via a local web server (`http://localhost:3000`) using automated browser actions:
-- Checked logo, pill status indicators, and initial layout alignments.
-- Clicked through the quiz options, inputted a test email, verified correct calculation of Fitzpatrick Type I, and read the specific warning details.
-- Verified that opening the modal, reading Chapter 2, toggling checklist items, and copying the checklist works correctly.
-- Checked receipt masking simulation to ensure sensitive data is blurred on target.
-- Verified no JavaScript errors in the console log.
+## 번역 방식
 
----
+- 화면 문구: `i18n.js`의 `translations` 키 → `t('key')`.
+- 병원명·의사명·위치·직함·진료시간: 영어로 저장된 값을 단어 사전으로 조합합니다. 모르는 단어가 하나라도 있으면 그 항목은 영어 원문 그대로 둡니다(섞여 나오지 않게).
+- 파트너가 포털에서 입력한 번역(`translations` 컬럼)이 있으면 그 값을 먼저 씁니다.
+- 공공데이터 병원명은 한국어 원문 그대로입니다.
 
-## Latest Updates: Modern Luxury Aesthetics & Tone & Manner Overhaul
+## 주요 변경 내역
 
-We have completely elevated the visual aesthetic and tone & manner of KOMICARE to state-of-the-art luxury K-Beauty standards:
+| 날짜 | 내용 |
+|---|---|
+| 2026-10-21 | 보안 수정: 초대 코드를 서버로 이동, XSS 이스케이프, 지도 URL 검증, CORS 정리, 405 상태 코드 |
+| 2026-10-21 | 히어로 체크리스트, 시술 아이콘 톤 통일, 모바일 헤더 넘침 수정 |
+| 2026-10-21 | 일본어·중국어 누락 번역, 하드코딩된 한국어 분기 → `t()` |
+| 2026-10-22 | 리뷰·시술 태그·병원명·의사명·위치·모달 문구 다국어화 |
+| 2026-10-22 | 포털 다국어 입력 탭과 빈 번역 경고, `translations` 컬럼 |
+| 2026-10-22 | 톤앤매너를 포슬린 로즈로 변경 (라이트 기본, 다크 지원), 백서·포털 포함 |
+| 2026-10-22 | 심평원 공공데이터 가져오기, 미인증 병원 표시, 더 보기 페이지 |
+| 2026-10-22 | 샘플 병원·샘플 리뷰·고정 가짜 점수·자동 5.0 평점 제거, DB 샘플 120곳 삭제(로컬 백업 보관) |
 
-### 1. Luminous Obsidian Emerald & Champagne Gold Palette
-- **Deep Obsidian Emerald Background (`#05110d`)**: Replaced dark cold slate tones with a deep obsidian emerald base enriched by multi-stop radial ambient glows (`rgba(216, 184, 141, 0.18)` & `rgba(18, 78, 60, 0.25)`).
-- **Champagne Gold & Soft Jade Accents (`#d8b88d` & `#4eb897`)**: Used metallic gold highlights for ratings, pill badges, and active filter states.
+## 아직 남은 것
 
-### 2. Floating Glass Deck & Luxury Filter Pills
-- **Refined Glassmorphism (`backdrop-filter: blur(24px)`)**: Replaced rigid boxy filter borders with an elevated floating glass deck featuring rounded corners (`24px`) and inner ambient rim highlights.
-- **Champagne Gold Pill Chips**: Converted raw checkboxes into interactive pill buttons (`.filter-btn-label`) that glow in champagne gold with soft drop shadows when checked.
-
-### 3. Clinic Cards & Doctor Ring Avatars
-- **3D Hover Lift (`transform: translateY(-5px)`)**: Updated `.partner-card` with rounded corners (`20px`), smooth hover lifts, and glowing gold borders.
-- **Metallic Avatar Rings**: Enclosed doctor initials in a champagne gold metallic ring gradient (`linear-gradient(135deg, #d8b88d 0%, #aa8c60 100%)`) with drop shadow highlights.
+- 공공데이터 실제 가져오기 (서비스 키와 마이그레이션 필요)
+- 헤더의 "100% 검증된 부티크 전용", 히어로의 "540명 이상의 의료 여행자" 같은 문구는 실제 수치·현황에 맞게 다듬어야 합니다.
+- 창업자 섹션의 인물(Dr. Minji Kim)이 실제 인물이 아니라면 교체가 필요합니다.

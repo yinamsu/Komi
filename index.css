@@ -4206,3 +4206,16 @@ html[data-theme="light"] .visual-category-menu .visual-category-item.active .ico
 .clinic-load-more:hover {
     border-color: var(--border-glow);
 }
+
+/* Empty states while there are no real reviews */
+.reviews-empty,
+.no-reviews-note {
+    grid-column: 1 / -1;
+    padding: 28px 20px;
+    border: 1px dashed var(--border-color);
+    border-radius: 14px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
