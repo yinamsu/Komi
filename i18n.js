@@ -237,7 +237,7 @@ const translations = {
         "compare.boutique_care_desc": "Dedicated recovery checklist support even after you return to your home country.",
         "compare.btn": "Select Boutique Standard",
 
-        "search.placeholder": "Search by treatment (e.g. Pico, Nd:YAG, Ulthera...)",
+        "search.placeholder": "Search clinic, doctor, area or treatment (e.g. Gallery, Gangnam, Pico)",
         "filter.all": "All Treatments",
         "filter.select_category": "Select a category above",
         "filter.select_category_desc": "Explore verified procedures and clinic specialties customized for your skin type.",
@@ -783,7 +783,7 @@ const translations = {
         "compare.boutique_care_desc": "본국으로 귀국한 후에도 전용 복구 체크리스트 및 비대면 사후 관리를 보장합니다.",
         "compare.btn": "안전한 부티크 시술 선택하기",
 
-        "search.placeholder": "시술명을 검색하세요 (예: 피코, 리프팅, Nd:YAG...)",
+        "search.placeholder": "병원명·의사명·지역·시술로 검색 (예: 갤러리아, 강남, 피코)",
         "filter.all": "전체 시술",
         "filter.select_category": "원하시는 카테고리를 선택해 보세요",
         "filter.select_category_desc": "피부 타입에 맞춘 검증된 시술 정보와 클리닉별 세부 전문 분야를 확인할 수 있습니다.",
@@ -1100,7 +1100,7 @@ const translations = {
     ja: {
         // ---- Categories & Filters ----
         "category.menu_title": "ご興味のある施術分野を選択してください",
-        "search.placeholder": "施術を検索（例：ピコ、Nd:YAG、ウルセラ...）",
+        "search.placeholder": "クリニック名・医師名・地域・施術で検索（例：江南、ピコ）",
         "filter.all": "すべての施術",
         "filter.select_category": "上のカテゴリーを選択してください",
         "filter.select_category_desc": "肌タイプに合った検証済みの施術や提携クリニックの専門分野を探索します。",
@@ -1958,7 +1958,7 @@ const translations = {
         "compare.boutique_risk_desc": "根据菲茨帕特里克分型调整脉冲长度与冷却参数。",
         "compare.boutique_care_desc": "即使回国后，也提供专属的修复清单支持。",
         "compare.btn": "选择精品标准",
-        "search.placeholder": "按项目搜索（如：皮秒、Nd:YAG、超声刀...）",
+        "search.placeholder": "按诊所、医生、地区或项目搜索（如：江南、皮秒）",
         "filter.select_category": "请在上方选择分类",
         "filter.select_category_desc": "探索为你的肤质量身定制的已验证项目和诊所专长。",
         "cat.fat": "脂肪手术",

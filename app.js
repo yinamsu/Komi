@@ -819,6 +819,25 @@ function getDetailedReviewRating(clinicId, category) {
     return null;
 }
 
+const normalizeSearchText = text => String(text || '').toLowerCase().replace(/[\s·.,()\-|📍]/g, '');
+
+// Everything a visitor might type to find a clinic, in the stored and the displayed language
+function clinicSearchText(c) {
+    const parts = [
+        c.name, clinicText(c, 'name', 'clinic'),
+        c.doctor_name, c.doctor_name && clinicText(c, 'doctor_name', 'doctor'),
+        c.location, clinicText(c, 'location', 'location'), c.address
+    ];
+    (c.specialties || []).forEach(spec => {
+        parts.push(spec, localizeSpecialty(spec));
+        const key = 'menu.' + spec.toLowerCase().replace(/ /g, '');
+        if (t(key) !== key) parts.push(t(key));
+    });
+    (c.departments || []).forEach(dept => parts.push(dept, localizeDepartment(dept)));
+    Object.values(c.translations || {}).forEach(tr => parts.push(tr.name, tr.doctor_name, tr.location));
+    return normalizeSearchText(parts.filter(Boolean).join(' '));
+}
+
 function applyFilters() {
     const searchInput = document.getElementById('directorySearchInput');
     const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
@@ -836,19 +855,13 @@ function applyFilters() {
         filtered = filtered.filter(c => (c.specialties || []).includes(tagFilter));
     }
     
-    // 3. Search Input Query
+    // 3. Search Input Query: clinic name, doctor name, area/address or treatment, in any shown language.
+    // Spaces are ignored and every word must match somewhere ("강남 갤러리아" finds 갤러리아피부과의원 in 강남구).
     if (q) {
+        const terms = q.split(/\s+/).map(normalizeSearchText).filter(Boolean);
         filtered = filtered.filter(c => {
-            const nameMatch = c.name.toLowerCase().includes(q) || clinicText(c, 'name', 'clinic').toLowerCase().includes(q);
-            const docMatch = !!c.doctor_name && (c.doctor_name.toLowerCase().includes(q) || clinicText(c, 'doctor_name', 'doctor').toLowerCase().includes(q));
-            const addrMatch = !!c.address && c.address.toLowerCase().includes(q);
-            const specMatch = (c.specialties || []).some(spec => {
-                const specLower = spec.toLowerCase();
-                const key = 'menu.' + specLower.replace(/ /g, '');
-                const trans = t(key).toLowerCase();
-                return specLower.includes(q) || trans.includes(q);
-            });
-            return nameMatch || docMatch || addrMatch || specMatch;
+            const haystack = clinicSearchText(c);
+            return terms.every(term => haystack.includes(term));
         });
     }
 
