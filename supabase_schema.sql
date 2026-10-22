@@ -91,6 +91,10 @@ ALTER TABLE public.clinics ALTER COLUMN hours DROP NOT NULL;
 ALTER TABLE public.clinics ALTER COLUMN map_iframe DROP NOT NULL;
 ALTER TABLE public.clinics ALTER COLUMN slots_tag DROP NOT NULL;
 
+-- 5-3. Different clinics can share a name (e.g. five separate "갤러리아피부과의원" in Seoul).
+-- Some databases were created with a UNIQUE constraint on name; drop it if present.
+ALTER TABLE public.clinics DROP CONSTRAINT IF EXISTS clinics_name_key;
+
 -- 6. Enable Row Level Security (RLS) on Clinics
 ALTER TABLE public.clinics ENABLE ROW LEVEL SECURITY;
 

@@ -159,6 +159,9 @@ async function upsert(rows) {
             if (error.code === '42703' || error.code === 'PGRST204') {
                 throw new Error(`${error.message}\nRun the "5-2" block of supabase_schema.sql in the Supabase SQL Editor first.`);
             }
+            if (error.code === '23505' && /clinics_name_key/.test(error.message)) {
+                throw new Error(`${error.message}\nSeveral real clinics share a name. Run the "5-3" block of supabase_schema.sql (drops the UNIQUE constraint on name), then import again.`);
+            }
             throw error;
         }
         console.log(`upserted ${Math.min(i + 500, rows.length)}/${rows.length}`);
