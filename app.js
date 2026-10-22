@@ -947,10 +947,14 @@ function localizeRating(rating) {
     return `⭐ ${m[1]} (${t('clinic.verified_reviews').replace('{count}', m[2])})`;
 }
 
-// kind ('clinic' | 'doctor' | 'location') lets English-only names be composed into ko/ja/zh
+// kind ('clinic' | 'doctor' | 'location' | 'text') lets English-only values be translated into ko/ja/zh.
+// 'title' and 'hours' use "|" to separate sections rather than "English | 한국어", so they skip the split.
 function getLocalizedText(rawText, kind) {
     if (!rawText) return '';
     const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
+    if ((kind === 'title' || kind === 'hours') && typeof localizeEntity === 'function') {
+        return localizeEntity(rawText, kind, lang);
+    }
     let text = rawText;
     if (rawText.includes('|')) {
         const parts = rawText.split('|').map(p => p.trim());
@@ -993,7 +997,7 @@ function renderClinicCards(clinics) {
         const localizedName = escapeHTML(getLocalizedText(clinic.name, 'clinic'));
         const localizedLoc = escapeHTML(getLocalizedText(clinic.location, 'location'));
         const localizedDocName = escapeHTML(getLocalizedText(clinic.doctor_name, 'doctor'));
-        const localizedDocTitle = escapeHTML(getLocalizedText(clinic.doctor_title));
+        const localizedDocTitle = escapeHTML(getLocalizedText(clinic.doctor_title, 'title'));
 
         const cardHTML = `
             <div class="partner-card" data-clinic-id="${escapeHTML(clinic.id)}">
@@ -1037,8 +1041,8 @@ function openClinicDetailModal(clinicId) {
     document.getElementById('clinic-detail-name').textContent = getLocalizedText(data.name, 'clinic');
     document.getElementById('clinic-detail-location').textContent = getLocalizedText(data.location, 'location');
     document.getElementById('clinic-detail-rating').textContent = localizeRating(data.rating);
-    document.getElementById('clinic-detail-desc').textContent = getLocalizedText(data.description);
-    document.getElementById('clinic-detail-hours').textContent = getLocalizedText(data.hours);
+    document.getElementById('clinic-detail-desc').textContent = getLocalizedText(data.description, 'text');
+    document.getElementById('clinic-detail-hours').textContent = getLocalizedText(data.hours, 'hours');
 
     const specialtiesContainer = document.getElementById('clinic-detail-specialties');
     specialtiesContainer.innerHTML = '';
@@ -1122,8 +1126,8 @@ function openClinicDetailModal(clinicId) {
 
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
     document.getElementById('clinic-detail-doc-name').textContent = getLocalizedText(data.doctor_name, 'doctor');
-    document.getElementById('clinic-detail-doc-title').textContent = getLocalizedText(data.doctor_title);
-    document.getElementById('clinic-detail-doc-bio').textContent = getLocalizedText(data.doctor_bio);
+    document.getElementById('clinic-detail-doc-title').textContent = getLocalizedText(data.doctor_title, 'title');
+    document.getElementById('clinic-detail-doc-bio').textContent = getLocalizedText(data.doctor_bio, 'text');
 
     const mapIframe = document.getElementById('clinic-detail-map-iframe');
     if (mapIframe) mapIframe.src = isSafeMapEmbedUrl(data.map_iframe) ? data.map_iframe : 'about:blank';
