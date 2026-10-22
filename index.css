@@ -1050,6 +1050,11 @@ html[data-theme="dark"] .theme-btn.active {
     padding-right: 8px;
 }
 
+/* Cards keep their natural height inside the scrolling list instead of being squashed to fit 620px */
+.partner-list > .partner-card {
+    flex-shrink: 0;
+}
+
 .partner-list::-webkit-scrollbar {
     width: 6px;
 }
