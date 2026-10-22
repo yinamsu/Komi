@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3c2c'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23c5a880' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23c5a880' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234e3029'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23e3a996' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23e3a996' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,22 +15,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Main Style CSS -->
+    <script>
+        try {
+            const savedTheme = localStorage.getItem('komicare-theme') || 'light';
+            const dark = savedTheme === 'dark' || (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <link rel="stylesheet" href="index.css">
 
     <style>
         :root {
-            --bg-paper: #020907;
-            --card-glass: rgba(10, 24, 20, 0.75);
-            --border-glass: rgba(197, 168, 128, 0.15);
-            --text-primary: #f0f4f2;
-            --text-secondary: #a3b8b0;
-            --accent-code: #52b788;
+            --bg-paper: var(--bg-primary);
+            --card-glass: var(--bg-secondary);
+            --border-glass: var(--border-color);
+            --accent-code: var(--color-accent-dark);
+            --secondary: var(--color-accent);
+            --primary: var(--color-on-accent);
         }
 
         body {
             background-color: var(--bg-paper);
-            background-image: radial-gradient(circle at 80% 10%, rgba(197, 168, 128, 0.08) 0%, transparent 50%),
-                              radial-gradient(circle at 10% 80%, rgba(11, 60, 44, 0.25) 0%, transparent 60%);
+            background-image: radial-gradient(circle at 80% 10%, rgba(var(--color-accent-rgb), 0.08) 0%, transparent 50%),
+                              radial-gradient(circle at 10% 80%, rgba(var(--color-primary-rgb), 0.25) 0%, transparent 60%);
             color: var(--text-primary);
             font-family: 'Outfit', 'Noto Sans KR', sans-serif;
             margin: 0;
@@ -45,7 +54,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(2, 9, 7, 0.85);
+            background: rgba(var(--bg-primary-rgb), 0.85);
         }
 
         .header-inner {
@@ -86,7 +95,7 @@
         /* Premium Language Switcher */
         .lang-toggle-container {
             display: flex;
-            background: rgba(10, 24, 20, 0.6);
+            background: rgba(var(--bg-primary-rgb), 0.6);
             border: 1px solid var(--border-glass);
             border-radius: 20px;
             padding: 3px;
@@ -123,7 +132,7 @@
         .back-btn:hover {
             background: var(--secondary);
             color: var(--primary);
-            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
+            box-shadow: 0 4px 15px rgba(var(--color-accent-rgb), 0.25);
         }
 
         .paper-layout {
@@ -131,13 +140,13 @@
             margin: 60px auto;
             padding: 0 24px;
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 280px minmax(0, 1fr);
             gap: 60px;
         }
 
         @media (max-width: 900px) {
             .paper-layout {
-                grid-template-columns: 1fr;
+                grid-template-columns: minmax(0, 1fr);
                 gap: 40px;
             }
             .sidebar-sticky {
@@ -171,7 +180,7 @@
 
         .doc-menu li a:hover {
             color: var(--secondary);
-            border-left-color: rgba(197, 168, 128, 0.5);
+            border-left-color: rgba(var(--color-accent-rgb), 0.5);
         }
 
         .doc-menu li.active a {
@@ -187,7 +196,7 @@
         }
 
         .doc-section {
-            border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+            border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.1);
             padding-bottom: 50px;
         }
 
@@ -209,7 +218,7 @@
 
         .doc-section h3 {
             font-family: 'Outfit', sans-serif;
-            color: #fff;
+            color: var(--text-primary);
             font-size: 1.25rem;
             margin-top: 30px;
         }
@@ -246,7 +255,7 @@
 
         code {
             font-family: 'Fira Code', monospace;
-            background: rgba(82, 183, 136, 0.08);
+            background: rgba(var(--color-accent-rgb), 0.08);
             color: var(--accent-code);
             padding: 3px 6px;
             border-radius: 4px;
@@ -254,7 +263,7 @@
         }
 
         pre {
-            background: rgba(10, 24, 20, 0.9);
+            background: rgba(var(--bg-primary-rgb), 0.9);
             border: 1px solid var(--border-glass);
             border-radius: 8px;
             padding: 20px;
@@ -263,7 +272,7 @@
 
         pre code {
             background: none;
-            color: #eaeaea;
+            color: var(--text-primary);
             padding: 0;
             font-size: 0.85rem;
         }
@@ -272,7 +281,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            background: rgba(10, 24, 20, 0.4);
+            background: rgba(var(--bg-primary-rgb), 0.4);
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--border-glass);
@@ -281,11 +290,11 @@
         th, td {
             padding: 14px 18px;
             text-align: left;
-            border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+            border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.1);
         }
 
         th {
-            background-color: rgba(11, 60, 44, 0.4);
+            background-color: rgba(var(--color-primary-rgb), 0.4);
             color: var(--secondary);
             font-weight: 600;
         }
@@ -296,7 +305,7 @@
         }
 
         .alert-box {
-            background: rgba(197, 168, 128, 0.04);
+            background: rgba(var(--color-accent-rgb), 0.04);
             border-left: 4px solid var(--secondary);
             padding: 20px;
             border-radius: 0 8px 8px 0;
@@ -364,9 +373,9 @@
         <div class="header-inner">
             <a href="index.html" class="logo-group">
                 <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="8" fill="#0b3c2c"/>
-                    <path d="M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z" fill="none" stroke="#c5a880" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M16 9V23M9 16H23" stroke="#c5a880" stroke-width="2.5" stroke-linecap="round"/>
+                    <rect width="32" height="32" rx="8" fill="#4e3029"/>
+                    <path d="M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z" fill="none" stroke="#e3a996" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 9V23M9 16H23" stroke="#e3a996" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
                 <h2>KOMICARE</h2>
             </a>
@@ -405,7 +414,7 @@
                 <!-- ENGLISH -->
                 <div class="trans-block lang-en">
                     <h1>Partner Doctor Whitepaper</h1>
-                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                    <p style="font-size: 1.15rem; color: var(--text-primary); font-style: italic;">
                         "Reclaiming the value of medical expertise: Escape price-competition and securely connect with premium global patients."
                     </p>
                     <p>
@@ -425,7 +434,7 @@
                 <!-- KOREAN -->
                 <div class="trans-block lang-ko">
                     <h1>협력 의료진을 위한 시스템 백서</h1>
-                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                    <p style="font-size: 1.15rem; color: var(--text-primary); font-style: italic;">
                         "의료 전문성의 가치 회복: 저가 출혈 경쟁에서 벗어나 프리미엄 외국인 환자를 안전하게 매칭합니다."
                     </p>
                     <p>
@@ -445,7 +454,7 @@
                 <!-- JAPANESE -->
                 <div class="trans-block lang-ja">
                     <h1>提携医師向けシステム白書</h1>
-                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                    <p style="font-size: 1.15rem; color: var(--text-primary); font-style: italic;">
                         "医療専門性の価値の回復：低価格競争から脱却し、プレミアムな外国人患者と安全にマッチングします。"
                     </p>
                     <p>
@@ -465,7 +474,7 @@
                 <!-- CHINESE -->
                 <div class="trans-block lang-zh">
                     <h1>合作医生系统白书</h1>
-                    <p style="font-size: 1.15rem; color: #fff; font-style: italic;">
+                    <p style="font-size: 1.15rem; color: var(--text-primary); font-style: italic;">
                         “重塑医疗专业价值：摆脱低价恶性竞争，安全精准匹配全球高端求美者。”
                     </p>
                     <p>

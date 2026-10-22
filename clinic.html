@@ -7,7 +7,7 @@
     
     <!-- KOMICARE Premium Favicon -->
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3c2c'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23c5a880' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23c5a880' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234e3029'/%3E%3Cpath d='M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z' fill='none' stroke='%23e3a996' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 9V23M9 16H23' stroke='%23e3a996' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +15,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Main Style CSS -->
+    <script>
+        try {
+            const savedTheme = localStorage.getItem('komicare-theme') || 'light';
+            const dark = savedTheme === 'dark' || (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <link rel="stylesheet" href="index.css">
     
     <!-- Translation mappings -->
@@ -22,18 +31,18 @@
 
     <style>
         :root {
-            --bg-portal: #030d0a;
-            --card-glass: rgba(15, 30, 25, 0.7);
-            --border-glass: rgba(197, 168, 128, 0.15);
-            /* Portal accents (used throughout this page but never defined before) */
-            --secondary: #c5a880;
-            --primary: #0b1420;
+            --bg-portal: var(--bg-primary);
+            --card-glass: var(--bg-secondary);
+            --border-glass: var(--border-color);
+            /* Portal accents, mapped onto the site palette */
+            --secondary: var(--color-accent);
+            --primary: var(--color-on-accent);
         }
 
         body {
             background-color: var(--bg-portal);
-            background-image: radial-gradient(circle at 50% 20%, rgba(11, 60, 44, 0.4) 0%, transparent 60%);
-            color: #eaeaea;
+            background-image: radial-gradient(circle at 50% 20%, rgba(var(--color-accent-rgb), 0.1) 0%, transparent 60%);
+            color: var(--text-primary);
             font-family: 'Outfit', 'Noto Sans KR', sans-serif;
             margin: 0;
             padding: 0;
@@ -47,7 +56,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(3, 13, 10, 0.8);
+            background: rgba(var(--bg-primary-rgb), 0.8);
         }
 
         .portal-header-container {
@@ -93,7 +102,7 @@
             border-radius: 16px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow-medium);
             backdrop-filter: blur(15px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -136,11 +145,11 @@
         }
 
         .input-group input, .input-group textarea, .input-group select {
-            background: rgba(3, 13, 10, 0.6);
+            background: rgba(var(--bg-primary-rgb), 0.6);
             border: 1px solid var(--border-glass);
             border-radius: 8px;
             padding: 12px 16px;
-            color: #fff;
+            color: var(--text-primary);
             font-family: inherit;
             font-size: 1rem;
             transition: all 0.25s ease;
@@ -149,11 +158,11 @@
         .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
             outline: none;
             border-color: var(--secondary);
-            box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
+            box-shadow: 0 0 10px rgba(var(--color-accent-rgb), 0.2);
         }
 
         .btn-premium {
-            background: linear-gradient(135deg, var(--secondary) 0%, #aa8c60 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--color-accent-dark) 100%);
             border: none;
             color: var(--primary);
             padding: 14px 28px;
@@ -168,7 +177,7 @@
 
         .btn-premium:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(197, 168, 128, 0.4);
+            box-shadow: 0 8px 20px rgba(var(--color-accent-rgb), 0.4);
         }
 
         /* Registry Layout Grid */
@@ -260,7 +269,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 13, 10, 0.9);
+            background: rgba(var(--bg-primary-rgb), 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -282,7 +291,7 @@
             padding: 40px;
             max-width: 500px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: var(--shadow-medium);
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -305,7 +314,7 @@
         }
 
         .success-details {
-            background: rgba(3, 13, 10, 0.5);
+            background: rgba(var(--bg-primary-rgb), 0.5);
             border-radius: 8px;
             padding: 16px;
             margin: 20px 0;
@@ -322,12 +331,12 @@
         }
 
         .tag-checkbox-btn {
-            background: rgba(197, 168, 128, 0.05);
+            background: rgba(var(--color-accent-rgb), 0.05);
             border: 1px solid var(--border-glass);
             border-radius: 20px;
             padding: 6px 14px;
             font-size: 0.85rem;
-            color: #ddd;
+            color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.2s ease;
             user-select: none;
@@ -350,12 +359,12 @@
         }
 
         .translation-tab {
-            background: rgba(197, 168, 128, 0.05);
+            background: rgba(var(--color-accent-rgb), 0.05);
             border: 1px solid var(--border-glass);
             border-radius: 20px;
             padding: 6px 16px;
             font-size: 0.85rem;
-            color: #ddd;
+            color: var(--text-secondary);
             cursor: pointer;
             font-family: inherit;
         }
@@ -383,7 +392,7 @@
 
         .translation-hint {
             font-size: 0.85rem;
-            color: #a8b8b2;
+            color: var(--text-secondary);
             margin: 6px 0 0;
             line-height: 1.5;
         }
@@ -395,9 +404,9 @@
         <div class="portal-header-container">
             <a href="index.html" class="logo-group">
                 <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="8" fill="#0b3c2c"/>
-                    <path d="M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z" fill="none" stroke="#c5a880" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M16 9V23M9 16H23" stroke="#c5a880" stroke-width="2.5" stroke-linecap="round"/>
+                    <rect width="32" height="32" rx="8" fill="#4e3029"/>
+                    <path d="M16 4C10 6 7 9 7 9V17C7 23 12 26 16 28C20 26 25 23 25 17V9C25 9 22 6 16 4Z" fill="none" stroke="#e3a996" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 9V23M9 16H23" stroke="#e3a996" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
                 <h2>KOMICARE</h2>
             </a>

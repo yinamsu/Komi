@@ -305,8 +305,10 @@ window.copySafetyChecklist = function () {
 function initTheme() {
     const themeSwitcher = document.getElementById('themeSwitcher');
     if (!themeSwitcher) return;
-    const savedTheme = localStorage.getItem('komicare-theme') || 'system';
-    applyTheme(savedTheme);
+    // Porcelain light theme is the brand default; visitors can still pick dark or follow the system
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('komicare-theme'); } catch (e) {}
+    applyTheme(savedTheme || 'light');
 
     themeSwitcher.querySelectorAll('.theme-btn').forEach(btn => {
         btn.addEventListener('click', () => applyTheme(btn.getAttribute('data-theme')));
@@ -316,7 +318,8 @@ function initTheme() {
 function applyTheme(theme) {
     const htmlEl = document.documentElement;
     htmlEl.setAttribute('data-theme', theme === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme);
-    localStorage.setItem('komicare-theme', theme);
+    document.querySelectorAll('#themeSwitcher .theme-btn').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-theme') === theme));
+    try { localStorage.setItem('komicare-theme', theme); } catch (e) {}
 }
 
 function expandClinicsWithGenerator(baseList) {
