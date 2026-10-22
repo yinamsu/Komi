@@ -9,6 +9,7 @@ node_modules/
 
 # import-hira.js --dry-run output
 scripts/hira-preview.json
+scripts/doctor-preview.json
 
 # Local DB backups (never commit)
 backups/

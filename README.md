@@ -11,6 +11,7 @@
 | `api/submit-clinic.js` | 파트너 병원 등록 API |
 | `api/book.js`, `api/subscribe.js` | 예약, 대기자 명단 API |
 | `scripts/import-hira.js` | 건강보험심사평가원 공공데이터 가져오기 스크립트 |
+| `scripts/enrich-doctors.js` | 병원 홈페이지에서 원장 이름 찾기 |
 | `.github/workflows/import-hira.yml` | 매월 공공데이터 자동 갱신 (GitHub Actions) |
 | `data/hira-sync.json` | 마지막 자동 갱신 결과 (자동으로 커밋됨) |
 | `supabase_schema.sql` | DB 스키마 |
@@ -36,6 +37,7 @@
 
 - **5-1**: 파트너 포털 다국어 표기 저장 (`translations` 컬럼)
 - **5-2**: 공공데이터 병원 저장 (`source`, `hira_ykiho`, `address`, `phone` 등 + 파트너 전용 컬럼의 NOT NULL 해제)
+- **5-4**: 홈페이지에서 찾은 원장 이름 저장 (`doctor_names`, `doctor_source_url`, `doctor_checked_at`, `doctor_opt_out`)
 - **5-3**: 병원명 UNIQUE 제약 제거. 서울에는 이름이 같은 서로 다른 병원이 있어(예: 갤러리아피부과의원 5곳) 이 제약이 있으면 일부가 저장되지 않습니다
 
 실행하지 않아도 사이트와 병원 등록은 동작하지만, 번역과 공공데이터는 저장되지 않습니다.
@@ -70,6 +72,8 @@ vercel dev
 ## 2. 파트너 포털 사용법 (`/clinic`)
 
 병원 원장님이 직접 병원을 등록하는 페이지입니다.
+
+> **이미 공공데이터로 올라와 있는 병원이라면**: 사이트에서 병원 카드를 눌러 상세 화면 아래의 **"이 병원 원장님이신가요?"**를 누르세요. 포털이 그 병원 이름·지역으로 미리 채워진 채 열리고, 등록하면 공공데이터 카드가 파트너 카드로 **전환**됩니다(새 카드가 따로 생기지 않으며 주소·전화·지도는 유지). 전환된 병원은 매월 자동 갱신이 덮어쓰지 않습니다.
 
 1. `/clinic`에 접속해 운영자에게 받은 **초대 코드**를 입력합니다. 코드는 서버에서만 확인되며 페이지 소스에는 들어 있지 않습니다.
 2. **기본 정보**를 입력합니다. 병원명·위치·소개·직함·소개글은 `English | 한국어` 형식으로 쓰면 한국어 화면에서 한국어 부분이 표시됩니다.
@@ -153,6 +157,32 @@ gh workflow run import-hira.yml -R yinamsu/Komi
 
 ```bash
 node scripts/import-hira.js --deactivate-missing --summary=data/hira-sync.json
+```
+
+### 원장 이름 (병원 홈페이지 기준)
+
+공공데이터에는 의사 이름이 없어서, 병원이 직접 공개한 **자체 홈페이지**에서 원장 이름을 찾습니다([scripts/enrich-doctors.js](scripts/enrich-doctors.js)).
+
+- 메인 페이지와 "의료진·원장 소개" 링크(최대 4개)만 읽고, `robots.txt`에서 막은 사이트와 네이버·인스타그램 등 플랫폼 페이지는 건너뜁니다.
+- "대표원장 홍길동", "홍길동 원장"처럼 **원장 직함 바로 옆에 쓰인 이름**만 인정합니다(성 + 두 글자).
+- 사이트에는 "원장 OOO · 홈페이지 기준"으로 표시하고, 상세 화면에 **출처 페이지와 확인 날짜**를 함께 보여줍니다.
+- 이름을 찾지 못한 병원도 확인 날짜를 남겨 30일 동안은 다시 확인하지 않습니다. 매월 자동 갱신 때 새 병원과 30일 지난 병원만 다시 확인합니다.
+- 홈페이지가 있는 병원은 약 800곳(23%)이고, 그중 약 1/3에서 이름을 찾습니다. 원장 소개가 이미지로만 되어 있거나 자바스크립트로 그려지는 사이트는 찾지 못합니다.
+
+```bash
+node scripts/enrich-doctors.js --dry-run
+```
+
+```bash
+node scripts/enrich-doctors.js
+```
+
+`--dry-run`은 저장 없이 `scripts/doctor-preview.json`만 만들고, `--from-preview`는 그 파일을 다시 긁지 않고 저장합니다.
+
+**정정·삭제 요청이 오면**: 원장님이 파트너로 등록(위의 "이 병원 원장님이신가요?")하면 본인 정보로 바뀝니다. 이름을 아예 빼 달라는 요청이면 아래 SQL로 처리하세요. `doctor_opt_out`이 켜진 병원은 다시 수집되지 않습니다.
+
+```sql
+UPDATE public.clinics SET doctor_names = NULL, doctor_source_url = NULL, doctor_opt_out = true WHERE id = /* 병원 id */;
 ```
 
 ### 샘플 데이터 (삭제 완료)

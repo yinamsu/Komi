@@ -23,6 +23,10 @@ function mapPublicClinic(item) {
         specialist_count: item.specialist_count,
         map_iframe: coordinateMapUrl(item.latitude, item.longitude),
         synced_at: item.synced_at,
+        // Director names from the clinic's own homepage, with where and when they were found
+        doctor_names: item.doctor_opt_out ? [] : (item.doctor_names || []),
+        doctor_source_url: item.doctor_opt_out ? null : item.doctor_source_url,
+        doctor_checked_at: item.doctor_checked_at,
         translations: item.translations || {}
     };
 }
@@ -41,7 +45,10 @@ function mapPartnerClinic(item) {
         doctor_title: item.doctor_title,
         doctor_bio: item.doctor_bio,
         hours: item.hours,
-        map_iframe: isSafeMapEmbedUrl(item.map_iframe) ? item.map_iframe : '',
+        // A claimed public listing keeps its coordinates map when the owner gave no embed URL
+        map_iframe: isSafeMapEmbedUrl(item.map_iframe) ? item.map_iframe : coordinateMapUrl(item.latitude, item.longitude),
+        address: item.address,
+        phone: item.phone,
         slots_tag: item.slots_tag,
         doctor_type: item.doctor_type,
         sleep_anesthesia: item.sleep_anesthesia,

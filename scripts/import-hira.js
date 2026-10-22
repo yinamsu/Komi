@@ -233,7 +233,25 @@ async function deactivateMissing(supabase, rows, activeBefore) {
     return { skipped: false, deactivated: data.length };
 }
 
+// hira_ykiho values of public listings a partner has claimed; the import must leave those rows alone
+async function claimedIds(supabase) {
+    const ids = new Set();
+    for (let from = 0; ; from += 1000) {
+        const { data, error } = await supabase.from('clinics').select('hira_ykiho')
+            .eq('source', 'partner').not('hira_ykiho', 'is', null).range(from, from + 999);
+        if (error) throw error;
+        data.forEach(r => ids.add(r.hira_ykiho));
+        if (data.length < 1000) break;
+    }
+    return ids;
+}
+
 async function upsert(rows, supabase = supabaseClient()) {
+    const claimed = await claimedIds(supabase);
+    if (claimed.size) {
+        rows = rows.filter(r => !claimed.has(r.hira_ykiho));
+        console.log(`skipping ${claimed.size} clinics claimed by partners`);
+    }
     for (let i = 0; i < rows.length; i += 500) {
         const chunk = rows.slice(i, i + 500);
         const { error } = await supabase.from('clinics').upsert(chunk, { onConflict: 'hira_ykiho' });

@@ -1,4 +1,4 @@
-# Monthly refresh of public clinic data (HIRA open API -> Supabase).
+# Monthly refresh of public clinic data (HIRA open API -> Supabase), then director names from homepages.
 # Runs on the 1st of every month at 09:00 KST, or on demand from the Actions tab ("Run workflow").
 # Needs repository secrets: HIRA_SERVICE_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
 name: Import HIRA clinics
@@ -18,7 +18,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
 
@@ -36,6 +36,15 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/import-hira.js --deactivate-missing --summary=data/hira-sync.json
+
+      # Director names from clinics' own homepages; only new clinics and ones not checked for 30 days
+      - name: Add director names from clinic homepages
+        # Best effort: a scraping problem should not fail the clinic import
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/enrich-doctors.js --recheck-days=30
 
       # Committing the summary keeps a sync history and keeps the repo active, since GitHub pauses
       # scheduled workflows in public repos after 60 days without commits

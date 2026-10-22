@@ -383,6 +383,23 @@
             line-height: 1.5;
         }
 
+        .claim-banner {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 0 0 20px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(var(--color-accent-rgb), 0.35);
+            background: rgba(var(--color-accent-rgb), 0.08);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .claim-banner[hidden] {
+            display: none;
+        }
+
         .translation-tab .tab-count {
             margin-left: 6px;
             font-size: 0.75rem;
@@ -446,6 +463,10 @@
             
             <div class="form-section">
                 <h3>🏥 Clinic Details Form</h3>
+                <div class="claim-banner" id="claimBanner" hidden>
+                    <strong>📍 <span id="claimClinicName"></span></strong>
+                    <span>공공데이터에 있는 이 병원 정보를 파트너 정보로 전환합니다. 주소·전화·지도는 그대로 유지되고, 아래에 입력한 원장 정보와 소개가 표시됩니다. · You are claiming this public listing; its address, phone and map are kept.</span>
+                </div>
                 
                 <form id="clinicForm" onsubmit="submitForm(event)">
                     
@@ -722,9 +743,30 @@
             return out;
         }
 
+        // Arriving from "Are you this clinic's director?" on a public listing: prefill and remember it
+        let claimId = null;
+        function applyClaimParams() {
+            const params = new URLSearchParams(location.search);
+            const id = parseInt(params.get('claim'), 10);
+            if (!Number.isInteger(id)) return;
+            claimId = id;
+            const name = (params.get('name') || '').slice(0, 120);
+            const area = (params.get('location') || '').slice(0, 120);
+            document.getElementById('claimClinicName').textContent = name + (area ? ` (${area})` : '');
+            document.getElementById('claimBanner').hidden = false;
+            // Public names are Korean; the form expects "English | 한국어", so leave the English part to the owner
+            if (name) document.getElementById('clinicName').value = ` | ${name}`;
+            if (area) document.getElementById('clinicLocation').value = ` | ${area}`;
+            const koName = document.querySelector('#translationPanels [data-lang="ko"][data-field="name"]');
+            const koArea = document.querySelector('#translationPanels [data-lang="ko"][data-field="location"]');
+            if (koName && name) koName.value = name;
+            if (koArea && area) koArea.value = area;
+        }
+
         // Populate dynamic tags
         window.addEventListener('DOMContentLoaded', () => {
             buildTranslationInputs();
+            applyClaimParams();
             Object.values(translationSourceInputs).forEach(id => document.getElementById(id).addEventListener('input', refreshTranslationTabs));
             refreshTranslationTabs();
             const pool = document.getElementById('specialtiesTagPool');
@@ -908,7 +950,8 @@
                 foreign_attraction_registered,
                 foreigner_insurance,
                 excellent_aftercare,
-                translations: getTranslations()
+                translations: getTranslations(),
+                claimId
             };
 
             try {
@@ -942,6 +985,8 @@
             document.getElementById('clinicForm').reset();
             const tagBtns = document.querySelectorAll('.tag-checkbox-btn');
             tagBtns.forEach(btn => btn.classList.remove('selected'));
+            claimId = null;
+            document.getElementById('claimBanner').hidden = true;
             refreshTranslationTabs();
             showTranslationPanel('ko');
             updateLivePreview();

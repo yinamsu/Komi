@@ -95,6 +95,15 @@ ALTER TABLE public.clinics ALTER COLUMN slots_tag DROP NOT NULL;
 -- Some databases were created with a UNIQUE constraint on name; drop it if present.
 ALTER TABLE public.clinics DROP CONSTRAINT IF EXISTS clinics_name_key;
 
+-- 5-4. Director names found on clinics' own homepages (scripts/enrich-doctors.js), shown as
+-- "홈페이지 기준" with the source page and check date. doctor_opt_out keeps a clinic's names out
+-- for good after a removal request.
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS doctor_names TEXT[];
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS doctor_source_url TEXT;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS doctor_checked_at TIMESTAMP WITH TIME ZONE;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS doctor_opt_out BOOLEAN DEFAULT false NOT NULL;
+NOTIFY pgrst, 'reload schema';
+
 -- 6. Enable Row Level Security (RLS) on Clinics
 ALTER TABLE public.clinics ENABLE ROW LEVEL SECURITY;
 

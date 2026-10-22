@@ -433,6 +433,13 @@ function publicDoctorCountText(clinic) {
         .replace('{specialists}', clinic.specialist_count || 0);
 }
 
+function publicDoctorNamesText(clinic) {
+    const names = clinic.doctor_names || [];
+    if (!names.length) return '';
+    const shown = names.length > 1 ? t('public.doctor_names_more').replace('{name}', names[0]).replace('{count}', names.length - 1) : names[0];
+    return t('public.doctor_names_card').replace('{names}', shown);
+}
+
 // Public directory entries (HIRA open data): facts only, no rating, doctor profile or safety badges
 function publicClinicCardHTML(clinic) {
     const depts = (clinic.departments || []).map(d => `<span class="partner-tag">${escapeHTML(localizeDepartment(d))}</span>`).join('');
@@ -448,6 +455,7 @@ function publicClinicCardHTML(clinic) {
                 </div>
                 <div class="partner-tags">${depts}</div>
                 <div class="public-meta">
+                    ${(clinic.doctor_names || []).length ? `<span>${escapeHTML(publicDoctorNamesText(clinic))}</span>` : ''}
                     ${counts ? `<span>${escapeHTML(counts)}</span>` : ''}
                     ${clinic.phone ? `<span>☎ ${escapeHTML(clinic.phone)}</span>` : ''}
                 </div>
@@ -673,6 +681,7 @@ function openClinicDetailModal(clinicId) {
 
 function fillPublicClinicDetails(data) {
     const rows = [
+        ['public.doctor_from_site', (data.doctor_names || []).join(', ')],
         ['public.address', data.address],
         ['public.phone', data.phone],
         ['public.departments', (data.departments || []).map(localizeDepartment).join(', ')],
@@ -698,6 +707,25 @@ function fillPublicClinicDetails(data) {
     if (safeHomepage) homepage.href = safeHomepage;
     const synced = data.synced_at ? new Date(data.synced_at).toISOString().slice(0, 10) : '';
     document.getElementById('clinic-detail-public-source').textContent = t('public.source').replace('{date}', synced);
+
+    // Where the director names came from, so visitors (and the clinic) can check them
+    const doctorSource = document.getElementById('clinic-detail-doctor-source');
+    let safeSource = '';
+    try {
+        const url = new URL(data.doctor_source_url);
+        if (url.protocol === 'http:' || url.protocol === 'https:') safeSource = url.href;
+    } catch (e) {}
+    doctorSource.style.display = (data.doctor_names || []).length && safeSource ? '' : 'none';
+    if (safeSource) {
+        doctorSource.href = safeSource;
+        const checked = data.doctor_checked_at ? new Date(data.doctor_checked_at).toISOString().slice(0, 10) : '';
+        doctorSource.textContent = t('public.doctor_source').replace('{date}', checked);
+    }
+
+    // Owners can take over their listing through the partner portal, prefilled with this clinic
+    const claim = document.getElementById('clinic-detail-claim');
+    const params = new URLSearchParams({ claim: data.id, name: data.name || '', location: (data.location || '').replace('📍', '').trim() });
+    claim.href = `clinic.html?${params.toString()}`;
 }
 
 function resetBookingViews() {
@@ -825,7 +853,7 @@ const normalizeSearchText = text => String(text || '').toLowerCase().replace(/[\
 function clinicSearchText(c) {
     const parts = [
         c.name, clinicText(c, 'name', 'clinic'),
-        c.doctor_name, c.doctor_name && clinicText(c, 'doctor_name', 'doctor'),
+        c.doctor_name, c.doctor_name && clinicText(c, 'doctor_name', 'doctor'), ...(c.doctor_names || []),
         c.location, clinicText(c, 'location', 'location'), c.address
     ];
     (c.specialties || []).forEach(spec => {

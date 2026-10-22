@@ -28,6 +28,7 @@ module.exports = async (req, res) => {
             excellent_aftercare,
             experience_years,
             translations,
+            claimId,
             verifyOnly
         } = req.body || {};
         const cleanTranslations = sanitizeTranslations(translations);
@@ -125,20 +126,43 @@ module.exports = async (req, res) => {
             active: true
         };
 
-        let { data, error } = await supabase
-            .from('clinics')
-            .insert([newClinic])
-            .select();
+        // Claiming a public (HIRA) listing upgrades that row in place, so the clinic keeps one card,
+        // its address/phone/map, and the monthly import stops overwriting it
+        let claimRowId = null;
+        if (claimId !== undefined && claimId !== null && claimId !== '') {
+            claimRowId = parseInt(claimId, 10);
+            if (!Number.isInteger(claimRowId)) {
+                return res.status(400).json({ success: false, error: 'Invalid clinic to claim' });
+            }
+            const { data: existing, error: findError } = await supabase.from('clinics')
+                .select('id, source').eq('id', claimRowId).maybeSingle();
+            if (findError) throw findError;
+            if (!existing) return res.status(404).json({ success: false, error: 'The clinic to claim was not found' });
+            if (existing.source !== 'hira') {
+                return res.status(409).json({ success: false, error: 'This clinic is already registered by a partner' });
+            }
+            newClinic.source = 'partner';
+            newClinic.doctor_names = null;
+            newClinic.doctor_source_url = null;
+        }
+        const write = () => claimRowId
+            ? supabase.from('clinics').update(newClinic).eq('id', claimRowId).eq('source', 'hira').select()
+            : supabase.from('clinics').insert([newClinic]).select();
+
+        let { data, error } = await write();
 
         // Older databases may lack optional columns; drop the ones the error names and retry
         const droppedColumns = [];
         while (error && (error.code === '42703' || error.code === 'PGRST204')) {
-            const missing = ['experience_years', 'translations'].find(col =>
+            const missing = ['experience_years', 'translations', 'doctor_names', 'doctor_source_url'].find(col =>
                 !droppedColumns.includes(col) && error.message && error.message.includes(col));
             if (!missing) break;
             delete newClinic[missing];
             droppedColumns.push(missing);
-            ({ data, error } = await supabase.from('clinics').insert([newClinic]).select());
+            ({ data, error } = await write());
+        }
+        if (!error && claimRowId && (!data || !data.length)) {
+            return res.status(409).json({ success: false, error: 'This clinic is already registered by a partner' });
         }
         if (error) {
             throw error;
