@@ -21,4 +21,28 @@ function isSafeMapEmbedUrl(value) {
     }
 }
 
-module.exports = { isValidInviteCode, isSafeMapEmbedUrl };
+// Partner-entered translations: only known languages/fields, trimmed strings with length caps
+const TRANSLATION_LANGS = ['ko', 'ja', 'zh'];
+const TRANSLATION_FIELDS = {
+    name: 120, location: 120, doctor_name: 80, doctor_title: 160,
+    hours: 200, description: 2000, doctor_bio: 2000
+};
+
+function sanitizeTranslations(input) {
+    const out = {};
+    if (!input || typeof input !== 'object') return out;
+    for (const lang of TRANSLATION_LANGS) {
+        const src = input[lang];
+        if (!src || typeof src !== 'object') continue;
+        const fields = {};
+        for (const [field, max] of Object.entries(TRANSLATION_FIELDS)) {
+            if (typeof src[field] !== 'string') continue;
+            const value = src[field].trim().slice(0, max);
+            if (value) fields[field] = value;
+        }
+        if (Object.keys(fields).length) out[lang] = fields;
+    }
+    return out;
+}
+
+module.exports = { isValidInviteCode, isSafeMapEmbedUrl, sanitizeTranslations };

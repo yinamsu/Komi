@@ -56,8 +56,14 @@ CREATE TABLE IF NOT EXISTS public.clinics (
     foreigner_insurance BOOLEAN DEFAULT false NOT NULL,
     excellent_aftercare BOOLEAN DEFAULT false NOT NULL,
     active BOOLEAN DEFAULT true NOT NULL,
+    translations JSONB DEFAULT '{}'::jsonb NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- 5-1. Owner-entered translations from the partner portal, e.g.
+-- {"ja": {"name": "...", "description": "..."}, "zh": {...}, "ko": {...}}
+-- Run this once on databases created before the column existed.
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}'::jsonb NOT NULL;
 
 -- 6. Enable Row Level Security (RLS) on Clinics
 ALTER TABLE public.clinics ENABLE ROW LEVEL SECURITY;

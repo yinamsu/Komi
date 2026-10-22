@@ -947,6 +947,14 @@ function localizeRating(rating) {
     return `⭐ ${m[1]} (${t('clinic.verified_reviews').replace('{count}', m[2])})`;
 }
 
+// Owner-entered translations from the partner portal win over the automatic dictionaries
+function clinicText(clinic, field, kind) {
+    if (!clinic) return '';
+    const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'en';
+    const own = clinic.translations && clinic.translations[lang] && clinic.translations[lang][field];
+    return own || getLocalizedText(clinic[field], kind);
+}
+
 // kind ('clinic' | 'doctor' | 'location' | 'text') lets English-only values be translated into ko/ja/zh.
 // 'title' and 'hours' use "|" to separate sections rather than "English | 한국어", so they skip the split.
 function getLocalizedText(rawText, kind) {
@@ -994,10 +1002,10 @@ function renderClinicCards(clinics) {
         let doctorTypeLabel = t(`badge.${clinic.doctor_type}`) || clinic.doctor_type;
         let anesthesiaLabel = clinic.sleep_anesthesia ? (clinic.anesthesiologist_resident ? t('badge.anesthesiologist') : t('badge.no_anesthesiologist')) : '';
 
-        const localizedName = escapeHTML(getLocalizedText(clinic.name, 'clinic'));
-        const localizedLoc = escapeHTML(getLocalizedText(clinic.location, 'location'));
-        const localizedDocName = escapeHTML(getLocalizedText(clinic.doctor_name, 'doctor'));
-        const localizedDocTitle = escapeHTML(getLocalizedText(clinic.doctor_title, 'title'));
+        const localizedName = escapeHTML(clinicText(clinic, 'name', 'clinic'));
+        const localizedLoc = escapeHTML(clinicText(clinic, 'location', 'location'));
+        const localizedDocName = escapeHTML(clinicText(clinic, 'doctor_name', 'doctor'));
+        const localizedDocTitle = escapeHTML(clinicText(clinic, 'doctor_title', 'title'));
 
         const cardHTML = `
             <div class="partner-card" data-clinic-id="${escapeHTML(clinic.id)}">
@@ -1038,11 +1046,11 @@ function openClinicDetailModal(clinicId) {
     activeClinicId = clinicId;
     resetBookingViews();
 
-    document.getElementById('clinic-detail-name').textContent = getLocalizedText(data.name, 'clinic');
-    document.getElementById('clinic-detail-location').textContent = getLocalizedText(data.location, 'location');
+    document.getElementById('clinic-detail-name').textContent = clinicText(data, 'name', 'clinic');
+    document.getElementById('clinic-detail-location').textContent = clinicText(data, 'location', 'location');
     document.getElementById('clinic-detail-rating').textContent = localizeRating(data.rating);
-    document.getElementById('clinic-detail-desc').textContent = getLocalizedText(data.description, 'text');
-    document.getElementById('clinic-detail-hours').textContent = getLocalizedText(data.hours, 'hours');
+    document.getElementById('clinic-detail-desc').textContent = clinicText(data, 'description', 'text');
+    document.getElementById('clinic-detail-hours').textContent = clinicText(data, 'hours', 'hours');
 
     const specialtiesContainer = document.getElementById('clinic-detail-specialties');
     specialtiesContainer.innerHTML = '';
@@ -1125,9 +1133,9 @@ function openClinicDetailModal(clinicId) {
     }
 
     document.getElementById('clinic-detail-doc-avatar').textContent = data.doctor_avatar;
-    document.getElementById('clinic-detail-doc-name').textContent = getLocalizedText(data.doctor_name, 'doctor');
-    document.getElementById('clinic-detail-doc-title').textContent = getLocalizedText(data.doctor_title, 'title');
-    document.getElementById('clinic-detail-doc-bio').textContent = getLocalizedText(data.doctor_bio, 'text');
+    document.getElementById('clinic-detail-doc-name').textContent = clinicText(data, 'doctor_name', 'doctor');
+    document.getElementById('clinic-detail-doc-title').textContent = clinicText(data, 'doctor_title', 'title');
+    document.getElementById('clinic-detail-doc-bio').textContent = clinicText(data, 'doctor_bio', 'text');
 
     const mapIframe = document.getElementById('clinic-detail-map-iframe');
     if (mapIframe) mapIframe.src = isSafeMapEmbedUrl(data.map_iframe) ? data.map_iframe : 'about:blank';
@@ -1300,8 +1308,8 @@ function applyFilters() {
     // 3. Search Input Query
     if (q) {
         filtered = filtered.filter(c => {
-            const nameMatch = c.name.toLowerCase().includes(q) || getLocalizedText(c.name, 'clinic').toLowerCase().includes(q);
-            const docMatch = c.doctor_name.toLowerCase().includes(q) || getLocalizedText(c.doctor_name, 'doctor').toLowerCase().includes(q);
+            const nameMatch = c.name.toLowerCase().includes(q) || clinicText(c, 'name', 'clinic').toLowerCase().includes(q);
+            const docMatch = c.doctor_name.toLowerCase().includes(q) || clinicText(c, 'doctor_name', 'doctor').toLowerCase().includes(q);
             const specMatch = c.specialties.some(spec => {
                 const specLower = spec.toLowerCase();
                 const key = 'menu.' + specLower.replace(/ /g, '');
@@ -1936,8 +1944,8 @@ function appendReviewToGrid(review) {
     if (!triggerBtn) return;
     
     const clinic = loadedClinicsGlobal.find(c => c.id === review.clinicId);
-    const clinicName = escapeHTML(clinic ? getLocalizedText(clinic.name, 'clinic') : 'Selected Boutique Clinic');
-    const doctorName = escapeHTML(clinic ? getLocalizedText(clinic.doctor_name, 'doctor') : 'Chief Physician');
+    const clinicName = escapeHTML(clinic ? clinicText(clinic, 'name', 'clinic') : 'Selected Boutique Clinic');
+    const doctorName = escapeHTML(clinic ? clinicText(clinic, 'doctor_name', 'doctor') : 'Chief Physician');
     
     const fitzType = quizData.fitzpatrickType || 3;
     const skinLabel = t('reviews.skin_type').replace('{type}', fitzType);
@@ -1990,7 +1998,7 @@ function updateReviewDoctorDropdown() {
         loadedClinicsGlobal.forEach(c => {
             const opt = document.createElement('option');
             opt.value = c.id;
-            opt.textContent = `${getLocalizedText(c.doctor_name, 'doctor')} (${getLocalizedText(c.name, 'clinic')})`;
+            opt.textContent = `${clinicText(c, 'doctor_name', 'doctor')} (${clinicText(c, 'name', 'clinic')})`;
             docSelect.appendChild(opt);
         });
     } else {

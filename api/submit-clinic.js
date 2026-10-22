@@ -1,5 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
-const { isValidInviteCode, isSafeMapEmbedUrl } = require('./_lib/security');
+const { isValidInviteCode, isSafeMapEmbedUrl, sanitizeTranslations } = require('./_lib/security');
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
@@ -27,8 +27,10 @@ module.exports = async (req, res) => {
             foreigner_insurance,
             excellent_aftercare,
             experience_years,
+            translations,
             verifyOnly
         } = req.body || {};
+        const cleanTranslations = sanitizeTranslations(translations);
 
         // Validate passcode against the server-side secret
         if (!process.env.PARTNER_INVITE_CODE) {
@@ -91,7 +93,8 @@ module.exports = async (req, res) => {
                     foreign_attraction_registered: !!foreign_attraction_registered,
                     foreigner_insurance: !!foreigner_insurance,
                     excellent_aftercare: !!excellent_aftercare,
-                    experience_years: experience_years ? parseInt(experience_years) : 7
+                    experience_years: experience_years ? parseInt(experience_years) : 7,
+                    translations: cleanTranslations
                 }
             });
         }
@@ -118,6 +121,7 @@ module.exports = async (req, res) => {
             foreigner_insurance: !!foreigner_insurance,
             excellent_aftercare: !!excellent_aftercare,
             experience_years: experience_years ? parseInt(experience_years) : 7,
+            translations: cleanTranslations,
             active: true
         };
 
@@ -126,26 +130,28 @@ module.exports = async (req, res) => {
             .insert([newClinic])
             .select();
 
+        // Older databases may lack optional columns; drop the ones the error names and retry
+        const droppedColumns = [];
+        while (error && (error.code === '42703' || error.code === 'PGRST204')) {
+            const missing = ['experience_years', 'translations'].find(col =>
+                !droppedColumns.includes(col) && error.message && error.message.includes(col));
+            if (!missing) break;
+            delete newClinic[missing];
+            droppedColumns.push(missing);
+            ({ data, error } = await supabase.from('clinics').insert([newClinic]).select());
+        }
         if (error) {
-            // Handle missing column gracefully by removing experience_years and retrying
-            if (error.code === '42703' || (error.message && error.message.includes('experience_years'))) {
-                delete newClinic.experience_years;
-                const retry = await supabase
-                    .from('clinics')
-                    .insert([newClinic])
-                    .select();
-
-                if (retry.error) {
-                    throw retry.error;
-                }
-                return res.status(200).json({
-                    success: true,
-                    message: "Clinic registered successfully (Note: database table does not support experience_years, fell back to default)",
-                    id: retry.data[0].id,
-                    clinic: retry.data[0]
-                });
-            }
             throw error;
+        }
+        if (droppedColumns.length) {
+            console.warn("clinics table is missing columns, saved without:", droppedColumns.join(', '));
+            return res.status(200).json({
+                success: true,
+                message: `Clinic registered, but the database is missing: ${droppedColumns.join(', ')}. Run supabase_schema.sql step 5-1 to store them.`,
+                droppedColumns,
+                id: data[0].id,
+                clinic: data[0]
+            });
         }
 
         return res.status(200).json({

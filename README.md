@@ -10,6 +10,10 @@
 2. 프로젝트 대시보드 왼쪽 메뉴의 **SQL Editor**로 이동합니다.
 3. **New query**를 클릭하고, 본 프로젝트 루트에 생성된 [supabase_schema.sql](file:///e:/Komi/supabase_schema.sql) 파일의 내용을 전체 복사하여 붙여넣습니다.
 4. 오른쪽 하단의 **Run** 버튼을 클릭하여 `leads` 테이블과 개인 정보 보호를 위한 RLS(Row Level Security) 정책을 적용합니다.
+5. **이미 DB를 만들어 둔 경우**: 파트너 포털의 다국어 표기를 저장하려면 SQL Editor에서 아래 한 줄을 실행합니다. 실행 전에도 등록은 되지만 번역은 저장되지 않습니다.
+   ```sql
+   ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}'::jsonb NOT NULL;
+   ```
 
 ---
 

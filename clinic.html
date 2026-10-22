@@ -25,6 +25,9 @@
             --bg-portal: #030d0a;
             --card-glass: rgba(15, 30, 25, 0.7);
             --border-glass: rgba(197, 168, 128, 0.15);
+            /* Portal accents (used throughout this page but never defined before) */
+            --secondary: #c5a880;
+            --primary: #0b1420;
         }
 
         body {
@@ -339,6 +342,51 @@
         .tag-checkbox-btn input {
             display: none;
         }
+
+        .translation-tabs {
+            display: flex;
+            gap: 8px;
+            margin: 14px 0 18px;
+        }
+
+        .translation-tab {
+            background: rgba(197, 168, 128, 0.05);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            color: #ddd;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .translation-tab.active {
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
+        }
+
+        .translation-tab .filled-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin-left: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            vertical-align: middle;
+            opacity: 0;
+        }
+
+        .translation-tab.has-content .filled-dot {
+            opacity: 0.8;
+        }
+
+        .translation-hint {
+            font-size: 0.85rem;
+            color: #a8b8b2;
+            margin: 6px 0 0;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -491,6 +539,12 @@
                         </label>
                     </div>
 
+                    <!-- Per-language display text -->
+                    <h4 style="color: var(--secondary); font-family: 'Playfair Display', serif; border-bottom: 1px solid var(--border-glass); padding-bottom: 8px; margin-top: 30px;">🌐 Translations (Optional · 다국어 표기)</h4>
+                    <p class="translation-hint">Fill in how your clinic should read for Korean, Japanese and Chinese visitors. Empty fields fall back to the English text above. · 비워 둔 항목은 위의 영문 내용으로 표시됩니다.</p>
+                    <div class="translation-tabs" id="translationTabs"></div>
+                    <div id="translationPanels"></div>
+
                     <button type="submit" class="btn-premium" style="margin-top: 20px;">Submit Registration</button>
                 </form>
             </div>
@@ -533,8 +587,78 @@
             "Ulthera", "Shurink", "Laser Toning"
         ];
 
+        const translationLangs = [
+            { code: 'ko', label: '한국어' },
+            { code: 'ja', label: '日本語' },
+            { code: 'zh', label: '中文' }
+        ];
+        const translationFields = [
+            { field: 'name', label: 'Clinic Name', placeholder: { ko: '예) 아우라 피부과', ja: '例）オーラ皮膚科', zh: '例：光环皮肤科' } },
+            { field: 'location', label: 'Location Area', placeholder: { ko: '예) 강남구 청담동', ja: '例）江南区 清潭洞', zh: '例：江南区 清潭洞' } },
+            { field: 'description', label: 'Brief Description', multiline: true },
+            { field: 'doctor_name', label: 'Doctor Full Name', placeholder: { ko: '예) 송민석 원장', ja: '例）ソン・ミンソク先生', zh: '例：宋敏锡 医生' } },
+            { field: 'doctor_title', label: 'Doctor Main Title', placeholder: { ko: '예) 피부과 전문의', ja: '例）皮膚科専門医', zh: '例：皮肤科专科医生' } },
+            { field: 'doctor_bio', label: 'Doctor Biography / Philosophy', multiline: true },
+            { field: 'hours', label: 'Hours of Operation', placeholder: { ko: '예) 월–금 10:00–19:00 | 토 10:00–15:00', ja: '例）月〜金 10:00–19:00 | 土 10:00–15:00', zh: '例：周一至周五 10:00–19:00 | 周六 10:00–15:00' } }
+        ];
+
+        function buildTranslationInputs() {
+            const tabs = document.getElementById('translationTabs');
+            const panels = document.getElementById('translationPanels');
+            translationLangs.forEach((lang, i) => {
+                const tab = document.createElement('button');
+                tab.type = 'button';
+                tab.className = 'translation-tab' + (i === 0 ? ' active' : '');
+                tab.dataset.lang = lang.code;
+                tab.innerHTML = `${lang.label}<span class="filled-dot"></span>`;
+                tab.addEventListener('click', () => showTranslationPanel(lang.code));
+                tabs.appendChild(tab);
+
+                const panel = document.createElement('div');
+                panel.dataset.lang = lang.code;
+                panel.style.display = i === 0 ? 'block' : 'none';
+                translationFields.forEach(f => {
+                    const group = document.createElement('div');
+                    group.className = 'input-group';
+                    const label = document.createElement('label');
+                    label.textContent = `${f.label} (${lang.label})`;
+                    const input = document.createElement(f.multiline ? 'textarea' : 'input');
+                    if (f.multiline) input.rows = 3; else input.type = 'text';
+                    input.dataset.lang = lang.code;
+                    input.dataset.field = f.field;
+                    input.placeholder = (f.placeholder && f.placeholder[lang.code]) || '';
+                    input.addEventListener('input', refreshTranslationTabs);
+                    group.append(label, input);
+                    panel.appendChild(group);
+                });
+                panels.appendChild(panel);
+            });
+        }
+
+        function showTranslationPanel(code) {
+            document.querySelectorAll('#translationTabs .translation-tab').forEach(t => t.classList.toggle('active', t.dataset.lang === code));
+            document.querySelectorAll('#translationPanels > div').forEach(p => { p.style.display = p.dataset.lang === code ? 'block' : 'none'; });
+        }
+
+        function refreshTranslationTabs() {
+            const translations = getTranslations();
+            document.querySelectorAll('#translationTabs .translation-tab').forEach(t => t.classList.toggle('has-content', !!translations[t.dataset.lang]));
+        }
+
+        function getTranslations() {
+            const out = {};
+            document.querySelectorAll('#translationPanels [data-field]').forEach(input => {
+                const value = input.value.trim();
+                if (!value) return;
+                out[input.dataset.lang] = out[input.dataset.lang] || {};
+                out[input.dataset.lang][input.dataset.field] = value;
+            });
+            return out;
+        }
+
         // Populate dynamic tags
         window.addEventListener('DOMContentLoaded', () => {
+            buildTranslationInputs();
             const pool = document.getElementById('specialtiesTagPool');
             rawSpecialties.forEach(spec => {
                 const label = document.createElement('label');
@@ -704,7 +828,8 @@
                 anesthesiologist_resident,
                 foreign_attraction_registered,
                 foreigner_insurance,
-                excellent_aftercare
+                excellent_aftercare,
+                translations: getTranslations()
             };
 
             try {
@@ -723,6 +848,7 @@
                     document.getElementById('successDoc').innerText = doctor_name.split('|')[0].trim();
                     
                     document.getElementById('successDialog').classList.add('active');
+                    if (result.droppedColumns && result.droppedColumns.length) alert(result.message);
                 } else {
                     alert('Submission failed: ' + (result.error || 'Unknown error'));
                 }
@@ -737,6 +863,8 @@
             document.getElementById('clinicForm').reset();
             const tagBtns = document.querySelectorAll('.tag-checkbox-btn');
             tagBtns.forEach(btn => btn.classList.remove('selected'));
+            refreshTranslationTabs();
+            showTranslationPanel('ko');
             updateLivePreview();
         }
     </script>
