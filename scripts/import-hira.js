@@ -10,13 +10,18 @@
 //   node scripts/import-hira.js --scope=all          # every clinic offering the departments
 //   node scripts/import-hira.js --deactivate-missing --summary=data/hira-sync.json   # monthly job
 //
+// Scopes (HIRA lists every clinic that merely offers a department, ~5,500 in Seoul):
+//   aesthetic  (default) specialist-named clinics, plus 의원/병원 offering the departments whose name
+//              does not point to another specialty or a general/charity clinic. Keeps aesthetic clinics
+//              named like "아이필유의원" that carry no specialty in their name.
+//   specialist only names containing 피부과/성형외과
+//   all        everything, including internal medicine clinics and general hospitals
 // --deactivate-missing hides (active = false) public entries that were not in this run, e.g. closed
 // clinics. It is skipped when the run returned under half of the currently active entries, which
 // points to an API problem rather than mass closures. --summary writes a small JSON report.
 //
-// --scope=specialist (default) keeps only clinics whose name carries the specialty ("…피부과의원",
-// "…성형외과"). Korean medical law lets only board-certified specialists put a specialty in the
-// clinic name, so this drops internal-medicine/general clinics that merely list dermatology.
+// Korean medical law lets only board-certified specialists put a specialty in the clinic name,
+// which is what "specialist" relies on.
 //
 // Env (read from the shell, then .env.local, then .env):
 //   HIRA_SERVICE_KEY            data.go.kr service key (Encoding or Decoding key both work)
@@ -42,7 +47,7 @@ function loadEnvFiles() {
 }
 
 function parseArgs(argv) {
-    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity, scope: 'specialist', deactivateMissing: false, summary: null };
+    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity, scope: 'aesthetic', deactivateMissing: false, summary: null };
     for (const arg of argv) {
         if (arg === '--dry-run') args.dryRun = true;
         else if (arg.startsWith('--sido=')) args.sido = arg.slice(7);
@@ -104,6 +109,16 @@ function toHomepage(value) {
 function isSpecialistClinic(row) {
     return /피부과|성형외과/.test(row.name);
 }
+
+// Names that point to another specialty, a hospital, or a general/charity clinic
+const NON_AESTHETIC_NAME = /내과|가정|이비인후|정형외과|신경외과|신경과|소아|산부인과|여성|비뇨|안과|재활|영상의학|마취|통증|정신|치과|한의|한방|요양|외과의원|검진|건강|재단|협회|부설|보건|의료원|병원$|통합|365|연합|열린의원/;
+
+function isAestheticClinic(row) {
+    if (isSpecialistClinic(row)) return true;
+    return (row.clinic_type === '의원' || row.clinic_type === '병원') && !NON_AESTHETIC_NAME.test(row.name);
+}
+
+const SCOPES = { aesthetic: isAestheticClinic, specialist: isSpecialistClinic, all: () => true };
 
 function toRow(item, departments, syncedAt) {
     const area = [item.sgguCdNm, item.emdongNm].filter(Boolean).join(' ');
@@ -207,11 +222,11 @@ async function main() {
         throw new Error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required (or use --dry-run).');
     }
 
-    if (!['specialist', 'all'].includes(args.scope)) throw new Error('--scope must be "specialist" or "all"');
+    if (!SCOPES[args.scope]) throw new Error(`--scope must be one of: ${Object.keys(SCOPES).join(', ')}`);
     if (args.deactivateMissing && Number.isFinite(args.limit)) throw new Error('--deactivate-missing cannot be combined with --limit');
     const collected = await collect({ key, ...args });
-    const rows = args.scope === 'all' ? collected : collected.filter(isSpecialistClinic);
-    if (args.scope !== 'all') console.log(`scope=specialist: kept ${rows.length} of ${collected.length} (name contains 피부과/성형외과)`);
+    const rows = collected.filter(SCOPES[args.scope]);
+    console.log(`scope=${args.scope}: kept ${rows.length} of ${collected.length}`);
     const withCoords = rows.filter(r => r.latitude && r.longitude).length;
     console.log(`collected ${rows.length} clinics (${withCoords} with coordinates)`);
 
@@ -253,4 +268,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { toRow, serviceKeyParam, fetchPage, collect, isSpecialistClinic, deactivateMissing };
+module.exports = { toRow, serviceKeyParam, fetchPage, collect, isSpecialistClinic, isAestheticClinic, deactivateMissing };

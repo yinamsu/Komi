@@ -1,10 +1,10 @@
 {
-  "synced_at": "2026-10-22T08:32:12.219Z",
-  "scope": "specialist",
+  "synced_at": "2026-10-22T08:47:01.061Z",
+  "scope": "aesthetic",
   "fetched": 5566,
-  "imported": 1332,
+  "imported": 3455,
   "active_before": 1332,
-  "active_after": 1332,
+  "active_after": 3455,
   "deactivated": 0,
   "deactivation_skipped": false
 }
