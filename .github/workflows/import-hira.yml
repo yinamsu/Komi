@@ -24,7 +24,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # supabase-js needs the native WebSocket that Node 22+ provides
+          node-version: 22
           cache: npm
 
       - run: npm ci
