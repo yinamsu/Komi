@@ -2819,7 +2819,8 @@ const entityParts = {
         "Songpa": ["송파", "松坡", "松坡"], "Suyu": ["수유", "水踰", "水逾"],
         "Yangcheon": ["양천", "陽川", "阳川"], "Yeongdeungpo": ["영등포", "永登浦", "永登浦"],
         "Yeoksam": ["역삼", "駅三", "驿三"], "Yeouido": ["여의도", "汝矣島", "汝矣岛"],
-        "Yongsan": ["용산", "龍山", "龙山"]
+        "Yongsan": ["용산", "龍山", "龙山"],
+        "Seogyo": ["서교", "西橋", "西桥"], "Yeonnam": ["연남", "延南", "延南"]
     },
     placeSuffixes: {
         "dong": ["동", "洞", "洞"], "gu": ["구", "区", "区"],
@@ -2844,14 +2845,24 @@ const entityParts = {
         "Science": ["사이언스", "サイエンス", "科学"], "Skin": ["스킨", "スキン", "皮肤"], "Studio": ["스튜디오", "スタジオ", "工作室"],
         "Top": ["탑", "トップ", "顶级"], "True": ["트루", "トゥルー", "真"], "V-line": ["브이라인", "Vライン", "V脸"],
         "Vivid": ["비비드", "ビビッド", "焕彩"], "Wellness": ["웰니스", "ウェルネス", "健康"], "White": ["화이트", "ホワイト", "白皙"],
-        "Youth": ["유스", "ユース", "青春"]
+        "Youth": ["유스", "ユース", "青春"],
+        "Korean Medicine Clinic": ["한의원", "韓医院", "韩医院"], "Korean Medicine": ["한의학", "韓医学", "韩医"],
+        "Plastic Surgery": ["성형외과", "形成外科", "整形外科"], "Aesthetic Surgery": ["미용외과", "美容外科", "美容外科"],
+        "Aesthetic Dentistry": ["심미치과", "審美歯科", "美学牙科"], "Hair Transplant": ["모발이식", "植毛", "植发"],
+        "Body Contouring": ["바디 컨투어링", "ボディコンツアリング", "身体塑形"],
+        "Surgery": ["외과", "外科", "外科"], "Plastic": ["성형", "形成", "整形"], "Dentistry": ["치과", "歯科", "牙科"],
+        "Transplant": ["이식", "移植", "移植"], "Body": ["바디", "ボディ", "身体"], "Contouring": ["컨투어링", "コンツアリング", "塑形"],
+        "Scalp": ["두피", "頭皮", "头皮"], "Eyelid": ["눈꺼풀", "まぶた", "眼睑"],
+        "Trust": ["트러스트", "トラスト", "信赖"], "Real": ["리얼", "リアル", "真实"], "Bright": ["브라이트", "ブライト", "亮采"],
+        "Gentle": ["젠틀", "ジェントル", "温和"], "Honest": ["어니스트", "オネスト", "诚实"],
+        "Signature": ["시그니처", "シグネチャー", "臻选"], "Elite": ["엘리트", "エリート", "精英"]
     },
     surnames: {
         "Cho": ["조", "チョ", "赵"], "Choi": ["최", "チェ", "崔"], "Han": ["한", "ハン", "韩"], "Hwang": ["황", "ファン", "黄"],
         "Jang": ["장", "チャン", "张"], "Jeong": ["정", "チョン", "郑"], "Jung": ["정", "チョン", "郑"], "Kang": ["강", "カン", "姜"],
         "Kim": ["김", "キム", "金"], "Koh": ["고", "コ", "高"], "Lee": ["이", "イ", "李"], "Lim": ["임", "イム", "林"],
         "Nam": ["남", "ナム", "南"], "Park": ["박", "パク", "朴"], "Ryu": ["류", "リュ", "柳"], "Shin": ["신", "シン", "申"],
-        "Song": ["송", "ソン", "宋"], "Yoo": ["유", "ユ", "俞"], "Yoon": ["윤", "ユン", "尹"]
+        "Song": ["송", "ソン", "宋"], "Yoo": ["유", "ユ", "俞"], "Yoon": ["윤", "ユン", "尹"], "Oh": ["오", "オ", "吴"]
     },
     westernSurnames: { "Miller": ["밀러", "ミラー", "米勒"] },
     givenNames: {
@@ -2864,7 +2875,9 @@ const entityParts = {
         "Sang-Woo": ["상우", "サンウ", "相宇"], "Sarah": ["사라", "サラ", "莎拉"], "Seo-Jun": ["서준", "ソジュン", "叙俊"],
         "Seo-Yeon": ["서연", "ソヨン", "叙妍"], "So-Young": ["소영", "ソヨン", "素英"], "Soo-Hyun": ["수현", "スヒョン", "秀贤"],
         "Sung-Min": ["성민", "ソンミン", "成民"], "Tae-Jin": ["태진", "テジン", "泰镇"], "Tae-Young": ["태영", "テヨン", "泰荣"],
-        "Yoon-Seo": ["윤서", "ユンソ", "允叙"], "Young-Ho": ["영호", "ヨンホ", "英浩"]
+        "Yoon-Seo": ["윤서", "ユンソ", "允叙"], "Young-Ho": ["영호", "ヨンホ", "英浩"],
+        "Min-Ji": ["민지", "ミンジ", "敏智"], "Ye-Rin": ["예린", "イェリン", "艺璘"], "Do-Hyun": ["도현", "ドヒョン", "道贤"],
+        "Joon-Ho": ["준호", "ジュノ", "俊浩"]
     }
 };
 
@@ -2879,14 +2892,28 @@ function joinEntityTokens(tokens, lang) {
     }, '');
 }
 
+// "Cheongdam", "Sinsa-dong", "Gangnam-daero" -> localized place, or null when unknown
+function localizePlaceToken(token, idx) {
+    if (entityParts.places[token]) return entityParts.places[token][idx];
+    const m = token.match(/^(.+?)-(dong|gu|daero|ro)$/i);
+    if (m && entityParts.places[m[1]]) return entityParts.places[m[1]][idx] + entityParts.placeSuffixes[m[2].toLowerCase()][idx];
+    return null;
+}
+
+// All-or-nothing: one unknown word keeps the whole English name, so names never come out half-translated
 function localizeClinicName(text, idx, lang) {
     const words = text.split(/\s+/);
     const out = [];
     for (let i = 0; i < words.length; i++) {
-        const pair = words[i] + ' ' + (words[i + 1] || '');
-        const hit = entityParts.words[pair] || entityParts.words[words[i]] || entityParts.places[words[i]];
-        if (entityParts.words[pair]) i++;
-        out.push(hit ? hit[idx] : words[i]);
+        let hit = null;
+        for (let span = 3; span >= 1 && !hit; span--) {
+            const phrase = words.slice(i, i + span).join(' ');
+            if (span > 1 && i + span > words.length) continue;
+            if (entityParts.words[phrase]) { hit = entityParts.words[phrase][idx]; i += span - 1; }
+        }
+        if (!hit) hit = localizePlaceToken(words[i], idx);
+        if (!hit) return text;
+        out.push(hit);
     }
     return joinEntityTokens(out, lang);
 }
@@ -2907,12 +2934,8 @@ function localizeDoctorName(text, idx, lang) {
 
 function localizeLocation(text, idx) {
     const pin = text.match(/^[^A-Za-z]*/)[0];
-    const parts = text.slice(pin.length).split(/\s*,\s*/).map(part => {
-        if (entityParts.places[part]) return entityParts.places[part][idx];
-        const m = part.match(/^(.+?)-(dong|gu|daero|ro)$/i);
-        if (m && entityParts.places[m[1]]) return entityParts.places[m[1]][idx] + entityParts.placeSuffixes[m[2].toLowerCase()][idx];
-        return part;
-    });
+    const parts = text.slice(pin.length).split(/\s*,\s*/).map(part => localizePlaceToken(part, idx));
+    if (parts.some(part => part === null)) return text;
     // Korean-style addresses read from the larger district to the neighborhood
     return pin + parts.reverse().join(' ');
 }
@@ -2969,7 +2992,10 @@ const titleSegments = {
     "Skin Glow Specialist": ["물광 피부 전문", "肌ツヤ専門", "肌肤光泽专家"],
     "Laser Expert": ["레이저 전문", "レーザー専門", "激光专家"],
     "Aesthetic Surgeon": ["미용 외과의", "美容外科医", "美容外科医生"],
-    "Skin Health": ["피부 건강", "肌の健康", "皮肤健康"]
+    "Skin Health": ["피부 건강", "肌の健康", "皮肤健康"],
+    "Prosthodontics": ["보철 치료", "補綴治療", "口腔修复"],
+    "Acupuncture Specialist": ["침구 전문", "鍼灸専門", "针灸专家"],
+    "Board-Certified Hair Restoration Specialist": ["모발 재건 전문의", "毛髪再建専門医", "毛发修复专科医生"]
 };
 
 const hoursParts = {
@@ -3001,7 +3027,9 @@ function localizeTitle(text, lang) {
     if (lang === 'ko' && parts.some(hasKorean)) return parts.filter(hasKorean).join(' · ');
     parts = parts.filter(p => !hasKorean(p));
     if (idx === undefined) return parts.join(' · ');
-    return parts.map(p => (titleSegments[p] ? titleSegments[p][idx] : p)).join(' · ');
+    // All-or-nothing, like names: one unknown segment keeps the English title
+    if (parts.some(p => !titleSegments[p])) return parts.join(' · ');
+    return parts.map(p => titleSegments[p][idx]).join(' · ');
 }
 
 function to24h(time) {
