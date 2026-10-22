@@ -422,7 +422,7 @@ let renderedClinicList = [];
 const isPublicClinic = clinic => clinic && clinic.source === 'hira';
 
 function localizeDepartment(dept) {
-    const key = { '피부과': 'dept.dermatology', '성형외과': 'dept.plastic_surgery' }[dept];
+    const key = { '피부과': 'dept.dermatology', '성형외과': 'dept.plastic_surgery', '치과': 'dept.dentistry', '한방': 'dept.korean_medicine' }[dept];
     return key ? t(key) : dept;
 }
 
@@ -827,7 +827,7 @@ function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
         breast: ["성형외과", "breast", "motiva", "mentor", "nipple", "gynecomastia", "가슴", "유두", "여유증"],
         hair: ["hair", "scalp", "meso", "모발", "탈모", "두피", "헤어라인", "transplant", "이식"],
         epilation: ["피부과", "epilation", "hair removal", "제모", "겨드랑이", "인중", "비키니"],
-        dental: ["dental", "teeth", "laminate", "orthodontic", "aligner", "치아", "라미네이트", "교정", "미백", "임플란트"],
+        dental: ["치과", "dental", "teeth", "laminate", "orthodontic", "aligner", "치아", "라미네이트", "교정", "미백", "임플란트"],
         herbal: ["herbal", "diet", "acupuncture", "한방", "한약", "매선", "침", "약침"],
         others: ["tattoo", "문신", "쁘띠", "부작용", "관리"]
     };

@@ -122,8 +122,22 @@ const GENERAL_HOSPITAL_NAME = /어린이|아이들|조인트|관절|척추|마�
 // Names that suggest an aesthetic clinic even when no dermatology/plastic surgery department is listed
 const AESTHETIC_NAME = /피부|스킨|skin|뷰티|beauty|에스테틱|aesthetic|미용|레이저|laser|성형|더마|derma|리프팅|안티에이징|모발|헤어|hair|탈모/i;
 
+// Dental and Korean-medicine clinics are fetched by clinic type, and only names pointing to cosmetic
+// care are kept: aesthetic dentistry (심미, 미백, 교정, 라미네이트…) and 한의원 for diet/skin/beauty.
+// "미소" is left out on purpose: it names ordinary neighborhood dental clinics far more often.
+const EXTRA_SCANS = [
+    { label: '치과', clCds: [['51', '치과의원'], ['41', '치과병원']],
+      keep: /심미|라미네이트|미백|화이트|white|교정|투명교정|인비절라인|invisalign|스마일|smile|뷰티|beauty|에스테틱|aesthetic|라인/i,
+      skip: /소아|어린이|키즈|kids/i },
+    { label: '한방', clCds: [['93', '한의원'], ['92', '한방병원']],
+      keep: /다이어트|diet|비만|슬림|slim|피부|미인|뷰티|beauty|미용|체형|매선|리프팅/i,
+      skip: /요양/ }
+];
+
 function isAestheticClinic(row) {
     if (isSpecialistClinic(row)) return true;
+    // Cosmetic dental / Korean-medicine clinics were already filtered by name in the extra scans
+    if ((row.departments || []).some(d => d === '치과' || d === '한방')) return true;
     if (NON_AESTHETIC_NAME.test(row.name)) return false;
     if (row.clinic_type === '의원') return true;
     // Hospitals only when they offer plastic surgery or are named like an aesthetic clinic (e.g. 아이디병원)
@@ -201,6 +215,29 @@ async function collect({ key, sido, depts, limit, nameScan = false }) {
                 await new Promise(r => setTimeout(r, 120));
             } while (fetched < total);
             process.stdout.write('\n');
+        }
+    }
+    if (nameScan && byId.size < limit) {
+        for (const scan of EXTRA_SCANS) {
+            for (const [clCd, label] of scan.clCds) {
+                let pageNo = 1, total = 0, fetched = 0, added = 0;
+                do {
+                    const { items, totalCount } = await fetchPage({ key, sido, clCd, pageNo });
+                    total = totalCount;
+                    for (const item of items) {
+                        if (!item.ykiho || !item.yadmNm || byId.has(item.ykiho)) continue;
+                        if (!scan.keep.test(item.yadmNm) || scan.skip.test(item.yadmNm)) continue;
+                        byId.set(item.ykiho, { item, departments: new Set([scan.label]) });
+                        added++;
+                    }
+                    fetched += items.length;
+                    pageNo++;
+                    process.stdout.write(`\rcosmetic ${label}: ${fetched}/${total} (+${added})`);
+                    if (!items.length) break;
+                    await new Promise(r => setTimeout(r, 120));
+                } while (fetched < total);
+                process.stdout.write('\n');
+            }
         }
     }
     const syncedAt = new Date().toISOString();

@@ -1,10 +1,10 @@
 {
-  "synced_at": "2026-10-22T09:25:43.519Z",
+  "synced_at": "2026-10-22T11:24:10.504Z",
   "scope": "aesthetic",
-  "fetched": 5572,
-  "imported": 3485,
+  "fetched": 5806,
+  "imported": 3719,
   "active_before": 3485,
-  "active_after": 3485,
+  "active_after": 3719,
   "deactivated": 0,
   "deactivation_skipped": false
 }
