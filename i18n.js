@@ -541,7 +541,21 @@ const translations = {
         "reviews.verified_member": "Verified Patient",
         "reviews.clinic_prefix": "Clinic: ",
         "reviews.physician_prefix": "Physician: ",
-        "clinic.verified_reviews": "{count}+ verified reviews"
+        "clinic.verified_reviews": "{count}+ verified reviews",
+        "public.badge": "Unverified · Public data",
+        "public.unverified_note": "KOMICARE has not verified this clinic. Ratings, reviews and doctor profiles appear only for verified partner clinics.",
+        "public.address": "Address",
+        "public.phone": "Phone",
+        "public.departments": "Departments",
+        "public.doctors": "Doctors",
+        "public.clinic_type": "Type",
+        "public.homepage": "Visit homepage ↗",
+        "public.doctor_counts": "{doctors} doctors · {specialists} specialists",
+        "public.source": "Source: HIRA hospital information open data (updated {date})",
+        "dept.dermatology": "Dermatology",
+        "dept.plastic_surgery": "Plastic Surgery",
+        "directory.load_more": "Show more ({shown} / {total})",
+        "directory.load_error": "Couldn't load the clinic list. Try again in a moment."
     },
 
     ko: {
@@ -1081,7 +1095,21 @@ const translations = {
         "reviews.verified_member": "방문 인증 회원",
         "reviews.clinic_prefix": "클리닉: ",
         "reviews.physician_prefix": "담당의: ",
-        "clinic.verified_reviews": "인증 리뷰 {count}+건"
+        "clinic.verified_reviews": "인증 리뷰 {count}+건",
+        "public.badge": "미인증 · 공공데이터",
+        "public.unverified_note": "코미케어가 검증하지 않은 병원입니다. 평점·리뷰·의사 정보는 검증된 파트너 병원에만 표시됩니다.",
+        "public.address": "주소",
+        "public.phone": "전화",
+        "public.departments": "진료과목",
+        "public.doctors": "의료진",
+        "public.clinic_type": "종별",
+        "public.homepage": "홈페이지 방문 ↗",
+        "public.doctor_counts": "의사 {doctors}명 · 전문의 {specialists}명",
+        "public.source": "출처: 건강보험심사평가원 병원정보서비스 공공데이터 ({date} 기준)",
+        "dept.dermatology": "피부과",
+        "dept.plastic_surgery": "성형외과",
+        "directory.load_more": "더 보기 ({shown} / {total})",
+        "directory.load_error": "병원 목록을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요."
     },
     ja: {
         // ---- Categories & Filters ----
@@ -1668,7 +1696,21 @@ const translations = {
         "reviews.verified_member": "来院認証済み会員",
         "reviews.clinic_prefix": "クリニック: ",
         "reviews.physician_prefix": "担当医: ",
-        "clinic.verified_reviews": "認証済みレビュー{count}件以上"
+        "clinic.verified_reviews": "認証済みレビュー{count}件以上",
+        "public.badge": "未認証 · 公共データ",
+        "public.unverified_note": "KOMICAREが検証していないクリニックです。評価・口コミ・医師情報は認証済みパートナークリニックにのみ表示されます。",
+        "public.address": "住所",
+        "public.phone": "電話",
+        "public.departments": "診療科",
+        "public.doctors": "医師",
+        "public.clinic_type": "種別",
+        "public.homepage": "ホームページを見る ↗",
+        "public.doctor_counts": "医師{doctors}名 · 専門医{specialists}名",
+        "public.source": "出典：健康保険審査評価院 病院情報サービス公共データ（{date}時点）",
+        "dept.dermatology": "皮膚科",
+        "dept.plastic_surgery": "形成外科",
+        "directory.load_more": "もっと見る（{shown} / {total}）",
+        "directory.load_error": "クリニック一覧を読み込めませんでした。しばらくしてからもう一度お試しください。"
     },
     zh: {
         // ---- Header ----
@@ -2212,7 +2254,21 @@ const translations = {
         "reviews.verified_member": "到店验证会员",
         "reviews.clinic_prefix": "诊所：",
         "reviews.physician_prefix": "主治医生：",
-        "clinic.verified_reviews": "{count}+ 条验证评价"
+        "clinic.verified_reviews": "{count}+ 条验证评价",
+        "public.badge": "未认证 · 公共数据",
+        "public.unverified_note": "KOMICARE 尚未验证这家诊所。评分、评价和医生信息仅对已认证的合作诊所显示。",
+        "public.address": "地址",
+        "public.phone": "电话",
+        "public.departments": "诊疗科目",
+        "public.doctors": "医生",
+        "public.clinic_type": "类别",
+        "public.homepage": "访问官网 ↗",
+        "public.doctor_counts": "医生 {doctors} 名 · 专科医生 {specialists} 名",
+        "public.source": "来源：韩国健康保险审查评估院 医院信息服务公共数据（截至 {date}）",
+        "dept.dermatology": "皮肤科",
+        "dept.plastic_surgery": "整形外科",
+        "directory.load_more": "查看更多（{shown} / {total}）",
+        "directory.load_error": "无法加载诊所列表，请稍后再试。"
     }
 };
 

@@ -1793,22 +1793,30 @@
             <div class="modal-body clinic-modal-body">
                 <div class="clinic-info-section">
                     <!-- 11개 세부 평점 요약 타이틀로 정교화 -->
-                    <div class="info-block">
+                    <!-- Public directory entry (HIRA open data): facts and source only -->
+                    <div class="info-block public-detail" id="clinic-detail-public" style="display: none;">
+                        <span class="public-badge" data-i18n="public.badge">Unverified · Public data</span>
+                        <p class="public-note" data-i18n="public.unverified_note">KOMICARE has not verified this clinic. Ratings, reviews and doctor profiles appear only for verified partner clinics.</p>
+                        <dl class="public-facts" id="clinic-detail-public-facts"></dl>
+                        <a id="clinic-detail-homepage" class="public-homepage" target="_blank" rel="noopener noreferrer nofollow" data-i18n="public.homepage">Visit homepage ↗</a>
+                        <p class="public-source" id="clinic-detail-public-source"></p>
+                    </div>
+                    <div class="info-block partner-only">
                         <span class="info-label" data-i18n="rev_sim.modal_title">Verified Review Statistics</span>
                         <h4 id="clinic-detail-rating"
                             style="color: var(--color-accent); font-size: 24px; margin-top: 4px;">⭐ 4.9</h4>
                     </div>
-                    <div class="info-block">
+                    <div class="info-block partner-only">
                         <span class="info-label" data-i18n="clinic.about_label">About the Clinic</span>
                         <p id="clinic-detail-desc">...</p>
                     </div>
-                    <div class="info-block">
+                    <div class="info-block partner-only">
                         <span class="info-label" data-i18n="clinic.specialties_label">Specialties</span>
                         <div class="clinic-specialties-container" id="clinic-detail-specialties">
                             <!-- JS will inject tags -->
                         </div>
                     </div>
-                    <div class="info-block">
+                    <div class="info-block partner-only">
                         <!-- 기존 safety.verified_title 라벨을 기획서에 맞춰 의사 실명 세부 리뷰 평가 정보로 명칭 전환 -->
                         <span class="info-label" data-i18n="rev_sim.criteria_label">Rate Your Experience (11 Evaluation
                             Criteria)</span>
@@ -1817,7 +1825,7 @@
                             <!-- 여기에 app.js의 11개 스케일 차트 바와 서술형 로그가 디테일하게 쭉 로드됩니다 -->
                         </div>
                     </div>
-                    <div class="info-block doctor-block">
+                    <div class="info-block doctor-block partner-only">
                         <span class="info-label" data-i18n="clinic.doctor_label">Operating Physician</span>
                         <div class="doctor-profile" style="margin-top: 8px;">
                             <div class="doctor-avatar" id="clinic-detail-doc-avatar">JY</div>
@@ -1830,7 +1838,7 @@
                             style="font-size: 13px; margin-top: 10px; font-style: italic; line-height: 1.5; color: var(--text-secondary);">
                             ...</p>
                     </div>
-                    <div class="info-block">
+                    <div class="info-block partner-only">
                         <span class="info-label" data-i18n="clinic.hours_label">Operating Hours</span>
                         <p id="clinic-detail-hours" style="font-size: 13px; color: var(--text-secondary);">...</p>
                     </div>
@@ -1849,7 +1857,7 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                        <button class="btn-primary" id="btnShowBookingForm" style="width: 100%; margin-top: 16px;"
+                        <button class="btn-primary partner-only" id="btnShowBookingForm" style="width: 100%; margin-top: 16px;"
                             data-i18n="clinic.book_btn">
                             📅 Secure 1:1 Booking Slot
                         </button>

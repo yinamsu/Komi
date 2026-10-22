@@ -6,3 +6,6 @@ node_modules/
 
 .vercel
 .env*
+
+# import-hira.js --dry-run output
+scripts/hira-preview.json

@@ -322,109 +322,6 @@ function applyTheme(theme) {
     try { localStorage.setItem('komicare-theme', theme); } catch (e) {}
 }
 
-function expandClinicsWithGenerator(baseList) {
-    const targetCount = 500;
-    const expanded = [...baseList];
-    
-    const districts = [
-        "Gangnam-daero, Gangnam", "Apgujeong-ro, Gangnam", "Yeoksam-dong, Gangnam", 
-        "Sinsa-dong, Gangnam", "Cheongdam-dong, Gangnam", "Myeong-dong, Jung-gu",
-        "Hannam-dong, Yongsan", "Itaewon-dong, Yongsan", "Seokyo-dong, Mapo-gu",
-        "Dongdaemun-gu, Seoul", "Jamsil-dong, Songpa-gu", "Seocho-dong, Seocho-gu"
-    ];
-    const brandPrefixes = [
-        "Aura", "Pure", "Glow", "Lumi", "Grace", "Calm", "Line", "Forest", "Ever", "Dr.", 
-        "Nature", "White", "True", "Clear", "Top", "Premium", "Bloom", "Vivid", "Relief", "Fine"
-    ];
-    const brandSuffixes = [
-        "Skin Clinic", "Dermatology", "Aesthetic House", "Laser Center", "Skin Lab", "Beauty Center", 
-        "Wellness Clinic", "Anti-Aging Center", "Skin Science", "Laser Lab", "Skin Studio"
-    ];
-    const firstNames = [
-        "Minji", "Ji-Yeon", "Tae-Young", "Seo-Jun", "Eun-Ji", "Min-Seok", "Jae-Hee", "Sang-Woo", 
-        "Soo-Hyun", "Jin-Woo", "Nam-gyu", "Bo-Min", "Seo-Yeon", "Dong-Hyun", "Sarah", "Sung-Min",
-        "Tae-Jin", "Young-Ho", "Hye-Jin", "Kyu-Hyun", "Ji-Hoon", "Min-Ki", "So-Young", "Eun-Cheol"
-    ];
-    const lastNames = ["Kim", "Lee", "Park", "Choi", "Song", "Nam", "Shin", "Yoon", "Koh", "Lim", "Hwang", "Miller", "Ryu", "Kang", "Han", "Jeong"];
-    
-    const specialtiesPool = [
-        "Nd:YAG Laser Calibrations", "Skin Barrier Reconstruction", "Pico Toning", "Skin Booster", 
-        "Lifting", "Pigmentation", "Vascular Laser Calibration", "Rosacea & Redness Recovery", 
-        "Ultrasonic Rejuvenation", "Acne", "Hair Removal", "Filler", "Botox", "Genuine Consumables Logged", 
-        "Ulthera", "Shurink", "Laser Toning"
-    ];
-    const docTypes = ["dermatologist", "specialist", "gp"];
-    
-    const baseIdCount = baseList.length;
-    for (let i = baseIdCount + 1; i <= targetCount; i++) {
-        const pseudoRandom = (seed) => {
-            const x = Math.sin(seed + i) * 10000;
-            return x - Math.floor(x);
-        };
-        
-        const r1 = pseudoRandom(1);
-        const r2 = pseudoRandom(2);
-        const r3 = pseudoRandom(3);
-        const r4 = pseudoRandom(4);
-        const r5 = pseudoRandom(5);
-        const r6 = pseudoRandom(6);
-        const r7 = pseudoRandom(7);
-        const r8 = pseudoRandom(8);
-        
-        const brand = brandPrefixes[Math.floor(r1 * brandPrefixes.length)] + " " + brandSuffixes[Math.floor(r2 * brandSuffixes.length)];
-        const loc = districts[Math.floor(r3 * districts.length)];
-        const rating = (4.5 + r4 * 0.5).toFixed(1);
-        const reviewsCount = Math.floor(50 + r5 * 200);
-        
-        const docLastName = lastNames[Math.floor(r6 * lastNames.length)];
-        const docFirstName = firstNames[Math.floor(r7 * firstNames.length)];
-        const docName = `Dr. ${docFirstName} ${docLastName}`;
-        const avatar = docFirstName.split('-').map(p => p[0]).join('') || docFirstName[0];
-        
-        const docType = docTypes[Math.floor(r8 * docTypes.length)];
-        let docTitle = "";
-        if (docType === "dermatologist") {
-            docTitle = `Board-Certified Dermatologist | Laser Expert`;
-        } else if (docType === "specialist") {
-            docTitle = `Specialist | Aesthetic Surgeon`;
-        } else {
-            docTitle = `General Practitioner | Skin Health`;
-        }
-        
-        const numSpecs = 3 + Math.floor(r1 * 4);
-        const specs = [];
-        let tempPool = [...specialtiesPool];
-        for (let s = 0; s < numSpecs; s++) {
-            const idx = Math.floor(pseudoRandom(s * 10) * tempPool.length);
-            specs.push(tempPool[idx]);
-            tempPool.splice(idx, 1);
-        }
-        
-        expanded.push({
-            id: i,
-            name: `${brand} | ${brand}`,
-            location: `📍 ${loc} | 📍 ${loc}`,
-            rating: `⭐ ${rating} (${reviewsCount}+ verified reviews)`,
-            description: `A state-of-the-art clinic dedicated to patient-centric customization and safety protocols. | 환자 개개인의 안전을 최우선으로 생각하는 프리미엄 커스텀 피부과입니다.`,
-            specialties: specs,
-            doctor_name: `${docName} | ${docName}`,
-            doctor_avatar: avatar,
-            doctor_title: `${docTitle} | ${docTitle}`,
-            doctor_bio: `Dedicated clinician with years of verified success in customized laser and barrier restoration protocols. | 수년간 검증된 풍부한 시술 경력을 보유한 전문 의료진이 정성을 다해 진료합니다.`,
-            hours: "Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 3:00 PM",
-            map_iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.5702213797686!2d127.04277717646549!3d37.5239169720489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca40f2f3d6dbf%3A0xe54ebad41a5d6f1!2sCheongdam-dong%2C%20Seoul!5e0!3m2!1sen!2skr!4v1719035000000!5m2!1sen!2skr",
-            slots_tag: `Max ${2 + Math.floor(r2 * 3)} Bookings/Hr`,
-            doctor_type: docType,
-            sleep_anesthesia: r3 > 0.5,
-            anesthesiologist_resident: r3 > 0.75,
-            foreign_attraction_registered: r4 > 0.4,
-            foreigner_insurance: r5 > 0.5,
-            excellent_aftercare: r6 > 0.4
-        });
-    }
-    return expanded;
-}
-
 async function loadClinics() {
     const container = document.getElementById('dynamic-partner-list');
     const searchInput = document.getElementById('directorySearchInput');
@@ -438,6 +335,9 @@ async function loadClinics() {
         if (result && result.success && result.clinics) {
             loadedClinicsGlobal = result.clinics;
             renderClinicCards(result.clinics);
+        } else if (container) {
+            loadedClinicsGlobal = [];
+            container.innerHTML = `<div class="text-center" style="padding:40px; color:var(--text-muted); width:100%;">${escapeHTML(t('directory.load_error'))}</div>`;
         }
     } catch (error) {
         console.error("API Fetch error, loading client-side fallback clinics:", error);
@@ -905,9 +805,9 @@ async function loadClinics() {
                 excellent_aftercare: true
             }
         ];
-        const finalFallback = expandClinicsWithGenerator(fallback);
-        loadedClinicsGlobal = finalFallback;
-        renderClinicCards(finalFallback);
+        // Offline demo only (static preview without /api): a handful of sample partner cards
+        loadedClinicsGlobal = fallback.map(c => ({ source: 'partner', ...c }));
+        renderClinicCards(loadedClinicsGlobal);
     } finally {
         if (searchInput) searchInput.disabled = false;
     }
@@ -927,7 +827,8 @@ function escapeHTML(value) {
 function isSafeMapEmbedUrl(value) {
     try {
         const url = new URL(value);
-        return url.protocol === 'https:' && url.hostname === 'www.google.com' && url.pathname.startsWith('/maps/embed');
+        if (url.protocol !== 'https:' || url.hostname !== 'www.google.com') return false;
+        return url.pathname.startsWith('/maps/embed') || (url.pathname === '/maps' && url.searchParams.get('output') === 'embed');
     } catch (e) {
         return false;
     }
@@ -980,6 +881,44 @@ function getLocalizedText(rawText, kind) {
     return text;
 }
 
+const CLINIC_PAGE_SIZE = 60;
+let renderedClinicList = [];
+
+const isPublicClinic = clinic => clinic && clinic.source === 'hira';
+
+function localizeDepartment(dept) {
+    const key = { '피부과': 'dept.dermatology', '성형외과': 'dept.plastic_surgery' }[dept];
+    return key ? t(key) : dept;
+}
+
+function publicDoctorCountText(clinic) {
+    if (clinic.doctor_count === null || clinic.doctor_count === undefined) return '';
+    return t('public.doctor_counts')
+        .replace('{doctors}', clinic.doctor_count)
+        .replace('{specialists}', clinic.specialist_count || 0);
+}
+
+// Public directory entries (HIRA open data): facts only, no rating, doctor profile or safety badges
+function publicClinicCardHTML(clinic) {
+    const depts = (clinic.departments || []).map(d => `<span class="partner-tag">${escapeHTML(localizeDepartment(d))}</span>`).join('');
+    const counts = publicDoctorCountText(clinic);
+    return `
+            <div class="partner-card partner-card-public" data-clinic-id="${escapeHTML(clinic.id)}">
+                <div class="partner-top">
+                    <div class="partner-info">
+                        <h4>${escapeHTML(clinicText(clinic, 'name', 'clinic'))}</h4>
+                        <span class="partner-location">${escapeHTML(clinicText(clinic, 'location', 'location'))}</span>
+                    </div>
+                    <span class="public-badge">${escapeHTML(t('public.badge'))}</span>
+                </div>
+                <div class="partner-tags">${depts}</div>
+                <div class="public-meta">
+                    ${counts ? `<span>${escapeHTML(counts)}</span>` : ''}
+                    ${clinic.phone ? `<span>☎ ${escapeHTML(clinic.phone)}</span>` : ''}
+                </div>
+            </div>`;
+}
+
 function renderClinicCards(clinics) {
     const container = document.getElementById('dynamic-partner-list');
     if (!container) return;
@@ -995,12 +934,28 @@ function renderClinicCards(clinics) {
     }
 
     container.innerHTML = '';
-    clinics.forEach(clinic => {
+    renderedClinicList = clinics;
+    appendClinicCards(0);
+}
+
+// Renders the next page of cards; thousands of public entries would be too heavy to draw at once
+function appendClinicCards(start) {
+    const container = document.getElementById('dynamic-partner-list');
+    if (!container) return;
+    container.querySelector('.clinic-load-more')?.remove();
+    const clinics = renderedClinicList;
+    const page = clinics.slice(start, start + CLINIC_PAGE_SIZE);
+    page.forEach(clinic => {
+        if (isPublicClinic(clinic)) {
+            container.insertAdjacentHTML('beforeend', publicClinicCardHTML(clinic));
+            return;
+        }
         const specs = Array.isArray(clinic.specialties) ? clinic.specialties : [];
         const tagsHTML = specs.map(spec => {
             return `<span class="partner-tag">${escapeHTML(localizeSpecialty(spec))}</span>`;
         }).join('');
-        const ratingVal = clinic.rating.includes('(') ? clinic.rating.split(' ')[1] : clinic.rating.replace('⭐', '').trim();
+        const rating = String(clinic.rating || '');
+        const ratingVal = rating.includes('(') ? rating.split(' ')[1] : rating.replace('⭐', '').trim();
 
         let doctorTypeLabel = t(`badge.${clinic.doctor_type}`) || clinic.doctor_type;
         let anesthesiaLabel = clinic.sleep_anesthesia ? (clinic.anesthesiologist_resident ? t('badge.anesthesiologist') : t('badge.no_anesthesiologist')) : '';
@@ -1039,6 +994,16 @@ function renderClinicCards(clinics) {
             </div>`;
         container.insertAdjacentHTML('beforeend', cardHTML);
     });
+
+    const shown = start + page.length;
+    if (shown < clinics.length) {
+        const more = document.createElement('button');
+        more.type = 'button';
+        more.className = 'clinic-load-more';
+        more.textContent = t('directory.load_more').replace('{shown}', shown.toLocaleString()).replace('{total}', clinics.length.toLocaleString());
+        more.addEventListener('click', (e) => { e.stopPropagation(); appendClinicCards(shown); });
+        container.appendChild(more);
+    }
 }
 
 // 예리 원장님 피드백 반영: 11개 세부 평점 카테고리 시각화 동적 연동 함수
@@ -1048,6 +1013,21 @@ function openClinicDetailModal(clinicId) {
 
     activeClinicId = clinicId;
     resetBookingViews();
+
+    const isPublic = isPublicClinic(data);
+    document.querySelectorAll('#clinicModal .partner-only').forEach(el => { el.style.display = isPublic ? 'none' : ''; });
+    const publicBlock = document.getElementById('clinic-detail-public');
+    if (publicBlock) publicBlock.style.display = isPublic ? '' : 'none';
+    if (isPublic) {
+        fillPublicClinicDetails(data);
+        document.getElementById('clinic-detail-name').textContent = clinicText(data, 'name', 'clinic');
+        document.getElementById('clinic-detail-location').textContent = clinicText(data, 'location', 'location');
+        const map = document.getElementById('clinic-detail-map-iframe');
+        if (map) map.src = isSafeMapEmbedUrl(data.map_iframe) ? data.map_iframe : 'about:blank';
+        const modal = document.getElementById('clinicModal');
+        if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        return;
+    }
 
     document.getElementById('clinic-detail-name').textContent = clinicText(data, 'name', 'clinic');
     document.getElementById('clinic-detail-location').textContent = clinicText(data, 'location', 'location');
@@ -1147,6 +1127,35 @@ function openClinicDetailModal(clinicId) {
     if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
 }
 
+function fillPublicClinicDetails(data) {
+    const rows = [
+        ['public.address', data.address],
+        ['public.phone', data.phone],
+        ['public.departments', (data.departments || []).map(localizeDepartment).join(', ')],
+        ['public.doctors', publicDoctorCountText(data)],
+        ['public.clinic_type', data.clinic_type]
+    ].filter(([, value]) => value);
+    const list = document.getElementById('clinic-detail-public-facts');
+    list.innerHTML = '';
+    rows.forEach(([key, value]) => {
+        const dt = document.createElement('dt');
+        dt.textContent = t(key);
+        const dd = document.createElement('dd');
+        dd.textContent = value;
+        list.append(dt, dd);
+    });
+    const homepage = document.getElementById('clinic-detail-homepage');
+    let safeHomepage = '';
+    try {
+        const url = new URL(data.homepage);
+        if (url.protocol === 'http:' || url.protocol === 'https:') safeHomepage = url.href;
+    } catch (e) {}
+    homepage.style.display = safeHomepage ? '' : 'none';
+    if (safeHomepage) homepage.href = safeHomepage;
+    const synced = data.synced_at ? new Date(data.synced_at).toISOString().slice(0, 10) : '';
+    document.getElementById('clinic-detail-public-source').textContent = t('public.source').replace('{date}', synced);
+}
+
 function resetBookingViews() {
     document.getElementById('clinic-map-view').classList.add('active');
     document.getElementById('clinic-booking-view').classList.remove('active');
@@ -1221,17 +1230,17 @@ function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
 
     // Category-wide keyword matching maps
     const categoryKeywords = {
-        skin: ["yag", "barrier", "toning", "pigment", "acne", "peel", "skin", "피부", "스킨", "필링", "미백", "색소", "여드름", "점", "booster", "부스터", "exosome", "엑소좀", "juvelook", "쥬베룩", "water", "물광"],
-        lifting: ["lifting", "ulthera", "shurink", "inmode", "thermage", "oligio", "thread", "contour", "리프팅", "울쎄라", "슈링크", "인모드", "써마지", "올리지오", "실", "윤곽", "조각", "이중턱"],
-        botox: ["botox", "보톡스", "미간", "이마", "눈가", "입술", "자갈턱", "사각턱", "침샘", "승모근", "종아리", "다한증"],
-        filler: ["filler", "필러", "이마", "앞광대", "볼", "팔자주름", "턱끝", "코", "입술", "입꼬리", "애교살", "골반", "힙업"],
-        eye: ["eye", "double eyelid", "canthoplasty", "ptosis", "blepharoplasty", "눈", "쌍꺼풀", "트임", "눈매", "상안검", "하안검"],
-        nose: ["rhinoplasty", "nose", "코", "콧대", "코끝", "콧볼", "복코", "매부리코"],
-        contour: ["contour", "jaw", "cheekbone", "orthognathic", "양악", "윤곽", "사각턱 수술", "광대축소", "돌출입"],
-        fat: ["lipo", "fat", "지방", "지방흡입", "지방이식"],
-        breast: ["breast", "motiva", "mentor", "nipple", "gynecomastia", "가슴", "유두", "여유증"],
+        skin: ["피부과", "yag", "barrier", "toning", "pigment", "acne", "peel", "skin", "피부", "스킨", "필링", "미백", "색소", "여드름", "점", "booster", "부스터", "exosome", "엑소좀", "juvelook", "쥬베룩", "water", "물광"],
+        lifting: ["피부과", "lifting", "ulthera", "shurink", "inmode", "thermage", "oligio", "thread", "contour", "리프팅", "울쎄라", "슈링크", "인모드", "써마지", "올리지오", "실", "윤곽", "조각", "이중턱"],
+        botox: ["피부과", "botox", "보톡스", "미간", "이마", "눈가", "입술", "자갈턱", "사각턱", "침샘", "승모근", "종아리", "다한증"],
+        filler: ["피부과", "filler", "필러", "이마", "앞광대", "볼", "팔자주름", "턱끝", "코", "입술", "입꼬리", "애교살", "골반", "힙업"],
+        eye: ["성형외과", "eye", "double eyelid", "canthoplasty", "ptosis", "blepharoplasty", "눈", "쌍꺼풀", "트임", "눈매", "상안검", "하안검"],
+        nose: ["성형외과", "rhinoplasty", "nose", "코", "콧대", "코끝", "콧볼", "복코", "매부리코"],
+        contour: ["성형외과", "contour", "jaw", "cheekbone", "orthognathic", "양악", "윤곽", "사각턱 수술", "광대축소", "돌출입"],
+        fat: ["성형외과", "lipo", "fat", "지방", "지방흡입", "지방이식"],
+        breast: ["성형외과", "breast", "motiva", "mentor", "nipple", "gynecomastia", "가슴", "유두", "여유증"],
         hair: ["hair", "scalp", "meso", "모발", "탈모", "두피", "헤어라인", "transplant", "이식"],
-        epilation: ["epilation", "hair removal", "제모", "겨드랑이", "인중", "비키니"],
+        epilation: ["피부과", "epilation", "hair removal", "제모", "겨드랑이", "인중", "비키니"],
         dental: ["dental", "teeth", "laminate", "orthodontic", "aligner", "치아", "라미네이트", "교정", "미백", "임플란트"],
         herbal: ["herbal", "diet", "acupuncture", "한방", "한약", "매선", "침", "약침"],
         others: ["tattoo", "문신", "쁘띠", "부작용", "관리"]
@@ -1242,6 +1251,7 @@ function clinicMatchesCategoryOrTreatment(clinic, categoryId, treatmentName) {
 }
 
 function getClinicExperienceYears(clinic) {
+    if (isPublicClinic(clinic)) return null;
     if (clinic.experience_years !== undefined && clinic.experience_years !== null) {
         return parseInt(clinic.experience_years);
     }
@@ -1305,21 +1315,22 @@ function applyFilters() {
     
     // 2. Tag Filter
     if (tagFilter !== 'all') {
-        filtered = filtered.filter(c => c.specialties.includes(tagFilter));
+        filtered = filtered.filter(c => (c.specialties || []).includes(tagFilter));
     }
     
     // 3. Search Input Query
     if (q) {
         filtered = filtered.filter(c => {
             const nameMatch = c.name.toLowerCase().includes(q) || clinicText(c, 'name', 'clinic').toLowerCase().includes(q);
-            const docMatch = c.doctor_name.toLowerCase().includes(q) || clinicText(c, 'doctor_name', 'doctor').toLowerCase().includes(q);
-            const specMatch = c.specialties.some(spec => {
+            const docMatch = !!c.doctor_name && (c.doctor_name.toLowerCase().includes(q) || clinicText(c, 'doctor_name', 'doctor').toLowerCase().includes(q));
+            const addrMatch = !!c.address && c.address.toLowerCase().includes(q);
+            const specMatch = (c.specialties || []).some(spec => {
                 const specLower = spec.toLowerCase();
                 const key = 'menu.' + specLower.replace(/ /g, '');
                 const trans = t(key).toLowerCase();
                 return specLower.includes(q) || trans.includes(q);
             });
-            return nameMatch || docMatch || specMatch;
+            return nameMatch || docMatch || addrMatch || specMatch;
         });
     }
 
@@ -1344,6 +1355,7 @@ function applyFilters() {
     if (isExp05 || isExp510 || isExp10p) {
         filtered = filtered.filter(c => {
             const years = getClinicExperienceYears(c);
+            if (years === null) return false;
             if (isExp05 && years >= 0 && years <= 5) return true;
             if (isExp510 && years > 5 && years <= 10) return true;
             if (isExp10p && years > 10) return true;
@@ -1381,7 +1393,8 @@ function applyFilters() {
         const el = document.getElementById(cat.id);
         const minVal = el ? parseFloat(el.value) : 0;
         if (minVal > 0) {
-            filtered = filtered.filter(c => getDetailedReviewRating(c.id, cat.key) >= minVal);
+            // Public directory entries have no reviews, so any minimum rating excludes them
+            filtered = filtered.filter(c => !isPublicClinic(c) && getDetailedReviewRating(c.id, cat.key) >= minVal);
         }
     });
     
@@ -1998,7 +2011,7 @@ function updateReviewDoctorDropdown() {
     docSelect.appendChild(defaultOpt);
  
     if (loadedClinicsGlobal && loadedClinicsGlobal.length > 0) {
-        loadedClinicsGlobal.forEach(c => {
+        loadedClinicsGlobal.filter(c => !isPublicClinic(c) && c.doctor_name).forEach(c => {
             const opt = document.createElement('option');
             opt.value = c.id;
             opt.textContent = `${clinicText(c, 'doctor_name', 'doctor')} (${clinicText(c, 'name', 'clinic')})`;

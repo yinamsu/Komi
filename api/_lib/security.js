@@ -15,7 +15,8 @@ function isSafeMapEmbedUrl(value) {
     if (!value) return true;
     try {
         const url = new URL(value);
-        return url.protocol === 'https:' && url.hostname === 'www.google.com' && url.pathname.startsWith('/maps/embed');
+        if (url.protocol !== 'https:' || url.hostname !== 'www.google.com') return false;
+        return url.pathname.startsWith('/maps/embed') || (url.pathname === '/maps' && url.searchParams.get('output') === 'embed');
     } catch (e) {
         return false;
     }

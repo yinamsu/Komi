@@ -4118,3 +4118,91 @@ html[data-theme="light"] .visual-category-menu .visual-category-item.active .ico
         line-height: 1.5;
     }
 }
+
+/* Public directory entries (HIRA open data) — visibly distinct from verified partners */
+.public-badge {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: rgba(var(--text-muted-rgb), 0.1);
+    border: 1px dashed rgba(var(--text-muted-rgb), 0.45);
+    white-space: nowrap;
+}
+
+.partner-card-public {
+    background: var(--surface-tint);
+    box-shadow: none;
+}
+
+.public-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.public-detail .public-badge {
+    align-self: flex-start;
+    width: fit-content;
+}
+
+.public-detail .public-note {
+    margin: 10px 0 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.public-facts {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 8px 16px;
+    margin: 0 0 14px;
+    font-size: 14px;
+}
+
+.public-facts dt {
+    color: var(--text-muted);
+}
+
+.public-facts dd {
+    margin: 0;
+    color: var(--text-primary);
+    word-break: keep-all;
+}
+
+.public-homepage {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary-text);
+    margin-bottom: 12px;
+}
+
+.public-source {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.clinic-load-more {
+    flex-shrink: 0;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--color-primary-text);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.clinic-load-more:hover {
+    border-color: var(--border-glow);
+}

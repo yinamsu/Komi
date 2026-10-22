@@ -65,6 +65,32 @@ CREATE TABLE IF NOT EXISTS public.clinics (
 -- Run this once on databases created before the column existed.
 ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}'::jsonb NOT NULL;
 
+-- 5-2. Public directory entries imported from the HIRA open API (scripts/import-hira.js).
+-- source = 'partner' for clinics registered through the partner portal, 'hira' for public data.
+-- Public rows have no rating, doctor profile or booking, so those columns become optional.
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS source TEXT DEFAULT 'partner' NOT NULL;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS hira_ykiho TEXT UNIQUE;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS address TEXT;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS phone TEXT;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS homepage TEXT;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS departments TEXT[];
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS clinic_type TEXT;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS doctor_count INTEGER;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS specialist_count INTEGER;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS latitude DOUBLE PRECISION;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS longitude DOUBLE PRECISION;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS opened_on DATE;
+ALTER TABLE public.clinics ADD COLUMN IF NOT EXISTS synced_at TIMESTAMP WITH TIME ZONE;
+ALTER TABLE public.clinics ALTER COLUMN rating DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN description DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN doctor_name DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN doctor_avatar DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN doctor_title DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN doctor_bio DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN hours DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN map_iframe DROP NOT NULL;
+ALTER TABLE public.clinics ALTER COLUMN slots_tag DROP NOT NULL;
+
 -- 6. Enable Row Level Security (RLS) on Clinics
 ALTER TABLE public.clinics ENABLE ROW LEVEL SECURITY;
 
