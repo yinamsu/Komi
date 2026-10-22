@@ -7,6 +7,11 @@
 //   node scripts/import-hira.js --dry-run            # fetch only, print a summary and write scripts/hira-preview.json
 //   node scripts/import-hira.js                      # fetch and upsert into Supabase
 //   node scripts/import-hira.js --sido=110000 --depts=14,08 --limit=50
+//   node scripts/import-hira.js --scope=all          # every clinic offering the departments
+//
+// --scope=specialist (default) keeps only clinics whose name carries the specialty ("…피부과의원",
+// "…성형외과"). Korean medical law lets only board-certified specialists put a specialty in the
+// clinic name, so this drops internal-medicine/general clinics that merely list dermatology.
 //
 // Env (read from the shell, then .env.local, then .env):
 //   HIRA_SERVICE_KEY            data.go.kr service key (Encoding or Decoding key both work)
@@ -32,12 +37,13 @@ function loadEnvFiles() {
 }
 
 function parseArgs(argv) {
-    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity };
+    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity, scope: 'specialist' };
     for (const arg of argv) {
         if (arg === '--dry-run') args.dryRun = true;
         else if (arg.startsWith('--sido=')) args.sido = arg.slice(7);
         else if (arg.startsWith('--depts=')) args.depts = arg.slice(8).split(',').map(s => s.trim()).filter(Boolean);
         else if (arg.startsWith('--limit=')) args.limit = parseInt(arg.slice(8), 10);
+        else if (arg.startsWith('--scope=')) args.scope = arg.slice(8);
         else throw new Error(`Unknown option: ${arg}`);
     }
     return args;
@@ -86,6 +92,10 @@ function toHomepage(value) {
     if (!s) return null;
     const url = /^https?:\/\//i.test(s) ? s : `http://${s}`;
     try { return new URL(url).toString(); } catch (e) { return null; }
+}
+
+function isSpecialistClinic(row) {
+    return /피부과|성형외과/.test(row.name);
 }
 
 function toRow(item, departments, syncedAt) {
@@ -164,7 +174,10 @@ async function main() {
         throw new Error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required (or use --dry-run).');
     }
 
-    const rows = await collect({ key, ...args });
+    if (!['specialist', 'all'].includes(args.scope)) throw new Error('--scope must be "specialist" or "all"');
+    const collected = await collect({ key, ...args });
+    const rows = args.scope === 'all' ? collected : collected.filter(isSpecialistClinic);
+    if (args.scope !== 'all') console.log(`scope=specialist: kept ${rows.length} of ${collected.length} (name contains 피부과/성형외과)`);
     const withCoords = rows.filter(r => r.latitude && r.longitude).length;
     console.log(`collected ${rows.length} clinics (${withCoords} with coordinates)`);
 
@@ -185,4 +198,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { toRow, serviceKeyParam, fetchPage, collect };
+module.exports = { toRow, serviceKeyParam, fetchPage, collect, isSpecialistClinic };
