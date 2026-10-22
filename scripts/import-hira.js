@@ -16,6 +16,8 @@
 //              named like "아이필유의원" that carry no specialty in their name.
 //   specialist only names containing 피부과/성형외과
 //   all        everything, including internal medicine clinics and general hospitals
+// aesthetic/all also scan every Seoul 의원/병원 for aesthetic names that list no matching department
+// (hair transplant clinics and the like); --no-name-scan skips that.
 // --deactivate-missing hides (active = false) public entries that were not in this run, e.g. closed
 // clinics. It is skipped when the run returned under half of the currently active entries, which
 // points to an API problem rather than mass closures. --summary writes a small JSON report.
@@ -47,7 +49,7 @@ function loadEnvFiles() {
 }
 
 function parseArgs(argv) {
-    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity, scope: 'aesthetic', deactivateMissing: false, summary: null };
+    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity, scope: 'aesthetic', deactivateMissing: false, summary: null, nameScan: true };
     for (const arg of argv) {
         if (arg === '--dry-run') args.dryRun = true;
         else if (arg.startsWith('--sido=')) args.sido = arg.slice(7);
@@ -55,6 +57,7 @@ function parseArgs(argv) {
         else if (arg.startsWith('--limit=')) args.limit = parseInt(arg.slice(8), 10);
         else if (arg.startsWith('--scope=')) args.scope = arg.slice(8);
         else if (arg === '--deactivate-missing') args.deactivateMissing = true;
+        else if (arg === '--no-name-scan') args.nameScan = false;
         else if (arg.startsWith('--summary=')) args.summary = arg.slice(10);
         else throw new Error(`Unknown option: ${arg}`);
     }
@@ -66,8 +69,9 @@ function serviceKeyParam(key) {
     return /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
 }
 
-async function fetchPage({ key, sido, dept, pageNo }) {
-    const query = `ServiceKey=${serviceKeyParam(key)}&pageNo=${pageNo}&numOfRows=${PAGE_SIZE}&sidoCd=${sido}&dgsbjtCd=${dept}&_type=json`;
+async function fetchPage({ key, sido, dept, clCd, pageNo }) {
+    const filters = (dept ? `&dgsbjtCd=${dept}` : '') + (clCd ? `&clCd=${clCd}` : '');
+    const query = `ServiceKey=${serviceKeyParam(key)}&pageNo=${pageNo}&numOfRows=${PAGE_SIZE}&sidoCd=${sido}${filters}&_type=json`;
     const res = await fetch(`${ENDPOINT}?${query}`);
     const text = await res.text();
     let json;
@@ -110,12 +114,23 @@ function isSpecialistClinic(row) {
     return /피부과|성형외과/.test(row.name);
 }
 
-// Names that point to another specialty, a hospital, or a general/charity clinic
-const NON_AESTHETIC_NAME = /내과|가정|이비인후|정형외과|신경외과|신경과|소아|산부인과|여성|비뇨|안과|재활|영상의학|마취|통증|정신|치과|한의|한방|요양|외과의원|검진|건강|재단|협회|부설|보건|의료원|병원$|통합|365|연합|열린의원/;
+// Names that point to another specialty or a general/charity clinic. "365" stays allowed for the
+// 365mc liposuction chain, and "편한의원" (gastro clinics) is not a 한의원.
+const NON_AESTHETIC_NAME = /내과|가정|이비인후|정형외과|신경외과|신경과|소아|산부인과|여성|비뇨|안과|재활|영상의학|마취|통증|정신|치과|(?<!편)한의원|한방|요양|외과의원|검진|건강|재단|협회|부설|보건|의료원|통합|365(?!\s*(?:mc|엠씨))|연합|열린의원/i;
+// 병원-type names that are clearly not aesthetic (children's, joints/spine, elderly care)
+const GENERAL_HOSPITAL_NAME = /어린이|아이들|조인트|관절|척추|마디|튼튼|노인/;
+// Names that suggest an aesthetic clinic even when no dermatology/plastic surgery department is listed
+const AESTHETIC_NAME = /피부|스킨|skin|뷰티|beauty|에스테틱|aesthetic|미용|레이저|laser|성형|더마|derma|리프팅|안티에이징|모발|헤어|hair|탈모/i;
 
 function isAestheticClinic(row) {
     if (isSpecialistClinic(row)) return true;
-    return (row.clinic_type === '의원' || row.clinic_type === '병원') && !NON_AESTHETIC_NAME.test(row.name);
+    if (NON_AESTHETIC_NAME.test(row.name)) return false;
+    if (row.clinic_type === '의원') return true;
+    // Hospitals only when they offer plastic surgery or are named like an aesthetic clinic (e.g. 아이디병원)
+    if (row.clinic_type === '병원') {
+        return !GENERAL_HOSPITAL_NAME.test(row.name) && ((row.departments || []).includes('성형외과') || AESTHETIC_NAME.test(row.name));
+    }
+    return false;
 }
 
 const SCOPES = { aesthetic: isAestheticClinic, specialist: isSpecialistClinic, all: () => true };
@@ -143,7 +158,7 @@ function toRow(item, departments, syncedAt) {
     };
 }
 
-async function collect({ key, sido, depts, limit }) {
+async function collect({ key, sido, depts, limit, nameScan = false }) {
     const byId = new Map();
     for (const dept of depts) {
         const label = DEPARTMENTS[dept] || dept;
@@ -165,6 +180,28 @@ async function collect({ key, sido, depts, limit }) {
         } while (fetched < total);
         process.stdout.write('\n');
         if (byId.size >= limit) break;
+    }
+    // Clinics that do aesthetics but registered no dermatology/plastic surgery department (e.g. hair
+    // transplant clinics): scan every 의원 and 병원 and keep aesthetic-looking names
+    if (nameScan && byId.size < limit) {
+        for (const [clCd, label] of [['31', '의원'], ['21', '병원']]) {
+            let pageNo = 1, total = 0, fetched = 0, added = 0;
+            do {
+                const { items, totalCount } = await fetchPage({ key, sido, clCd, pageNo });
+                total = totalCount;
+                for (const item of items) {
+                    if (!item.ykiho || !item.yadmNm || byId.has(item.ykiho) || !AESTHETIC_NAME.test(item.yadmNm)) continue;
+                    byId.set(item.ykiho, { item, departments: new Set() });
+                    added++;
+                }
+                fetched += items.length;
+                pageNo++;
+                process.stdout.write(`\rname scan ${label}: ${fetched}/${total} (+${added})`);
+                if (!items.length) break;
+                await new Promise(r => setTimeout(r, 120));
+            } while (fetched < total);
+            process.stdout.write('\n');
+        }
     }
     const syncedAt = new Date().toISOString();
     return [...byId.values()].slice(0, limit).map(({ item, departments }) => toRow(item, [...departments], syncedAt));
@@ -224,7 +261,8 @@ async function main() {
 
     if (!SCOPES[args.scope]) throw new Error(`--scope must be one of: ${Object.keys(SCOPES).join(', ')}`);
     if (args.deactivateMissing && Number.isFinite(args.limit)) throw new Error('--deactivate-missing cannot be combined with --limit');
-    const collected = await collect({ key, ...args });
+    // The name scan adds ~110 API calls; the narrow specialist scope does not need it
+    const collected = await collect({ key, ...args, nameScan: args.scope !== 'specialist' && args.nameScan });
     const rows = collected.filter(SCOPES[args.scope]);
     console.log(`scope=${args.scope}: kept ${rows.length} of ${collected.length}`);
     const withCoords = rows.filter(r => r.latitude && r.longitude).length;
@@ -268,4 +306,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { toRow, serviceKeyParam, fetchPage, collect, isSpecialistClinic, isAestheticClinic, deactivateMissing };
+module.exports = { toRow, serviceKeyParam, fetchPage, collect, isSpecialistClinic, isAestheticClinic, deactivateMissing, AESTHETIC_NAME };
