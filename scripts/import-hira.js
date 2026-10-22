@@ -8,6 +8,11 @@
 //   node scripts/import-hira.js                      # fetch and upsert into Supabase
 //   node scripts/import-hira.js --sido=110000 --depts=14,08 --limit=50
 //   node scripts/import-hira.js --scope=all          # every clinic offering the departments
+//   node scripts/import-hira.js --deactivate-missing --summary=data/hira-sync.json   # monthly job
+//
+// --deactivate-missing hides (active = false) public entries that were not in this run, e.g. closed
+// clinics. It is skipped when the run returned under half of the currently active entries, which
+// points to an API problem rather than mass closures. --summary writes a small JSON report.
 //
 // --scope=specialist (default) keeps only clinics whose name carries the specialty ("…피부과의원",
 // "…성형외과"). Korean medical law lets only board-certified specialists put a specialty in the
@@ -37,13 +42,15 @@ function loadEnvFiles() {
 }
 
 function parseArgs(argv) {
-    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity, scope: 'specialist' };
+    const args = { dryRun: false, sido: '110000', depts: Object.keys(DEPARTMENTS), limit: Infinity, scope: 'specialist', deactivateMissing: false, summary: null };
     for (const arg of argv) {
         if (arg === '--dry-run') args.dryRun = true;
         else if (arg.startsWith('--sido=')) args.sido = arg.slice(7);
         else if (arg.startsWith('--depts=')) args.depts = arg.slice(8).split(',').map(s => s.trim()).filter(Boolean);
         else if (arg.startsWith('--limit=')) args.limit = parseInt(arg.slice(8), 10);
         else if (arg.startsWith('--scope=')) args.scope = arg.slice(8);
+        else if (arg === '--deactivate-missing') args.deactivateMissing = true;
+        else if (arg.startsWith('--summary=')) args.summary = arg.slice(10);
         else throw new Error(`Unknown option: ${arg}`);
     }
     return args;
@@ -148,10 +155,33 @@ async function collect({ key, sido, depts, limit }) {
     return [...byId.values()].slice(0, limit).map(({ item, departments }) => toRow(item, [...departments], syncedAt));
 }
 
-async function upsert(rows) {
+function supabaseClient() {
     const { createClient } = require('@supabase/supabase-js');
     const url = (process.env.SUPABASE_URL || '').replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
-    const supabase = createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY);
+    return createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY);
+}
+
+async function countActivePublic(supabase) {
+    const { count, error } = await supabase.from('clinics').select('*', { count: 'exact', head: true })
+        .eq('source', 'hira').eq('active', true);
+    if (error) throw error;
+    return count || 0;
+}
+
+// Hides public entries this run did not see (synced_at older than this run)
+async function deactivateMissing(supabase, rows, activeBefore) {
+    if (rows.length < activeBefore * 0.5) {
+        console.warn(`skipping deactivation: this run returned ${rows.length} clinics but ${activeBefore} are active (possible API problem)`);
+        return { skipped: true, deactivated: 0 };
+    }
+    const { data, error } = await supabase.from('clinics').update({ active: false })
+        .eq('source', 'hira').eq('active', true).lt('synced_at', rows[0].synced_at).select('id');
+    if (error) throw error;
+    console.log(`deactivated ${data.length} clinics no longer in the public data`);
+    return { skipped: false, deactivated: data.length };
+}
+
+async function upsert(rows, supabase = supabaseClient()) {
     for (let i = 0; i < rows.length; i += 500) {
         const chunk = rows.slice(i, i + 500);
         const { error } = await supabase.from('clinics').upsert(chunk, { onConflict: 'hira_ykiho' });
@@ -178,6 +208,7 @@ async function main() {
     }
 
     if (!['specialist', 'all'].includes(args.scope)) throw new Error('--scope must be "specialist" or "all"');
+    if (args.deactivateMissing && Number.isFinite(args.limit)) throw new Error('--deactivate-missing cannot be combined with --limit');
     const collected = await collect({ key, ...args });
     const rows = args.scope === 'all' ? collected : collected.filter(isSpecialistClinic);
     if (args.scope !== 'all') console.log(`scope=specialist: kept ${rows.length} of ${collected.length} (name contains 피부과/성형외과)`);
@@ -190,8 +221,29 @@ async function main() {
         console.log(`dry run: wrote ${out}, nothing saved to Supabase`);
         return;
     }
-    await upsert(rows);
-    console.log('done');
+    const supabase = supabaseClient();
+    const activeBefore = await countActivePublic(supabase);
+    await upsert(rows, supabase);
+    const cleanup = args.deactivateMissing ? await deactivateMissing(supabase, rows, activeBefore) : null;
+    const activeAfter = await countActivePublic(supabase);
+    console.log(`done: ${activeAfter} active public clinics (was ${activeBefore})`);
+
+    if (args.summary) {
+        const summary = {
+            synced_at: rows[0] ? rows[0].synced_at : new Date().toISOString(),
+            scope: args.scope,
+            fetched: collected.length,
+            imported: rows.length,
+            active_before: activeBefore,
+            active_after: activeAfter,
+            deactivated: cleanup ? cleanup.deactivated : 0,
+            deactivation_skipped: cleanup ? cleanup.skipped : null
+        };
+        const out = path.resolve(process.cwd(), args.summary);
+        fs.mkdirSync(path.dirname(out), { recursive: true });
+        fs.writeFileSync(out, JSON.stringify(summary, null, 2) + '\n');
+        console.log(`summary written to ${args.summary}`);
+    }
 }
 
 if (require.main === module) {
@@ -201,4 +253,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { toRow, serviceKeyParam, fetchPage, collect, isSpecialistClinic };
+module.exports = { toRow, serviceKeyParam, fetchPage, collect, isSpecialistClinic, deactivateMissing };

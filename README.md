@@ -11,6 +11,8 @@
 | `api/submit-clinic.js` | 파트너 병원 등록 API |
 | `api/book.js`, `api/subscribe.js` | 예약, 대기자 명단 API |
 | `scripts/import-hira.js` | 건강보험심사평가원 공공데이터 가져오기 스크립트 |
+| `.github/workflows/import-hira.yml` | 매월 공공데이터 자동 갱신 (GitHub Actions) |
+| `data/hira-sync.json` | 마지막 자동 갱신 결과 (자동으로 커밋됨) |
 | `supabase_schema.sql` | DB 스키마 |
 
 코드 구조와 변경 내역은 [walkthrough.md](walkthrough.md)에 정리되어 있습니다.
@@ -126,8 +128,31 @@ DB에 마이그레이션 5-1이 적용되지 않았다면 등록은 되지만 "�
 | `--limit=50` | 전체 | 가져올 최대 병원 수 (테스트용) |
 | `--scope=all` | `specialist` | 기본값 `specialist`는 이름에 "피부과/성형외과"가 들어간 병원만 가져옵니다(전문과목을 병원명에 쓸 수 있는 건 해당 전문의뿐). `all`은 해당 진료과목을 개설한 모든 병원(서울 약 5,500곳, 내과·종합병원 포함) |
 | `--dry-run` | — | 저장하지 않고 미리보기 파일만 생성 |
+| `--deactivate-missing` | — | 이번에 가져오지 못한 공공데이터 병원을 숨김 처리 (`--limit`과 함께 쓸 수 없음) |
+| `--summary=파일` | — | 실행 결과를 JSON으로 저장 |
 
-공공데이터는 바뀌므로 한 달에 한 번 정도 다시 실행하는 것을 권장합니다.
+### 매월 자동 갱신 (GitHub Actions)
+
+[.github/workflows/import-hira.yml](.github/workflows/import-hira.yml)이 **매월 1일 오전 9시(KST)**에 자동으로 가져오기를 실행합니다. GitHub 공개 저장소라 무료입니다.
+
+- 새로 생긴 병원은 추가되고, 바뀐 정보(전화번호·주소·의사 수 등)는 갱신됩니다.
+- 이번 공공데이터에 없는 병원(폐업 등)은 삭제하지 않고 숨김(`active = false`) 처리합니다. 다시 나타나면 자동으로 다시 표시됩니다.
+- 한 번에 절반 넘게 사라지는 경우는 폐업이 아니라 API 오류일 가능성이 높으므로, 숨김 처리를 건너뜁니다.
+- 실행 결과는 [data/hira-sync.json](data/hira-sync.json)에 커밋됩니다(가져온 수, 활성 병원 수, 숨긴 수). 이 커밋 덕분에 GitHub가 60일 동안 활동이 없는 저장소의 예약 실행을 멈추는 일도 막습니다.
+
+필요한 GitHub 저장소 Secrets (Settings → Secrets and variables → Actions): `HIRA_SERVICE_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
+
+바로 한 번 실행하려면 GitHub 저장소 → **Actions → Import HIRA clinics → Run workflow**를 누르거나:
+
+```bash
+gh workflow run import-hira.yml -R yinamsu/Komi
+```
+
+로컬에서 같은 작업을 하려면:
+
+```bash
+node scripts/import-hira.js --deactivate-missing --summary=data/hira-sync.json
+```
 
 ### 샘플 데이터 (삭제 완료)
 

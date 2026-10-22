@@ -1,0 +1,51 @@
+# Monthly refresh of public clinic data (HIRA open API -> Supabase).
+# Runs on the 1st of every month at 09:00 KST, or on demand from the Actions tab ("Run workflow").
+# Needs repository secrets: HIRA_SERVICE_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
+name: Import HIRA clinics
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-hira
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Import clinics and hide ones that closed
+        env:
+          HIRA_SERVICE_KEY: ${{ secrets.HIRA_SERVICE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/import-hira.js --deactivate-missing --summary=data/hira-sync.json
+
+      # Committing the summary keeps a sync history and keeps the repo active, since GitHub pauses
+      # scheduled workflows in public repos after 60 days without commits
+      - name: Commit sync summary
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/hira-sync.json
+          if git diff --cached --quiet; then
+            echo "No summary changes"
+          else
+            git commit -m "chore(data): HIRA clinic sync $(date -u +%Y-%m-%d)"
+            git push
+          fi
