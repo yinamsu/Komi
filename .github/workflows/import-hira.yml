@@ -46,6 +46,14 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/enrich-doctors.js --recheck-days=30
 
+      # Clinics still without a name but named after their director ("김소영피부과의원")
+      - name: Add director names from clinic names
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/enrich-doctors.js --from-clinic-names
+
       # Committing the summary keeps a sync history and keeps the repo active, since GitHub pauses
       # scheduled workflows in public repos after 60 days without commits
       - name: Commit sync summary

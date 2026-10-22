@@ -9,12 +9,22 @@
 //   node scripts/enrich-doctors.js                  # scrape and save to Supabase
 //   node scripts/enrich-doctors.js --from-preview   # save scripts/doctor-preview.json without re-scraping
 //   node scripts/enrich-doctors.js --recheck-days=30 --limit=50 --concurrency=4
+//   node scripts/enrich-doctors.js --only-missing       # retry every homepage clinic still without a name
+//   node scripts/enrich-doctors.js --from-clinic-names  # clinics named after their director ("김소영피부과의원")
+//
+// Where a name came from is kept in doctor_source_url: the page URL for homepage names,
+// "komicare:clinic-name" for names read from the clinic name, "komicare:operator" for names an
+// operator confirmed. Operator-confirmed names are never overwritten by this script.
 //
 // Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (read from the shell, .env.local or .env)
 
 const fs = require('fs');
 const path = require('path');
 const { findDoctorNames } = require('./lib/doctor-names');
+const { nameFromClinic } = require('./lib/name-from-clinic');
+
+const OPERATOR = 'komicare:operator';
+const CLINIC_NAME = 'komicare:clinic-name';
 
 const PREVIEW = path.join(__dirname, 'doctor-preview.json');
 
@@ -30,10 +40,12 @@ function loadEnvFiles() {
 }
 
 function parseArgs(argv) {
-    const args = { dryRun: false, fromPreview: false, recheckDays: 30, limit: Infinity, concurrency: 4 };
+    const args = { dryRun: false, fromPreview: false, recheckDays: 30, limit: Infinity, concurrency: 4, onlyMissing: false, fromClinicNames: false };
     for (const arg of argv) {
         if (arg === '--dry-run') args.dryRun = true;
         else if (arg === '--from-preview') args.fromPreview = true;
+        else if (arg === '--only-missing') args.onlyMissing = true;
+        else if (arg === '--from-clinic-names') args.fromClinicNames = true;
         else if (arg.startsWith('--recheck-days=')) args.recheckDays = Number(arg.slice(15));
         else if (arg.startsWith('--limit=')) args.limit = parseInt(arg.slice(8), 10);
         else if (arg.startsWith('--concurrency=')) args.concurrency = Math.max(1, Math.min(8, parseInt(arg.slice(14), 10)));
@@ -48,23 +60,26 @@ function supabaseClient() {
     return createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY);
 }
 
-async function loadTargets(supabase, recheckDays, dryRun) {
+async function loadTargets(supabase, recheckDays, dryRun, onlyMissing) {
     try {
-        return await loadTargetsWith(supabase, recheckDays, 'id,name,homepage,doctor_checked_at,doctor_opt_out');
+        const rows = await loadPublicClinics(supabase, 'id,name,homepage,doctor_names,doctor_source_url,doctor_checked_at,doctor_opt_out', true);
+        const cutoff = Date.now() - recheckDays * 86400000;
+        return rows.filter(r => !r.doctor_opt_out && r.doctor_source_url !== OPERATOR && (onlyMissing
+            ? !(r.doctor_names || []).length || r.doctor_source_url === CLINIC_NAME
+            : !r.doctor_checked_at || Date.parse(r.doctor_checked_at) < cutoff));
     } catch (e) {
         // A dry run can scrape before the 5-4 columns exist; saving cannot
-        if (dryRun && /5-4/.test(e.message)) return loadTargetsWith(supabase, recheckDays, 'id,name,homepage');
+        if (dryRun && /5-4/.test(e.message)) return loadPublicClinics(supabase, 'id,name,homepage', true);
         throw e;
     }
 }
 
-async function loadTargetsWith(supabase, recheckDays, columns) {
+async function loadPublicClinics(supabase, columns, withHomepage) {
     const rows = [];
     for (let from = 0; ; from += 1000) {
-        const { data, error } = await supabase.from('clinics')
-            .select(columns)
-            .eq('source', 'hira').eq('active', true).not('homepage', 'is', null)
-            .order('id').range(from, from + 999);
+        let query = supabase.from('clinics').select(columns).eq('source', 'hira').eq('active', true);
+        if (withHomepage) query = query.not('homepage', 'is', null);
+        const { data, error } = await query.order('id').range(from, from + 999);
         if (error) {
             if (error.code === '42703' || error.code === 'PGRST204') {
                 throw new Error(`${error.message}\nRun the "5-4" block of supabase_schema.sql in the Supabase SQL Editor first.`);
@@ -74,8 +89,27 @@ async function loadTargetsWith(supabase, recheckDays, columns) {
         rows.push(...data);
         if (data.length < 1000) break;
     }
-    const cutoff = Date.now() - recheckDays * 86400000;
-    return rows.filter(r => !r.doctor_opt_out && (!r.doctor_checked_at || Date.parse(r.doctor_checked_at) < cutoff));
+    return rows;
+}
+
+// Clinics without any name yet whose clinic name is "[director name]피부과/성형외과(의원)"
+async function fillFromClinicNames(supabase, dryRun) {
+    const rows = await loadPublicClinics(supabase, 'id,name,doctor_names,doctor_opt_out', false);
+    const found = rows.filter(r => !r.doctor_opt_out && !(r.doctor_names || []).length)
+        .map(r => ({ id: r.id, name: r.name, director: nameFromClinic(r.name) })).filter(r => r.director);
+    console.log(`clinic-name method: ${found.length} clinics named after their director`);
+    if (dryRun) {
+        console.log(found.slice(0, 30).map(r => `${r.name} → ${r.director}`).join('\n'));
+        return;
+    }
+    const checkedAt = new Date().toISOString();
+    for (const r of found) {
+        const { error } = await supabase.from('clinics')
+            .update({ doctor_names: [r.director], doctor_source_url: CLINIC_NAME, doctor_checked_at: checkedAt })
+            .eq('id', r.id).eq('source', 'hira').eq('doctor_opt_out', false).is('doctor_names', null);
+        if (error) throw error;
+    }
+    console.log(`saved ${found.length} clinic-name directors`);
 }
 
 async function scrape(targets, concurrency) {
@@ -135,12 +169,14 @@ async function main() {
     }
     const supabase = supabaseClient();
 
+    if (args.fromClinicNames) return fillFromClinicNames(supabase, args.dryRun);
+
     let results;
     if (args.fromPreview) {
         results = JSON.parse(fs.readFileSync(PREVIEW, 'utf8'));
         console.log(`loaded ${results.length} results from ${path.relative(process.cwd(), PREVIEW)}`);
     } else {
-        const targets = (await loadTargets(supabase, args.recheckDays, args.dryRun)).slice(0, args.limit);
+        const targets = (await loadTargets(supabase, args.recheckDays, args.dryRun, args.onlyMissing)).slice(0, args.limit);
         console.log(`clinics to check: ${targets.length}`);
         results = await scrape(targets, args.concurrency);
     }

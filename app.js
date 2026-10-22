@@ -433,11 +433,20 @@ function publicDoctorCountText(clinic) {
         .replace('{specialists}', clinic.specialist_count || 0);
 }
 
+// Where a public listing's director name came from: the clinic's homepage (URL), the clinic name,
+// or a KOMICARE operator who confirmed it
+function doctorNameSource(clinic) {
+    const src = clinic.doctor_source_url || '';
+    if (src === 'komicare:operator') return 'operator';
+    if (src === 'komicare:clinic-name') return 'clinic_name';
+    return 'homepage';
+}
+
 function publicDoctorNamesText(clinic) {
     const names = clinic.doctor_names || [];
     if (!names.length) return '';
     const shown = names.length > 1 ? t('public.doctor_names_more').replace('{name}', names[0]).replace('{count}', names.length - 1) : names[0];
-    return t('public.doctor_names_card').replace('{names}', shown);
+    return t('public.doctor_names_card').replace('{names}', shown).replace('{source}', t(`public.source_${doctorNameSource(clinic)}`));
 }
 
 // Public directory entries (HIRA open data): facts only, no rating, doctor profile or safety badges
@@ -715,11 +724,16 @@ function fillPublicClinicDetails(data) {
         const url = new URL(data.doctor_source_url);
         if (url.protocol === 'http:' || url.protocol === 'https:') safeSource = url.href;
     } catch (e) {}
-    doctorSource.style.display = (data.doctor_names || []).length && safeSource ? '' : 'none';
+    const checked = data.doctor_checked_at ? new Date(data.doctor_checked_at).toISOString().slice(0, 10) : '';
+    const sourceKind = doctorNameSource(data);
+    doctorSource.style.display = (data.doctor_names || []).length && (safeSource || sourceKind !== 'homepage') ? '' : 'none';
     if (safeSource) {
         doctorSource.href = safeSource;
-        const checked = data.doctor_checked_at ? new Date(data.doctor_checked_at).toISOString().slice(0, 10) : '';
         doctorSource.textContent = t('public.doctor_source').replace('{date}', checked);
+    } else {
+        // Not a page we can link to: say how the name was confirmed instead
+        doctorSource.removeAttribute('href');
+        doctorSource.textContent = t(`public.doctor_source_${sourceKind}`).replace('{date}', checked);
     }
 
     // Owners can take over their listing through the partner portal, prefilled with this clinic

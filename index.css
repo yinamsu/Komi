@@ -4230,6 +4230,10 @@ html[data-theme="light"] .visual-category-menu .visual-category-item.active .ico
     text-underline-offset: 2px;
 }
 
+.public-doctor-source:not([href]) {
+    text-decoration: none;
+}
+
 .public-claim {
     display: flex;
     flex-direction: column;

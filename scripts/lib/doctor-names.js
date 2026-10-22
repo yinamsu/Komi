@@ -3,7 +3,7 @@
 // and only accepts names written next to a director title ("대표원장 홍길동", "홍길동 원장").
 
 const UA = 'KomicareBot/1.0 (+clinic directory; contact via site)';
-const TIMEOUT_MS = 10000;
+const TIMEOUT_MS = 15000;
 const MAX_SUBPAGES = 4;
 
 // Common Korean surnames (covers the vast majority of the population)
@@ -17,7 +17,7 @@ const PATTERNS = [
 ];
 // Words that look like names next to "원장" but are not
 const STOPWORDS = new Set(['원장님', '대표님', '이사장', '전문의', '피부과', '성형외', '병원장', '진료과', '의료진', '소개합', '인사말', '대표원', '우리원', '본원장', '진료원', '부원장', '공동대', '전원장', '임원장', '이원장', '김원장', '박원장', '최원장',
-    '대표이', '주요경', '경력사', '학력사', '진료분', '전문분', '상담실', '시술전', '시술후', '고객님', '여러분', '안녕하', '반갑습', '감사합', '정성을', '최선을', '책임지', '직접시', '모든시', '정확한', '안전한', '건강한', '아름다', '자연스', '만족도', '노하우', '이벤트', '공지사', '오시는', '진료시', '예약하', '문의하', '전화상', '온라인', '카카오', '네이버', '인스타', '유튜브', '블로그', '정회원', '준회원', '평생회', '대한민']);
+    '대표이', '주요경', '경력사', '학력사', '진료분', '전문분', '상담실', '시술전', '시술후', '고객님', '여러분', '안녕하', '반갑습', '감사합', '정성을', '최선을', '책임지', '직접시', '모든시', '정확한', '안전한', '건강한', '아름다', '자연스', '만족도', '노하우', '이벤트', '공지사', '오시는', '진료시', '예약하', '문의하', '전화상', '온라인', '카카오', '네이버', '인스타', '유튜브', '블로그', '정회원', '준회원', '평생회', '대한민', '이미지', '동영상', '썸네일', '아이콘', '배경이', '로고이']);
 
 function withTimeout(ms) {
     const controller = new AbortController();
@@ -40,8 +40,19 @@ async function fetchText(url, allowHttpsRetry = true) {
         try { text = new TextDecoder(/euc-?kr|ks_c_5601/i.test(charset) ? 'euc-kr' : 'utf-8').decode(buf); } catch (e) { text = buf.toString('utf8'); }
         return { url: res.url || url, html: text };
     } catch (e) {
-        // Many listed homepages are http:// while the site now only answers on https://
-        if (allowHttpsRetry && url.startsWith('http://')) return fetchText('https://' + url.slice(7), false);
+        // Many listed homepages are http:// while the site now only answers on https://, or only
+        // answers with / without the "www." prefix
+        if (allowHttpsRetry) {
+            const u = new URL(url);
+            const variants = [];
+            if (u.protocol === 'http:') variants.push(url.replace(/^http:/, 'https:'));
+            const host = u.hostname.startsWith('www.') ? u.hostname.slice(4) : 'www.' + u.hostname;
+            variants.push(`https://${host}${u.pathname}${u.search}`, `http://${host}${u.pathname}${u.search}`);
+            for (const v of variants) {
+                const res = await fetchText(v, false);
+                if (res) return res;
+            }
+        }
         return null;
     } finally {
         t.done();
@@ -71,6 +82,7 @@ async function robotsAllows(url) {
 function htmlToText(html) {
     return html
         .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/gi, ' ')
+        .replace(/<(?:img|area)\b[^>]*?(?:alt|title)=["']([^"']*)["'][^>]*>/gi, ' $1 ')
         .replace(/<[^>]+>/g, ' ')
         .replace(/&nbsp;|&#160;/g, ' ')
         .replace(/&amp;/g, '&')
@@ -123,7 +135,12 @@ async function findDoctorNames(homepage) {
     if (!home) return { names: [], reason: 'homepage unreachable' };
 
     const pages = [home];
-    for (const link of doctorLinks(home.html, home.url)) {
+    const links = doctorLinks(home.html, home.url);
+    if (!links.length) {
+        const origin = new URL(home.url).origin;
+        for (const guess of ['/doctor', '/doctors', '/intro/doctor', '/sub/doctor.php', '/about']) links.push(origin + guess);
+    }
+    for (const link of links.slice(0, MAX_SUBPAGES + 2)) {
         if (!(await robotsAllows(link))) continue;
         const page = await fetchText(link);
         if (page) pages.push(page);

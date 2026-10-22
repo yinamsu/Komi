@@ -159,25 +159,43 @@ gh workflow run import-hira.yml -R yinamsu/Komi
 node scripts/import-hira.js --deactivate-missing --summary=data/hira-sync.json
 ```
 
-### 원장 이름 (병원 홈페이지 기준)
+### 원장 이름
 
-공공데이터에는 의사 이름이 없어서, 병원이 직접 공개한 **자체 홈페이지**에서 원장 이름을 찾습니다([scripts/enrich-doctors.js](scripts/enrich-doctors.js)).
+공공데이터에는 의사 이름이 없어서, 아래 세 가지 출처로 채웁니다([scripts/enrich-doctors.js](scripts/enrich-doctors.js)). 사이트에는 이름 옆에 **출처**를 함께 표시합니다.
 
-- 메인 페이지와 "의료진·원장 소개" 링크(최대 4개)만 읽고, `robots.txt`에서 막은 사이트와 네이버·인스타그램 등 플랫폼 페이지는 건너뜁니다.
-- "대표원장 홍길동", "홍길동 원장"처럼 **원장 직함 바로 옆에 쓰인 이름**만 인정합니다(성 + 두 글자).
-- 사이트에는 "원장 OOO · 홈페이지 기준"으로 표시하고, 상세 화면에 **출처 페이지와 확인 날짜**를 함께 보여줍니다.
-- 이름을 찾지 못한 병원도 확인 날짜를 남겨 30일 동안은 다시 확인하지 않습니다. 매월 자동 갱신 때 새 병원과 30일 지난 병원만 다시 확인합니다.
-- 홈페이지가 있는 병원은 약 800곳(23%)이고, 그중 약 1/3에서 이름을 찾습니다. 원장 소개가 이미지로만 되어 있거나 자바스크립트로 그려지는 사이트는 찾지 못합니다.
+| 출처 | 사이트 표시 | 방법 |
+|---|---|---|
+| 병원 홈페이지 | "홈페이지 기준" + 출처 페이지 링크·확인일 | 병원이 직접 공개한 자체 홈페이지에서 "대표원장 홍길동", "홍길동 원장"처럼 원장 직함 바로 옆 이름만 인정 |
+| 병원 이름 | "병원명 기준" | 병원 이름이 "[원장 이름]피부과/성형외과의원"인 경우(예: 김소영피부과의원 → 김소영). 실제 이름에 흔히 쓰는 음절만 인정하고, 오렌지·이미지·제이OO 같은 브랜드는 제외 |
+| 코미케어 확인 | "코미케어 확인" | 운영자가 직접 확인한 이름. 자동 수집이 덮어쓰지 않음 |
 
-```bash
-node scripts/enrich-doctors.js --dry-run
-```
+홈페이지 수집 규칙:
+
+- 메인 페이지, "의료진·원장 소개" 링크, 링크가 없으면 흔한 의료진 페이지 주소(`/doctor` 등)를 읽고, 이미지 설명(alt)도 확인합니다.
+- `http`/`https`, `www` 유무를 바꿔 다시 시도합니다.
+- `robots.txt`에서 막은 사이트와 네이버·인스타그램 등 플랫폼 페이지는 건너뜁니다.
+- 체인 병원 공용 사이트처럼 같은 이름이 3곳 이상에 나오면 어느 지점 원장인지 알 수 없으므로 넣지 않습니다.
+- 이름을 찾지 못한 병원은 확인일을 남겨 30일 뒤 다시 확인합니다. 매월 자동 갱신 때 함께 실행됩니다.
 
 ```bash
 node scripts/enrich-doctors.js
 ```
 
-`--dry-run`은 저장 없이 `scripts/doctor-preview.json`만 만들고, `--from-preview`는 그 파일을 다시 긁지 않고 저장합니다.
+```bash
+node scripts/enrich-doctors.js --only-missing
+```
+
+```bash
+node scripts/enrich-doctors.js --from-clinic-names
+```
+
+`--only-missing`은 아직 이름이 없는 홈페이지 병원을 날짜와 관계없이 다시 확인하고, `--from-clinic-names`는 병원 이름에서 원장 이름을 채웁니다. `--dry-run`은 저장하지 않습니다.
+
+**운영자가 직접 확인한 이름 넣기** (예: 원장님께 직접 확인한 경우):
+
+```sql
+UPDATE public.clinics SET doctor_names = ARRAY['권혜련'], doctor_source_url = 'komicare:operator', doctor_checked_at = now() WHERE id = 5874;
+```
 
 **정정·삭제 요청이 오면**: 원장님이 파트너로 등록(위의 "이 병원 원장님이신가요?")하면 본인 정보로 바뀝니다. 이름을 아예 빼 달라는 요청이면 아래 SQL로 처리하세요. `doctor_opt_out`이 켜진 병원은 다시 수집되지 않습니다.
 
